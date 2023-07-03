@@ -33,14 +33,14 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Room, Hotel, Booking, Users } = sequelize.models;
+const { Rooms, Hotel, Booking, Users } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Room.hasOne(Hotel,{ foreignKey: 'hotelid', targetKey: 'id' });
-Booking.hasOne(Users, {foreignKey: 'userId', targetKey: 'id'})
-Booking.hasMany(Room, {foreignKey: 'roomId', targetKey: 'Id'})
+Rooms.hasOne(Hotel,{ foreignKey: 'hotelid', targetKey: 'id' });
+/*Booking.hasOne(Users, {foreignKey: 'userId', targetKey: 'id'})*/
+Booking.hasMany(Rooms, {foreignKey: 'roomId', targetKey: 'Id'})
 
 
 
