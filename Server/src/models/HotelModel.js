@@ -1,11 +1,12 @@
 const { DataTypes } = require('sequelize');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = (sequelize)=> {
     sequelize.define('Hotel', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
-            defaultValue: () => UUIDV4(),
+            defaultValue: () => uuidv4(),
             allowNull: true,
         },
         users: {

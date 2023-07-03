@@ -2,7 +2,7 @@ const { DataTypes, Sequelize } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 
 module.exports = (sequelize) => {
-    const Room = sequelize.define('Rooms', {
+    sequelize.define('Rooms', {
         Id: {
             type: DataTypes.UUID,
             allowNull: false,
@@ -34,5 +34,4 @@ module.exports = (sequelize) => {
     },{
         tableName: 'Rooms',
     })
-    return Room;
 }

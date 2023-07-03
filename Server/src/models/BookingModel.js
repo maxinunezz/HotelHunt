@@ -1,15 +1,16 @@
 const { DataTypes } = require('sequelize');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = (sequelize)=> {
     sequelize.define('Booking', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
-            defaultValue: () => UUIDV4(),
+            defaultValue: () => uuidv4(),
             allowNull: true,
         },
         dateStart: {
-            tpye: DataTypes.DATE,
+            type: DataTypes.DATE,
             allowNull: false
 
         },
