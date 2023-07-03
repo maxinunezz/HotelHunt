@@ -37,9 +37,11 @@ const { Room, Hotel, Booking, Users } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+
 Room.hasOne(Hotel,{ foreignKey: 'hotelid', targetKey: 'id' });
 Booking.hasOne(Users, {foreignKey: 'userId', targetKey: 'id'})
 Booking.hasMany(Room, {foreignKey: 'roomId', targetKey: 'Id'})
+
 
 
 module.exports = {
