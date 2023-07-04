@@ -1,37 +1,39 @@
-const { DataTypes, Sequelize } = require('sequelize');
-const { v4: uuidv4 } = require('uuid');
+const { DataTypes, Sequelize } = require("sequelize");
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize) => {
-    sequelize.define('Rooms', {
-        Id: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            defaultValue: () => uuidv4(),
-            primaryKey: true,
+  sequelize.define(
+    "Room",
+    {
+      Id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        defaultValue: () => uuidv4(),
+        primaryKey: true,
+      },
+      hotelId: {
+        type: DataTypes.UUID,
+        reference: {
+          model: "Hotel",
+          key: "id",
         },
-        hotelid: {
-            type: DataTypes.UUID,
-            reference: {
-                model: 'Hotel',
-                key: 'id',
-            },
-            allowNull: false,
-
-        },
-        description:{
-            type: DataTypes.TEXT,
-            allowNull: false,
-        },
-        pax: {
-            type: DataTypes.SMALLINT,
-            allowNull: false,
-        },
-        services: {
-            type: DataTypes.JSONB,
-            allowNull: true,
-        },
-        
-    },{
-        tableName: 'Rooms',
-    })
-}
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      pax: {
+        type: DataTypes.SMALLINT,
+        allowNull: false,
+      },
+      services: {
+        type: DataTypes.JSONB,
+        allowNull: true,
+      },
+    },
+    {
+      tableName: "Rooms",
+    }
+  );
+};
