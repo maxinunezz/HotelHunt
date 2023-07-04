@@ -48,10 +48,10 @@ const createRoom = async (req, res) => {
 };
 
 const updateRoom = async(req, res) => {
-    const { roomId } = req.params
+    const { id } = req.params
     try {
 
-        const room = Room.findByPK(roomId)
+        const room = await Room.findByPk(id);
         if(!room) {
             return res.status(404).send("Habitacion no encontrada");
         };
@@ -64,12 +64,18 @@ const updateRoom = async(req, res) => {
 };
 
 const deleteRoom = async (req, res) => {
-    const { roomId } = req.params;
+    const roomId = req.params.id
+    console.log(roomId);
     try {
-        const room = await Room.findByPK(roomId);
+        const room = await Room.findOne({
+            where: {
+                id: roomId,
+            }
+        });
         if(!room) {
             return res.status(404).send("Habitacion no encontada");
         }
+        console.log(room);
         await room.destroy();
         return res.status(200).send('Habitacion eliminada correctamente');
     } catch (error) {

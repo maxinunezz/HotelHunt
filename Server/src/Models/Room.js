@@ -17,10 +17,6 @@ module.exports = (sequelize) => {
       },
       hotelId: {
         type: DataTypes.UUID,
-        reference: {
-          model: "Hotel",
-          key: "id",
-        },
         allowNull: false,
       },
       description: {
