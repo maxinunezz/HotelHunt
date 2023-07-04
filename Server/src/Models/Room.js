@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,        
+        allowNull: false,
       },
       hotelId: {
         type: DataTypes.UUID,
@@ -34,10 +34,9 @@ module.exports = (sequelize) => {
       photo: {
         type: DataTypes.JSONB,
         allowNull: false,
-      }
+      },
     },
-    {
-      tableName: "Rooms",
-    }
+
+    { timestamps: false }
   );
 };
