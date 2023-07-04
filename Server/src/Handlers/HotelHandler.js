@@ -1,12 +1,11 @@
 const { Hotel, conn } = require('../db');
-const { v4: uuidv4 } = require("uuid");
 
 let hotels_array = [];
 
-const getallhotels = async (req,res) => {
+const getallhotels = async (req, res) => {
     try {
         const data = await Hotel.findAll();
-        if(data.length === 0){
+        if (data.length === 0) {
             throw Error('No hotels found');
         }
 
@@ -36,25 +35,30 @@ const getallhotels = async (req,res) => {
 
 const createHotel = async (req, res) => {
     try {
-      const { name, description, location, photo, maxCapacity } = req.body;
+        const { id, name, description, location, photo, maxCapacity } = req.body;
 
-      const users = uuidv4();
-  
-      const hotel = await Hotel.create({
-        users,
-        name,
-        description,
-        location,
-        photo,
-        maxCapacity,
-      });
-  
-      return res.status(201).json(hotel);
+        const existingHotel = await findOne({
+            where: {
+                name: name,
+            }
+        })
+
+        if (!existingHotel) {
+            await Hotel.create({
+                users: id,
+                name,
+                description,
+                location,
+                photo,
+                maxCapacity,
+            });
+
+            return res.status(201).send("Hotel create successfull");
+        }
     } catch (error) {
-      console.error("Error al crear el hotel:", error);
-      return res.status(500).json({ error: "Error al crear el hotel" });
+        return res.status(500).json(error.message);
     }
-  };
+};
 
 module.exports = {
     getallhotels,

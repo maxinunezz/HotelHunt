@@ -27,6 +27,59 @@ const getallRooms = async (req, res) => {
     }
 }
 
+const createRoom = async (req, res) => {
+    const { name, hotelId, description, pax, services,photo } = req.body;
+  
+    try {
+      await Room.create({
+        name,
+        hotelId,
+        description,
+        pax,
+        services,
+        photo,
+      });
+  
+      return res.status(201).send("Room created successfully");
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Error creating room' });
+    }
+};
+
+const updateRoom = async(req, res) => {
+    const { roomId } = req.params
+    try {
+
+        const room = Room.findByPK(roomId)
+        if(!room) {
+            return res.status(404).send("Habitacion no encontrada");
+        };
+
+        await room.update(req.body);
+        return res.status(200).json(room);
+    } catch (error) {
+        return res.status(500).send(error.message); 
+    }
+};
+
+const deleteRoom = async (req, res) => {
+    const { roomId } = req.params;
+    try {
+        const room = await Room.findByPK(roomId);
+        if(!room) {
+            return res.status(404).send("Habitacion no encontada");
+        }
+        await room.destroy();
+        return res.status(200).send('Habitacion eliminada correctamente');
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
+
 module.exports = {
     getallRooms,
+    createRoom,
+    updateRoom,
+    deleteRoom,
 }
