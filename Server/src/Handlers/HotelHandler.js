@@ -37,7 +37,7 @@ const createHotel = async (req, res) => {
     try {
         const { id, name, description, location, photo, maxCapacity } = req.body;
 
-        const existingHotel = await findOne({
+        const existingHotel = await Hotel.findOne({
             where: {
                 name: name,
             }
@@ -60,7 +60,40 @@ const createHotel = async (req, res) => {
     }
 };
 
+const updateHotel = async(req, res) => {
+    const { id } = req.params
+    try {
+        const hotel = await Hotel.findByPk(id)
+        if(!hotel) {
+            return res.status(404).send("Hotel no encontrado");
+        };
+
+        await hotel.update(req.body);
+        return res.status(200).json(hotel);
+    } catch (error) {
+        return res.status(500).send(error.message); 
+    }
+};
+
+const deleteHotel = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const hotel = await Hotel.findByPk(id);
+        if(!hotel) {
+            return res.status(404).send("Habitacion no encontada");
+        }
+        await hotel.destroy();
+        return res.status(200).send('Habitacion eliminada correctamente');
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+};
+
+
+
 module.exports = {
     getallhotels,
     createHotel,
+    updateHotel,
+    deleteHotel
 }
