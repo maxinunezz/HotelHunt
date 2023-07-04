@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Hotel",
+    "User",
     {
       id: {
         type: DataTypes.UUID,
@@ -11,36 +11,25 @@ module.exports = (sequelize) => {
         defaultValue: () => uuidv4(),
         allowNull: false,
       },
-      users: {
-        type: DataTypes.UUID,
-        reference: {
-          moodel: "Users",
-          key: "id",
-        },
-        allowNull: false,
-      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      description: {
+      lastName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      country: {
+      birthDate: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+      },
+      phoneNumber: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      city: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      photo: {
-        type: DataTypes.JSONB,
-        allowNull: false,
-      },
-      maxCapacity: {
-        type: DataTypes.SMALLINT,
+      admin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
         allowNull: false,
       },
     },

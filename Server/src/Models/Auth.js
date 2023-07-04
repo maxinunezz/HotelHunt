@@ -1,9 +1,9 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Sequelize } = require("sequelize");
 const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Booking",
+    "Auth",
     {
       id: {
         type: DataTypes.UUID,
@@ -11,30 +11,22 @@ module.exports = (sequelize) => {
         defaultValue: () => uuidv4(),
         allowNull: false,
       },
-      dateStart: {
-        type: DataTypes.DATE,
+      email: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
-      dataEnd: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      roomId: {
-        type: DataTypes.UUID,
-        reference: {
-          model: "Room",
-          key: "id",
-        },
+      password: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       userId: {
         type: DataTypes.UUID,
+        allowNull:false,
         reference: {
-          moodel: "Users",
+          model: "User",
           key: "id",
-        },
-        allowNull: false,
-      },
+        }
+      }
     },
     { timestamps: false }
   );
