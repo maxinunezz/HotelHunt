@@ -17,6 +17,8 @@ const router = Router();
 
 router.get("/hotels", getallhotels);
 router.post("/hotel", createHotel);
+router.put("/hotel/:id", updateHotel);
+router.delete("/hotel/:id", deleteHotel);
 router.post("/singup", CreateUserForEmail);
 router.get("/room", getallRooms);
 router.post("/room", createRoom);
