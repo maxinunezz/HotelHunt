@@ -43,33 +43,39 @@ const createRoom = async (req, res) => {
       return res.status(201).send("Room created successfully");
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ error: 'Error creating room' });
+      return res.status(500).json(error.message);
     }
 };
 
 const updateRoom = async(req, res) => {
-    const { roomId } = req.params
+    const { id } = req.params
     try {
 
-        const room = Room.findByPK(roomId)
+        const room = await Room.findByPk(id);
         if(!room) {
             return res.status(404).send("Habitacion no encontrada");
         };
 
         await room.update(req.body);
-        return res.status(200).json(room);
+        return res.status(200).send("Update successfully");
     } catch (error) {
         return res.status(500).send(error.message); 
     }
 };
 
 const deleteRoom = async (req, res) => {
-    const { roomId } = req.params;
+    const roomId = req.params.id
+    console.log(roomId);
     try {
-        const room = await Room.findByPK(roomId);
+        const room = await Room.findOne({
+            where: {
+                id: roomId,
+            }
+        });
         if(!room) {
             return res.status(404).send("Habitacion no encontada");
         }
+        console.log(room);
         await room.destroy();
         return res.status(200).send('Habitacion eliminada correctamente');
     } catch (error) {
