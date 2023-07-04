@@ -1,7 +1,7 @@
 const server = require("./src/server");
 const { conn } = require('./src/db.js');
 const PORT = 3001;
-const routes = require('./src/routes/index.js')
+const routes = require('./src/Routes/index.js')
 
 server.use('/', routes);
 

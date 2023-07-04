@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   sequelize.define(
     "Room",
     {
-      Id: {
+      id: {
         type: DataTypes.UUID,
         allowNull: false,
         defaultValue: () => uuidv4(),
