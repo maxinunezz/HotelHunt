@@ -11,6 +11,10 @@ module.exports = (sequelize) => {
         defaultValue: () => uuidv4(),
         primaryKey: true,
       },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,        
+      },
       hotelId: {
         type: DataTypes.UUID,
         reference: {
@@ -31,6 +35,10 @@ module.exports = (sequelize) => {
         type: DataTypes.JSONB,
         allowNull: true,
       },
+      photo: {
+        type: DataTypes.JSONB,
+        allowNull: false,
+      }
     },
     {
       tableName: "Rooms",

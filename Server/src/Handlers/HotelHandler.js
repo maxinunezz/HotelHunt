@@ -2,10 +2,10 @@ const { Hotel, conn } = require('../db');
 
 let hotels_array = [];
 
-const getallhotels = async (req,res) => {
+const getallhotels = async (req, res) => {
     try {
         const data = await Hotel.findAll();
-        if(data.length === 0){
+        if (data.length === 0) {
             throw Error('No hotels found');
         }
 
@@ -30,8 +30,37 @@ const getallhotels = async (req,res) => {
     } catch (error) {
         return res.status(500).send(error.message);
     }
-}
+};
+
+
+const createHotel = async (req, res) => {
+    try {
+        const { id, name, description, location, photo, maxCapacity } = req.body;
+
+        const existingHotel = await Hotel.findOne({
+            where: {
+                name: name,
+            }
+        })
+
+        if (!existingHotel) {
+            await Hotel.create({
+                users: id,
+                name,
+                description,
+                location,
+                photo,
+                maxCapacity,
+            });
+
+            return res.status(201).send("Hotel create successfull");
+        }
+    } catch (error) {
+        return res.status(500).json(error.message);
+    }
+};
 
 module.exports = {
-    getallhotels
+    getallhotels,
+    createHotel,
 }
