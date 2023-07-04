@@ -43,7 +43,7 @@ const createRoom = async (req, res) => {
       return res.status(201).send("Room created successfully");
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ error: 'Error creating room' });
+      return res.status(500).json(error.message);
     }
 };
 
@@ -57,7 +57,7 @@ const updateRoom = async(req, res) => {
         };
 
         await room.update(req.body);
-        return res.status(200).json(room);
+        return res.status(200).send("Update successfully");
     } catch (error) {
         return res.status(500).send(error.message); 
     }
