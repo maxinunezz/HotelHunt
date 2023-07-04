@@ -51,7 +51,7 @@ Hotel.belongsTo(Room, { foreignKey: "roomsId", targetKey: "id" });
   foreignKey: "userId",
   targetKey: "id",
   onDelete: "CASCADE",
-});*/
+});
 /*Auth.belongsTo(User, { foreignKey: "id", targetKey: "id" });*/
 
 module.exports = {
