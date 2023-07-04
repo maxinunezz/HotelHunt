@@ -1,5 +1,10 @@
 const { Router } = require("express");
-const { getallhotels, createHotel } = require("../Handlers/HotelHandler");
+const {
+  getallhotels,
+  createHotel,
+  updateHotel,
+  deleteHotel,
+} = require("../Handlers/HotelHandler");
 const { CreateUserForEmail } = require("../Handlers/UsersHandler");
 const {
   createRoom,
@@ -12,7 +17,7 @@ const router = Router();
 
 router.get("/hotels", getallhotels);
 router.post("/hotel", createHotel);
-router.post("/signup", CreateUserForEmail);
+router.post("/singup", CreateUserForEmail);
 router.get("/room", getallRooms);
 router.post("/room", createRoom);
 router.delete("/room/:id", deleteRoom);
