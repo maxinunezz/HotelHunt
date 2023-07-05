@@ -6,9 +6,11 @@ const {
     deleteHotel,
     } = require("../Handlers/HotelHandler");
 
+const { getForSearch } = require("../Handlers/SearchHandler")
 
 const hotelRouter = Router();
 
+hotelRouter.get("/", getForSearch)
 hotelRouter.get("/", getAllhotels);
 hotelRouter.post("/", createHotel);
 hotelRouter.put("/:id", updateHotel);
