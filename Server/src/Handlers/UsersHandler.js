@@ -6,6 +6,7 @@ const createUserForEmail = async (req, res) => {
     const { name, lastName, birthDate, phoneNumber, admin, email, password } =
       req.body;
     /* el ID de AUTH deberia apuntar al ID de USER */
+    let usercreate;
     const userexist = await Auth.findOne({
       where: { email },
       raw: true,
@@ -14,19 +15,23 @@ const createUserForEmail = async (req, res) => {
       const saltrounds = 5;
       const hashedpass = await bcrypt.hash(password, saltrounds);
 
-      const usercreate = await User.create({
+      usercreate = await User.create({
         name,
         lastName,
         birthDate,
         phoneNumber,
         admin,
       });
+      console.log(usercreate.id);
+      
 
       const authcreate = await Auth.create({
         email,
         password: hashedpass,
+        id: usercreate.id,
         userId: usercreate.id,
       });
+      await usercreate.reload();
 
       await Promise.all([usercreate, authcreate]);
 
@@ -44,13 +49,14 @@ const createUserForEmail = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const { userId } = req.body;
-    const user = await User.findByPk(userId);
+    const { id } = req.params;
+    const user = await User.findByPk(id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    await user.destroy();
-    await Auth.destroy({ where: { userId } });
+    const destroyUser = await user.destroy();
+    const destroyAuthUser = await Auth.destroy({ where: { id: id } });
+    await Promise.all([destroyAuthUser,destroyUser]);
     return res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -58,23 +64,17 @@ const deleteUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { userId, name, lastName, birthDate, phoneNumber, admin } = req.body;
-    const user = await User.findByPk(userId);
+    const user = await User.findByPk(id);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    name = user.name;
-    lastName = user.lastName;
-    birthDate = user.birthDate;
-    phoneNumber = user.phoneNumber;
-    admin = user.admin;
+    await user.update(req.body);
 
-    await user.save();
-
-    return res.status(200).json({ message: "User updated successfully", user });
+    return res.status(200).json({ message: "User updated successfully" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
