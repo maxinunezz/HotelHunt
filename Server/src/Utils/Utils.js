@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Hotel, Room, User, conn } = require('../db');
+const { Hotel, Room, User, Auth, conn } = require('../db');
 
 
 async function fetchHotelsData() {
@@ -69,18 +69,21 @@ async function firstload() {
     }
 
     for (const user of users){
-        const { name, lastName, birthDate, phoneNumber, admin, email, password, id} = user;
-        await User.create({
-            id,
-            name,
-            lastName,
-            birthDate,
-            phoneNumber,
-            admin,
-            email,
-            password,
-        })
-    }
+      const { name, lastName, birthDate, phoneNumber, admin, id, email, password} = user;
+      const createdUser = await User.create({
+          id,
+          name,
+          lastName,
+          birthDate,
+          phoneNumber,
+          admin,
+      })
+      await Auth.create({
+        email,
+        password,
+        userId: createdUser.id,
+      })
+  }
 
     console.log('Datos incrustados correctamente');
   } catch (error) {

@@ -27,7 +27,6 @@ const createUserForEmail = async (req, res) => {
       const authcreate = await Auth.create({
         email,
         password: hashedpass,
-        id: usercreate.id,
         userId: usercreate.id,
       });
       await usercreate.reload();
@@ -36,7 +35,6 @@ const createUserForEmail = async (req, res) => {
 
       return res.status(201).json({
         message: "Successful",
-        userId: usercreate.id,
       });
     } else {
       return res.status(400).send("Users already exist");
