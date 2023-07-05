@@ -39,8 +39,8 @@ module.exports = (sequelize) => {
         type: DataTypes.JSONB,
         allowNull: false,
       },
-      maxCapacity: {
-        type: DataTypes.SMALLINT,
+      floorNumber: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
     },
