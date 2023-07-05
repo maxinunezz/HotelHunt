@@ -1,6 +1,6 @@
 const { Room, conn } = require('../db');
 
-const getallRooms = async (req, res) => {
+const getAllRooms = async (req, res) => {
     try {
         const data = await Room.findAll()
 
@@ -84,7 +84,7 @@ const deleteRoom = async (req, res) => {
 };
 
 module.exports = {
-    getallRooms,
+    getAllRooms,
     createRoom,
     updateRoom,
     deleteRoom,

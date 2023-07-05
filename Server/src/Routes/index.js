@@ -5,7 +5,6 @@ const {
   updateHotel,
   deleteHotel,
 } = require("../Handlers/HotelHandler");
-const { createUserForEmail } = require("../Handlers/UsersHandler");
 const {
   createRoom,
   getAllRooms,
