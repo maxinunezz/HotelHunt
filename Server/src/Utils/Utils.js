@@ -69,18 +69,18 @@ async function firstload() {
     }
 
     for (const user of users){
-        const { name, lastName, birthDate, phoneNumber, admin, email, password, id} = user;
-        await User.create({
-            id,
-            name,
-            lastName,
-            birthDate,
-            phoneNumber,
-            admin,
-            email,
-            password,
-        })
-    }
+      const { name, lastName, birthDate, phoneNumber, admin, email, password, id} = user;
+      await User.create({
+          id,
+          name,
+          lastName,
+          birthDate,
+          phoneNumber,
+          admin,
+          email,
+          password,
+      })
+  }
 
     console.log('Datos incrustados correctamente');
   } catch (error) {

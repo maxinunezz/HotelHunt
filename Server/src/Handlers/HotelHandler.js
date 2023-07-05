@@ -9,7 +9,7 @@ const getAllhotels = async (req, res) => {
       throw Error("No hotels found");
     }
 
-    data.foreach((hotel) => {
+    data.forEach((hotel) => {
       const one_hotel = {
         id: hotel.id,
         users: hotel.users,
