@@ -42,21 +42,6 @@ const createUserForEmail = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
-  try {
-    const { userId } = req.body;
-    const user = await User.findByPk(userId);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    await user.destroy();
-    await Auth.destroy({ where: { userId } });
-    return res.status(200).json({ message: "User deleted successfully" });
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-};
-
 const updateUser = async (req, res) => {
   try {
     const { userId, name, lastName, birthDate, phoneNumber, admin } = req.body;
@@ -75,6 +60,21 @@ const updateUser = async (req, res) => {
     await user.save();
 
     return res.status(200).json({ message: "User updated successfully", user });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    await user.destroy();
+    await Auth.destroy({ where: { userId } });
+    return res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
