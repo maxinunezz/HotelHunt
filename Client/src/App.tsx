@@ -1,13 +1,13 @@
 import { Route, Routes } from "react-router-dom"
 import './App.css'
-import LogingPage from "./Pages/LoginPage/LoginPage"
+import Carrusel from "./components/Carrucel/Carrusel"
 
 function App() {
 
   return (
-    <div id="app" className='flex items-center h-screen justify-center bg-slate-500'>
+    <div id="app">
       <Routes>
-        <Route path="/login" element={<LogingPage/>}></Route>
+        <Route path="/" element={<Carrusel />} ></Route>
       </Routes>
     </div>
   )
