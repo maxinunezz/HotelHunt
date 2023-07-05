@@ -11,7 +11,7 @@ const {
 const roomRouter = Router();
 
 roomRouter.get("/", getAllRooms);
-roomRouter.posr("/", createRoom);
+roomRouter.post("/", createRoom);
 roomRouter.put("/:id", updateRoom);
 roomRouter.delete("/:id", deleteRoom);
 

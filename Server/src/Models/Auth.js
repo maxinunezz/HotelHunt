@@ -19,14 +19,14 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      userId: {
+      /*userId: {
         type: DataTypes.UUID,
         allowNull:false,
         reference: {
           model: "User",
           key: "id",
         }
-      }
+      }*/
     },
     { timestamps: false }
   );
