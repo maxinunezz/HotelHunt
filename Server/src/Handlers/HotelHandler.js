@@ -2,7 +2,7 @@ const { Hotel, conn } = require("../db");
 
 let hotels_array = [];
 
-const getallhotels = async (req, res) => {
+const getAllhotels = async (req, res) => {
   try {
     const data = await Hotel.findAll();
     if (data.length === 0) {
@@ -31,7 +31,8 @@ const getallhotels = async (req, res) => {
 
 const createHotel = async (req, res) => {
   try {
-    const { id, name, description, country, city, photo, maxCapacity } = req.body;
+    const { id, name, description, country, city, photo, maxCapacity } =
+      req.body;
 
     const existingHotel = await Hotel.findOne({
       where: {
@@ -87,7 +88,7 @@ const deleteHotel = async (req, res) => {
 };
 
 module.exports = {
-  getallhotels,
+  getAllhotels,
   createHotel,
   updateHotel,
   deleteHotel,

@@ -1,28 +1,35 @@
 const { Router } = require("express");
 const {
-  getallhotels,
+  getAllhotels,
   createHotel,
   updateHotel,
   deleteHotel,
 } = require("../Handlers/HotelHandler");
-const { CreateUserForEmail } = require("../Handlers/UsersHandler");
+const { createUserForEmail } = require("../Handlers/UsersHandler");
 const {
   createRoom,
-  getallRooms,
+  getAllRooms,
   updateRoom,
   deleteRoom,
 } = require("../Handlers/RoomsHandler");
+const {
+  createUserForEmail,
+  deleteUser,
+  updateUser,
+} = require("../Handlers/UsersHandler.js");
 
 const router = Router();
 
-router.get("/hotels", getallhotels);
+router.get("/hotels", getAllhotels);
 router.post("/hotel", createHotel);
 router.put("/hotel/:id", updateHotel);
 router.delete("/hotel/:id", deleteHotel);
-router.post("/singup", CreateUserForEmail);
-router.get("/room", getallRooms);
+router.get("/room", getAllRooms);
 router.post("/room", createRoom);
 router.delete("/room/:id", deleteRoom);
 router.put("/room/:id", updateRoom);
+router.post("/signup", createUserForEmail);
+router.delete("/user/:id", deleteUser);
+router.put("/user/:id", updateUser);
 
 module.exports = router;
