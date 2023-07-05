@@ -41,20 +41,40 @@ async function firstload() {
     const rooms = await fetchRoomsData();
     const users = await loadusers();
 
+    for (const user of users){
+      const { name, lastName, birthDate, phoneNumber, admin, id, email, password} = user;
+      const createdUser = await User.create({
+          id,
+          name,
+          lastName,
+          birthDate,
+          phoneNumber,
+          admin,
+      })
+      const createdAuth = await Auth.create({
+        email,
+        password,
+        userId: createdUser.id,
+      })
+
+      await Promise.all([createdUser, createdAuth]);
+
 
     for (const hotel of hotels) {
-      const { id, name, description, photo, city, floorNumber, country, users, } = hotel;
-      await Hotel.create({        
+      const { id, name, description, photo, city, floorNumber, country, userId, } = hotel;
+      const hotelcreated = await Hotel.create({        
         id,
         name,
         description,
-        users,
+        userId,
         photo,
         city,
         floorNumber,
         country,
       });
     }
+
+    await Promise.all([hotelcreated]);
 
     for (const room of rooms) {
         const { name, description, photo, pax, hotelId, services } = room;
@@ -68,21 +88,7 @@ async function firstload() {
         })
     }
 
-    for (const user of users){
-      const { name, lastName, birthDate, phoneNumber, admin, id, email, password} = user;
-      const createdUser = await User.create({
-          id,
-          name,
-          lastName,
-          birthDate,
-          phoneNumber,
-          admin,
-      })
-      await Auth.create({
-        email,
-        password,
-        userId: createdUser.id,
-      })
+    
   }
 
     console.log('Datos incrustados correctamente');

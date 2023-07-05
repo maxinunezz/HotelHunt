@@ -2,6 +2,7 @@ const { DataTypes, Sequelize } = require("sequelize");
 const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize) => {
+  const Hotel = sequelize.models.Hotel
   sequelize.define(
     "Room",
     {
@@ -18,7 +19,7 @@ module.exports = (sequelize) => {
       hotelId: {
         type: DataTypes.UUID,
         references: {
-          model: "Hotel",
+          model: Hotel,
           key: "id",
         },
         allowNull: false,

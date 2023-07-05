@@ -7,7 +7,7 @@ const { firstload } = require('./src/Utils/Utils.js'); // descomentar para prime
 server.use('/', routes);
 
 conn.sync({ force: true }).then(() => { /* cambiar a true en primera carga */
-  /*firstload(); // descomentar para primera carga */
+  firstload(); // descomentar para primera carga */
   server.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
   })

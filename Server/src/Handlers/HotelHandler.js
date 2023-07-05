@@ -12,14 +12,13 @@ const getAllhotels = async (req, res) => {
     data.forEach((hotel) => {
       const one_hotel = {
         id: hotel.id,
-        users: hotel.users,
+        userId: hotel.userId,
         name: hotel.name,
         description: hotel.description,
         country: hotel.country,
         city: hotel.city,
         photo: hotel.photo,
         floorNumber: hotel.floorNumber,
-        roomsId: hotel.roomsId,
       };
       hotels_array.push(one_hotel);
     });
@@ -42,7 +41,7 @@ const createHotel = async (req, res) => {
 
     if (!existingHotel) {
       await Hotel.create({
-        users: id,
+        userId: id,
         name,
         description,
         country,
