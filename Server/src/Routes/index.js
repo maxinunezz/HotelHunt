@@ -1,19 +1,12 @@
 const { Router } = require("express");
-const hotelRouter = require("./HotelRouter")
-const roomRouter = require("./RoomRouter")
-const { createUserForEmail } = require("../Handlers/UsersHandler");
-const {
-  createUserForEmail,
-  deleteUser,
-  updateUser,
-} = require("../Handlers/UsersHandler.js");
+const hotelRouter = require("./HotelRouter");
+const roomRouter = require("./RoomRouter");
+const userRouter = require("./UserRouter");
 
 const router = Router();
 
 router.use("/hotel", hotelRouter);
-router.use("/room", roomRouter) 
-router.post("/signup", createUserForEmail);
-router.delete("/user/:id", deleteUser);
-router.put("/user/:id", updateUser);
+router.use("/room", roomRouter);
+router.use("/user", userRouter);
 
 module.exports = router;
