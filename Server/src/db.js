@@ -47,12 +47,15 @@ const { Room, Hotel, Booking, User, Auth } = sequelize.models;
 /*Hotel.hasMany(Room, { foreignKey: "hotelId", targetKey: "id" });*/
 Room.hasMany(Booking, { foreignKey: "roomId", targetKey: "id" });
 Hotel.belongsTo(Room, { foreignKey: "roomsId", targetKey: "id" });
-User.hasOne(Auth, {
-  foreignKey: "UserId",
-  targetKey: "id",
-  onDelete: "CASCADE",
+Auth.belongsTo(User, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE'
 });
-Auth.belongsTo(User);
+User.hasOne(Auth, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE'
+});
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

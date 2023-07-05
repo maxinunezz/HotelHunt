@@ -21,14 +21,12 @@ const createUserForEmail = async (req, res) => {
         birthDate,
         phoneNumber,
         admin,
-      });
-      
+      });      
 
       const authcreate = await Auth.create({
         email,
         password: hashedpass,
-        /*id: usercreate.id,*/
-        /*userId: usercreate.id,*/
+        userId: usercreate.id,
       });
       await usercreate.reload();
 
@@ -53,8 +51,7 @@ const deleteUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     const destroyUser = await user.destroy();
-    const destroyAuthUser = await Auth.destroy({ where: { id: id } });
-    await Promise.all([destroyAuthUser,destroyUser]);
+    await Promise.all([destroyUser]);
     return res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
