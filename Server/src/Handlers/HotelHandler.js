@@ -19,6 +19,7 @@ const getAllhotels = async (req, res) => {
         city: hotel.city,
         photo: hotel.photo,
         floorNumber: hotel.floorNumber,
+        roomsId: hotel.roomsId,
       };
       hotels_array.push(one_hotel);
     });
@@ -48,6 +49,7 @@ const createHotel = async (req, res) => {
         city,
         photo,
         floorNumber,
+        roomsId: [],
       });
 
       return res.status(201).send("Hotel create successfull");

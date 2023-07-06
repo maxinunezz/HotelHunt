@@ -44,6 +44,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      roomsId: {
+        type: DataTypes.JSONB,
+        allowNull: true,
+        
+      }
     },
     { timestamps: false }
   );
