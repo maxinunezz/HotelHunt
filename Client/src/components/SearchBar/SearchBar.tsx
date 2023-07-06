@@ -6,6 +6,7 @@ import { Dropdown, Button, Input } from '@rewind-ui/core';
 
 const SearchBar = () => {
 	useFetchHotels();
+
 	const [input, setinput] = useState('');
 	const [selectedOption, setSelectedOption] = useState<string | undefined>();
 
