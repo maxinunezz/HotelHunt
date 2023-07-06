@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { LoginMiddleware } = require('../Middleware/Login');
 
 const {
     createUserForEmail,
@@ -11,7 +12,7 @@ const userRouter = Router();
 
 userRouter.post("/signup", createUserForEmail);
 userRouter.delete("/:id", deleteUser);
-userRouter.put("/:id", updateUser);
+userRouter.put("/:id",LoginMiddleware, updateUser);
 
 
 module.exports = userRouter;
