@@ -19,6 +19,7 @@ const getAllhotels = async (req, res) => {
         city: hotel.city,
         photo: hotel.photo,
         floorNumber: hotel.floorNumber,
+        floorNumber: hotel.floorNumber,
         roomsId: hotel.roomsId,
       };
       hotels_array.push(one_hotel);
@@ -32,6 +33,7 @@ const getAllhotels = async (req, res) => {
 const createHotel = async (req, res) => {
   try {
     const { users, name, description, country, city, photo, floorNumber } =
+    const { id, name, description, country, city, photo, floorNumber } =
       req.body;
 
     const existingHotel = await Hotel.findOne({

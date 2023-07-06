@@ -2,7 +2,11 @@ const { Room, conn } = require("../db");
 
 const getAllRooms = async (req, res) => {
   try {
-    const data = await Room.findAll();
+    const data = await Room.findAll({
+      where: {
+        hotelId: hotelId,
+      },
+    });
 
     if (data.length === 0) {
       throw Error("Not rooms found");
