@@ -1,7 +1,9 @@
 const { DataTypes, Sequelize } = require("sequelize");
 const { v4: uuidv4 } = require("uuid");
 
+
 module.exports = (sequelize) => {
+  const User = sequelize.models.User
   sequelize.define(
     "Auth",
     {
@@ -22,8 +24,8 @@ module.exports = (sequelize) => {
       userId: {
         type: DataTypes.UUID,
         allowNull:false,
-        reference: {
-          model: "User",
+        references: {
+          model: User,
           key: "id",
         }
       }
