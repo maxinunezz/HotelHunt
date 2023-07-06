@@ -9,12 +9,7 @@ export default function NavBar() {
 			<SearchBar />
 
 			<div>
-				<select className="bg-slate-800">
-					<option value="All">Filtrar por hotel</option>
-					<option value="created">Filtar por ubicación</option>
-					<option value="api">Filtrar por capacidad</option>
-					<option value="api">Filtrar por servicio</option>
-				</select>
+				<h1>algo</h1>
 			</div>
 
 			<button>User</button>

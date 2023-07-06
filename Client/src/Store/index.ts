@@ -1,1 +1,2 @@
-export * from "./HotelsStore"
+export * from './HotelsStore';
+export * from './SearchStore';
