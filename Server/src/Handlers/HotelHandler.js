@@ -29,7 +29,7 @@ const getAllhotels = async (req, res) => {
 
 const createHotel = async (req, res) => {
   try {
-    const { id, name, description, country, city, photo, floorNumber } =
+    const { id, name, description, country, city, photo } =
       req.body;
 
     const existingHotel = await Hotel.findOne({

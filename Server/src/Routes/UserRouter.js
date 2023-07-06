@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { LoginMiddleware } = require('../Middleware/Login');
+const { AuthHandler } = require('../Handlers/AuthHandler');
 
 const {
     createUserForEmail,
@@ -11,6 +12,7 @@ const userRouter = Router();
 
 
 userRouter.post("/signup", createUserForEmail);
+userRouter.get("/auth", AuthHandler);
 userRouter.delete("/:id", deleteUser);
 userRouter.put("/:id",LoginMiddleware, updateUser);
 
