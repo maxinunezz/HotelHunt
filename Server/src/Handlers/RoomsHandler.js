@@ -32,7 +32,8 @@ const getAllRooms = async (req, res) => {
 };
 
 const createRoom = async (req, res) => {
-  const { name, hotelId, description, pax, services, photo } = req.body;
+  const { name, hotelId, description, pax, services, photo, floorNumber } =
+    req.body;
   try {
     const newRoom = await Room.create({
       name,
@@ -41,17 +42,23 @@ const createRoom = async (req, res) => {
       pax,
       services,
       photo,
+      floorNumber,
     });
 
     const hotel = await Hotel.findByPk(hotelId);
-    
+
     const RoomsIds = hotel.roomsId;
 
     RoomsIds.push(newRoom.id);
 
-    await Hotel.update({ roomsId: RoomsIds}, { where : {
-      id: hotelId,
-    }});
+    await Hotel.update(
+      { roomsId: RoomsIds },
+      {
+        where: {
+          id: hotelId,
+        },
+      }
+    );
 
     return res.status(201).send("Room created successfully");
   } catch (error) {
@@ -76,7 +83,6 @@ const updateRoom = async (req, res) => {
 
 const deleteRoom = async (req, res) => {
   const roomId = req.params.id;
-  console.log(roomId);
   try {
     const room = await Room.findOne({
       where: {
@@ -86,7 +92,6 @@ const deleteRoom = async (req, res) => {
     if (!room) {
       return res.status(404).send("Habitacion no encontada");
     }
-    console.log(room);
     await room.destroy();
     return res.status(200).send("Habitacion eliminada correctamente");
   } catch (error) {

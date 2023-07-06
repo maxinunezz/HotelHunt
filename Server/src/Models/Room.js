@@ -2,7 +2,7 @@ const { DataTypes, Sequelize } = require("sequelize");
 const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize) => {
-  const Hotel = sequelize.models.Hotel
+  const Hotel = sequelize.models.Hotel;
   sequelize.define(
     "Room",
     {
@@ -38,6 +38,10 @@ module.exports = (sequelize) => {
       },
       photo: {
         type: DataTypes.JSONB,
+        allowNull: false,
+      },
+      floorNumber: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
     },

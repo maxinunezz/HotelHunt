@@ -1,7 +1,5 @@
 const { Hotel, conn } = require("../db");
 
-
-
 const getAllhotels = async (req, res) => {
   let hotels_array = [];
   try {
@@ -19,8 +17,6 @@ const getAllhotels = async (req, res) => {
         country: hotel.country,
         city: hotel.city,
         photo: hotel.photo,
-        floorNumber: hotel.floorNumber,
-        floorNumber: hotel.floorNumber,
         roomsId: hotel.roomsId,
       };
       hotels_array.push(one_hotel);
@@ -33,7 +29,8 @@ const getAllhotels = async (req, res) => {
 
 const createHotel = async (req, res) => {
   try {
-    const { id , name, description, country, city, photo, floorNumber } = req.body;
+    const { id, name, description, country, city, photo, floorNumber } =
+      req.body;
 
     const existingHotel = await Hotel.findOne({
       where: {
@@ -49,7 +46,6 @@ const createHotel = async (req, res) => {
         country,
         city,
         photo,
-        floorNumber,
         roomsId: [],
       });
 
