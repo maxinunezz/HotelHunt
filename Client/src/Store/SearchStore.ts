@@ -18,16 +18,27 @@ export const searchStore = create<States & Actions>((set) => ({
 	...initialState,
 
 	fetchSearchResults: async (data) => {
-		const search = await axios.post(
-			`http://localhost:3001/hotels/search`,
-			data
-		);
-		const searchData = search.data;
-
-		set((state) => ({
-			...state,
-			searchResults: searchData,
-		}));
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			data: data,
+		}
+		return await axios.get(
+			`http://localhost:3001/hotel/search`, 
+			config
+		).then((response) => {
+			if(response.data.length > 0) {
+				const result = response.data;
+				set((state) => ({
+					...state,
+					searchResults: result,
+				}))
+			}
+		}).catch((error) => {
+			console.error(error, "Server Error");
+		})
+		
 	},
 
 	reset: () => {
