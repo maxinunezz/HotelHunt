@@ -94,11 +94,10 @@ async function firstload() {
       const RoomsIds = hotel.roomsId;
 
       RoomsIds.push(newRoom.id);
-      const objetorooms = { roomsId: RoomsIds}
 
-      console.log(objetorooms);
-
-      await hotel.update(objetorooms);
+      await Hotel.update({ roomsId: RoomsIds}, { where : {
+        id: hotelId,
+      }});
 
 
     }
