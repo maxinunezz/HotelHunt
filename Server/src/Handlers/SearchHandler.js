@@ -1,9 +1,10 @@
 const { Hotel, conn } = require("../db.js");
+const { Op } = require('sequelize');
 
 const getForSearch = async (req, res) => {
   /* en search se busca hotel por name o region */
 
-  const { criterion, value } = req.params;
+  const { criterion, value } = req.body; 
 
   const query = {
     where: {

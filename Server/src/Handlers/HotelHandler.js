@@ -1,8 +1,9 @@
 const { Hotel, conn } = require("../db");
 
-let hotels_array = [];
+
 
 const getAllhotels = async (req, res) => {
+  let hotels_array = [];
   try {
     const data = await Hotel.findAll();
     if (data.length === 0) {
