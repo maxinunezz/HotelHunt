@@ -29,8 +29,8 @@ const SearchBar = () => {
 			value: input,
 		})
 
-		await fetchSearchResults(data.criterion, data.value)
-		console.log(data);
+		await fetchSearchResults(data);
+		
 		
 	}
 
