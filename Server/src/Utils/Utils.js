@@ -43,7 +43,7 @@ async function firstload() {
 
 
     for (const hotel of hotels) {
-      const { id, name, description, photo, city, maxCapacity, country, users, } = hotel;
+      const { id, name, description, photo, city, floorNumber, country, users, } = hotel;
       await Hotel.create({        
         id,
         name,
@@ -51,7 +51,7 @@ async function firstload() {
         users,
         photo,
         city,
-        maxCapacity,
+        floorNumber,
         country,
       });
     }

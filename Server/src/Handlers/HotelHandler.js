@@ -18,7 +18,7 @@ const getAllhotels = async (req, res) => {
         country: hotel.country,
         city: hotel.city,
         photo: hotel.photo,
-        maxCapacity: hotel.maxCapacity,
+        floorNumber: hotel.floorNumber,
         roomsId: hotel.roomsId,
       };
       hotels_array.push(one_hotel);
@@ -31,7 +31,7 @@ const getAllhotels = async (req, res) => {
 
 const createHotel = async (req, res) => {
   try {
-    const { id, name, description, country, city, photo, maxCapacity } =
+    const { users, name, description, country, city, photo, floorNumber } =
       req.body;
 
     const existingHotel = await Hotel.findOne({
@@ -42,13 +42,13 @@ const createHotel = async (req, res) => {
 
     if (!existingHotel) {
       await Hotel.create({
-        users: id,
+        users,
         name,
         description,
         country,
         city,
         photo,
-        maxCapacity,
+        floorNumber,
       });
 
       return res.status(201).send("Hotel create successfull");
