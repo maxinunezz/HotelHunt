@@ -2,23 +2,24 @@ const { Hotel, conn } = require("../db");
 
 let hotels_array = [];
 
-const getallhotels = async (req, res) => {
+const getAllhotels = async (req, res) => {
   try {
     const data = await Hotel.findAll();
     if (data.length === 0) {
       throw Error("No hotels found");
     }
 
-    data.foreach((hotel) => {
+    data.forEach((hotel) => {
       const one_hotel = {
         id: hotel.id,
-        users: hotel.users,
+        userId: hotel.userId,
         name: hotel.name,
         description: hotel.description,
         country: hotel.country,
         city: hotel.city,
         photo: hotel.photo,
-        maxCapacity: hotel.maxCapacity,
+        floorNumber: hotel.floorNumber,
+        floorNumber: hotel.floorNumber,
         roomsId: hotel.roomsId,
       };
       hotels_array.push(one_hotel);
@@ -31,7 +32,7 @@ const getallhotels = async (req, res) => {
 
 const createHotel = async (req, res) => {
   try {
-    const { id, name, description, country, city, photo, maxCapacity } = req.body;
+    const { users, name, description, country, city, photo, floorNumber } = req.body;
 
     const existingHotel = await Hotel.findOne({
       where: {
@@ -41,13 +42,14 @@ const createHotel = async (req, res) => {
 
     if (!existingHotel) {
       await Hotel.create({
-        users: id,
+        userId: id,
         name,
         description,
         country,
         city,
         photo,
-        maxCapacity,
+        floorNumber,
+        roomsId: [],
       });
 
       return res.status(201).send("Hotel create successfull");
@@ -87,7 +89,7 @@ const deleteHotel = async (req, res) => {
 };
 
 module.exports = {
-  getallhotels,
+  getAllhotels,
   createHotel,
   updateHotel,
   deleteHotel,
