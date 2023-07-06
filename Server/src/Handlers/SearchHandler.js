@@ -19,7 +19,7 @@ const getForSearch = async (req, res) => {
 
     const hotels_results = data.map((hotel) => ({
       id: hotel.id,
-      users: hotel.users,
+      userId: hotel.userId,
       name: hotel.name,
       description: hotel.description,
       country: hotel.country,

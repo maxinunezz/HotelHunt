@@ -44,10 +44,28 @@ const { Room, Hotel, Booking, User, Auth } = sequelize.models;
 // Product.hasMany(Reviews);
 
 /*User.hasMany(Booking, { foreignKey: "userId", targetKey: "id" });*/
-/*Hotel.hasMany(Room, { foreignKey: "hotelId", targetKey: "id" });*/
-Room.hasMany(Booking, { foreignKey: "roomId", targetKey: "id" });
-Hotel.hasMany(Room, { foreignKey: "hotelId", targetKey: "id" });
-Room.belongsTo(Hotel, { foreignKey: "hotelId", targetKey: "id" });
+/*Room.hasMany(Booking, { foreignKey: "roomId", targetKey: "id" });*/
+
+
+
+Hotel.belongsTo(User, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE',
+});
+
+User.hasOne(Hotel, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE',
+});
+
+Hotel.hasMany(Room, { 
+  foreignKey: "hotelId",
+   onDelete: "CASCADE", 
+});
+Room.belongsTo(Hotel, { 
+  foreignKey: "hotelId", 
+  onDelete: "CASCADE", 
+});
 Auth.belongsTo(User, {
   foreignKey: "userId",
   onDelete: "CASCADE",

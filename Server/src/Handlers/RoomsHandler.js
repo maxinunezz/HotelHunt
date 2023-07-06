@@ -1,6 +1,7 @@
-const { Room, conn } = require("../db");
+const { Room, Hotel, conn } = require("../db");
 
 const getAllRooms = async (req, res) => {
+  const { hotelId } = req.params;
   try {
     const data = await Room.findAll({
       where: {
@@ -34,7 +35,7 @@ const createRoom = async (req, res) => {
   const { name, hotelId, description, pax, services, photo } = req.body;
 
   try {
-    await Room.create({
+    const newRoom = await Room.create({
       name,
       hotelId,
       description,
@@ -42,6 +43,13 @@ const createRoom = async (req, res) => {
       services,
       photo,
     });
+
+    const hotel = Hotel.findByPk(hotelId);
+    const RoomsIds = hotel.roomsId || [];
+
+    RoomsIds.push(newRoom.id);
+
+    await hotel.update({where: { roomId: RoomsIds }});
 
     return res.status(201).send("Room created successfully");
   } catch (error) {
