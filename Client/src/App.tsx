@@ -3,6 +3,7 @@ import './App.css'
 import LogingPage from "./Pages/LoginPage/LoginPage"
 import HomePage from "./Pages/HomePage/HomePage"
 import DashBoardPage from "./Pages/DashboardPage/DashboardPage"
+import FormPageUser from "./Pages/FormPageUser/FormPageUser"
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<LogingPage/>}></Route>
         <Route path="/home" element={<HomePage/>}></Route>
         <Route path="/dashboard" element={<DashBoardPage/>}></Route>
+        <Route path="/usercreate" element={<FormPageUser/>}></Route>
       </Routes>
     </div>
   )
