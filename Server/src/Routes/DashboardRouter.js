@@ -1,10 +1,10 @@
-const {dashBoardHandler} = require ('../Handlers/DashBoardHandler')
+const {getAllHotelsById} = require ('../Handlers/DashBoardHandler')
 const { Router } = require("express");
 
 
 const dashBoardRouter = Router()
 
-dashBoardRouter.get('/:id',dashBoardHandler)
+dashBoardRouter.get('/:id',getAllHotelsById)
 
 
 

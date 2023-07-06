@@ -33,7 +33,6 @@ const getAllRooms = async (req, res) => {
 
 const createRoom = async (req, res) => {
   const { name, hotelId, description, pax, services, photo } = req.body;
-
   try {
     const newRoom = await Room.create({
       name,
@@ -44,16 +43,18 @@ const createRoom = async (req, res) => {
       photo,
     });
 
-    const hotel = Hotel.findByPk(hotelId);
-    const RoomsIds = hotel.roomsId || [];
+    const hotel = await Hotel.findByPk(hotelId);
+    
+    const RoomsIds = hotel.roomsId;
 
     RoomsIds.push(newRoom.id);
 
-    await hotel.update({where: { roomId: RoomsIds }});
+    await Hotel.update({ roomsId: RoomsIds}, { where : {
+      id: hotelId,
+    }});
 
     return res.status(201).send("Room created successfully");
   } catch (error) {
-    console.error(error);
     return res.status(500).json(error.message);
   }
 };
