@@ -56,8 +56,10 @@ async function firstload() {
         password,
         userId: createdUser.id,
       })
-
       await Promise.all([createdUser, createdAuth]);
+    }
+
+      
 
 
     for (const hotel of hotels) {
@@ -72,9 +74,10 @@ async function firstload() {
         floorNumber,
         country,
       });
+      await Promise.all([hotelcreated]);
     }
 
-    await Promise.all([hotelcreated]);
+    
 
     for (const room of rooms) {
         const { name, description, photo, pax, hotelId, services } = room;
@@ -89,7 +92,7 @@ async function firstload() {
     }
 
     
-  }
+  
 
     console.log('Datos incrustados correctamente');
   } catch (error) {
