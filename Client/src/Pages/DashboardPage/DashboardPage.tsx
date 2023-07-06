@@ -1,4 +1,3 @@
-import BackButton from "../../components/BackButton/BackButton";
 import CrearRoomButton from "../../components/D-CrearRoomButton/CrearRoomButton"
 
 const DashBoardPage = () => {
