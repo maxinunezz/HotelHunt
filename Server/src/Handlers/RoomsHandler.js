@@ -22,7 +22,7 @@ const getAllRooms = async (req, res) => {
         description: room.description,
         pax: room.pax,
         services: room.services,
-        price: room.price
+        price: room.price,
       };
       rooms_array.push(one_room);
     });
@@ -44,7 +44,7 @@ const createRoom = async (req, res) => {
       services,
       photo,
       floorNumber,
-      price
+      price,
     });
 
     const hotel = await Hotel.findByPk(hotelId);

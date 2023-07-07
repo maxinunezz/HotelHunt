@@ -93,7 +93,7 @@
               "Spa (costo adicional)",
               "Piscina Externa"
           ],
-          "hotel category": "3",
+          "hotelCategory": "3",
           "userId": "8ab241e4-3067-4779-9c60-536eed689157"
       },
       {
@@ -114,7 +114,7 @@
               "Recepción las 24 horas",
               "Tarjetas de crédito aceptadas"
           ],
-          "hotel category": "3",
+          "hotelCategory": "3",
           "userId": "9257d1e8-e384-42aa-9432-865db79c2410"
       },
       {
@@ -135,7 +135,7 @@
               "LCD 32 (con servicio de cable)",
               "Acceso para huéspedes con movilidad reducida"
           ],
-          "hotel category": "4",
+          "hotelCategory": "4",
           "userId": "91044992-69fb-4067-89af-88e65f0a3d82"
       },
       {
@@ -155,7 +155,7 @@
               "Servicio de Lavandería (con cargo)",
               "Climatización frio calor"
           ],
-          "hotel category": "5",
+          "hotelCategory": "5",
           "userId": "9526dc0d-2d81-4450-b768-1eba5fcf5f51"
       },
       {
@@ -173,7 +173,7 @@
               "No fumadores",
               "Spa (costo adicional)"
           ],
-          "hotel category": "5",
+          "hotelCategory": "5",
           "userId": "98e23a78-a1ca-4e01-9953-421977244ac8"
       },
       {
@@ -201,7 +201,7 @@
               "Climatización frio calor",
               "Servicio de mucama diario"
           ],
-          "hotel category": "4",
+          "hotelCategory": "4",
           "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9"
       },
       {
@@ -222,7 +222,7 @@
               "No fumadores",
               "Spa (costo adicional)"
           ],
-          "hotel category": "3",
+          "hotelCategory": "3",
           "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9"
       },
       {
@@ -256,7 +256,7 @@
               "Spa (costo adicional)",
               "Piscina Externa"
           ],
-          "hotel category": "5",
+          "hotelCategory": "5",
           "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9"
       },
       {
@@ -288,7 +288,7 @@
               "Spa (costo adicional)",
               "Piscina Externa"
           ],
-          "hotel category": "5",
+          "hotelCategory": "5",
           "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9"
       },
       {
@@ -309,7 +309,7 @@
               "Tarjetas de crédito aceptadas",
               "Terraza"
           ],
-          "hotel category": "5",
+          "hotelCategory": "5",
           "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9"
       }
   ],
@@ -516,7 +516,7 @@
       },
       {
         "name": "TRIPLE",
-        "description": "on una espectacular vista al Lago Nauhel Huapi, estas habitaciones disponen de un Sommier matrimonial queen size + un sommier individual o 3 sommiers individuales , permitiendo una ocupación máxima de 3 personas por habitación.",
+        "description": "Con una espectacular vista al Lago Nauhel Huapi, estas habitaciones disponen de un Sommier matrimonial queen size + un sommier individual o 3 sommiers individuales , permitiendo una ocupación máxima de 3 personas por habitación.",
         "photo": ["https://htlhoteles.com/lamalinka/wp-content/uploads/2022/06/705b258b2a2793fb7632453885b0de3c.jpg", "https://htlhoteles.com/lamalinka/wp-content/uploads/2022/06/731f1c2c13d61f690ba0dfd2e5270912.jpg", "https://htlhoteles.com/lamalinka/wp-content/uploads/malinka/galerias/2307c1c0b55f94a2e405c402b21f1377/578c307eaad859214922431b384b3482.jpg"],
         "pax": 3,
         "services": ["Calefaccion", "Caja de seguridad", "Baño privado", "TV"],
@@ -545,17 +545,17 @@
         "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
       },
       {
-        "name": "(Hotel N7(4))",
-        "description": "",
-        "photo": [],
+        "name": "Cuadruple",
+        "description": "Con una espectacular vista al Lago Nauhel Huapi, estas habitaciones disponen de un Sommier matrimonial queen size + un sommier individual o 4 sommiers individuales , permitiendo una ocupación máxima de 4 personas por habitación.",
+        "photo": ["https://media-cdn.tripadvisor.com/media/photo-s/0f/42/ac/d8/habitacion-cuadruple.jpg", "https://www.hoteltierrainka.com/images/habitaciones/h_cuadruple_001.jpg","https://www.hoteltierrainka.com/images/habitaciones/h_triple_001.jpg"],
         "pax": 1,
-        "services": [],
-        "price": "",
+        "services": ["Calefaccion", "Caja de seguridad", "Baño privado", "TV"],
+        "price": "210",
         "floorNumber": "6",
         "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
       },
       {
-        "name": "Suit Presidencia",
+        "name": "Suit Presidencial",
         "description": "La habitación más espaciosa del hotel, con la mejor vista a la laguna de Chascomús donde puede disfrutar al máximo su estadía y equipado con todo lo necesario para su comodidad",
         "photo": ["https://d1ofesossdj49a.cloudfront.net/h_251/T75/p_2111/Suite_King_943471.jpg", "https://d1ofesossdj49a.cloudfront.net/h_251/T75/p_2111/detalle_balcon_suite_king_756441.jpg"],
         "pax": 2,
@@ -573,16 +573,6 @@
         "price": "160",
         "floorNumber": "4",
         "hotelId": "17e2c78a-3666-436e-b707-a53a553c3562"
-      },
-      {
-        "name": "(Hotel N7(5))",
-        "description": "Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.\n\nCum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-        "photo": "http://dummyimage.com/211x100.png/ff4444/ffffff",
-        "pax": 3,
-        "services": "parking",
-        "price": "",
-        "floorNumber": "3",
-        "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
       },
       {
         "name": "Suite Deluxe con bañera de hidromasaje",
@@ -651,7 +641,7 @@
         "pax": 2,
         "services": ["Baño privado", "Aire acondicionado", "TV", "Desayuno incluido"],
         "price": "250",
-        "floorNumber": "",
+        "floorNumber": "3",
         "hotelId": "13a9d6e0-22a1-4dae-8198-c81e9176eb40"
       },
       {
@@ -736,7 +726,7 @@
       },
       {
         "name": "JUNIOR SUITE",
-        "description": "",
+        "description": "Nuestras Junior Suites están ubicadas estratégicamente para ofrecerle una vista espectacular de una de las áreas verdes más grandes de la ciudad, el Lima Golf Club. Las habitaciones están equipadas con una cama King size, sala de estar, un hermoso balcón al aire libre, internet WiFi, Smart TV curvo de 49 con señal digital, dos líneas telefónicas con buzón de voz, despertador, caja de seguridad, cafetera, plancha y tabla de planchar, minibar, sala de estar y un hermoso balcón abierto.",
         "photo": ["https://image-tc.galaxy.tf/wijpeg-z1on2t7ed4duar7h8txmvjbl/delfines-hotel-peru-lima-accommodation-junior-suite-room-tripadvisor-booking-bed_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-7zjju9055uc6wgi4ysavggqfr/hotellosdelfines-2018-403_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-bt6qbiu8aiogx1qdyx80ieph0/hotellosdelfines-2018-405_wide.jpg?crop=0%2C93%2C1800%2C1013&width=1140", "https://image-tc.galaxy.tf/wijpeg-b4giv9htyu7696narzszvzauo/delfines-hotel-peru-lima-accommodation-junior-suite-room-tripadvisor-booking-terrace-smoking-area_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-8yctoe7juw5gnc46u3xl7k5vy/delfines-hotel-peru-lima-accommodation-junior-suite-room-tripadvisor-booking-bathroom_wide.jpg?crop=0%2C230%2C605%2C340&width=1140"],
         "pax": 2,
         "services": ["Wi-Fi", "TV", "Caja de seguridad", "MiniBar", "Balcon", "Batas de privado"],

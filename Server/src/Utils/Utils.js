@@ -67,7 +67,7 @@ async function firstload() {
     }
 
     for (const hotel of hotels) {
-      const { id, name, description, photo, city, country, userId } = hotel;
+      const { id, name, description, photo, city, country, userId, hotelCategory, services } = hotel;
       const hotelcreated = await Hotel.create({
         id,
         name,
@@ -76,13 +76,15 @@ async function firstload() {
         photo,
         city,
         country,
+        hotelCategory,
+        services,
         roomsId: [],
       });
       await Promise.all([hotelcreated]);
     }
 
     for (const room of rooms) {
-      const { name, description, photo, pax, hotelId, services } =
+      const { name, description, photo, pax, hotelId, services, floorNumber, price } =
         room;
       const newRoom = await Room.create({
         name,
@@ -91,6 +93,8 @@ async function firstload() {
         photo,
         pax,
         services,
+        price,
+        floorNumber,
       });
       const hotel = await Hotel.findByPk(hotelId);
       const RoomsIds = hotel.roomsId;

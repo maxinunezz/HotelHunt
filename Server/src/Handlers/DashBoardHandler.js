@@ -47,7 +47,7 @@ const UpdateRoomsByHotel = async (req, res) => { //falta testear
 
 const createRoomByHotel = async (req, res) => {
 
-  const { name, description, pax, services, photo } = req.body;
+  const { name, description, pax, services, photo, price, floorNumber } = req.body;
 
   const { hotelId } = req.params;
   try {
@@ -57,7 +57,9 @@ const createRoomByHotel = async (req, res) => {
       description,
       pax,
       services,
+      price,
       photo,
+      floorNumber,
     });
 
     const hotel = await Hotel.findByPk(hotelId);
@@ -126,7 +128,7 @@ const UpdateHotelByUser = async (req, res) => {
 
 const createHotelByUser = async (req, res) => {
   try {
-    const { name, description, country, city, photo } =
+    const { name, description, country, city, photo, hotelCategory, services, } =
       req.body;
     const { id } = userData;
 
@@ -144,6 +146,8 @@ const createHotelByUser = async (req, res) => {
         country,
         city,
         photo,
+        services,
+        hotelCategory,
         roomsId: [],
       });
 
