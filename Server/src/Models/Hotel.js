@@ -37,11 +37,18 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      services: {
+        type: DataTypes.JSONB,
+        allowNull: false,
+      },
+      hotelcategory: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       photo: {
         type: DataTypes.JSONB,
         allowNull: false,
       },
-
       roomsId: {
         type: DataTypes.JSONB,
         allowNull: true,
