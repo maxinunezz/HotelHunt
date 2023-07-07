@@ -9,12 +9,11 @@ const {
 const { getForSearch } = require("../Handlers/SearchHandler")
 
 const hotelRouter = Router();
-
-hotelRouter.get("/search", getForSearch)
-hotelRouter.get("/", getAllhotels);
-hotelRouter.post("/", createHotel);
-hotelRouter.put("/:id", updateHotel);
-hotelRouter.delete("/:id", deleteHotel);
+hotelRouter.post("/search", getForSearch)//*
+hotelRouter.get("/", getAllhotels); //*
+hotelRouter.post("/", createHotel);//se va
+hotelRouter.put("/:id", updateHotel);//super
+hotelRouter.delete("/:id", deleteHotel);//super
 
 
 module.exports = hotelRouter;

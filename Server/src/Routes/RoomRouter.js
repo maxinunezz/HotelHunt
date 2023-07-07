@@ -10,10 +10,10 @@ const {
 
 const roomRouter = Router();
 
-roomRouter.get("/", getAllRooms);
-roomRouter.post("/", createRoom);
-roomRouter.put("/:id", updateRoom);
-roomRouter.delete("/:id", deleteRoom);
+roomRouter.get("/", getAllRooms);//front
+roomRouter.post("/", createRoom);//se va
+roomRouter.put("/:id", updateRoom);// superadmin
+roomRouter.delete("/:id", deleteRoom);// superadmin
 
 
 module.exports = roomRouter;

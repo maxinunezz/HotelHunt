@@ -33,9 +33,7 @@ const createUserForEmail = async (req, res) => {
 
       await Promise.all([usercreate, authcreate]);
 
-      return res.status(201).json({
-        message: "Successful",
-      });
+      return res.status(201).send("Successfull");
     } else {
       return res.status(400).send("Users already exist");
     }

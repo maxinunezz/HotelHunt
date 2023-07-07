@@ -1,0 +1,10 @@
+
+Flujo =>
+
+LoginMiddleware => token[deberia decir si admin o no] (que expire a las 6hs)=>(no admin) put/User
+                                                                            =>(admin) dashboard/ post,put,option,delete.
+
+admin false => !dashboard
+admin true => dashboard.
+
+front => dashboard => crear habitacion => post/host/dashboard/hotel/room

@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { AuthHandler } = require('../Handlers/AuthHandler');
 
 const {
     createUserForEmail,
@@ -9,9 +10,10 @@ const {
 const userRouter = Router();
 
 
-userRouter.post("/signup", createUserForEmail);
-userRouter.delete("/:id", deleteUser);
-userRouter.put("/:id", updateUser);
+userRouter.post("/signup", createUserForEmail);//*
+userRouter.post("/auth", AuthHandler);//*
+userRouter.delete("/:id", deleteUser);// super
+userRouter.put("/:id", updateUser);// super
 
 
 module.exports = userRouter;
