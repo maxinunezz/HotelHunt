@@ -41,8 +41,33 @@ const getRoomsByHotel = async (req, res) => {
 
 const UpdateRoomsByHotel = async (req, res) => { //falta testear
   const { hotelId } = req.params;
-  const room_for_update = Room.findAll({ where: { hotelId: hotelId } });
-  room_for_update.update(req.body);
+  try {
+    const tuhotel = await Hotel.findOne({
+      where: {
+        id: hotelId,
+        userId: userData.id,
+      }
+    });
+
+    if(!tuhotel) {
+      return res.staus(403).send("you don't have permission to edit this room")
+    }
+    const room = await Room.findOne({
+      where: {
+        id: req.body.id,
+        hotelId: hotelId,
+      },
+    });
+
+    if(!room) {
+      return res.status(404).send("Room not found");
+    }
+
+    await room.update(req.body);
+    return res.status(200).send("Room updated");
+  } catch (error) {
+    return res.status(500).json(error.message)
+  }
 }
 
 const createRoomByHotel = async (req, res) => {
@@ -114,9 +139,12 @@ const deleteRoomsByHotel = async (req, res) => {
 const UpdateHotelByUser = async (req, res) => {
   const { id } = req.params;
   try {
-    const hotel = await Hotel.findByPk(id);
+    const hotel = await Hotel.findOne({where: {
+      id: id,
+      userId: userData.id
+    }});
     if (!hotel) {
-      return res.status(404).send("Hotel not found");
+      return res.status(403).send("Hotel not found");
     }
 
     await hotel.update(req.body);
