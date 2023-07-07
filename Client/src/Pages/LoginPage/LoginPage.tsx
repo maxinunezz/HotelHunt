@@ -36,7 +36,7 @@ const LogingPage = () => {
 				<h3>Aumenta tu bla bla junto a nosotros!</h3>
 			</div>
 
-			<div className="w-4/5 bg-lime-600 flex flex-col items-center justify-center">
+			<div className="bg-lime-600 w-[35%] flex flex-col items-center justify-center">
 				<h1>Bienvenido!</h1>
 				<div className='w-10/12 bg-lime-300 m-10 justify-center items-center justify-self-center'>
 					<Formik<LoginValues>
