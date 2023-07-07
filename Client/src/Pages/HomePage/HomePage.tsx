@@ -1,3 +1,4 @@
+
 import { searchStore } from '../../Store';
 import NavBar from '../../components/NavBar/NavBar';
 
@@ -21,3 +22,4 @@ export default function HomePage() {
 		</div>
 	);
 }
+

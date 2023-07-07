@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 
@@ -16,3 +17,4 @@ export default function NavBar() {
 		</nav>
 	);
 }
+
