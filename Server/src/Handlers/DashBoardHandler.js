@@ -13,14 +13,14 @@ const getAllHotelsById = async (req, res) => {
     })
 
     if (!hotels) {
-      res.status(400).send('no hay hoteles asociados')
+      res.status(400).send('There are no associated hotels')
     }
 
     res.status(200).json(hotels)
 
   } catch (error) {
     console.error(error);
-    res.status(500).send('error del dashboard')
+    res.status(500).send('Dashboard error')
   }
 };
 
@@ -93,7 +93,7 @@ const deleteRoomsByHotel = async (req, res) => {
       },
     });
     if (!room) {
-      return res.status(404).send("Habitacion no encontada");
+      return res.status(404).send("Room not found");
     }
 
 
@@ -105,7 +105,7 @@ const deleteRoomsByHotel = async (req, res) => {
 
     await Promise.all([poproom, destroyroom])
 
-    return res.status(200).send("Habitacion eliminada correctamente");
+    return res.status(200).send("Room deleted successfully");
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -116,7 +116,7 @@ const UpdateHotelByUser = async (req, res) => {
   try {
     const hotel = await Hotel.findByPk(id);
     if (!hotel) {
-      return res.status(404).send("Hotel no encontrado");
+      return res.status(404).send("Hotel not found");
     }
 
     await hotel.update(req.body);
@@ -165,10 +165,10 @@ const deleteHotelByUser = async (req, res) => {
   try {
     const hotel = await Hotel.findByPk(id);
     if (!hotel) {
-      return res.status(404).send("Habitacion no encontada");
+      return res.status(404).send("Hotel not found");
     }
     await hotel.destroy();
-    return res.status(200).send("Habitacion eliminada correctamente");
+    return res.status(200).send("Hotel successfully removed");
   } catch (error) {
     return res.status(500).send(error.message);
   }

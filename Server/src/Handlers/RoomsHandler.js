@@ -73,7 +73,7 @@ const updateRoom = async (req, res) => {
   try {
     const room = await Room.findByPk(id);
     if (!room) {
-      return res.status(404).send("Habitacion no encontrada");
+      return res.status(404).send("Room not found");
     }
 
     await room.update(req.body);
@@ -92,7 +92,7 @@ const deleteRoom = async (req, res) => {
       },
     });
     if (!room) {
-      return res.status(404).send("Habitacion no encontada");
+      return res.status(404).send("Room not found");
     }
 
 
@@ -104,7 +104,7 @@ const deleteRoom = async (req, res) => {
 
     await Promise.all([poproom, destroyroom])
 
-    return res.status(200).send("Habitacion eliminada correctamente");
+    return res.status(200).send("Room deleted successfully");
   } catch (error) {
     return res.status(500).send(error.message);
   }

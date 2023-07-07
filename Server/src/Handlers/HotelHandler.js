@@ -65,7 +65,7 @@ const updateHotel = async (req, res) => {
   try {
     const hotel = await Hotel.findByPk(id);
     if (!hotel) {
-      return res.status(404).send("Hotel no encontrado");
+      return res.status(404).send("Hotel not found");
     }
 
     await hotel.update(req.body);
@@ -80,10 +80,10 @@ const deleteHotel = async (req, res) => {
   try {
     const hotel = await Hotel.findByPk(id);
     if (!hotel) {
-      return res.status(404).send("Habitacion no encontada");
+      return res.status(404).send("Hotel not found");
     }
     await hotel.destroy();
-    return res.status(200).send("Habitacion eliminada correctamente");
+    return res.status(200).send("Hotel successfully removed");
   } catch (error) {
     return res.status(500).send(error.message);
   }
