@@ -1,7 +1,7 @@
 import { Button, FormControl } from '@rewind-ui/core';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useCallback } from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
 interface UserCreateValues {
@@ -68,7 +68,7 @@ const FormPageUser = () => {
                             >
                                 <FormControl.Label>Nombre</FormControl.Label>
                                 <FormControl.Input
-                                    type="name"
+                                    type="text"
                                     placeholder="nombre"
                                     onChange={async (event) => {
                                         await setFieldValue('name', event.target.value);
@@ -80,7 +80,7 @@ const FormPageUser = () => {
 
                             <FormControl.Label>Apellido</FormControl.Label>
                             <FormControl.Input
-                                type="surname"
+                                type="text"
                                 placeholder='apellido'
                                 onChange={async (event) => {
                                     await setFieldValue('surname', event.target.value);
@@ -91,7 +91,7 @@ const FormPageUser = () => {
 
                             <FormControl.Label>Fecha de nacimiento</FormControl.Label>
                             <FormControl.Input
-                                type="dob"
+                                type="number"
                                 placeholder='Fecha de nacimiento'
                                 onChange={async (event) => {
                                     await setFieldValue('dob', event.target.value);
@@ -102,7 +102,7 @@ const FormPageUser = () => {
 
                             <FormControl.Label>Fono de contacto</FormControl.Label>
                             <FormControl.Input
-                                type="phone"
+                                type="number"
                                 placeholder='Fono de contacto'
                                 onChange={async (event) => {
                                     await setFieldValue('phone', event.target.value);

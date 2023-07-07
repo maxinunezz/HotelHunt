@@ -16,7 +16,7 @@ const initialState: States = {
 	searchResoults: [],
 };
 
-export const hotelStore = create<States & Actions>((set, get) => ({
+export const hotelStore = create<States & Actions>((set) => ({
 	...initialState,
 
 	fetchHotels: async () => {
