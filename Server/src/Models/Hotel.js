@@ -2,6 +2,7 @@ const { DataTypes } = require("sequelize");
 const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize) => {
+  const User = sequelize.models.User
   sequelize.define(
     "Hotel",
     {
@@ -11,10 +12,10 @@ module.exports = (sequelize) => {
         defaultValue: () => uuidv4(),
         allowNull: false,
       },
-      users: {
+      userId: {
         type: DataTypes.UUID,
-        reference: {
-          moodel: "Users",
+        references: {
+          model: User,
           key: "id",
         },
         allowNull: false,
@@ -39,10 +40,15 @@ module.exports = (sequelize) => {
         type: DataTypes.JSONB,
         allowNull: false,
       },
-      maxCapacity: {
-        type: DataTypes.SMALLINT,
+      floorNumber: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
+      roomsId: {
+        type: DataTypes.JSONB,
+        allowNull: true,
+        
+      }
     },
     { timestamps: false }
   );
