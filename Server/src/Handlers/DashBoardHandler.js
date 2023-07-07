@@ -166,33 +166,39 @@ const createRoomByHotel = async (req, res) => {
 
   const { hotelId } = req.params;
   try {
-    const newRoom = await Room.create({
-      name,
-      hotelId,
-      description,
-      pax,
-      services,
-      price,
-      photo,
-      floorNumber,
-    });
-
-    const hotel = await Hotel.findByPk(hotelId);
-
-    const RoomsIds = hotel.roomsId;
-
-    RoomsIds.push(newRoom.id);
-
-    await Hotel.update(
-      { roomsId: RoomsIds },
-      {
-        where: {
-          id: hotelId,
-        },
-      }
-    );
-
-    return res.status(201).send("Room created successfully");
+    const hotel = await Hotel.findOne({where:{
+      id: hotelId,
+      userId: userData.id,
+    }});
+    if(hotel){
+      const newRoom = await Room.create({
+        name,
+        hotelId,
+        description,
+        pax,
+        services,
+        price,
+        photo,
+        floorNumber,
+      });      
+  
+      const RoomsIds = hotel.roomsId;
+  
+      RoomsIds.push(newRoom.id);
+  
+      await Hotel.update(
+        { roomsId: RoomsIds },
+        {
+          where: {
+            id: hotelId,
+          },
+        }
+      );
+  
+      return res.status(201).send("Room created successfully");
+    }else{
+      return res.status(403).send("Only owner can create rooms")
+    }
   } catch (error) {
     return res.status(500).json(error.message);
   }
