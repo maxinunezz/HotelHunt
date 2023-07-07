@@ -92,7 +92,16 @@ const deleteRoom = async (req, res) => {
     if (!room) {
       return res.status(404).send("Habitacion no encontada");
     }
-    await room.destroy();
+
+
+    const hotel = await Hotel.findOne({ where: { id: room.hotelId } })
+    const newRoomsId = hotel.roomsId.filter((roomId) => roomId !== room.id);
+
+    const poproom = await hotel.update({ roomsId: newRoomsId });
+    const destroyroom = await room.destroy();
+
+    await Promise.all([poproom, destroyroom])
+
     return res.status(200).send("Habitacion eliminada correctamente");
   } catch (error) {
     return res.status(500).send(error.message);

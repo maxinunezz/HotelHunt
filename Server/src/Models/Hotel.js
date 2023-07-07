@@ -43,11 +43,7 @@ module.exports = (sequelize) => {
       },
 
       roomsId: {
-        type: DataTypes.ARRAY,
-        references: {
-          model: Room,
-          key: "id",
-        },
+        type: DataTypes.JSONB,
         allowNull: true,
       },
     },

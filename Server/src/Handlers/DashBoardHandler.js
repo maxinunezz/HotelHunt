@@ -1,4 +1,4 @@
-const { Hotel, Room } = require("../db");
+const { Hotel, Room, User } = require("../db");
 
 const getAllHotelsById = async (req, res) => {
 
@@ -83,19 +83,26 @@ const createRoomByHotel = async (req, res) => {
 };
 
 const deleteRoomsByHotel = async (req, res) => {
-
+  const { id } = req.params;
   try {
-    const { roomId } = req.params;
-    
     const room = await Room.findOne({
       where: {
-        id: roomId,
+        id: id,
       },
     });
     if (!room) {
       return res.status(404).send("Habitacion no encontada");
     }
-    await room.destroy();
+
+
+    const hotel = await Hotel.findOne({ where: { id: room.hotelId } })
+    const newRoomsId = hotel.roomsId.filter((roomId) => roomId !== room.id);
+
+    const poproom = await hotel.update({ roomsId: newRoomsId });
+    const destroyroom = await room.destroy();
+
+    await Promise.all([poproom, destroyroom])
+
     return res.status(200).send("Habitacion eliminada correctamente");
   } catch (error) {
     return res.status(500).send(error.message);
@@ -150,7 +157,7 @@ const createHotelByUser = async (req, res) => {
 
 const deleteHotelByUser = async (req, res) => {
   const { id } = req.params;
-  
+
   try {
     const hotel = await Hotel.findByPk(id);
     if (!hotel) {
@@ -161,7 +168,22 @@ const deleteHotelByUser = async (req, res) => {
   } catch (error) {
     return res.status(500).send(error.message);
   }
-}
+};
+
+const deleteAccount = async (req, res) => {
+  try {
+    const { id } = userData;
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const destroyUser = await user.destroy();
+    await Promise.all([destroyUser]);
+    return res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 
 
@@ -174,4 +196,5 @@ module.exports = {
   UpdateHotelByUser,
   deleteHotelByUser,
   createHotelByUser,
+  deleteAccount,
 };
