@@ -32,41 +32,6 @@ const getAllRooms = async (req, res) => {
   }
 };
 
-const createRoom = async (req, res) => {
-  const { name, hotelId, description, pax, services, photo, floorNumber, price} =
-    req.body;
-  try {
-    const newRoom = await Room.create({
-      name,
-      hotelId,
-      description,
-      pax,
-      services,
-      photo,
-      floorNumber,
-      price,
-    });
-
-    const hotel = await Hotel.findByPk(hotelId);
-
-    const RoomsIds = hotel.roomsId;
-
-    RoomsIds.push(newRoom.id);
-
-    await Hotel.update(
-      { roomsId: RoomsIds },
-      {
-        where: {
-          id: hotelId,
-        },
-      }
-    );
-
-    return res.status(201).send("Room created successfully");
-  } catch (error) {
-    return res.status(500).json(error.message);
-  }
-};
 
 const updateRoom = async (req, res) => {
   const { id } = req.params;
@@ -112,7 +77,6 @@ const deleteRoom = async (req, res) => {
 
 module.exports = {
   getAllRooms,
-  createRoom,
   updateRoom,
   deleteRoom,
 };

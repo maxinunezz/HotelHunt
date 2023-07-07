@@ -5,8 +5,18 @@ const createUserForEmail = async (req, res) => {
   try {
     const { name, lastName, birthDate, phoneNumber, admin, email, password } =
       req.body;
-    /* el ID de AUTH deberia apuntar al ID de USER */
+    
     let usercreate;
+    let adminvalue = ""
+    if(admin){
+      adminvalue = "admin";
+    }
+    if(!admin){
+      adminvalue = "normal";
+    }
+    if(admin === "super"){
+      adminvalue = admin;
+    }
     const userexist = await Auth.findOne({
       where: { email },
       raw: true,
@@ -20,9 +30,8 @@ const createUserForEmail = async (req, res) => {
         lastName,
         birthDate,
         phoneNumber,
-        admin,
+        admin: adminvalue,
       });
-      console.log(usercreate.id);
 
       const authcreate = await Auth.create({
         email,

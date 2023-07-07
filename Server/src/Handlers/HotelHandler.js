@@ -29,36 +29,6 @@ const getAllhotels = async (req, res) => {
   }
 };
 
-const createHotel = async (req, res) => {
-  try {
-    const { id, name, description, country, city, photo , services, hotelCategory} =
-      req.body;
-
-    const existingHotel = await Hotel.findOne({
-      where: {
-        name: name,
-      },
-    });
-
-    if (!existingHotel) {
-      await Hotel.create({
-        userId: id,
-        name,
-        description,
-        country,
-        city,
-        services,
-        hotelCategory,
-        photo,
-        roomsId: [],
-      });
-
-      return res.status(201).send("Hotel create successfull");
-    }
-  } catch (error) {
-    return res.status(500).json(error.message);
-  }
-};
 
 const updateHotel = async (req, res) => {
   const { id } = req.params;
@@ -91,7 +61,6 @@ const deleteHotel = async (req, res) => {
 
 module.exports = {
   getAllhotels,
-  createHotel,
   updateHotel,
   deleteHotel,
 };

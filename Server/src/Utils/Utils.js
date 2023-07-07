@@ -50,13 +50,23 @@ async function firstload() {
         email,
         password,
       } = user;
+      let adminvalue = ""
+      if (admin) {
+        adminvalue = "admin";
+      }
+      if (!admin) {
+        adminvalue = "normal";
+      }
+      if (admin === "super") {
+        adminvalue = admin;
+      }
       const createdUser = await User.create({
         id,
         name,
         lastName,
         birthDate,
         phoneNumber,
-        admin,
+        admin: adminvalue,
       });
       const createdAuth = await Auth.create({
         email,

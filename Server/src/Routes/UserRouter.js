@@ -6,14 +6,16 @@ const {
     deleteUser,
     updateUser,
     } = require("../Handlers/UsersHandler.js");
+const { authMiddleware } = require("../Middleware/AuthMiddleware");
+const { SuperAdminCheck } = require("../Middleware/SuperAdminMiddleware");
 
 const userRouter = Router();
 
 
 userRouter.post("/signup", createUserForEmail);//*
 userRouter.post("/auth", AuthHandler);//*
-userRouter.delete("/:id", deleteUser);// super
-userRouter.put("/:id", updateUser);// super
+userRouter.delete("/:id",authMiddleware, SuperAdminCheck, deleteUser);// super
+userRouter.put("/:id",authMiddleware, SuperAdminCheck, updateUser);// super
 
 
 module.exports = userRouter;
