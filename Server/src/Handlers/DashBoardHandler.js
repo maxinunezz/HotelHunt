@@ -39,23 +39,12 @@ const getRoomsByHotel = async (req, res) => {
   }
 };
 
-const UpdateRoomsByHotel = async (req, res) => { //falta testear
-  const { hotelId } = req.params;
+const UpdateRoomsByHotel = async (req, res) => { 
+  const { roomId } = req.params;
   try {
-    const tuhotel = await Hotel.findOne({
-      where: {
-        id: hotelId,
-        userId: userData.id,
-      }
-    });
-
-    if (!tuhotel) {
-      return res.staus(403).send("you don't have permission to edit this room")
-    }
     const room = await Room.findOne({
       where: {
-        id: req.body.id,
-        hotelId: hotelId,
+        id: roomId,
       },
     });
 
@@ -63,8 +52,23 @@ const UpdateRoomsByHotel = async (req, res) => { //falta testear
       return res.status(404).send("Room not found");
     }
 
+    let tuhotel;
+
+    if(room) {
+        tuhotel = await Hotel.findOne({
+        where: {
+          id: room.hotelId,
+          userId: userData.id,
+        }
+      });
+    }
+
+    if (!tuhotel) {
+      return res.staus(403).send("You don't have permission to edit this room")
+    }
     await room.update(req.body);
     return res.status(200).send("Room updated");
+
   } catch (error) {
     return res.status(500).json(error.message)
   }
@@ -106,11 +110,11 @@ const deleteRoomsByHotel = async (req, res) => {
 }
 
 const UpdateHotelByUser = async (req, res) => {
-  const { id } = req.params;
+  const { hotelId } = req.params;
   try {
-    const hotel = await Hotel.findByOne({
+    const hotel = await Hotel.findOne({
       where: {
-        id: id,
+        id: hotelId,
         userId: userData.id
       }
     });
@@ -131,15 +135,14 @@ const createHotelByUser = async (req, res) => {
       req.body;
     const { id } = userData;
 
-    const hotel = await Hotel.findByOne({where: {
-      id: id,
-      userId: userData.id
+    const hotel = await Hotel.findOne({where: {
+      name: name
     }});
-    if (!hotel) {
-      return res.status(404).send("Hotel not found");
+    if (hotel) {
+      return res.status(404).send("Hotel already exist");
     }
 
-    if (!existingHotel) {
+    if (!hotel) {
       await Hotel.create({
         userId: id,
         name,
