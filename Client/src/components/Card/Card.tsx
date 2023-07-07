@@ -1,4 +1,5 @@
 
+
 interface CardProps {
 	id: string;
 	name: string;
@@ -28,4 +29,5 @@ const Card: React.FC<CardProps> = ({
 	);
 };
 export default Card;
+
 
