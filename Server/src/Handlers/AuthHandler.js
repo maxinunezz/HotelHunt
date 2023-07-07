@@ -11,12 +11,9 @@ const AuthHandler = async (req, res) => {
         const { email, password } = req.body;
 
         const results = await Auth.findOne({ where: { email: email } });
-        console.log("primer result", results)
         
-        if(results.deletedAt){
-            await results.restore();
+        if(results){
             await User.restore({ where: { id: results.userId } });
-            console.log(results)
         }
         const storedpassword = results.password;
 
@@ -26,7 +23,6 @@ const AuthHandler = async (req, res) => {
             return res.status(401).send("Wrong password");
         }
         const user = await User.findOne({ where: { id: results.userId } })
-        console.log(user)
         
         if(!user){
             return res.status(401).send("User doesnt exist");
