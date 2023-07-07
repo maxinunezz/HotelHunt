@@ -2,7 +2,7 @@ const BothAccess = async (req, res, next) => {
 
     try {
         const { admin } = userData;
-        if (admin === "super" || admin === "admin" ) {
+        if (admin === "normal" || admin === "admin" ) {
             next();
         }
         else {

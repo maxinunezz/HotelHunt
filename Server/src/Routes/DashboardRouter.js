@@ -2,6 +2,7 @@ const {getAllHotelsById, getRoomsByHotel, createRoomByHotel, deleteRoomsByHotel,
 const { Router } = require("express");
 const { authMiddleware } = require('../Middleware/AuthMiddleware');
 const { AdminCheck } = require('../Middleware/AdminMiddleware');
+const { BothAccess } = require('../Middleware/BothMiddleware');
 
 
 const dashBoardRouter = Router()
@@ -12,8 +13,8 @@ dashBoardRouter.post('/room/:hotelId', authMiddleware, AdminCheck, createRoomByH
 dashBoardRouter.post('/hotel',authMiddleware, AdminCheck,createHotelByUser);
 dashBoardRouter.put('/room/:roomId', authMiddleware,AdminCheck, UpdateRoomsByHotel);
 dashBoardRouter.put('/hotel/:hotelId', authMiddleware, AdminCheck,UpdateHotelByUser);
-dashBoardRouter.put('/user',authMiddleware,AdminCheck,updateAccount);
-dashBoardRouter.delete('/user',authMiddleware ,AdminCheck, deleteAccount);
+dashBoardRouter.put('/user',authMiddleware,BothAccess,updateAccount);
+dashBoardRouter.delete('/user',authMiddleware ,BothAccess, deleteAccount);
 dashBoardRouter.delete('/room/:roomId', authMiddleware, AdminCheck,deleteRoomsByHotel);
 dashBoardRouter.delete('/hotel/:id', authMiddleware,AdminCheck, deleteHotelByUser);
 

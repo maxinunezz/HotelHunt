@@ -39,7 +39,7 @@ const getRoomsByHotel = async (req, res) => {
   }
 };
 
-const UpdateRoomsByHotel = async (req, res) => { 
+const UpdateRoomsByHotel = async (req, res) => {
   const { roomId } = req.params;
   try {
     const room = await Room.findOne({
@@ -54,8 +54,8 @@ const UpdateRoomsByHotel = async (req, res) => {
 
     let tuhotel;
 
-    if(room) {
-        tuhotel = await Hotel.findOne({
+    if (room) {
+      tuhotel = await Hotel.findOne({
         where: {
           id: room.hotelId,
           userId: userData.id,
@@ -64,7 +64,7 @@ const UpdateRoomsByHotel = async (req, res) => {
     }
 
     if (!tuhotel) {
-      return res.staus(403).send("You don't have permission to edit this room")
+      return res.status(403).send("You don't have permission to edit this room")
     }
     await room.update(req.body);
     return res.status(200).send("Room updated");
@@ -75,11 +75,11 @@ const UpdateRoomsByHotel = async (req, res) => {
 }
 
 const deleteRoomsByHotel = async (req, res) => {
-  const { id } = req.params;
+  const { roomId } = req.params;
   try {
     const room = await Room.findOne({
       where: {
-        id: id,
+        id: roomId,
       },
     });
     if (!room) {
@@ -135,9 +135,11 @@ const createHotelByUser = async (req, res) => {
       req.body;
     const { id } = userData;
 
-    const hotel = await Hotel.findOne({where: {
-      name: name
-    }});
+    const hotel = await Hotel.findOne({
+      where: {
+        name: name
+      }
+    });
     if (hotel) {
       return res.status(404).send("Hotel already exist");
     }
@@ -169,11 +171,13 @@ const createRoomByHotel = async (req, res) => {
 
   const { hotelId } = req.params;
   try {
-    const hotel = await Hotel.findOne({where:{
-      id: hotelId,
-      userId: userData.id,
-    }});
-    if(hotel){
+    const hotel = await Hotel.findOne({
+      where: {
+        id: hotelId,
+        userId: userData.id,
+      }
+    });
+    if (hotel) {
       const newRoom = await Room.create({
         name,
         hotelId,
@@ -183,12 +187,12 @@ const createRoomByHotel = async (req, res) => {
         price,
         photo,
         floorNumber,
-      });      
-  
+      });
+
       const RoomsIds = hotel.roomsId;
-  
+
       RoomsIds.push(newRoom.id);
-  
+
       await Hotel.update(
         { roomsId: RoomsIds },
         {
@@ -197,9 +201,9 @@ const createRoomByHotel = async (req, res) => {
           },
         }
       );
-  
+
       return res.status(201).send("Room created successfully");
-    }else{
+    } else {
       return res.status(403).send("Only owner can create rooms")
     }
   } catch (error) {
@@ -212,7 +216,7 @@ const deleteHotelByUser = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const hotel = await Hotel.findByPk({
+    const hotel = await Hotel.findOne({
       where: {
         id: id, userId: userData.id
       }
