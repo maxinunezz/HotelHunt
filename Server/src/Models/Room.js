@@ -36,14 +36,18 @@ module.exports = (sequelize) => {
         type: DataTypes.JSONB,
         allowNull: true,
       },
+      price: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       photo: {
         type: DataTypes.JSONB,
         allowNull: false,
       },
-      /*floorNumber: {
+      floorNumber: {
         type: DataTypes.STRING,
         allowNull: false,
-      },*/
+      },
     },
 
     { timestamps: false }
