@@ -12,10 +12,10 @@ const { SuperAdminCheck } = require("../Middleware/SuperAdminMiddleware");
 const userRouter = Router();
 
 
-userRouter.post("/signup", createUserForEmail);//*
-userRouter.post("/auth", AuthHandler);//*
-userRouter.delete("/:id",authMiddleware, SuperAdminCheck, deleteUser);// super
-userRouter.put("/:id",authMiddleware, SuperAdminCheck, updateUser);// super
+userRouter.post("/signup", createUserForEmail);
+userRouter.post("/auth", AuthHandler);
+userRouter.delete("/:id",authMiddleware, SuperAdminCheck, deleteUser);
+userRouter.put("/:id",authMiddleware, SuperAdminCheck, updateUser);
 
 
 module.exports = userRouter;

@@ -20,8 +20,8 @@ get RoomsByHotel => *
 -
 los post:
 
-post createHotelByUser => admin (DashBoardHandler)
-post createRoom => admin (DashBoardHandler)
+post createHotelByUser => admin (DashBoardHandler) *
+post createRoom => admin (DashBoardHandler) *
 ------
 los put:
 

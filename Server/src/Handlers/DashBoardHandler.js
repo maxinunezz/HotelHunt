@@ -13,7 +13,7 @@ const getAllHotelsById = async (req, res) => {
     })
 
     if (!hotels) {
-      res.status(400).send('There are no associated hotels')
+      res.status(404).send('There are no associated hotels')
     }
 
     res.status(200).json(hotels)
@@ -51,33 +51,41 @@ const createRoomByHotel = async (req, res) => {
 
   const { hotelId } = req.params;
   try {
-    const newRoom = await Room.create({
-      name,
-      hotelId,
-      description,
-      pax,
-      services,
-      price,
-      photo,
-      floorNumber,
-    });
+    const hotel = await Hotel.findOne({where:{
+      id: hotelId,
+      userId: userData.id,
+    }})
 
-    const hotel = await Hotel.findByPk(hotelId);
-
-    const RoomsIds = hotel.roomsId;
-
-    RoomsIds.push(newRoom.id);
-
-    await Hotel.update(
-      { roomsId: RoomsIds },
-      {
-        where: {
-          id: hotelId,
-        },
-      }
-    );
-
-    return res.status(201).send("Room created successfully");
+    if(hotel){
+      const newRoom = await Room.create({
+        name,
+        hotelId,
+        description,
+        pax,
+        services,
+        price,
+        photo,
+        floorNumber,
+      });
+  
+  
+      const RoomsIds = hotel.roomsId;
+  
+      RoomsIds.push(newRoom.id);
+  
+      await Hotel.update(
+        { roomsId: RoomsIds },
+        {
+          where: {
+            id: hotelId,
+          },
+        }
+      );
+  
+      return res.status(201).send("Room created successfully");
+    }else{
+      return res.status(403).send("Is not your Hotel");
+    }
   } catch (error) {
     return res.status(500).json(error.message);
   }
@@ -95,17 +103,25 @@ const deleteRoomsByHotel = async (req, res) => {
     if (!room) {
       return res.status(404).send("Room not found");
     }
+    const hotel = await Hotel.findOne({
+      where: {
+        id: room.hotelId,
+        userId: userData.id,
+      }
+    });
+    if (hotel) {
+      const newRoomsId = hotel.roomsId.filter((roomId) => roomId !== room.id);
 
+      const poproom = await hotel.update({ roomsId: newRoomsId });
+      const destroyroom = await room.destroy();
 
-    const hotel = await Hotel.findOne({ where: { id: room.hotelId } })
-    const newRoomsId = hotel.roomsId.filter((roomId) => roomId !== room.id);
+      await Promise.all([poproom, destroyroom])
 
-    const poproom = await hotel.update({ roomsId: newRoomsId });
-    const destroyroom = await room.destroy();
+      return res.status(200).send("Room deleted successfully");
+    } else {
+      return res.status(403).send("Is not your room");
+    }
 
-    await Promise.all([poproom, destroyroom])
-
-    return res.status(200).send("Room deleted successfully");
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -114,7 +130,10 @@ const deleteRoomsByHotel = async (req, res) => {
 const UpdateHotelByUser = async (req, res) => {
   const { id } = req.params;
   try {
-    const hotel = await Hotel.findByPk(id);
+    const hotel = await Hotel.findByOne({where: {
+      id: id,
+      userId: userData.id
+    }});
     if (!hotel) {
       return res.status(404).send("Hotel not found");
     }
@@ -163,7 +182,9 @@ const deleteHotelByUser = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const hotel = await Hotel.findByPk(id);
+    const hotel = await Hotel.findByPk({where:{ 
+      id: id, userId: userData.id 
+    }});
     if (!hotel) {
       return res.status(404).send("Hotel not found");
     }
@@ -189,6 +210,23 @@ const deleteAccount = async (req, res) => {
   }
 };
 
+const updateAccount = async (req, res) => {
+  const { id } = userData;
+  try {
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    await user.update(req.body);
+
+    return res.status(200).json({ message: "User updated successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 
 
 module.exports = {
@@ -201,4 +239,5 @@ module.exports = {
   deleteHotelByUser,
   createHotelByUser,
   deleteAccount,
+  updateAccount,
 };
