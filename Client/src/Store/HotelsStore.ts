@@ -4,6 +4,7 @@ import { Hotel } from '../models';
 
 type States = {
 	hotels: Hotel[];
+	searchResoults: any[];
 };
 
 type Actions = {
@@ -12,6 +13,7 @@ type Actions = {
 
 const initialState: States = {
 	hotels: [],
+	searchResoults: [],
 };
 
 export const hotelStore = create<States & Actions>((set) => ({

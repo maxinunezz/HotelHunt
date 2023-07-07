@@ -1,3 +1,4 @@
+
 import { Button } from '@rewind-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -10,3 +11,4 @@ function CrearHostelButton() {
 }
 
 export default CrearHostelButton;
+

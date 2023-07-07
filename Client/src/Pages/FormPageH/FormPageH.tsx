@@ -27,6 +27,7 @@ const useFormStore = create<FormState>((set) => ({
   setImagen: (imagen) => set({ imagen }),
 }));
 
+
 export default function FormPageH() {
   const {
     nombre,
@@ -154,7 +155,9 @@ export default function FormPageH() {
           <h3 className="text-lg font-bold mb-2">Imagen seleccionada:</h3>
           <img src={imagen} alt="Imagen seleccionada" className="max-w-full" />
         </div>
+
       )}
     </div>
 );
       }
+
