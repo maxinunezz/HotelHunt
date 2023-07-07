@@ -10,6 +10,7 @@ import DashBoardPage from "./Pages/DashboardPage/DashboardPage"
 import FormPageH from "./Pages/FormPageH/FormPageH"
 
 import FormPageUser from "./Pages/FormPageUser/FormPageUser"
+import HotelPage from "./Pages/HotelPage/HotelPage"
 
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/formHotel" element={<FormPageH/>}></Route>
 
         <Route path="/usercreate" element={<FormPageUser/>}></Route>
+        <Route path="/hotelpage" element={<HotelPage/>}></Route>
 
       </Routes>
     </div>
