@@ -11,6 +11,13 @@ const AuthHandler = async (req, res) => {
         const { email, password } = req.body;
 
         const results = await Auth.findOne({ where: { email: email } });
+        console.log("primer result", results)
+        
+        if(results.deletedAt){
+            await results.restore();
+            await User.restore({ where: { id: results.userId } });
+            console.log(results)
+        }
         const storedpassword = results.password;
 
         const access = await bcrypt.compare(password, storedpassword);
@@ -19,6 +26,7 @@ const AuthHandler = async (req, res) => {
             return res.status(401).send("Wrong password");
         }
         const user = await User.findOne({ where: { id: results.userId } })
+        console.log(user)
         
         if(!user){
             return res.status(401).send("User doesnt exist");

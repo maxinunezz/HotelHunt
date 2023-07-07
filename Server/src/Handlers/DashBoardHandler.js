@@ -240,7 +240,7 @@ const deleteAccount = async (req, res) => {
     }
     const destroyUser = await user.destroy();
     await Promise.all([destroyUser]);
-    return res.status(200).json({ message: "User deleted successfully" });
+    return res.status(200).json({ message: "You have 30 days after your account would delete" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
