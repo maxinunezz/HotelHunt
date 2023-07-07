@@ -131,15 +131,14 @@ const createHotelByUser = async (req, res) => {
       req.body;
     const { id } = userData;
 
-    const hotel = await Hotel.findByOne({where: {
-      id: id,
-      userId: userData.id
+    const hotel = await Hotel.findOne({where: {
+      name: name
     }});
-    if (!hotel) {
-      return res.status(404).send("Hotel not found");
+    if (hotel) {
+      return res.status(404).send("Hotel already exist");
     }
 
-    if (!existingHotel) {
+    if (!hotel) {
       await Hotel.create({
         userId: id,
         name,
