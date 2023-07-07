@@ -16,6 +16,8 @@ const getAllhotels = async (req, res) => {
         description: hotel.description,
         country: hotel.country,
         city: hotel.city,
+        services:hotel.services,
+        hotelCategory:hotel['hotel category'],
         photo: hotel.photo,
         roomsId: hotel.roomsId,
       };
@@ -29,7 +31,7 @@ const getAllhotels = async (req, res) => {
 
 const createHotel = async (req, res) => {
   try {
-    const { id, name, description, country, city, photo } =
+    const { id, name, description, country, city, photo , services, hotelcategory} =
       req.body;
 
     const existingHotel = await Hotel.findOne({
@@ -45,6 +47,8 @@ const createHotel = async (req, res) => {
         description,
         country,
         city,
+        services,
+        hotelcategory,
         photo,
         roomsId: [],
       });

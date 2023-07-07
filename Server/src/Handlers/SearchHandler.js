@@ -27,6 +27,8 @@ const getForSearch = async (req, res) => {
       city: hotel.city,
       photo: hotel.photo,
       floorNumber: hotel.floorNumber,
+      services: hotel.services,
+      hotelcategory: hotel['hotel category']
     }));
 
     return res.status(200).json(hotels_results);

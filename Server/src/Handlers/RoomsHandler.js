@@ -22,6 +22,7 @@ const getAllRooms = async (req, res) => {
         description: room.description,
         pax: room.pax,
         services: room.services,
+        price: room.price
       };
       rooms_array.push(one_room);
     });
@@ -32,7 +33,7 @@ const getAllRooms = async (req, res) => {
 };
 
 const createRoom = async (req, res) => {
-  const { name, hotelId, description, pax, services, photo, floorNumber } =
+  const { name, hotelId, description, pax, services, photo, floorNumber, price} =
     req.body;
   try {
     const newRoom = await Room.create({
@@ -43,6 +44,7 @@ const createRoom = async (req, res) => {
       services,
       photo,
       floorNumber,
+      price
     });
 
     const hotel = await Hotel.findByPk(hotelId);
