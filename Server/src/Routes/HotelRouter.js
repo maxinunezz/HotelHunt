@@ -9,8 +9,7 @@ const {
 const { getForSearch } = require("../Handlers/SearchHandler")
 
 const hotelRouter = Router();
-
-hotelRouter.get("/search", getForSearch)
+hotelRouter.post("/search", getForSearch)
 hotelRouter.get("/", getAllhotels);
 hotelRouter.post("/", createHotel);
 hotelRouter.put("/:id", updateHotel);

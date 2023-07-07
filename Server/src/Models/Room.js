@@ -40,10 +40,10 @@ module.exports = (sequelize) => {
         type: DataTypes.JSONB,
         allowNull: false,
       },
-      floorNumber: {
+      /*floorNumber: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
+      },*/
     },
 
     { timestamps: false }

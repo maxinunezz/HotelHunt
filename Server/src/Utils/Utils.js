@@ -82,7 +82,7 @@ async function firstload() {
     }
 
     for (const room of rooms) {
-      const { name, description, photo, pax, hotelId, services, floorNumber } =
+      const { name, description, photo, pax, hotelId, services } =
         room;
       const newRoom = await Room.create({
         name,
@@ -91,7 +91,6 @@ async function firstload() {
         photo,
         pax,
         services,
-        floorNumber,
       });
       const hotel = await Hotel.findByPk(hotelId);
       const RoomsIds = hotel.roomsId;
