@@ -46,6 +46,7 @@ const { Room, Hotel, Booking, User, Auth } = sequelize.models;
 /*User.hasMany(Booking, { foreignKey: "userId", targetKey: "id" });*/
 /*Room.hasMany(Booking, { foreignKey: "roomId", targetKey: "id" });*/
 
+
 Hotel.belongsTo(User, {
 	foreignKey: 'userId',
 	onDelete: 'CASCADE',

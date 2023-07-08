@@ -30,6 +30,10 @@ module.exports = (sequelize) => {
         }
       }
     },
-    { timestamps: false }
+    { 
+      paranoid: true,
+      deletedAt: 'destroyTime',
+      deletedRetention: 30,
+     }
   );
 };

@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       country: {
@@ -36,20 +36,32 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      photo: {
+      services: {
         type: DataTypes.JSONB,
         allowNull: false,
       },
-      floorNumber: {
+      hotelCategory: {
         type: DataTypes.STRING,
+        allowNull: false,
+      },
+      photo: {
+        type: DataTypes.JSONB,
         allowNull: false,
       },
       roomsId: {
         type: DataTypes.JSONB,
         allowNull: true,
-        
-      }
+      },
+      disabled: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      },
     },
-    { timestamps: false }
+    {
+      paranoid: true,
+      deletedAt: 'destroyTime',
+      deletedRetention: 31,
+    }
   );
 };

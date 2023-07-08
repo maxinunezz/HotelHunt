@@ -28,12 +28,15 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       admin: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        type: DataTypes.STRING,
+        defaultValue: "normal",
         allowNull: false,
       },
     },
-    { timestamps: false }
+    { paranoid: true,
+      deletedAt: 'destroyTime',
+      deletedRetention: 30
+    }
   );
 };
 
