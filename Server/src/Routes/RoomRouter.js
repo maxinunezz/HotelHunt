@@ -10,7 +10,7 @@ const { SuperAdminCheck } = require("../Middleware/SuperAdminMiddleware");
 
 const roomRouter = Router();
 
-roomRouter.get("/:hotelId", getAllRooms);
+roomRouter.get("/", getAllRooms);
 roomRouter.put("/:id",authMiddleware, SuperAdminCheck, updateRoom);
 roomRouter.delete("/:id",authMiddleware, SuperAdminCheck, deleteRoom);
 

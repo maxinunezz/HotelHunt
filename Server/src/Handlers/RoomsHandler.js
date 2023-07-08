@@ -1,13 +1,8 @@
 const { Room, Hotel, conn } = require("../db");
 
 const getAllRooms = async (req, res) => {
-  const { hotelId } = req.params;
   try {
-    const data = await Room.findAll({
-      where: {
-        hotelId: hotelId,
-      },
-    });
+    const data = await Room.findAll();
 
     if (data.length === 0) {
       throw Error("Not rooms found");
