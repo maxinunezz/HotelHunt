@@ -67,9 +67,6 @@ const UpdateRoomsByHotel = async (req, res) => {
     if (!tuhotel) {
       return res.status(403).send("You don't have permission to edit this room")
     }
-    if(room.deletedAt !== null) {
-      await room.restore();
-    }
 
     await room.update(req.body);
     return res.status(200).send("Room updated");
@@ -110,6 +107,24 @@ const deleteRoomsByHotel = async (req, res) => {
   }
 }
 
+const restoreRoom = async (req, res) => {
+  const { roomId } = req.params;
+  try {
+    const room = await Room.findByPk(roomId, { paranoid: false });
+    if (!room) {
+      return res.status(404).send("Room not found");
+    }
+    if (!room.destroyTime) {
+      return res.status(400).send("Room is not deleted");
+    }
+    await room.restore();
+
+    return res.status(200).send("Room restored successfully");
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
 const UpdateHotelByUser = async (req, res) => {
   const { hotelId } = req.params;
   try {
@@ -121,8 +136,6 @@ const UpdateHotelByUser = async (req, res) => {
     });
     if (!hotel) {
       return res.status(404).send("Hotel not found");
-    } else {
-      await hotel.restore();
     }
 
     await hotel.update(req.body);
@@ -221,14 +234,34 @@ const deleteHotelByUser = async (req, res) => {
   try {
     const hotel = await Hotel.findOne({
       where: {
-        id: id, userId: userData.id
+        id: id, 
+        userId: userData.id,
       }
     });
     if (!hotel) {
       return res.status(404).send("Hotel not found");
     }
+
     await hotel.destroy();
     return res.status(200).send("Hotel successfully removed");
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+const restoreHotel = async (req, res) => {
+  const { hotelId } = req.params;
+  try {
+    const hotel = await Hotel.findByPk(hotelId, { paranoid: false });
+    if (!hotel) {
+      return res.status(404).send("Hotel not found");
+    }
+    if (!hotel.destroyTime) {
+      return res.status(400).send("Hotel is not deleted");
+    }
+    await hotel.restore();
+
+    return res.status(200).send("Hotel restored successfully");
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -279,4 +312,6 @@ module.exports = {
   createHotelByUser,
   deleteAccount,
   updateAccount,
+  restoreRoom,
+  restoreHotel
 };

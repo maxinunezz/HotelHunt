@@ -56,12 +56,12 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
         allowNull: false,
-      }
+      },
     },
     {
       paranoid: true,
       deletedAt: 'destroyTime',
-      deletedRetention: 30,
+      deletedRetention: 31,
     }
   );
 };
