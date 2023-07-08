@@ -10,7 +10,7 @@ const {
 
 const roomRouter = Router();
 
-roomRouter.get("/", getAllRooms);
+roomRouter.get("/:hotelId", getAllRooms);
 roomRouter.post("/", createRoom);
 roomRouter.put("/:id", updateRoom);
 roomRouter.delete("/:id", deleteRoom);

@@ -19,7 +19,7 @@ type States = {
 };
 
 type Actions = {
-	fetchRooms: () => Promise<void>;
+	fetchRooms: (hotelId:any) => Promise<void>;
 };
 
 const initialState: States = {
@@ -30,15 +30,18 @@ const initialState: States = {
 export const roomsStore = create<States & Actions>((set) => ({
 	...initialState,
 
-	fetchRooms: async () => {
-		const data: Room[] = await (
-			await axios.get('http://localhost:3001/room')
-		).data;
-
-		set((state) => ({
-			...state,
-			rooms: data,
-		}));
+	fetchRooms: async (hotelId) => {
+		console.log(hotelId);
+		
+		return await axios.get(`http://localhost:3001/room/${hotelId}`).then((response) => {
+			if(response.data.length > 0) {
+				const roomsHotel = response.data
+				set((state) => ({
+					...state,
+					rooms: roomsHotel
+				}))
+			}
+		})
 	},
 
 	reset: () => {
