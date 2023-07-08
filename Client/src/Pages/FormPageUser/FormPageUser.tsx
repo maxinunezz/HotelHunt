@@ -19,7 +19,7 @@ const loginValidationSchema = yup.object().shape({
         .string()
         .trim()
         .matches(/^\d{4}-\d{2}-\d{2}$/, 'El formato de fecha debe ser "yyyy-mm-dd"')
-        .required('La fecha de nacimiento es requerida "'),
+        .required('La fecha de nacimiento es requerida '),
     phone: yup.string().trim().required('El teléfono es requerido'),
     email: yup
         .string()
@@ -39,7 +39,7 @@ const FormPageUser = () => {
         []
     );
     return (
-        <div className="h-screen bg-blue-600 flex items-center justify-center ">
+        <div className="h-screen bg-white flex items-center justify-center ">
         <div className="bg-gray-800 p-8 rounded-md">
           <Formik
             initialValues={{
