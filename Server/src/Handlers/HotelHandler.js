@@ -37,12 +37,11 @@ const updateHotel = async (req, res) => {
     if (!hotel) {
       return res.status(404).send("Hotel not found");
     }
-
-    await hotel.update(req.body);
-    return res.status(200).json(hotel);
-  } catch (error) {
-    return res.status(500).send(error.message);
-  }
+		await hotel.update(req.body);
+		return res.status(200).json(hotel);
+	} catch (error) {
+		return res.status(500).send(error.message);
+	}
 };
 
 const deleteHotel = async (req, res) => {

@@ -15,4 +15,5 @@ roomRouter.put("/:id",authMiddleware, SuperAdminCheck, updateRoom);
 roomRouter.delete("/:id",authMiddleware, SuperAdminCheck, deleteRoom);
 
 
+
 module.exports = roomRouter;

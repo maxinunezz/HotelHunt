@@ -1,5 +1,6 @@
-const { Router } = require("express");
+const { Router } = require('express');
 const {
+
     getAllhotels,
     updateHotel,
     deleteHotel,
