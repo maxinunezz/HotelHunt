@@ -13,8 +13,7 @@ export default function HomePage() {
 		<div className="bg-slate-300 flex-col w-full m-1 p-10">
 			<NavBar />
 
-			/* <HotelList /> cuando necesites descomenta e importar*\
-
+			<HotelList /> 
 		</div>
 	);
 }
