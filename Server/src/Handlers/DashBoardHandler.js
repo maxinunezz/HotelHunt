@@ -41,7 +41,6 @@ const getRoomsByHotel = async (req, res) => {
 
 const UpdateRoomsByHotel = async (req, res) => {
   const { roomId } = req.params;
-  const { disabled } = req.body;
   try {
     const room = await Room.findOne({
       where: {
@@ -52,12 +51,7 @@ const UpdateRoomsByHotel = async (req, res) => {
     if (!room) {
       return res.status(404).send("Room not found");
     }
-    if(disabled){
-      await room.destroy();
-    }
-    if(!disabled){
-      await room.restore();
-    }
+    
 
     let tuhotel;
 

@@ -5,12 +5,12 @@ const { JWT_SECRET } = process.env;
 
 const authMiddleware = (req, res, next) => {
   
-  const { authorization } = req.headers; 
+  const { Authorization } = req.headers; 
 
 
-  if (authorization) {
+  if (Authorization) {
     try {
-      const token = authorization.split(" ")[1].replace(/"/g, '');
+      const token = Authorization.split(" ")[1].replace(/"/g, '');
   
       const decodedToken = jwt.verify(token, JWT_SECRET ); 
       
