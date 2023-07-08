@@ -57,6 +57,7 @@ module.exports = (sequelize) => {
     { 
       paranoid: true,
       deletedAt: 'destroyTime',
+      deletedRetention: 31,
      }
   );
 };

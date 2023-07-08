@@ -97,12 +97,8 @@ const deleteRoomsByHotel = async (req, res) => {
       }
     });
     if (hotel) {
-      const newRoomsId = hotel.roomsId.filter((roomId) => roomId !== room.id);
 
-      const poproom = await hotel.update({ roomsId: newRoomsId });
-      const destroyroom = await room.destroy({force: true});
-
-      await Promise.all([poproom, destroyroom])
+      await room.destroy();
 
       return res.status(200).send("Room deleted successfully");
     } else {

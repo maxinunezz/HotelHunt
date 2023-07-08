@@ -581,7 +581,7 @@
         "pax": 2,
         "services": ["Sala de estar", "Caja de seguridad", "Aire acondicionado", "TV", "Wi-Fi", "Secador de pelo", "Baño privado"],
         "price": "170",
-        "floorNumber": "",
+        "floorNumber": "1",
         "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
       },
       {
