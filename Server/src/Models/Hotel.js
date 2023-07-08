@@ -52,7 +52,16 @@ module.exports = (sequelize) => {
         type: DataTypes.JSONB,
         allowNull: true,
       },
+      disabled: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      }
     },
-    { timestamps: false }
+    {
+      paranoid: true,
+      deletedAt: 'destroyTime',
+      deletedRetention: 30,
+    }
   );
 };

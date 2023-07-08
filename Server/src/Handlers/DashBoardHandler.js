@@ -67,6 +67,10 @@ const UpdateRoomsByHotel = async (req, res) => {
     if (!tuhotel) {
       return res.status(403).send("You don't have permission to edit this room")
     }
+    if(room.deletedAt !== null) {
+      await room.restore();
+    }
+
     await room.update(req.body);
     return res.status(200).send("Room updated");
 
@@ -121,6 +125,8 @@ const UpdateHotelByUser = async (req, res) => {
     });
     if (!hotel) {
       return res.status(404).send("Hotel not found");
+    } else {
+      await hotel.restore();
     }
 
     await hotel.update(req.body);
