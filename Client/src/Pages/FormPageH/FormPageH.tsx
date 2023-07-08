@@ -2,7 +2,7 @@ import React from 'react';
 import create from 'zustand';
 import { AiOutlineReload } from 'react-icons/ai';
 import BackButton from '../../components/BackButton/BackButton';
-
+import hotel from './hotel.png'
 type FormState = {
   nombre: string;
   locacion: string;
@@ -176,9 +176,10 @@ export default function FormPageH() {
 
   return (
     <div className="flex h-screen">
-      <div className="w-full bg-blue-500 flex flex-col justify-center">
-        <h2 className="text-3xl text-white font-bold px-8 text-center">Título del área azul</h2>
-      </div>
+    <div className="w-full bg-blue-500 flex flex-col justify-center">
+      <img src={hotel} alt="Imagen" className="mx-auto max-w-full" />
+      <h2 className="text-3xl text-white font-bold px-8 text-center">Título del área azul</h2>
+    </div>
       <div className="w-full bg-gray-800 shadow-lg p-8 overflow-y-auto">
         <div className="max-h-full">
           <div className="flex justify-start">
