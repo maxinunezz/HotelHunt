@@ -25,7 +25,7 @@ const HotelPage = () => {
         <div className="bg-teal-800 justify-center items-center">
             <h1 className="bg-lime-700 w-[70%]">Bienvenido a {`${hotelOnScreen?.name}`} </h1> 
             {/* Error de typecript, no rompe la app, pero debería poder definirse de forma correcta */}
-           <RoomList/> 
+            <RoomList/> 
         </div>
     )
 }
