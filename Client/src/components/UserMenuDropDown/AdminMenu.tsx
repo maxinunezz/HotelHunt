@@ -1,10 +1,11 @@
 import { Dropdown, Button, Input } from '@rewind-ui/core';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { tokenStore } from '../../Store';
+import { Link, useNavigate } from 'react-router-dom';
 
 
-const AdminMenu = () => {   
-
+const AdminMenu = () => {
+    const navigate = useNavigate()
     const [selectedOption, setSelectedOption] = useState<string | undefined>();
     return (
         <div>
@@ -16,11 +17,14 @@ const AdminMenu = () => {
                     <Dropdown.Item onClick={() => setSelectedOption("Perfil")}>
                         Perfil
                     </Dropdown.Item>
-
-                    <Dropdown.Item onClick={() => setSelectedOption("Admin")}>
+                    <Dropdown.Item onClick={() => navigate('/dashboard')}>
+                        
                         Admin
+                        
                     </Dropdown.Item>
-                    
+
+
+
                     <Dropdown.Item onClick={() => setSelectedOption("LogOut")}>
                         LogOut
                     </Dropdown.Item>

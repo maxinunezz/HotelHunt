@@ -1,7 +1,5 @@
 
-import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
-import { User } from '@phosphor-icons/react'
 import { tokenStore } from '../../Store';
 import UserMenu from '../UserMenuDropDown/UserMenu';
 import AdminMenu from '../UserMenuDropDown/AdminMenu';

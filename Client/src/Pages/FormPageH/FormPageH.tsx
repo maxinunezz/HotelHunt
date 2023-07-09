@@ -7,7 +7,10 @@ import BackButton from '../../components/BackButton/BackButton';
 import { ArrowCounterClockwise } from '@phosphor-icons/react';
 import axios from 'axios';
 import { errorToast, successToast } from '../../components/toast';
-import hotel from './hotel.png'
+import Hotel from "./Hotel.png"
+import { tokenStore } from '../../Store';
+
+
 
 interface FormValues {
 	name: string;
@@ -15,7 +18,8 @@ interface FormValues {
 	country: string;
 	city: string;
 	photo: string;
-	floorNumber: string;
+	category: string;
+	services:string;
 }
 
 const formValidationSchema = yup.object().shape({
@@ -40,35 +44,62 @@ const formValidationSchema = yup.object().shape({
 
 export default function FormPageH() {
 	const [isCreated, setIsCreated] = useState(false);
+	const token = tokenStore((state) => state.userState)
+
+	const CLOUD_NAME = "hotelmatimaxi4342";
+	const UPLOAD_PRESET = "hotel_pf";
+
+	const upload = async (file: string | Blob) => {
+		const formdata = new FormData();
+		formdata.append("file", file);
+		formdata.append("upload_preset", UPLOAD_PRESET);
+		const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`,
+			{ method: "POST", body: formdata })
+		const data = await response.json()
+		return data.secure_url
+	};
 
 	const handleSubmit = useCallback(
 		async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
 			try {
-				const data = await axios.post('http://localhost:3001/hotel', {
-					name: values.name,
-					description: values.description,
-					country: values.country,
-					city: values.city,
-					photo: values.photo,
-					floorNumber: values.floorNumber,
-				});
+				console.log(token[0]);
+
+				const data = await axios.post(
+					'http://localhost:3001/dashboard/hotel/',
+					{
+						name: values.name,
+						description: values.description,
+						country: values.country,
+						city: values.city,
+						photo: values.photo,
+						category: values.category,
+						services: values.services,
+					},
+					{
+						headers: {
+							authorization: `Bearer ${token[0]}`,
+						},
+					}
+				);
+
 				setIsCreated(true);
 				successToast('Hotel creado correctamente');
 				console.log('data', data);
 			} catch (error) {
+
 				errorToast('Hubo un error, intenta de nuevo');
 			}
 			helpers.setSubmitting(false);
 		},
-		[setIsCreated]
+		[setIsCreated, token]
 	);
-
+		
 	return (
 		<div className="flex h-screen">
-      <div className="w-full bg-blue-500 flex flex-col justify-center">
-        <img src={hotel} alt="Imagen" className="mx-auto max-w-full" />
-        <h2 className="text-3xl text-white font-bold px-8 text-center">Título del área azul</h2>
-      </div>
+			<div className="w-full bg-blue-500 flex flex-col justify-center">
+				<img src={Hotel} alt="Imagen" className="mx-auto max-w-full" />
+				<h2 className="text-3xl text-white font-bold px-8 text-center">Título del área azul</h2>
+			</div>
 			<div className="w-full bg-gray-800 shadow-lg p-8 overflow-y-auto">
 				<div className="max-h-full">
 					<div className="flex justify-start">
@@ -88,7 +119,8 @@ export default function FormPageH() {
 							country: '',
 							city: '',
 							photo: '',
-							floorNumber: '',
+							category: '',
+							services: ""
 						}}
 						onSubmit={handleSubmit}
 						validationSchema={formValidationSchema}
@@ -101,8 +133,8 @@ export default function FormPageH() {
 											values.name.length === 0
 												? 'none'
 												: errors.name
-												? 'invalid'
-												: 'valid'
+													? 'invalid'
+													: 'valid'
 										}
 										className="mb-4"
 									>
@@ -125,8 +157,8 @@ export default function FormPageH() {
 											values.description.length === 0
 												? 'none'
 												: errors.description
-												? 'invalid'
-												: 'valid'
+													? 'invalid'
+													: 'valid'
 										}
 										className="mb-4"
 									>
@@ -149,8 +181,8 @@ export default function FormPageH() {
 											values.country.length === 0
 												? 'none'
 												: errors.country
-												? 'invalid'
-												: 'valid'
+													? 'invalid'
+													: 'valid'
 										}
 										className="mb-4"
 									>
@@ -168,13 +200,14 @@ export default function FormPageH() {
 										/>
 										<FormControl.Text>{errors.country}</FormControl.Text>
 									</FormControl>
+
 									<FormControl
 										validation={
 											values.city.length === 0
 												? 'none'
 												: errors.city
-												? 'invalid'
-												: 'valid'
+													? 'invalid'
+													: 'valid'
 										}
 										className="mb-4"
 									>
@@ -217,8 +250,8 @@ export default function FormPageH() {
 												values.photo.length === 0
 													? 'none'
 													: errors.photo
-													? 'invalid'
-													: 'valid'
+														? 'invalid'
+														: 'valid'
 											}
 											className="mb-4"
 										>
@@ -229,53 +262,76 @@ export default function FormPageH() {
 												type="file"
 												placeholder="Foto"
 												accept="image/*"
-												onChange={async (event) => {
+												onChange={(event) => {
 													const file = event.target.files?.[0];
 													if (file) {
-														const reader = new FileReader();
+														upload(file)
+															.then((image) => {
+																setFieldValue('photo', image);
+															})
+															.catch((error) => {
+																console.error(error);
 
-														reader.onload = async (
-															e: ProgressEvent<FileReader>
-														) => {
-															await setFieldValue(
-																'photo',
-																e.target?.result as string
-															);
-														};
-
-														reader.readAsDataURL(file);
+															});
 													}
 												}}
 												value={values.photo}
 												required
 											/>
+
 											<FormControl.Text>{errors.photo}</FormControl.Text>
 										</FormControl>
 									)}
 									<FormControl
 										validation={
-											values.floorNumber.length === 0
+											values.category.length === 0
 												? 'none'
-												: errors.floorNumber
-												? 'invalid'
-												: 'valid'
+												: errors.category
+													? 'invalid'
+													: 'valid'
 										}
 										className="mb-4"
 									>
 										<FormControl.Label className="text-white">
-											Piso
+											Category
 										</FormControl.Label>
 										<FormControl.Input
 											type="number"
-											placeholder="Piso"
+											placeholder="category"
 											onChange={async (event) => {
-												await setFieldValue('floorNumber', event.target.value);
+												await setFieldValue('category', event.target.value);
 											}}
-											value={values.floorNumber}
+											value={values.category}
 											required
 										/>
-										<FormControl.Text>{errors.floorNumber}</FormControl.Text>
+										<FormControl.Text>{errors.category}</FormControl.Text>
 									</FormControl>
+
+									<FormControl
+										validation={
+											values.services.length === 0
+												? 'none'
+												: errors.services
+													? 'invalid'
+													: 'valid'
+										}
+										className="mb-4"
+									>
+										<FormControl.Label className="text-white">
+											Servicios
+										</FormControl.Label>
+										<FormControl.Input
+											type="text"
+											placeholder="services"
+											onChange={async (event) => {
+												await setFieldValue('services', event.target.value);
+											}}
+											value={values.services}
+											required
+										/>
+										<FormControl.Text>{errors.services}</FormControl.Text>
+									</FormControl>
+
 									<div className="flex items-center justify-center">
 										<Button
 											className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md"

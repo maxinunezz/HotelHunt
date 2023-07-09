@@ -67,7 +67,7 @@ const LogingPage = () => {
 				<img src={gif} alt="GIF" className="mt-8 max-w-[600px]" />
 				<div className="text-blue-500 text-3xl font-bold mt-8">HOTELHUNT</div>
 				{
-					userInfoState.length !== 0 ?
+					userInfoState.length === 0 ?
 						<div className="bg-green-700 flex m-10 p-5 space-x-1 rounded-md ">
 							<h1 className="text-white ">Ingresa como </h1>
 							<Link to="/home">
@@ -84,7 +84,7 @@ const LogingPage = () => {
 				}
 			</div>
 			{
-				userInfoState.length === 0 && (<div className="bg-gray-800 w-[35%] flex flex-col items-center justify-center">
+				userInfoState.length === 0 ? (<div className="bg-gray-800 w-[35%] flex flex-col items-center justify-center">
 					<h1 className="text-white text-2xl font-bold mb-4">✨Bienvenido✨</h1>
 					<div className="w-10/12 bg-gray-800 p-8 rounded-md">
 						<Formik
@@ -162,6 +162,8 @@ const LogingPage = () => {
 					</div>
 
 				</div>)
+				:
+				(<div className="bg-gray-800 w-[35%] flex flex-col items-center justify-center">Test</div>)
 
 			}
 
