@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 const HotelList = () => {
 	const hoteles = hotelStore((state) => state.hotels);
 	const totalHoteles = hoteles?.length;
+	console.log(hoteles);
+	
 
 	return (
 		<div>
