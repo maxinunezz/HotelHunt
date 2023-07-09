@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import {useEffect} from 'react'
+//import {useEffect} from 'react'
 import { hotelStore, roomsStore } from "../../Store";
 import {  useFetchHotels, useFetchRooms } from "../../hooks";
 import RoomList from "../../components/RoomList/RoomList";
