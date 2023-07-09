@@ -1,41 +1,53 @@
-import RoomCard from "../RoomCard/RoomCard";
-import { roomsStore } from "../../Store";
-import { Link } from 'react-router-dom'
+import RoomCard from '../RoomCard/RoomCard';
+import { roomsStore } from '../../Store';
+import { Link } from 'react-router-dom';
+import { RoomsPagination } from '../Pagination/RoomsPagination';
+
+const roomsPerPage = 3;
 
 const RoomList = () => {
-    const roomsHotelId = roomsStore((state) => state.roomsHotelSelect)
-    
-    const roomsHotelValid = roomsHotelId?.length
-    console.log(roomsHotelId[0]);
-    
-    return (
-        <div className="justify-center items-center">   
-        <p>{roomsHotelValid } blablablabla</p>   
-                {
-                    roomsHotelValid ? (roomsHotelId.map((room) => {                        
-                        
-                        return (                            
-                        <Link to={`/roompage/${room.id}`}>
-                            <RoomCard
-                                key={room.id}
-                                id={room.id}
-                                name={room.name}
-                                description={room.description}
-                                price={room.price}
-                                pax={room.pax}
-                                services={room.services}
-                                photo={room.photo}
-                                floorNumber={room.floorNumber}
-                                disabled={room.disabled}
-                            />
-                        </Link>
+	const { roomsHotelSelect, currentPage } = roomsStore((state) => ({
+		roomsHotelSelect: state.roomsHotelSelect,
+		currentPage: state.currentPage,
+	}));
 
-                    )}))
-                        :
-                        <p>No se encontró nada</p>
-                }
-            </div>
-    )
-}
+	const roomsHotelValid = roomsHotelSelect?.length;
+	console.log(roomsHotelSelect[0]);
+
+	const totalRooms = roomsHotelSelect?.length;
+	const firstIndex = (currentPage - 1) * roomsPerPage;
+	const lastIndex = currentPage * roomsPerPage;
+	const currentRooms = roomsHotelSelect?.slice(firstIndex, lastIndex);
+
+	return (
+		<div>
+			<div className="justify-center items-center">
+				<p>{roomsHotelValid} blablablabla</p>
+				{totalRooms ? (
+					currentRooms.map((room) => {
+						return (
+							<Link to={`/roompage/${room.id}`} key={room.id}>
+								<RoomCard
+									id={room.id}
+									name={room.name}
+									description={room.description}
+									price={room.price}
+									pax={room.pax}
+									services={room.services}
+									photo={room.photo}
+									floorNumber={room.floorNumber}
+									disabled={room.disabled}
+								/>
+							</Link>
+						);
+					})
+				) : (
+					<p>No se encontró nada</p>
+				)}
+			</div>
+			<RoomsPagination />
+		</div>
+	);
+};
 
 export default RoomList;
