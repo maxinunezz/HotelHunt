@@ -5,8 +5,7 @@ import Card from '../Card/Card';
 const HotelList = () => {
 	const hoteles = hotelStore((state) => state.hotels);
 	const totalHoteles = hoteles?.length;
-	console.log('hoteles', hoteles);
-	return (
+
 		<div className="flex flex-col gap-4">
 			{totalHoteles ? (
 				hoteles.map((hotel) => (

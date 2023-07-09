@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { roomsStore } from '../Store';
 
-export const useFetchRooms = () => {
-	const { fetchRooms } = roomsStore();
+export const useHotelIdSetter = (roomsHotelSelected:[]) => {
+	const { hotelIdSetter } = roomsStore();
 	// const hoteles = hotelStore(state=> state.hotels)  llamar estado
 
 	useEffect(() => {
-		fetchRooms();
-	}, [fetchRooms]);
+		hotelIdSetter(roomsHotelSelected);
+	}, [hotelIdSetter]);
 };
