@@ -6,7 +6,6 @@ import { Pagination } from '../Pagination/Pagination';
 const hotelsPerPage = 3;
 
 const HotelList = () => {
-
 	const { hotels, currentPage } = hotelStore((state) => ({
 		hotels: state.hotels,
 		currentPage: state.currentPage,
@@ -38,8 +37,6 @@ const HotelList = () => {
 				)}
 			</div>
 			<Pagination />{' '}
-	const hoteles = hotelStore((state) => state.hotels);
-	const totalHoteles = hoteles?.length;
 		</div>
 	);
 };
