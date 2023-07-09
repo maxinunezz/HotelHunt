@@ -141,10 +141,10 @@
       {
           "id": "19cf4e0d-225c-4026-9dc6-d1bd77688df4",
           "name": "Catalina park",
-          "description": "In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
+          "description": "El hotel Catalinas se encuentra en ubicado en una zona privilegiada de San Miguel de Tucumán. El edificio está frente al parque 9 de Julio, principal pulmón verde de la ciudad, y a solo seis (6) calles del centro comercial. Así mismo, está próximo a puntos emblemáticos tales como, Casa Mercedes Sosa a setenta (70) metros, Casa de Gobierno, plaza Independencia y Museo Casa Histórica de la Independencia.Su emplazamiento, en avenida Soldati 380, permite una conexión directa con el aeropuerto internacional Benjamín Matienzo (17 minutos) y la terminal de ómnibus de la ciudad. El aparcamiento es gratuito (sujeto a disponibilidad).",
           "country": "Argetina",
           "city": "Tucuman",
-          "photo": "https://hotelcatalinastucuman.com.ar/storage/posts/January2023/Td2Y2eyIt5dwbYvEPZTd-cropped.jpg",
+          "photo": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/ca/30/72/catalinas-park-hotel.jpg?w=700&h=-1&s=1",
           "services": [
               "Recepción las 24 horas",
               "Tarjetas de crédito aceptadas",
@@ -207,12 +207,12 @@
       {
           "id": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9",
           "name": "Hotel La Malinka",
-          "description": "3",
+          "description": "nuestro hotel de montaña en San Carlos de Bariloche, exclusivo para adultos. A orillas del lago Nahuel Huapi y próximo a la zona comercial de Bariloche y el centro de esquí Cerro Catedral.Nuestro hotel es una expresión de la calidez, la tradición y el confort de la Patagonia, que es ideal para esquiadores, parejas y amantes de la naturaleza. Nuestro hotel le propone una estadía con todo el encanto de un hotel de estilo rústico montañés en el que podrá encontrar habitaciones cómodas con servicios útiles, internet wifi sin costo adicional, estacionamiento, desayuno buffet, atención personalizada… y un entorno mágico. Disfrute de unos días de relax en el paraíso de San Carlos de Bariloche ",
           "country": "Argetina",
           "city": "San Carlos Bariloche",
           "photo": [
-              "https://htlhoteles.com/lamalinka/wp-content/uploads/malinka/galerias/2307c1c0b55f94a2e405c402b21f1377/b0d8e080d067486304a1d5b898d4401c-400x210.jpg",
-              "https://htlhoteles.com/lamalinka/wp-content/uploads/malinka/galerias/2307c1c0b55f94a2e405c402b21f1377/e79178b6d1c2421436d927414ed3097f-400x210.jpg"
+              "https://htlhoteles.com/lamalinka/wp-content/uploads/malinka/galerias/2307c1c0b55f94a2e405c402b21f1377/b0d8e080d067486304a1d5b898d4401c.jpg"
+              
           ],
           "services": [
               "Servicio de mucama diario",
