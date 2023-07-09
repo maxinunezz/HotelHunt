@@ -9,41 +9,83 @@ interface Room {
 	description: string;
 	services: string;
 	photo: string;
-    pax: number;
-    hotelId:string;
+	pax: number;
+	hotelId: string;
+	price:string;
+	
 }
 
 type States = {
 	rooms: Room[];
-	searchResoults: any[];
+	roomsHotelSelect: Room[];
+	roomDetail: Room[];
 };
 
 type Actions = {
-	fetchRooms: (hotelId:any) => Promise<void>;
+	fetchRooms: () => Promise<void>;
+	hotelIdSetter: (roomsHotelSelected: []) => Promise<void>;
+	setRoom: (roomDetail: []) => Promise<void>;
 };
 
 const initialState: States = {
 	rooms: [],
-	searchResoults: [],
+	roomsHotelSelect: [],
+	roomDetail:[]
 };
 
 export const roomsStore = create<States & Actions>((set) => ({
 	...initialState,
 
-	fetchRooms: async (hotelId) => {
-		console.log(hotelId);
+	fetchRooms: async () => {
 		
-		return await axios.get(`http://localhost:3001/room/${hotelId}`).then((response) => {
-			if(response.data.length > 0) {
-				const roomsHotel = response.data
+		return await axios.get(`http://localhost:3001/room`).then((response) => {
+			if (response.data.length > 0) {
+				const allRooms = response.data
 				set((state) => ({
 					...state,
-					rooms: roomsHotel
+					rooms: allRooms
 				}))
 			}
 		})
 	},
-
+	hotelIdSetter: async (roomsHotelSelected) => {
+		const arrayAux:Room[] = []
+		console.log("roomsHotelSelected"+roomsHotelSelected);
+		
+		return await axios.get(`http://localhost:3001/room`).then((response) => {
+			const allroomsAux = response.data;
+			console.log(allroomsAux);
+			
+			for(let i = 0; i<roomsHotelSelected?.length ; i++) {
+				for(let j = 0; j < allroomsAux.length ; j++) {
+					if(roomsHotelSelected[i] === allroomsAux[j].id) {
+						arrayAux.push(allroomsAux[j])
+					}
+				}
+			}
+			set((state) => ({
+				...state,
+				roomsHotelSelect: arrayAux
+			}))
+		})
+	},
+	setRoom: async (roomId) => {
+		const auxArray:Room[] =[]
+		return await axios.get(`http://localhost:3001/room`).then((response) => {
+			const allroomsAux = response.data;
+			console.log(allroomsAux);
+			for(let i = 0; i<allroomsAux?.length ; i++) {
+				if(allroomsAux[i].id === roomId) {
+					auxArray.push(allroomsAux[i])
+				}
+			}
+			
+			set((state) => ({
+				...state,
+				roomDetail: auxArray
+			}))
+		})
+	},
 	reset: () => {
 		set(initialState);
 	},
