@@ -1,19 +1,19 @@
 const { Router } = require("express")
 
 const {
-    createRoom,
     getAllRooms,
     updateRoom,
     deleteRoom,
   } = require("../Handlers/RoomsHandler");
-
+const { authMiddleware } = require("../Middleware/AuthMiddleware");
+const { SuperAdminCheck } = require("../Middleware/SuperAdminMiddleware");
 
 const roomRouter = Router();
 
 roomRouter.get("/", getAllRooms);
-roomRouter.post("/", createRoom);
-roomRouter.put("/:id", updateRoom);
-roomRouter.delete("/:id", deleteRoom);
+roomRouter.put("/:id",authMiddleware, SuperAdminCheck, updateRoom);
+roomRouter.delete("/:id",authMiddleware, SuperAdminCheck, deleteRoom);
+
 
 
 module.exports = roomRouter;

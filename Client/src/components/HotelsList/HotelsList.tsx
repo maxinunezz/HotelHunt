@@ -1,30 +1,30 @@
-import Card from '../Card/Card';
 import { hotelStore } from '../../Store';
+import { Link } from 'react-router-dom';
+import Card from '../Card/Card';
 
 const HotelList = () => {
 	const hoteles = hotelStore((state) => state.hotels);
 	const totalHoteles = hoteles?.length;
-
+	console.log('hoteles', hoteles);
 	return (
-		<div>
-			<div>
-				{totalHoteles ? (
-					hoteles.map((hotel) => (
+		<div className="flex flex-col gap-4">
+			{totalHoteles ? (
+				hoteles.map((hotel) => (
+					<Link to={`/hotelpage/${hotel.id}`} key={hotel.id}>
 						<Card
-							key={hotel.id}
+							key={hotel.key}
 							id={hotel.id}
 							name={hotel.name}
 							description={hotel.description}
 							country={hotel.country}
 							city={hotel.city}
 							photo={hotel.photo}
-							maxCapacity={hotel.maxCapacity}
 						/>
-					))
-				) : (
-					<p className="bg-neutral-800">No hay hoteles</p>
-				)}
-			</div>
+					</Link>
+				))
+			) : (
+				<p className="bg-neutral-800">No hay hoteles</p>
+			)}
 		</div>
 	);
 };
