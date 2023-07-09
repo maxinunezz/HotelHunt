@@ -8,7 +8,7 @@ import { useStore } from 'zustand'
 
 const SearchBar = () => {
 	useFetchHotels();
-	
+
 	const [input, setinput] = useState('');
 	const [selectedOption, setSelectedOption] = useState<string | undefined>();
 	const [data, setData] = useState({
@@ -20,8 +20,8 @@ const SearchBar = () => {
 
 	const handleSearch = async () => {
 		console.log("Estoy en el handler");
-		
-		if(!selectedOption) {
+
+		if (!selectedOption) {
 			return
 		}
 		setData({
@@ -30,8 +30,8 @@ const SearchBar = () => {
 		})
 
 		await fetchSearchResults(data);
-		
-		
+
+
 	}
 
 	// const handleChange = (selectedOption: string, input: string) => {
@@ -43,21 +43,21 @@ const SearchBar = () => {
 	// }
 
 	return (
-		<div className="bg-slate-500 p-2 flex items-center">
+		<div className="bg-slate-500 p-2 rounded-md flex items-center w-[600px]">
 			<Input
 				value={input}
 				onChange={(event) => setinput(event.target.value)}
-				className="rounded-md text-black mr-2"
+				className="rounded-md text-black mr-2 flex-grow"
 				type="text"
-				placeholder="Buscar driver..."
+				placeholder="Buscar hotel..."
 			/>
 			<Dropdown>
 				<Dropdown.Trigger>
-					<Button>{selectedOption ?? 'Buscar por'}</Button>
+					<Button className="w-40">{selectedOption ?? 'Buscar por'}</Button>
 				</Dropdown.Trigger>
 				<Dropdown.Content>
 					<Dropdown.Item onClick={() => setSelectedOption("city")}>
-						Region
+						Región
 					</Dropdown.Item>
 					<Dropdown.Item onClick={() => setSelectedOption("name")}>
 						Nombre
@@ -68,8 +68,10 @@ const SearchBar = () => {
 			<button className="p-2" type="submit" onClick={handleSearch}>
 				<MagnifyingGlass size={28} weight="bold" />
 			</button>
-		</div >
+		</div>
+
 	);
+
 };
 
 export default SearchBar;
