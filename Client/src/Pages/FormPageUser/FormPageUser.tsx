@@ -39,7 +39,7 @@ const FormPageUser = () => {
         []
     );
     return (
-        <div className="h-screen bg-white flex items-center justify-center ">
+        <div className="h-screen bg-slate-600 flex items-center justify-center ">
         <div className="bg-gray-800 p-8 rounded-md">
           <Formik
             initialValues={{
