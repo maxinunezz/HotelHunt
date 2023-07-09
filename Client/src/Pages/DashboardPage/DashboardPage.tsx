@@ -1,23 +1,17 @@
-import CrearRoomButton from "../../components/D-CrearRoomButton/CrearRoomButton"
-import CrearHostelButton from "../../components/D-CrearHotelButton/CrearHostelButton"
-
-
+import CrearRoomButton from '../../components/D-CrearRoomButton/CrearRoomButton';
+import CrearHostelButton from '../../components/D-CrearHotelButton/CrearHostelButton';
 
 const DashBoardPage = () => {
-    return (
-        <div>
-            <div>
+	return (
+		<div>
+			<div>Este es el dashboard</div>
 
-                Este es el dashboard
-            </div>
-
-            <div>
-                <CrearHostelButton />
-                <CrearRoomButton />
-
-            </div>
-        </div>
-    );
+			<div>
+				<CrearHostelButton />
+				<CrearRoomButton />
+			</div>
+		</div>
+	);
 };
 
-export default DashBoardPage
+export default DashBoardPage;
