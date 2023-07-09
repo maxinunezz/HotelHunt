@@ -24,7 +24,7 @@ const initialState: States = {
 const calculatePageNumbers = (hotelsLength: number): number[] => {
 	const tempPageNumberArray: number[] = [];
 
-	for (let i = 1; i <= Math.ceil(hotelsLength / 9); i++) {
+	for (let i = 1; i <= Math.ceil(hotelsLength / 3); i++) {
 		tempPageNumberArray.push(i);
 	}
 
