@@ -10,11 +10,14 @@ export default function HomePage() {
 
 
 	return (
-		<div className="bg-slate-300 flex-col w-full m-1 p-10">
-			<NavBar />
+		<div className="bg-slate-600 min-h-screen w-screen p-10">
+			<NavBar/>
 
-			<HotelList /> 
+			<div className="mt-16">
+				<HotelList />
+			</div>
 		</div>
+
 	);
 }
 
