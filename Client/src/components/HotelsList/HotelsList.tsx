@@ -38,8 +38,7 @@ const HotelList = () => {
 				)}
 			</div>
 			<Pagination />{' '}
-	const hoteles = hotelStore((state) => state.hotels);
-	const totalHoteles = hoteles?.length;
+	
 		</div>
 	);
 };

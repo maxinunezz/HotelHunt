@@ -30,7 +30,9 @@ const AuthHandler = async (req, res) => {
 
         const token = jwt.sign({id: user.id, admin: user.admin}, JWT_SECRET, { expiresIn: '6h' });
 
-        return res.status(200).json(token);
+        const admin = user.admin;
+
+        return res.status(200).json({token, admin});
 
     } catch (error) {
         return res.status(401).send(error.message);

@@ -53,10 +53,10 @@ const SearchBar = () => {
 			/>
 			<Dropdown>
 				<Dropdown.Trigger>
-					<Button className="w-40">{selectedOption ?? 'Buscar por'}</Button>
+					<Button className="w-40 justify-center">{selectedOption ?? 'Buscar por'}</Button>
 				</Dropdown.Trigger>
 				<Dropdown.Content>
-					<Dropdown.Item onClick={() => setSelectedOption("city")}>
+					<Dropdown.Item className='w-20' onClick={() => setSelectedOption("city")}>
 						Región
 					</Dropdown.Item>
 					<Dropdown.Item onClick={() => setSelectedOption("name")}>
