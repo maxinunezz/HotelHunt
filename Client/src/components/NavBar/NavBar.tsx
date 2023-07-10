@@ -1,10 +1,12 @@
 
 import SearchBar from '../SearchBar/SearchBar';
+import { useNavigate } from 'react-router-dom';
 import { tokenStore } from '../../Store';
 import UserMenu from '../UserMenuDropDown/UserMenu';
 import AdminMenu from '../UserMenuDropDown/AdminMenu';
 
 export default function NavBar() {
+	const navigate = useNavigate()
 	const isLogged = tokenStore((state) => state.userState)
 	console.log(isLogged);
 	console.log("isLogged");
@@ -16,7 +18,7 @@ export default function NavBar() {
 					isLogged[1] === "normal" ? <UserMenu />: <AdminMenu/>)
 					:
 					(
-						<UserMenu />
+						<h1 onClick={() => navigate('/login')}>Login</h1>
 
 					)
 			}

@@ -14,8 +14,8 @@ function App() {
 	return (
 		<div id="app">
 			<Routes>
-				<Route path="/" element={<LogingPage />}></Route>
-				<Route path="/home" element={<HomePage />}></Route>
+				<Route path="/" element={<HomePage />}></Route>
+				<Route path="/login" element={<LogingPage />}></Route>
 				<Route path="/dashboard" element={<DashBoardPage />}></Route>
 				<Route path="/formHotel" element={<FormPageH />}></Route>
 				<Route path="/formRoom" element={<FormPageR />}></Route>
