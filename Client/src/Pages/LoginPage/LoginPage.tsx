@@ -1,4 +1,3 @@
-
 import { Button, FormControl } from '@rewind-ui/core';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useCallback } from 'react';
@@ -177,4 +176,3 @@ const LogingPage = () => {
 
 };
 export default LogingPage;
-
