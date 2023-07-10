@@ -52,11 +52,11 @@ export const roomsStore = create<States & Actions>((set) => ({
 
 	hotelIdSetter: async (roomsHotelSelected) => {
 		const arrayAux: Room[] = [];
-		console.log('roomsHotelSelected' + roomsHotelSelected);
+		
 
 		return await axios.get(`http://localhost:3001/room`).then((response) => {
 			const allroomsAux = response.data;
-			console.log(allroomsAux);
+			
 
 			for (let i = 0; i < roomsHotelSelected?.length; i++) {
 				for (let j = 0; j < allroomsAux.length; j++) {

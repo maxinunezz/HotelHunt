@@ -30,6 +30,7 @@ export default function NavBar() {
 
 
 			<SearchBar />
+
 			<button onClick={handleAllHotels} >Mostrar todos los hoteles</button>
 			<div>
 				<h1 className="text-white">

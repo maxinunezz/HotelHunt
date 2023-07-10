@@ -37,11 +37,9 @@ const LogingPage = () => {
 						const tokenRaw = response.data.token
 						const statusadmin = response.data.admin
 						const logeado = true
-						const userdata = response.data.data
 						arrayAux.push(tokenRaw)
 						arrayAux.push(statusadmin)
 						arrayAux.push(logeado)
-						arrayAux.push(userdata)
 						saveInfo(arrayAux)
 					}
 					console.log("values",values);
@@ -179,4 +177,3 @@ const LogingPage = () => {
 
 };
 export default LogingPage;
-
