@@ -8,7 +8,7 @@ const RoomPage = () => {
     const [roomRender, setRoomRender] = useState()
     useFetchRooms()
     const allRooms = roomsStore((state) => state.rooms)
-    console.log(allRooms);
+    
     
     useEffect(() => {
         const roomOnScreen = allRooms.find((roomRender) => {
@@ -19,15 +19,15 @@ const RoomPage = () => {
             }        
         })
         setRoomRender(roomOnScreen)
-        console.log(roomOnScreen);
+       
         setRoom(id);
     }, [allRooms, id, setRoom])
 
-    console.log("ajemajem"+roomRender);
+    
 
 
     return (
-        <div className="border-2 bg-rose-600 items-center w-[80%]">
+        <div className="border-2 bg-yellow-300 items-center w-[80%]">
             <h1>Habitación: {roomRender?.name}</h1> 
             {/* Pedir propiedad name para habitaciones en Back */}
             <h2>Descripción: {roomRender?.description}</h2>

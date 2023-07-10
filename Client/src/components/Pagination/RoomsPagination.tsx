@@ -28,30 +28,43 @@ export const RoomsPagination = () => {
 	}
 
 	return (
-		<nav>
-			<button onClick={onPreviusPage}>Anterior</button>
+		<nav className="flex justify-center">
 			<div>
-				{pageNumbers.map((page) => {
-					if (page >= currentPage + 4 || page <= currentPage - 4) {
-						return null;
-					}
-					return (
-						<button
-							key={page}
-							onClick={() => {
-								onSpecificPage(page);
-							}}
-						>
-							{page}
-						</button>
-					);
-				})}
+				<div className="flex justify-center">
+					<button
+						className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
+						onClick={onPreviusPage}
+					>
+						Anterior
+					</button>
+					{pageNumbers.map((page) => {
+						if (page >= currentPage + 4 || page <= currentPage - 4) {
+							return null;
+						}
+						return (
+							<button
+								className="px-4 py-2 mx-1 bg-blue-200 hover:bg-blue-300 text-blue-800 rounded"
+								key={page}
+								onClick={() => {
+									onSpecificPage(page);
+								}}
+							>
+								{page}
+							</button>
+						);
+					})}
+					<button
+						className={`px-4 py-2 ${currentPage !== pageNumbers.length
+								? 'bg-blue-500 hover:bg-blue-600 text-white'
+								: 'bg-gray-500 text-gray-300 cursor-not-allowed'
+							} rounded`}
+						onClick={currentPage !== pageNumbers.length ? onNextPage : undefined}
+					>
+						Siguiente
+					</button>
+				</div>
 			</div>
-			<button
-				onClick={currentPage !== pageNumbers.length ? onNextPage : undefined}
-			>
-				Siguiente
-			</button>
 		</nav>
+
 	);
 };
