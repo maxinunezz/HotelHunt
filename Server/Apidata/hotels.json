@@ -1,0 +1,809 @@
+{
+    "users": [
+      {
+        "id": "8ab241e4-3067-4779-9c60-536eed689157",
+        "name": "Iona",
+        "lastName": "Skellorne",
+        "birthDate": "2023-04-07",
+        "phoneNumber": "+549871759741",
+        "admin": true,
+        "email": "iskellorne0@quantcast.com",
+        "password": "wE5(xlND*kv)Y"
+      },
+      {
+        "id": "91044992-69fb-4067-89af-88e65f0a3d82",
+        "name": "Oralle",
+        "lastName": "Gronav",
+        "birthDate": "2022-02-26",
+        "phoneNumber": "+541178951263",
+        "admin": true,
+        "email": "ogronav1@gizmodo.com",
+        "password": "oI8/$$3uU*(<W}OW"
+      },
+      {
+        "id": "9257d1e8-e384-42aa-9432-865db79c2410",
+        "name": "Maegan",
+        "lastName": "McCaughren",
+        "birthDate": "2021-07-25",
+        "phoneNumber": "+547589413658",
+        "admin": true,
+        "email": "mmccaughren2@csmonitor.com",
+        "password": "jS6/R{c#aD"
+      },
+      {
+        "id": "9526dc0d-2d81-4450-b768-1eba5fcf5f51",
+        "name": "Wyndham",
+        "lastName": "Lovekin",
+        "birthDate": "2023-04-03",
+        "phoneNumber": "+54785416951",
+        "admin": true,
+        "email": "wlovekin3@upenn.edu",
+        "password": "rS5.8mQ4{("
+      },
+      {
+        "id": "98e23a78-a1ca-4e01-9953-421977244ac8",
+        "name": "Hally",
+        "lastName": "Avieson",
+        "birthDate": "2022-10-17",
+        "phoneNumber": "+549874136992",
+        "admin": true,
+        "email": "havieson4@cmu.edu",
+        "password": "xV7/M&uTS7V>"
+      },
+      {
+        "id": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9",
+        "name": "Elset",
+        "lastName": "Themann",
+        "birthDate": "2020-10-23",
+        "phoneNumber": "+543548569489",
+        "admin": true,
+        "email": "ethemann5@virginia.edu",
+        "password": "yL2$(|Wp@'e>09)t"
+      }
+    ],
+    "hotels": [
+      {
+          "id": "12193d17-8c82-4397-a6b9-2922401b858b",
+          "name": "Hotel plaza",
+          "description": "El Hotel Plaza se encuentra en el centro de Colón, en Entre Ríos, a 500 metros de la playa, y dispone de sauna y piscina exterior con bar y bañera de hidromasaje. Hay WiFi gratuita. Las tranquilas habitaciones del Hotel Plaza tienen aire acondicionado, baño privado, caja fuerte, minibar y TV de pantalla plana por cable.El Hotel Plaza cuenta con sauna y piscina climatizada cubierta a disposición de los huéspedes. Hay recepción 24 horas, y se puede solicitar servicio de lavandería y de planchado. El Hotel Plaza se halla a 200 metros del bulevar del río, a 1 km de las aguas termales y a 1.5 km de la estación de autobuses más cercana. Hay aparcamiento gratuito a 100 metros del establecimiento, sujeto a disponibilidad",
+          "country": "Argetina",
+          "city": "Entre Rios",
+          "photo": "https://images.pxsol.com/1471/company/library/user/22616705594789e71cdcdc324216bcb07f808b77fe0.jpg?auto=format&browser=Chrome&h=1000&ixlib=php-3.3.1&w=1900&s=0c3c244538fa4abf131916c6c7d7b78d",
+          "services": [
+              "Wi-Fi gratis en todo el hotel",
+              "Desayuno incluido en la tarifa",
+              "Desayuno para celiacos (previa notificación)",
+              "Estacionamiento cubierto sujeto a disponibilidad",
+              "Piscina Interior",
+              "Restaurante",
+              "Minibar",
+              "Recepción las 24 horas",
+              "Tarjetas de crédito aceptadas",
+              "Terraza",
+              "Bar & Cafetería",
+              "Late check out (sujeto a disponibilidad)",
+              "Línea telefónica directa DDI DDN",
+              "Servicio de Lavandería (con cargo)",
+              "Climatización frio calor",
+              "Servicio de mucama diario",
+              "Cuna (solo a petición)",
+              "LCD 32 (con servicio de cable)",
+              "Acceso para huéspedes con movilidad reducida",
+              "No fumadores",
+              "Spa (costo adicional)",
+              "Piscina Externa"
+          ],
+          "hotelCategory": "3",
+          "userId": "8ab241e4-3067-4779-9c60-536eed689157"
+      },
+      {
+          "id": "13a9d6e0-22a1-4dae-8198-c81e9176eb40",
+          "name": "Amerian",
+          "description": "Amérian Córdoba Park Hotel es un hotel en Córdoba de categoría 4 estrellas superior, que cuenta con 116 habitaciones, salones para eventos y convenciones, restaurante-bar y terraza con piscina y solárium. Posee la mejor ubicación de los hoteles en Córdoba, ya que se encuentra en pleno centro, ofreciendo una vía de acceso privilegiada desde cualquier punto de la ciudad. Además es uno de los hoteles en Córdoba de mayor trayectoria y prestigio, que ofrece todos los servicios y comodidades orientados a satisfacer las necesidades de los huéspedes en sus viajes de negocios o placer",
+          "country": "Argetina",
+          "city": "Cordoba",
+          "photo": "https://images.pxsol.com/2505/company/library/user/3232342422bcc85b683d7d72354d6050046c7ec340.jpg?auto=format&browser=&ixlib=php-3.3.1&w=1200&s=7f0cb8875af29b0db70dd469d30d19f6",
+          "services": [
+              "Wi-Fi gratis en todo el hotel",
+              "Desayuno incluido en la tarifa",
+              "Desayuno para celiacos (previa notificación)",
+              "Estacionamiento cubierto sujeto a disponibilidad",
+              "Piscina Interior",
+              "Restaurante",
+              "Minibar",
+              "Recepción las 24 horas",
+              "Tarjetas de crédito aceptadas"
+          ],
+          "hotelCategory": "3",
+          "userId": "9257d1e8-e384-42aa-9432-865db79c2410"
+      },
+      {
+          "id": "17e2c78a-3666-436e-b707-a53a553c3562",
+          "name": "Howard Johnson Hotel & Convention Center Madariaga",
+          "description": "Howard Johnson Hotel & Convention Center Madariaga, Cariló. Está ubicado sobre la ruta 11, a metros del acceso a Cariló, donde se combina la tranquilidad de un hotel de campo con la proximidad al centro comercial de Cariló, y un fácil acceso a las ciudades de Pinamar y Villa Gesell. El hotel ofrece amplias y modernas habitaciones donde la fusión entre el confort y la naturaleza harán que su estadía sea única.",
+          "country": "Argetina",
+          "city": "Buenos Aires",
+          "photo": "https://d1ofesossdj49a.cloudfront.net/h_285/TN/Predio_Noche_B-15_774783.jpg",
+          "services": [
+              "Bar & Cafetería",
+              "Late check out (sujeto a disponibilidad)",
+              "Línea telefónica directa DDI DDN",
+              "Servicio de Lavandería (con cargo)",
+              "Climatización frio calor",
+              "Servicio de mucama diario",
+              "Cuna (solo a petición)",
+              "LCD 32 (con servicio de cable)",
+              "Acceso para huéspedes con movilidad reducida"
+          ],
+          "hotelCategory": "4",
+          "userId": "91044992-69fb-4067-89af-88e65f0a3d82"
+      },
+      {
+          "id": "19cf4e0d-225c-4026-9dc6-d1bd77688df4",
+          "name": "Catalina park",
+          "description": "El hotel Catalinas se encuentra en ubicado en una zona privilegiada de San Miguel de Tucumán. El edificio está frente al parque 9 de Julio, principal pulmón verde de la ciudad, y a solo seis (6) calles del centro comercial. Así mismo, está próximo a puntos emblemáticos tales como, Casa Mercedes Sosa a setenta (70) metros, Casa de Gobierno, plaza Independencia y Museo Casa Histórica de la Independencia.Su emplazamiento, en avenida Soldati 380, permite una conexión directa con el aeropuerto internacional Benjamín Matienzo (17 minutos) y la terminal de ómnibus de la ciudad. El aparcamiento es gratuito (sujeto a disponibilidad).",
+          "country": "Argetina",
+          "city": "Tucuman",
+          "photo": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/ca/30/72/catalinas-park-hotel.jpg?w=700&h=-1&s=1",
+          "services": [
+              "Recepción las 24 horas",
+              "Tarjetas de crédito aceptadas",
+              "Terraza",
+              "Bar & Cafetería",
+              "Late check out (sujeto a disponibilidad)",
+              "Línea telefónica directa DDI DDN",
+              "Servicio de Lavandería (con cargo)",
+              "Climatización frio calor"
+          ],
+          "hotelCategory": "5",
+          "userId": "9526dc0d-2d81-4450-b768-1eba5fcf5f51"
+      },
+      {
+          "id": "330901b9-c997-42b5-8fe1-40348d8d6ee5",
+          "name": "Sheraton",
+          "description": "El Sheraton es una cadena de hoteles de lujo reconocida a nivel mundial. Cada hotel Sheraton está diseñado para brindar una experiencia excepcional a sus huéspedes, combinando elegancia, comodidad y servicios de alta calidad",
+          "country": "Argetina",
+          "city": "Buenos Aires",
+          "photo": "https://s7d1.scene7.com/is/image/marriotts7prod/si-buesc-hotel-exterior--29362:Classic-Hor?wid=2880&fit=constrain",
+          "services": [
+              "Servicio de mucama diario",
+              "Cuna (solo a petición)",
+              "LCD 32 (con servicio de cable)",
+              "Acceso para huéspedes con movilidad reducida",
+              "No fumadores",
+              "Spa (costo adicional)"
+          ],
+          "hotelCategory": "5",
+          "userId": "98e23a78-a1ca-4e01-9953-421977244ac8"
+      },
+      {
+          "id": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1",
+          "name": "Hilton",
+          "description": "El Hilton es un hotel de lujo de renombre mundial. Con una arquitectura impresionante y habitaciones elegantes, brindamos una experiencia de hospedaje excepcional. Nuestro personal amable y atento se esfuerza por hacer que cada estancia sea inolvidable. Ofrecemos servicios de alta calidad, como restaurantes, gimnasios y spas, para satisfacer las necesidades de nuestros huéspedes. En el Hilton, nos enorgullece proporcionar lujo y comodidad sin igual",
+          "country": "Argetina",
+          "city": "Santiago del Estero",
+          "photo": "https://www.hilton.com/im/en/SDEGIGI/16183313/636a8002-hdr.jpg?impolicy=crop&cw=3000&ch=1581&gravity=NorthWest&xposition=0&yposition=755&rw=1100&rh=580",
+          "services": [
+              "Wi-Fi gratis en todo el hotel",
+              "Desayuno incluido en la tarifa",
+              "Desayuno para celiacos (previa notificación)",
+              "Estacionamiento cubierto sujeto a disponibilidad",
+              "Piscina Interior",
+              "Restaurante",
+              "Minibar",
+              "Recepción las 24 horas",
+              "Tarjetas de crédito aceptadas",
+              "Terraza",
+              "Bar & Cafetería",
+              "Late check out (sujeto a disponibilidad)",
+              "Línea telefónica directa DDI DDN",
+              "Servicio de Lavandería (con cargo)",
+              "Climatización frio calor",
+              "Servicio de mucama diario"
+          ],
+          "hotelCategory": "4",
+          "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9"
+      },
+      {
+          "id": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9",
+          "name": "Hotel La Malinka",
+          "description": "nuestro hotel de montaña en San Carlos de Bariloche, exclusivo para adultos. A orillas del lago Nahuel Huapi y próximo a la zona comercial de Bariloche y el centro de esquí Cerro Catedral.Nuestro hotel es una expresión de la calidez, la tradición y el confort de la Patagonia, que es ideal para esquiadores, parejas y amantes de la naturaleza. Nuestro hotel le propone una estadía con todo el encanto de un hotel de estilo rústico montañés en el que podrá encontrar habitaciones cómodas con servicios útiles, internet wifi sin costo adicional, estacionamiento, desayuno buffet, atención personalizada… y un entorno mágico. Disfrute de unos días de relax en el paraíso de San Carlos de Bariloche ",
+          "country": "Argetina",
+          "city": "San Carlos Bariloche",
+          "photo": [
+              "https://htlhoteles.com/lamalinka/wp-content/uploads/malinka/galerias/2307c1c0b55f94a2e405c402b21f1377/b0d8e080d067486304a1d5b898d4401c.jpg"
+              
+          ],
+          "services": [
+              "Servicio de mucama diario",
+              "Cuna (solo a petición)",
+              "LCD 32 (con servicio de cable)",
+              "Acceso para huéspedes con movilidad reducida",
+              "No fumadores",
+              "Spa (costo adicional)"
+          ],
+          "hotelCategory": "3",
+          "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9"
+      },
+      {
+          "id": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4",
+          "name": "Calipolis",
+          "description": "Calipolis, el hotel en Sitges con ubicación inmejorable y servicio excepcional. Sitges, encantadora localidad costera a 38 km de Barcelona, ofrece gastronomía mediterránea, vida nocturna animada y playas hermosas. Disfruta de vistas al mar, relájate en sus 17 playas y explora sus encantos. Además, su cercanía a Barcelona permite una visita conveniente.",
+          "country": "España",
+          "city": "Barcelona",
+          "photo": "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_galeriapage/1/calipolis-home01681.jpg",
+          "services": [
+              "Wi-Fi gratis en todo el hotel",
+              "Desayuno incluido en la tarifa",
+              "Desayuno para celiacos (previa notificación)",
+              "Estacionamiento cubierto sujeto a disponibilidad",
+              "Piscina Interior",
+              "Restaurante",
+              "Minibar",
+              "Recepción las 24 horas",
+              "Tarjetas de crédito aceptadas",
+              "Terraza",
+              "Bar & Cafetería",
+              "Late check out (sujeto a disponibilidad)",
+              "Línea telefónica directa DDI DDN",
+              "Servicio de Lavandería (con cargo)",
+              "Climatización frio calor",
+              "Servicio de mucama diario",
+              "Cuna (solo a petición)",
+              "LCD 32 (con servicio de cable)",
+              "Acceso para huéspedes con movilidad reducida",
+              "No fumadores",
+              "Spa (costo adicional)",
+              "Piscina Externa"
+          ],
+          "hotelCategory": "5",
+          "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9"
+      },
+      {
+          "id": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6",
+          "name": "Delfines",
+          "description": "Con la mejor ubicación en el centro de la ciudad para viajes de negocios y de placer, Delfines Hotel & Convention Center es uno de los principales de Lima Perú Hoteles de conferencia de 5 estrellas. Nuestro entorno en el corazón del exclusivo distrito financiero y residencial de San Isidro le ofrece lo mejor de Lima. Quédese con nosotros y encuentre una amplia gama de atracciones turísticas, tiendas, restaurantes y destinos de vida nocturna, y ruinas históricas. Además, nuestro hotel de lujo está cerca de la ubicación del centro financiero y ofrece una comodidad incomparable a las principales corporaciones y oficinas gubernamentales.",
+          "country": "Peru",
+          "city": "Lima",
+          "photo": [
+              "https://cf.bstatic.com/xdata/images/hotel/max1024x768/172550030.jpg?k=926a97cba96ba42af2becee00581caaa9db683e0d5e4ea196e5f710823311581&o=&hp=1",
+              "https://ak-d.tripcdn.com/images/220w1700000116ay63A34_R_960_660_R5_D.jpg"
+          ],
+          "services": [
+              "Restaurante",
+              "Minibar",
+              "Recepción las 24 horas",
+              "Tarjetas de crédito aceptadas",
+              "Terraza",
+              "Bar & Cafetería",
+              "Late check out (sujeto a disponibilidad)",
+              "Línea telefónica directa DDI DDN",
+              "Servicio de Lavandería (con cargo)",
+              "Climatización frio calor",
+              "Servicio de mucama diario",
+              "Cuna (solo a petición)",
+              "LCD 32 (con servicio de cable)",
+              "Acceso para huéspedes con movilidad reducida",
+              "No fumadores",
+              "Spa (costo adicional)",
+              "Piscina Externa"
+          ],
+          "hotelCategory": "5",
+          "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9"
+      },
+      {
+          "id": "d675988c-9d0d-4d2f-82de-9b49911d4e7f",
+          "name": "Hotel La Lagun",
+          "description": "Hotel ubicado en un inigualable rincón del mediterráneo, garantizándole privacidad y evasión. Con muy cómodas y rápidas vías de comunicación, a tan sólo 5 minutos de Guardamar del Segura, las mejores playas de la Costa Blanca, y a 10 minutos de Torrevieja, ciudad repleta de ofertas de ocio. Benefíciese además de dos aeropuertos internacionales a menos de 45 minutos vía autopista, asegurándose rapidez y comodidad en sus desplazamientos.",
+          "country": "España",
+          "city": "Valencia",
+          "photo": "https://hotellalaguna.com/wp-content/uploads/2018/07/Home-principal-1-AF.jpg",
+          "services": [
+              "Desayuno incluido en la tarifa",
+              "Desayuno para celiacos (previa notificación)",
+              "Estacionamiento cubierto sujeto a disponibilidad",
+              "Piscina Interior",
+              "Restaurante",
+              "Minibar",
+              "Recepción las 24 horas",
+              "Tarjetas de crédito aceptadas",
+              "Terraza"
+          ],
+          "hotelCategory": "5",
+          "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9"
+      }
+  ],
+    "rooms": [
+      {
+        "name": "Clásica (1king)",
+        "description": "Las habitaciones Classic son espaciosas y cómodas. El mobiliario de madera clara crea un ambiente elegante, mientras que la vista a la ciudad constituye un telón de fondo encantador. También ofrecemos acceso por cable a Internet de alta velocidad",
+        "photo": ["https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-classic-room-4925-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*", "https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-classic-room-4926-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*", "https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-king-room-7071-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*", "https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-king-room-7071-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*", "https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-king-guestroom-0435-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*"],
+        "pax": 2,
+        "services": ["Baño privado", "TV", "Aire acondicionado", "Escritorio", "Calefaccion", "Caja de seguridad"],
+        "price": "160",
+        "floorNumber": "8",
+        "hotelId": "330901b9-c997-42b5-8fe1-40348d8d6ee5"
+      },
+      {
+        "name": "1 KING BED",
+        "description": "Dale la bienvenida a tu nuevo refugio, una habitación de 34 metros cuadrados con una cama king-size y comodidades convenientes, como un amplio escritorio, una silla giratoria, un televisor inteligente de 55 pulgadas y WiFi gratuito. Llena el minibar con bebidas frías, disfruta de algunos aperitivos o disfruta de una taza de café o té hecho con la tetera eléctrica de la habitación. Esta habitación cuenta con un refrigerador y una tetera eléctrica para hacer café y té, perfecto para preparar y almacenar cualquier bocadillo que necesites.",
+        "photo": ["https://www.hilton.com/im/en/SDEGIGI/16183576/636a0204-hdr.jpg?impolicy=resize&rh=383&rw=680", "https://www.hilton.com/im/en/SDEGIGI/16183570/636a0205-hdr.jpg?impolicy=resize&rh=383&rw=680"],
+        "pax": 2,
+        "services": ["TV", "Escritorio", "Wi-Fi", "MiniBar"],
+        "price": "120",
+        "floorNumber": "6",
+        "hotelId": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1"
+      },
+      {
+        "name": "Habitacion Neo Doble",
+        "description": "Habitación de aproximadamente 25 mts2, cama somier (de 1.80 x 2.00 m), LED 39, climatización, baño con bañera con hidromasaje, escritorio, ventanales con aislacion acústica, frigobar, caja de seguridad,balcón",
+        "photo": ["https://images.pxsol.com/1471/company/library/user/11308357508655ed22dd86641361b24b3914d32771e.jpg?auto=format&browser=&h=400&ixlib=php-3.3.1&w=600&s=0b7c67d730ee7a1f3a4bb970c679c209", "https://images.pxsol.com/1471/company/library/user/64619185929ba6aa1477233cd56566cd5fd59e4a81.jpg?auto=format&browser=&h=400&ixlib=php-3.3.1&w=600&s=7b22137fd5a765426c00999c8c799e75", "https://images.pxsol.com/1471/company/library/user/14539316481c2d939880be6b6bba14885482adeda3a.jpg?auto=format&browser=&h=400&ixlib=php-3.3.1&w=600&s=5766378ec3345d216a194d0f71b7f201"], 
+        "pax": 2,
+        "services": ["TV", "Desayuno incluido", "Baño privado", "Caja de seguridad", "Wi-Fi"],
+        "price": "100",
+        "floorNumber": "4",
+        "hotelId": "12193d17-8c82-4397-a6b9-2922401b858b"
+      },
+      {
+        "name": "Habitación Design Cuadruple",
+        "description": "Habitación Plaza Design de aproximadamente 30m2. Dos somier matrimoniales (de 1.40 x 2.00 mts). Baño con bañera con hidromasaje, batas, secador de pelo, espejo con aumento, frigobar, caja de seguridad, LED 39, escritorio, ventanales con aislacion acústica, balcón",
+        "photo": ["https://images.pxsol.com/1471/P2802/photos/f457919e4289f20251a952b2bdc0e18a1eae30b3.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=2278bc59036481444b5cbcc70c6dafd1", "https://images.pxsol.com/1471/P2802/photos/47bb49e955112264e0f70d9733b7cfb781662148.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=42cb1be7c97c763e32bc547eab8b489c", "https://images.pxsol.com/1471/P2802/photos/989a259577d75385dcfc1f0b16dda26a5ae9d834.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=45248fb7d21eac47a5b0747e8f586bae", ""],
+        "pax": 4,
+        "services": ["Desayuno incluido", "TV", "Aire acondicionado", "Baño privado", "Caja de seguridad", "Calefaccion" ],
+        "price": "200",
+        "floorNumber": "7",
+        "hotelId": "12193d17-8c82-4397-a6b9-2922401b858b"
+      },
+      {
+        "name": "Standard King",
+        "description": "1 cama King Size (2.00 x 2.00 mts)TV de LCD con servicio de televisión satelital Caja de seguridad MinibarSecador de pelo Escritorio Teléfono Sistema de calefacción y aire acondicionado individual",
+        "photo": ["https://d1ofesossdj49a.cloudfront.net/h_285/TN/p_2474/Habitaciones10_452353.jpg", "https://cdn.pixabay.com/photo/2018/09/17/13/27/hotel-bathroom-3683837_640.jpg"],
+        "pax": 2,
+        "services": ["Baño privado", "TV", "Aire acondicionado", "Wi-Fi"],
+        "price": "190",
+        "floorNumber": "6",
+        "hotelId": "17e2c78a-3666-436e-b707-a53a553c3562"
+      },
+      {
+        "name": "Habitacion Individual Estandar",
+        "description": "Superficie: 25 m².Condiciones del Hotel: - Check In: A partir de las 15:00 horas (Argentina)  - Check Out: Hasta las 10:00 horas (Argentina)    Ingresá las fechas de tu estadía y consultá las condiciones de la habitación seleccionada. - Condiciones sobre menores y camas adicionales: Pueden alojarse niños de todas las edades.  - Tarjetas aceptadas en este hotel  Catalinas acepta estas tarjetas: Visa MasterCard Prohibiciones    - No se aceptan mascotas.    - Está prohibido fumar en el edificio (excepto en lugares al aire libre. Ley N°7.575)",
+        "photo": ["https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/h1auHFhi2MFdLpi25cvI-cropped.jpg", "https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/kpX1LShiPoN2FbdrayhE-cropped.jpg", "https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/5wnAJAhOegBUZSd5lo5y-cropped.jpg"],
+        "pax": 2,
+        "services": ["Escritorio", "Caja de seguridad", "Secador de pelo", "TV", "Calefaccion", "Baño privado", "Wi-Fi", "Aire acondicionado"],
+        "price": "90",
+        "floorNumber": "9",
+        "hotelId": "19cf4e0d-225c-4026-9dc6-d1bd77688df4"
+      },
+      {
+        "name": "Standard Twin",
+        "description": "2 camas Queen Size (1.40 x 2.00 mts) TV de LCD con servicio de televisión satelital Caja de seguridad Minibar Secador de pelo Escritorio Teléfono Sistema de calefacción y aire acondicionado individual",
+        "photo": ["https://d1ofesossdj49a.cloudfront.net/h_285/TN/p_2475/Rooms_B-28_593431.jpg", "https://cdn.pixabay.com/photo/2016/04/15/11/43/hotel-1330831_640.jpg", "https://cdn.pixabay.com/photo/2019/05/28/00/15/indoors-4234071_640.jpg", "https://cdn.pixabay.com/photo/2016/08/29/10/42/buddha-bar-hotel-budapest-1627852_640.jpg"],
+        "pax": 5,
+        "services": ["Balcon", "TV", "Aire acondicionado", "Baño privado", "MiniBar"],
+        "price": "230",
+        "floorNumber": "6",
+        "hotelId": "17e2c78a-3666-436e-b707-a53a553c3562"
+      },
+      {
+        "name": "Clásica: 2 individuales",
+        "description": "Las habitaciones Classic son espaciosas y cómodas. El mobiliario de madera clara crea un ambiente elegante, mientras que la vista a la ciudad constituye un telón de fondo encantador. También ofrecemos acceso por cable a Internet de alta velocidad",
+        "photo": ["https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-bathroom-4922-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*", "https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-twin-room-7077-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*", "https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-bathroom-4922-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*"],
+        "pax": 2,
+        "services": ["Baño privado", "Aire acondicionado", "TV", "Caja de seguridad", "Escritorio", "Desayuno incluido"],
+        "price": "200",
+        "floorNumber": "5",
+        "hotelId": "330901b9-c997-42b5-8fe1-40348d8d6ee5"
+      },
+      {
+        "name": "Estándar twin: 2 camas individuales",
+        "description": "20 mt2. 2 camas de 1 * 1,90 mt. Escritorio y silla. Baño con bañera. Vista interna o extrena - sujeto a disponibilidad. No se permite adicionar cama extra. Servicio en la habitación: amenities, frigobar, aire acondicionado, TV LCD por cable, caja de seguridad, secador de pelo",
+        "photo": ["https://images.pxsol.com/2505/company/library/user/323234256224492c5cad024ec2a3217bf1e66cc06e.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=557700ec261fd4ff2d3a05ec66fc0f40", "https://images.pxsol.com/2505/company/library/user/24242569245c451b81e037aae3839715fb2fdaeac43.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=f42c0656c4d7212347e015e4301a6afa", "https://images.pxsol.com/2505/company/library/user/12929370272a6133e0754cb12c77b9730bbb61a58d5.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=d819f466d9cdd97f3d71326f11628a03", "https://images.pxsol.com/2505/company/library/user/80808564151e6e8366725e2e088f6c28659f1dc40a.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=ff619633661027f5aedad365255dae41", ""],
+        "pax": 2,
+        "services": ["TV", "Baño privado", "Aire acondicionado", "Desayuno incluido"],
+        "price": "100",
+        "floorNumber": "8",
+        "hotelId": "13a9d6e0-22a1-4dae-8198-c81e9176eb40"
+      },
+      {
+        "name": "Habitación Clásica Doble ",
+        "description": "Habitaciones Plaza Clásico matrimonial de aproximadamente 14m2, somier matrimonial (de 1.40 x 1.90 m), baño con bidet y ducha, LCD 32, cerraduras electrónicas, climatización central, cofre de seguridad, frigobar.",
+        "photo": ["https://images.pxsol.com/1471/P2802/photos/4d5364c63e41e0c0a1a77b9fb5bbf1fe84c18381.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=86a724821d409e7e90e38e5b05aae76d", "https://images.pxsol.com/1471/P2802/photos/56df7f341712a6ab52cbfa6dcacedd27de95bd30.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=f3c042b63cdea192ea2e653618bf35cb", "https://images.pxsol.com/1471/P2802/photos/85e3d822eaa981a7644771f34ad5fb3c68cc9c5a.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=a35194041af7c5b97d78badfc5a3c4d4"],
+        "pax": 2,
+        "services": ["Caja de seguridad", "TV", "Baño privado "],
+        "price": "80",
+        "floorNumber": "6",
+        "hotelId": "12193d17-8c82-4397-a6b9-2922401b858b"
+      },
+      {
+        "name": "Standard king",
+        "description": "20 mt2. 2 camas de 1,30 * 2,30 mt. Escritorio y silla. Baño con bañera. Vista interna o extrena - sujeto a disponibilidad. No se permite adicionar cama extra. Servicio en la habitación: amenities, frigobar, aire acondicionado, TV LCD por cable, caja de seguridad, secador de pelo.",
+        "photo": ["https://cdn.pixabay.com/photo/2016/04/15/11/45/hotel-1330841_640.jpg", "https://cdn.pixabay.com/photo/2016/04/15/11/46/bedroom-1330846_640.jpg", "https://cdn.pixabay.com/photo/2016/04/15/11/46/hotel-1330845_640.jpg", "https://cdn.pixabay.com/photo/2016/04/15/11/48/hotel-1330847_640.jpg"],
+        "pax": 2,
+        "services": ["Baño privado ", "Escritorio", "Aire acondicionado", "TV", "Caja de seguridad", "Secador de pelo"],
+        "price": "180",
+        "floorNumber": "10",
+        "hotelId": "17e2c78a-3666-436e-b707-a53a553c3562"
+      },
+      {
+        "name": "Estándar twin: 2 camas individuales(del Amerian)",
+        "description": "20 mt2. 2 camas de 1 * 1,90 mt. Escritorio y silla. Baño con bañera. Vista interna o extrena - sujeto a disponibilidad. No se permite adicionar cama extra. Servicio en la habitación: amenities, frigobar, aire acondicionado, TV LCD por cable, caja de seguridad, secador de pelo.",
+        "photo": ["https://images.pxsol.com/2505/company/library/user/251741846851c4f8832cb13b0d33055c626af9c2e22.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=b6bdd89e9762ba09f22a95a1c72e78f5", "https://images.pxsol.com/2505/company/library/user/9697027668aa63ceb976690de93fcd0ce7e55971c2.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=1ae08cc789e963b9150a883cc28531ff", "https://images.pxsol.com/2505/company/library/user/3356557972d8be1843b70ce5f0142abb2384bd63bd.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=3144c38018fb406b59b40b3b22a89ec5", "https://images.pxsol.com/2505/company/library/user/13426231952eafe4487faa0303b187648a00e7b6794.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=892bf0264d20cab6cca5087677790dd6"],
+        "pax": 2,
+        "services": ["Aire acondicionado", "TV", "Caja de seguridad", "Calefaccion", "Desayuno incluido"],
+        "price": "150",
+        "floorNumber": "8",
+        "hotelId": "13a9d6e0-22a1-4dae-8198-c81e9176eb40"
+      },
+      {
+        "name": "Habitación Temática Cuádruple",
+        "description": "Habitación Temática de aproximadamente 18mts2. Con un somier matrimonial (de 1.60 x 1.90 m) y dos somieres individuales , cofre de seguridad, baño con ducha y bidet, TV lcd 32 cerraduras electrónicas, climatización, ventanales con aislamiento acústico, balcón, frigobar, caja de seguridad.",
+        "photo": ["https://images.pxsol.com/1471/company/library/user/21581897649c5f149b69ab30e8fd18b428dd666eafc.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=2b857375b13ad8a6298352806d653c4d", "https://images.pxsol.com/1471/company/library/user/16601459700535379576b7c8ab7c36c6cdc5ea387fe.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=c214d716affeea191036847639f7c495", "https://images.pxsol.com/1471/company/library/user/664058388413b3c16e8205e3febf86bf929f4f9354.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=f6de4c2fb6e3a3c176f2340dfd351f33", "https://images.pxsol.com/1471/company/library/user/6640583900cd6b3014945468ca3c457e20220f4882.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=729dc34fa2a9fdcd6af08919bca8770a"],
+        "pax": 4,
+        "services": ["Estacionamiento", "TV", "Baño privado", "Caja de seguridad", "Desayuno incluido", "Aire acondicionado", "Calefaccion", "Wi-Fi"],
+        "price": "282",
+        "floorNumber": "7",
+        "hotelId": "12193d17-8c82-4397-a6b9-2922401b858b"
+      },
+      {
+        "name": "Habitacion Individual Superior",
+        "description": "Superficie: 30 m². Condiciones del Hotel - Check In: A partir de las 15:00 horas (Argentina) - Check Out:  Hasta las 10:00 horas (Argentina)  Condiciones sobre menores y camas adicionales: Pueden alojarse niños de todas las edades",
+        "photo": ["https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/KrqDvCI5cG6MIYUMNVoG-cropped.jpg", "https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/VDODXUvsMGqdWg0v5ikV-cropped.jpg", "https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/lCPMDmorvO38Dg7J5BGh-cropped.jpg"],
+        "pax": 2,
+        "services": ["Baño privado", "TV", "Calefaccion", "Aire acondicionado", "Caja de seguridad", "Secador de pelo", "Escritorio"],
+        "price": "110",
+        "floorNumber": "9",
+        "hotelId": "19cf4e0d-225c-4026-9dc6-d1bd77688df4"
+      },
+      {
+        "name": "2 TWIN BEDS",
+        "description": "Saluda a tu nuevo retiro, una habitación de 34 metros cuadrados completa con dos camas individuales y comodidades convenientes, que incluyen un escritorio grande, una silla giratoria, un televisor de alta definición inteligente de 55 pulgadas, y WiFi de cortesía. Llene la mini nevera con bebidas frías, coma algunos bocadillos o disfrute de una taza de café o té hecho con la tetera eléctrica de la habitación.  Esta habitación cuenta con nevera y hervidor eléctrico para preparar café y té, perfecto para preparar y almacenar los bocadillos que necesite.",
+        "photo": ["https://www.hilton.com/im/en/SDEGIGI/16183570/636a0205-hdr.jpg?impolicy=resize&rh=383&rw=680", "https://www.hilton.com/im/en/SDEGIGI/17896532/-c8a9719.jpg?impolicy=crop&cw=4898&ch=2784&gravity=NorthWest&xposition=0&yposition=240&rw=760&rh=432"],
+        "pax": 2,
+        "services": ["Escritorio", "TV", "Wi-Fi", "MiniBar", "Aire acondicionado"],
+        "price": "180",
+        "floorNumber": "6",
+        "hotelId": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1"
+      },
+      {
+        "name": "Suite Panorama y terraza",
+        "description": "Hermosa Suite Panorama con Terraza y vista al Río Uruguay. Cuenta con dos ambientes de 45 m2 y una terraza de 45m2 con vista panorámica, dos reposeras y mesa, para un total de 90 m2. Living con TV , escritorio, microondas, batas incluidas, dormitorio con somier king size (de 2.00 x 2.00 m), con TV, baño con box de ducha, sanitarios, y jacuzzi doble de 2.00 x 2.00 m",
+        "photo": ["https://cdn.pixabay.com/photo/2020/10/18/09/16/bedroom-5664221_1280.jpg", "https://images.pxsol.com/1471/company/library/user/11308359699da3e7c1732437562829aadcb775f47dd.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=202f44c769f1a02133c9239ab909b097", "https://images.pxsol.com/1471/company/library/user/484643979389cc2d70b4d4a5d967c384b5e5417c38.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=b0b8b05a9c9081c07306d584f26903be", "https://images.pxsol.com/1471/company/library/user/2100123906497aa9a64792cbd75dd376f129810e4c9.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=8b437d8aa47f69d0210fcc8465929be4"],
+        "pax": 2,
+        "services": ["desayuno incluido", "Estacionamiento", "TV", "Wi-Fi", "Baño privado", "Aire acondicionado", "Caja de seguridad", "Calefaccion"],
+        "price": "110",
+        "floorNumber": "8",
+        "hotelId": "12193d17-8c82-4397-a6b9-2922401b858b"
+      },
+      {
+        "name": "Doble",
+        "description": "Estas habitaciones disponen de un Sommier matrimonial queen size o dos sommiers individuales, permitiendo una ocupación máxima de 2 personas por habitación. Una cálida decoración promete un descanso asegurado luego de un día de actividades. Fotos ilustrativas. Asignacion vista lago o vista bosque sujeta a disponibilidad al momento de la asignacion.",
+        "photo": ["https://htlhoteles.com/lamalinka/wp-content/uploads/malinka/galerias/2307c1c0b55f94a2e405c402b21f1377/71638367540cf5f63c24df739123a3d8.jpg", "https://htlhoteles.com/lamalinka/wp-content/uploads/malinka/galerias/3ed34a8645475a76067a0989beac0fe5/e9c1845c441404f76f6dd90d4751b477.jpg", "https://htlhoteles.com/lamalinka/wp-content/uploads/2022/06/49c6b9aa76b7489f384020cce7543d80-2.jpg"],
+        "pax": 2,
+        "services": ["TV", "Baño privado ", "Calefaccion", "Desayuno incluido"],
+        "price": "160",
+        "floorNumber": "6",
+        "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
+      },
+      {
+        "name": "1 KING BED PRESIDENTIAL SUITE",
+        "description": "Notará y disfrutará del lujoso baño completo con artículos de baño mejorados, albornoces, zapatillas y la ducha completa y la bañera de hidromasaje separadas. Además, puede llenar el mini refrigerador con bebidas frías, comer algunos bocadillos o disfrutar de una taza de café o té directamente de su cervecero personal de Nespresso.",
+        "photo": ["https://www.hilton.com/im/en/SDEGIGI/16183564/636a0230-hdr.jpg?impolicy=crop&cw=4500&ch=2557&gravity=NorthWest&xposition=0&yposition=221&rw=760&rh=432", "https://www.hilton.com/im/en/SDEGIGI/16183547/636a0255-hdr.jpg?impolicy=resize&rh=383&rw=680", "https://www.hilton.com/im/en/SDEGIGI/16183544/636a0260-hdr.jpg?impolicy=resize&rh=383&rw=680", "https://www.hilton.com/im/en/SDEGIGI/16183550/636a0265-hdr.jpg?impolicy=crop&cw=4500&ch=2557&gravity=NorthWest&xposition=0&yposition=221&rw=760&rh=432"],
+        "pax": 2,
+        "services": ["MiniBar", "TV", "Escritorio", "Sofa", "Aire acondicionado"],
+        "price": "200",
+        "floorNumber": "5",
+        "hotelId": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1"
+      },
+      {
+        "name": "Premier: 1 king",
+        "description": "Nuestras suites Premiere ofrecen el espacio y la comodidad para disfrutar de una visita relajada. La vista panorámica es sensacional y crea el escenario perfecto para la ambientación acogedora y atractiva de estas suites. Con un baño y una sala de estar, estas suites cuentan con el espacio suficiente para que los huéspedes se relajen. Cada una de las suites tiene caja de seguridad en la habitación, dos televisores de pantalla LCD de 42 pulgadas y minibar",
+        "photo": ["https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-premier-5179-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*", "https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-premier-5178-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*", "https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-suite-2772-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*", "https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-bathroom-2774-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*"],
+        "pax": 2,
+        "services": ["Escritorio", "Baño privado", "Aire acondicionado", "MiniBar", "Desayuno incluido"],
+        "price": "220",
+        "floorNumber": "4",
+        "hotelId": "330901b9-c997-42b5-8fe1-40348d8d6ee5"
+      },
+      {
+        "name": "Classic pequeña",
+        "description": "Las habitaciones Classic son espaciosas y cómodas. El mobiliario de madera clara crea un ambiente elegante, mientras que la vista a la ciudad constituye un telón de fondo encantador. También ofrecemos acceso por cable a Internet de alta velocidad.",
+        "photo": ["https://s7d1.scene7.com/is/image/marriotts7prod/si-buesc-king-classic-small-31692-52675:Wide-Hor?wid=1336&fit=constrain", "https://img.freepik.com/fotos-premium/habitaciones-hotel-modernas-elegantes_1417-8490.jpg", "https://images.trvl-media.com/lodging/2000000/1670000/1665300/1665211/3cd9267e.jpg?impolicy=fcrop&w=1200&h=800&p=1&q=medium"],
+        "pax": 1,
+        "services": ["Escritorio", "Baño privado ", "Aire acondicionado", "Desayuno incluido", "Caja de seguridad"],
+        "price": "160",
+        "floorNumber": "6",
+        "hotelId": "330901b9-c997-42b5-8fe1-40348d8d6ee5"
+      },
+      {
+        "name": "TRIPLE",
+        "description": "Con una espectacular vista al Lago Nauhel Huapi, estas habitaciones disponen de un Sommier matrimonial queen size + un sommier individual o 3 sommiers individuales , permitiendo una ocupación máxima de 3 personas por habitación.",
+        "photo": ["https://htlhoteles.com/lamalinka/wp-content/uploads/2022/06/705b258b2a2793fb7632453885b0de3c.jpg", "https://htlhoteles.com/lamalinka/wp-content/uploads/2022/06/731f1c2c13d61f690ba0dfd2e5270912.jpg", "https://htlhoteles.com/lamalinka/wp-content/uploads/malinka/galerias/2307c1c0b55f94a2e405c402b21f1377/578c307eaad859214922431b384b3482.jpg"],
+        "pax": 3,
+        "services": ["Calefaccion", "Caja de seguridad", "Baño privado", "TV"],
+        "price": "190",
+        "floorNumber": "8",
+        "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
+      },
+      {
+        "name": "Belgrano",
+        "description": "La suite Belgrano es una suite espaciosa de dos dormitorios que ofrece una vista panorámica espectacular a la ciudad y al Río de la Plata. Ubicada en el piso 23, la suite Belgrano es cómoda y privada, con un ambiente encantador y clásico perfecto para relajarse o recibir invitados. 2 habitaciones Suite de 2 dormitorio(s), piso alto, acceso a la piscina, hidromasaje",
+        "photo": ["https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-suite-8749-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*", "https://s7d1.scene7.com/is/image/marriotts7prod/si-buesc-belgrano-suite-20935:Wide-Hor?wid=1336&fit=constrain", "https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-suite-8748-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*", "https://cache.marriott.com/content/dam/marriott-renditions/BUESC/buesc-suite-8751-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*"],
+        "pax": 2,
+        "services": ["Balcon", "Aire acondicionado", "Baño privado", "Desayuno incluido", "Calefaccion", "Batas de baño", "Caja de seguridad"],
+        "price": "280",
+        "floorNumber": "6",
+        "hotelId": "330901b9-c997-42b5-8fe1-40348d8d6ee5"
+      },
+      {
+        "name": "DOBLE FLAT",
+        "description": "Amplia habitacion con entrada independiente que dispopne de un sommier matrimonial queen size o dos sommiers individuales, permitiendo una ocupación máxima de 2 personas. Kitchinette equipada exclusivamente con heladera bajo mesada, pava electrica , cafetera , tostadora cubiertos y vajilla de losa",
+        "photo": ["https://htlhoteles.com/lamalinka/wp-content/uploads/2023/02/1-2.jpg", "https://htlhoteles.com/lamalinka/wp-content/uploads/2023/02/2-1.jpg", "https://htlhoteles.com/lamalinka/wp-content/uploads/2023/02/3-1.jpg"],
+        "pax": 2,
+        "services": ["Cocina", "Calefaccion", "Baño privado ", "TV", "Caja de seguridad"],
+        "price": "210",
+        "floorNumber": "9",
+        "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
+      },
+      {
+        "name": "Cuadruple",
+        "description": "Con una espectacular vista al Lago Nauhel Huapi, estas habitaciones disponen de un Sommier matrimonial queen size + un sommier individual o 4 sommiers individuales , permitiendo una ocupación máxima de 4 personas por habitación.",
+        "photo": ["https://media-cdn.tripadvisor.com/media/photo-s/0f/42/ac/d8/habitacion-cuadruple.jpg", "https://www.hoteltierrainka.com/images/habitaciones/h_cuadruple_001.jpg","https://www.hoteltierrainka.com/images/habitaciones/h_triple_001.jpg"],
+        "pax": 1,
+        "services": ["Calefaccion", "Caja de seguridad", "Baño privado", "TV"],
+        "price": "210",
+        "floorNumber": "6",
+        "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
+      },
+      {
+        "name": "Suit Presidencial",
+        "description": "La habitación más espaciosa del hotel, con la mejor vista a la laguna de Chascomús donde puede disfrutar al máximo su estadía y equipado con todo lo necesario para su comodidad",
+        "photo": ["https://d1ofesossdj49a.cloudfront.net/h_251/T75/p_2111/Suite_King_943471.jpg", "https://d1ofesossdj49a.cloudfront.net/h_251/T75/p_2111/detalle_balcon_suite_king_756441.jpg"],
+        "pax": 2,
+        "services": ["Balcon", "TV", "Baño privado", "Batas de baño", "Caja de seguridad"],
+        "price": "200",
+        "floorNumber": "5",
+        "hotelId": "17e2c78a-3666-436e-b707-a53a553c3562"
+      },
+      {
+        "name": "Suite Premium Queen",
+        "description": "Contempla la belleza natural de la laguna, desde estas cálidas, elegantes y luminosas habitaciones de 36 mts2 con dos camas Queen matrimoniales de 1,40 x 2 mts más puerta ventana corrediza hermética de doble vidrio y balcón o salida al parque. Cuenta con split 2250 frigorías frío/calor, TV 40” mobiliario y blanquearía premium, sillones, escritorio, teléfono, caja de seguridad, placard, baño completo, bañera, secador de pelo y amenities",
+        "photo": ["https://d1ofesossdj49a.cloudfront.net/h_251/T75/p_15527/suite_queen_906647.jpg", "https://cdn.pixabay.com/photo/2019/05/28/00/15/indoors-4234071_640.jpg"],
+        "pax": 4,
+        "services": ["TV", "Escritorio", "Caja de seguridad", "Baño privado ", "Secador de pelo"],
+        "price": "160",
+        "floorNumber": "4",
+        "hotelId": "17e2c78a-3666-436e-b707-a53a553c3562"
+      },
+      {
+        "name": "Suite Deluxe con bañera de hidromasaje",
+        "description": "Convierta su estancia en una experiencia única alojándose en una de las suites más bonitas del hotel. Totalmente engalanadas con mucho mimo para agasajar a nuestros huéspedes. Estas habitaciones se distinguen por su estilo, elegancia y amplitud, ofreciendo además todas las comodidades que puedan imaginar.",
+        "photo": ["https://hotellalaguna.com/wp-content/uploads/2017/10/Suite-Deluxe-bis-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/Habitaci%C3%B3n-Suite-Deluxe-1-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/Terraza-Suite-Deluxe-2-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/Ba%C3%B1o-Suite-Deluxe-2-con-bid%C3%A9-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/Ba%C3%B1o-Suite-Deluxe-1-768x512.jpg"],
+        "pax": 2,
+        "services": ["Sala de estar", "Caja de seguridad", "Aire acondicionado", "TV", "Wi-Fi", "Secador de pelo", "Baño privado"],
+        "price": "170",
+        "floorNumber": "1",
+        "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
+      },
+      {
+        "name": "Estándar matrimonial: 1 cama doble grande",
+        "description": "20 mt2. 1 cama matrimonial de 1,80 * 1,90 mt. Escritorio y silla. Baño con bañera. Vista interna o extrena - sujeto a disponibilidad. Amenities, frigobar, aire acondicionado, TV LCD por cable, caja de seguridad, secador de pelo. No permite adicionar cama extra",
+        "photo": ["https://images.pxsol.com/2505/company/library/user/808085615579e64d8986dd78b3244ab02fcaa5ded0.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=44d5dd9968af1d953bc83baedf108c69", "https://images.pxsol.com/2505/company/library/user/1131319863896954ad30607f52f628c85b8ccb20242.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=d6746d5f39c90c8ecf4c803bbcd6173e", "https://images.pxsol.com/2505/company/library/user/3356557972d8be1843b70ce5f0142abb2384bd63bd.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=3144c38018fb406b59b40b3b22a89ec5"],
+        "pax": 2,
+        "services": ["Baño privado", "Desayuno incluido", "Aire acondicionado", "Caja de seguridad", "Calefaccion"],
+        "price": "200",
+        "floorNumber": "6",
+        "hotelId": "13a9d6e0-22a1-4dae-8198-c81e9176eb40"
+      },
+      {
+        "name": "Estándar twin: 2 camas individuales",
+        "description": "20 mt2. 2 camas de 1 * 1,90 mt. Escritorio y silla. Baño con bañera. Vista interna o extrena. No se permite adicionar cama extra. Servicio en la habitación: amenities, frigobar, aire acondicionado, TV LCD por cable, caja de seguridad, secador de pelo.",
+        "photo": ["https://images.pxsol.com/2505/company/library/user/251741846851c4f8832cb13b0d33055c626af9c2e22.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=b6bdd89e9762ba09f22a95a1c72e78f5", "https://images.pxsol.com/2505/company/library/user/9697027668aa63ceb976690de93fcd0ce7e55971c2.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=1ae08cc789e963b9150a883cc28531ff", "https://images.pxsol.com/2505/company/library/user/3356557972d8be1843b70ce5f0142abb2384bd63bd.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=3144c38018fb406b59b40b3b22a89ec5", "https://images.pxsol.com/2505/company/library/user/13426231952eafe4487faa0303b187648a00e7b6794.jpg?auto=format&browser=Chrome&h=400&ixlib=php-3.3.1&w=600&s=892bf0264d20cab6cca5087677790dd6"],
+        "pax": 2,
+        "services": ["Baño privado", "Desayuno incluido", "Caja de seguridad", "TV", "Calefaccion"],
+        "price": "120",
+        "floorNumber": "9",
+        "hotelId": "13a9d6e0-22a1-4dae-8198-c81e9176eb40"
+      },
+      {
+        "name": "Suite Presidencial con bañera de hidromasaje",
+        "description": "Disfrute de la suite más exclusiva del hotel con dos impresionantes dormitorios y todos los servicios que pueda soñar. La Suite Presidencial con bañeras de hidromasaje con más de 88 m² compuesta por dos espectaculares salones decorados por conocidos interioristas, dos baños completos cada uno de ellos con una bañera de hidromasaje semi-circular , y dos dormitorios ambos con cama tipo “King size” de 2 metros por 2 metros de amplitud que le aportará una extraordinaria calidad de descanso.",
+        "photo": ["https://hotellalaguna.com/wp-content/uploads/2017/10/Suite-Presidencial-bis-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/Suite-Presidencial-2-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/Suite-Presidencial-3-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/Terraza-Suite-Deluxe-1-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/Ba%C3%B1o-Suite-presidencial-1-768x512.jpg"],
+        "pax": 2,
+        "services": ["Balcon", "Sofa", "Secador de pelo", "Caja de seguridad", "TV", "Sofa", "Suelo de madera"],
+        "price": "300",
+        "floorNumber": "7",
+        "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
+      },
+      {
+        "name": "1 KING ",
+        "description": "Dale la bienvenida a tu nuevo refugio, una habitación de 34 metros cuadrados con una cama king-size y comodidades convenientes, como un amplio escritorio, una silla giratoria, un televisor inteligente de 55 pulgadas y WiFi gratuito. Llena el minibar con bebidas frías, disfruta de algunos aperitivos o disfruta de una taza de café o té hecho con la tetera eléctrica de la habitación. Esta habitación cuenta con un refrigerador y una tetera eléctrica para hacer café y té, perfecto para preparar y almacenar cualquier bocadillo que necesites." ,
+        "photo": ["https://www.hilton.com/im/en/SDEGIGI/16183576/636a0204-hdr.jpg?impolicy=resize&rh=383&rw=680", "https://www.hilton.com/im/en/SDEGIGI/16183570/636a0205-hdr.jpg?impolicy=resize&rh=383&rw=680"],
+        "pax": 2,
+        "services": ["Escritorio", "TV", "Wi-Fi", "Aire acondicionado", "MiniBar"],
+        "price": "160",
+        "floorNumber": "6",
+        "hotelId": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1"
+      },
+      {
+        "name": "2 TWIN ",
+        "description": "Saluda a tu nuevo retiro, una habitación de 34 metros cuadrados completa con dos camas individuales y comodidades convenientes, que incluyen un escritorio grande, una silla giratoria, un televisor de alta definición inteligente de 55 pulgadas, y WiFi de cortesía. Llene la mini nevera con bebidas frías, coma algunos bocadillos o disfrute de una taza de café o té hecho con la tetera eléctrica de la habitación.  Esta habitación cuenta con nevera y hervidor eléctrico para preparar café y té, perfecto para preparar y almacenar los bocadillos que necesite.",
+        "photo": ["https://www.hilton.com/im/en/SDEGIGI/16183570/636a0205-hdr.jpg?impolicy=resize&rh=383&rw=680", "https://www.hilton.com/im/en/SDEGIGI/17896532/-c8a9719.jpg?impolicy=crop&cw=4898&ch=2784&gravity=NorthWest&xposition=0&yposition=240&rw=760&rh=432"],
+        "pax": 2,
+        "services": ["Escritorio", "TV", "MiniBar", "Aire acondicionado", "Baño privado ", "MiniBar"],
+        "price": "140",
+        "floorNumber": "8",
+        "hotelId": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1"
+      },
+      {
+        "name": "Estándar twin: 1 camas Matrimonial",
+        "description": "Disfruta de la comodidad y amplitud de nuestras habitaciones estándar twin con una cama matrimonial. Perfectas para parejas o viajeros individuales que buscan un descanso tranquilo, nuestras habitaciones ofrecen una cama espaciosa y cómoda para una noche de sueño reparador. Relájate en un ambiente acogedor y descubre la comodidad de nuestras habitaciones twin con cama matrimonial en nuestro hotel",
+        "photo": ["https://cdn.pixabay.com/photo/2020/10/18/09/16/bedroom-5664221_1280.jpg", "https://cdn.pixabay.com/photo/2019/05/28/00/15/indoors-4234071_640.jpg", "https://cdn.pixabay.com/photo/2018/02/13/09/39/modern-minimalist-bathroom-3150293_640.jpg"],
+        "pax": 2,
+        "services": ["Baño privado", "Aire acondicionado", "TV", "Desayuno incluido"],
+        "price": "250",
+        "floorNumber": "3",
+        "hotelId": "13a9d6e0-22a1-4dae-8198-c81e9176eb40"
+      },
+      {
+        "name": "EJECUTIVA CON VISTAS AL MAR EN SITGES",
+        "description": "En el hotel Calipolis de Sitges, la habitación ejecutiva con vista mar frontal y terraza es una de las más solicitadas. La habitación se encuentra entre la 5ª y 9ª planta y en primera línea de playa, una combinación ideal para disfrutar de unas vistas privilegiadas. La terraza es amplia y totalmente privada, lo que invita a relajarse disfrutando del paisaje. Sus magníficas vistas y su gran encanto hacen que tenga un valor añadido sobre el resto de habitaciones. La máxima capacidad en las habitaciones ejecutivas vista mar frontal es de 2 personas",
+        "photo": ["https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_galeriahabitaciones/1/hor-mar1414.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_galeriahabitaciones/1/hor-mar3187.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_galeriahabitaciones/1/hor-mar9606.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_galeriahabitaciones/1/hor-mar4671.jpg"],
+        "pax": 2,
+        "services": ["Balcon", "Baño privado", "Caja de seguridad", "Desayuno incluido"],
+        "price": "180",
+        "floorNumber": "7",
+        "hotelId": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4"
+      },
+      {
+        "name": "Estándar vista mar frontal",
+        "description": "Las habitaciones estándar vista mar frontal, situadas entre la planta 1 y 4ª del hotel, son muy amplias y están equipadas con todo lo necesario para garantizar una agradable estancia a nuestros clientes. Todas las habitaciones estándar vista mar frontal disponen de una magnífica terraza privada con vistas al Paseo Marítimo y las playas más céntricas de Sitges.    La máxima capacidad en las habitaciones vista mar es de 2 personas.",
+        "photo": ["https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/10/list-marfrontal1354.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/10/marfrontal3239.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/10/terrazamarfrontal324.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/10/baofrontal994.jpg"],
+        "pax": 2,
+        "services": ["Balcon", "Baño privado", "Caja de seguridad", "Desayuno incluido"],
+        "price": "120",
+        "floorNumber": "8",
+        "hotelId": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4"
+      },
+      {
+        "name": "Ejecutiva vista mar latera",
+        "description": "Situadas entre la 5ª y 9ª planta del hotel, las habitaciones ejecutivas con vista mar lateral y terraza privada ofrecen más luz y más comodidad a nuestros clientes. Gracias a su orientación, se pueden contemplar espectaculares puestas de sol desde la terraza. Una fantástica opción para pasar una maravillosa experiencia junto al mar con todas las comodidades necesarias en un ambiente tranquilo y relajado.  La máxima capacidad en las habitaciones ejecutivas vista mar lateral es de 2 personas.",
+        "photo": ["https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/9/lateral3936.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/9/lateralconterraza14155.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/9/lateralconterraza6127.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/9/lateralconterraza4364.jpg"],
+        "pax": 2,
+        "services": ["Balcon", "Baño privado", "Aire acondicionado", "Desayuno incluido"],
+        "price": "140",
+        "floorNumber": "7",
+        "hotelId": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4"
+      },
+      {
+        "name": "Junior Suite",
+        "description": "Para aquellos que esperan aún más. Más espacio, más exclusividad... Un amplio dormitorio con cama de matrimonio, sala de estar y una terraza más grande, totalmente equipada para los días soleados",
+        "photo": ["https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/3/js1496.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/3/js3973.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/3/lavabo-suite2283.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/3/junior-suite11730.jpg"],
+        "pax": 3,
+        "services": ["Balcon", "Sofa", "Baño privado", "Caja de seguridad"],
+        "price": "200",
+        "floorNumber": "11",
+        "hotelId": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4"
+      },
+      {
+        "name": "Habitacion Doble Superior(Una o Dos Camas)",
+        "description": "Superficie: 30 m². Condiciones del Hotel - Check In: A partir de las 15:00 horas (Argentina) - Check Out:  Hasta las 10:00 horas (Argentina)  Condiciones sobre menores y camas adicionales: Pueden alojarse niños de todas las edades",
+        "photo": ["https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/FymQRuJ4NRezdAGvlzAZ-cropped.jpg", "https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/cT718aeuopRIimIcdwVx-cropped.jpg", "https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/7BDTBxgRle0WKLT1d56O-cropped.jpg"],
+        "pax": 4,
+        "services": ["Aire acondicionado", "Caja de seguridad", "Baño privado", "Escritorio", "Secador de pelo", "Calefaccion" ],
+        "price": "140",
+        "floorNumber": "8",
+        "hotelId": "19cf4e0d-225c-4026-9dc6-d1bd77688df4"
+      },
+      {
+        "name": "SUITE PENTHOUSE CON JACUZZI",
+        "description": "La Suite Penthouse con jacuzzi es la mejor opción para los amantes de la comodidad, elegancia y lujo. Es una exclusiva y espectacular suite de diseño. Se encuentra situada en la última planta del hotel por lo que las vistas son magníficas. Se trata de un dormitorio con cama de matrimonio King size, baño con jacuzzi privado, una sala de estar muy amplia, independiente, con una zona de trabajo y una terraza. El hotel en Sitges con Jacuzzi en la habitación cuenta con una terraza de 45 metros cuadrados privada.",
+        "photo": ["https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_galeriahabitaciones/1/pent2873.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_galeriahabitaciones/1/pent3395.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_galeriahabitaciones/1/pent1738.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_galeriahabitaciones/1/pent1738.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_galeriahabitaciones/1/pent12121.jpg"],
+        "pax": 2,
+        "services": ["Baño privado", "Aire acondicionado", "MiniBar", "Caja de seguridad"],
+        "price": "270",
+        "floorNumber": "7",
+        "hotelId": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4"
+      },
+      {
+        "name": "HABITACIÓN SUPERIOR",
+        "description": "Las habitaciones están situadas entre los pisos 2 y 9 y cuentan con una cama tamaño king o dos camas dobles, internet WiFi, Smart TV curvo de 49 con señal digital, dos líneas de teléfono con buzón de voz, reloj despertador, caja fuerte, cafetera y un minibar.",
+        "photo": ["https://image-tc.galaxy.tf/wijpeg-axw5v17qr09qa28z5mfpaam09/delfines-hotel-peru-lima-accommodation-superior-room-tripadvisor-booking-bed_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-imf3mvp0x53pz41zoige714g/hotellosdelfines-2018-365_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-1j6fdkxjqjd05syo5k7xfk4bu/delfines-hotel-peru-lima-accommodation-superior-room-tripadvisor-booking-corporative_wide.jpg?crop=0%2C244%2C554%2C312&width=1140", "https://image-tc.galaxy.tf/wijpeg-2b3canhlehgnur4t52bprvotl/delfines-hotel-peru-lima-accommodation-superior-room-tripadvisor-booking-bathroom_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140"],
+        "pax": 2,
+        "services": ["TV", "Wi-Fi", "Caja de seguridad", "Cafetera", "MiniBar", "Baño privado"],
+        "price": "130",
+        "floorNumber": "9",
+        "hotelId": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6"
+      },
+      {
+        "name": "HABITACIÓN EJECUTIVA",
+        "description": "Se encuentra desde los pisos 12 al 14 en una ubicación privilegiada para brindarle una vista espectacular de una de las áreas verdes más grandes de la ciudad, el Lima Golf Club. Las habitaciones están equipadas con una cama King o dos camas dobles, internet WiFi, Smart TV curvo de 49 con señal digital, dos líneas telefónicas con buzón de voz, reloj despertador, caja fuerte en la habitación, cafetera, plancha y tabla de planchar, minibar y hermosos baños de mármol blanco que incluyen bañeras de hidromasaje",
+        "photo": ["https://image-tc.galaxy.tf/wijpeg-960e8umgtqm0t1fni31qhcojv/delfines-hotel-peru-lima-accommodation-executive-room-tripadvisor-booking-bed_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-5x99ccwh2ajgqoma9ff1fdwf7/hotellosdelfines-2018-425_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-a6op54np12910ojwuftqwh072/hotellosdelfines-2018-423_wide.jpg?crop=0%2C242%2C563%2C317&width=1140", "https://image-tc.galaxy.tf/wijpeg-4u7usjlnqqwsudmrgdiioptdo/delfines-hotel-peru-lima-accommodation-executive-room-tripadvisor-booking-bathroom_wide.jpg?crop=0%2C230%2C605%2C340&width=1140"],
+        "pax": 2,
+        "services": ["Wi-Fi", "TV", "Caja de seguridad", "Cafetera", "MiniBar", "Baño privado"],
+        "price": "170",
+        "floorNumber": "7",
+        "hotelId": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6"
+      },
+      {
+        "name": "JUNIOR SUITE",
+        "description": "Nuestras Junior Suites están ubicadas estratégicamente para ofrecerle una vista espectacular de una de las áreas verdes más grandes de la ciudad, el Lima Golf Club. Las habitaciones están equipadas con una cama King size, sala de estar, un hermoso balcón al aire libre, internet WiFi, Smart TV curvo de 49 con señal digital, dos líneas telefónicas con buzón de voz, despertador, caja de seguridad, cafetera, plancha y tabla de planchar, minibar, sala de estar y un hermoso balcón abierto.",
+        "photo": ["https://image-tc.galaxy.tf/wijpeg-z1on2t7ed4duar7h8txmvjbl/delfines-hotel-peru-lima-accommodation-junior-suite-room-tripadvisor-booking-bed_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-7zjju9055uc6wgi4ysavggqfr/hotellosdelfines-2018-403_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-bt6qbiu8aiogx1qdyx80ieph0/hotellosdelfines-2018-405_wide.jpg?crop=0%2C93%2C1800%2C1013&width=1140", "https://image-tc.galaxy.tf/wijpeg-b4giv9htyu7696narzszvzauo/delfines-hotel-peru-lima-accommodation-junior-suite-room-tripadvisor-booking-terrace-smoking-area_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-8yctoe7juw5gnc46u3xl7k5vy/delfines-hotel-peru-lima-accommodation-junior-suite-room-tripadvisor-booking-bathroom_wide.jpg?crop=0%2C230%2C605%2C340&width=1140"],
+        "pax": 2,
+        "services": ["Wi-Fi", "TV", "Caja de seguridad", "MiniBar", "Balcon", "Batas de privado"],
+        "price": "210",
+        "floorNumber": "9",
+        "hotelId": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6"
+      },
+      {
+        "name": "Suite",
+        "description": "Superficie: 57 m² Esta suite incluye dos (2) cuartos de baño, una zona de estar Esta suite incluye dos (2) cuartos de baño, una zona de estar ",
+        "photo": ["https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/oKZd47Zc1yhJpFgOf0Zj-cropped.jpg", "https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/ipmiSW134T1wpSALQYUR-cropped.jpg", "https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/azaua3t3rUaOwRBJzsNg-cropped.jpg"],
+        "pax": 2,
+        "services": ["Aire acondicionado", "Caja de seguridad", "Calefaccion", "Escritorio", "Secador de pelo", "Sofa", "Batas de baño", "TV"],
+        "price": "190",
+        "floorNumber": "6",
+        "hotelId": "19cf4e0d-225c-4026-9dc6-d1bd77688df4"
+      },
+      {
+        "name": "SENIOR SUITE",
+        "description": "La Senior Suite cuenta con una ubicación privilegiada para brindarle vistas panorámicas del Lima Golf Club y de nuestra terraza con piscina. También ofrece la comodidad de una sala de estar y comedor independientes, un escritorio, Smart TV curvo de 49 con señal digital, un amplio baño completamente de mármol blanco, equipado con jacuzzi, amplia ducha y comodidades de primera clase.Esta suite es ideal para ocasiones especiales como una noche de bodas o incluso un aniversario de bodas.",
+        "photo": ["https://image-tc.galaxy.tf/wijpeg-eeztucv39uufnduku40tfnhbs/delfines-hotel-peru-lima-accommodation-senior-suite-room-tripadvisor-booking-living-room_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-3mc31crrv81xtf1q1up4wtdku/delfines-hotel-peru-lima-accommodation-senior-suite-room-tripadvisor-booking-living-room-tv_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-dezaqy0wjccwvnlizrzwwtoxb/hotellosdelfines-2018-439_wide.jpg?crop=0%2C54%2C1232%2C693&width=1140", "https://image-tc.galaxy.tf/wijpeg-3jk1ynlb3fee7qn94ljexkok8/hotellosdelfines-2018-441_wide.jpg?crop=0%2C94%2C1800%2C1013&width=1140", "https://image-tc.galaxy.tf/wijpeg-1pz93eyr038hbkuvrk9hc4yf0/hotellosdelfines-2018-461_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140"],
+        "pax": 2,
+        "services": ["Escritorio", "TV", "Baño privado", "Sala de estar"],
+        "price": "250",
+        "floorNumber": "7",
+        "hotelId": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6"
+      },
+      {
+        "name": "SUITE OLIMPO",
+        "description": "Esta elegante suite es ideal para alojar a nuestros visitantes más importantes y posee una vista espectacular del Lima Golf Club. Cuenta con una sala de estar, comedor, kitchenette, baño para visitas, un encantador dormitorio con cama King y un amplio y lujoso baño principal de mármol blanco que incluye sauna y jacuzzi. La Suite Olimpo está equipada con conexión inalámbrica a Internet, Smart TV curvo de 65 con señal digital,vestidor, dos líneas telefónicas con buzón de voz, despertador, caja de seguridad, plancha y tabla de planchar y un mini bar. En su ambiente distinguido, la Suite Olimpo tambien es ideal para impresionar durante sus cenas y reuniones de negocios.",
+        "photo": ["https://image-tc.galaxy.tf/wijpeg-47mkdpclcbxmu5ovwpromghft/hotellosdelfines-2018-511_wide.jpg?crop=0%2C94%2C1800%2C1013&width=1140", "https://image-tc.galaxy.tf/wijpeg-9a5a4rpfp2o4ou84ix3c90hak/delfines-hotel-peru-lima-accommodation-olimpo-suite-room-tripadvisor-booking-living-room_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-bhh5i6rm9wuht6kjkmiakztzi/delfines-hotel-peru-lima-accommodation-olimpo-suite-room-tripadvisor-booking-living-room_wide.jpg?crop=0%2C105%2C2000%2C1125&width=1140", "https://image-tc.galaxy.tf/wijpeg-bhh5i6rm9wuht6kjkmiakztzi/delfines-hotel-peru-lima-accommodation-olimpo-suite-room-tripadvisor-booking-living-room_wide.jpg?crop=0%2C105%2C2000%2C1125&width=1140", "https://image-tc.galaxy.tf/wijpeg-30c02z1cf1o3d8hxyw2x1zl8v/delfines-hotel-peru-lima-accommodation-olimpo-suite-room-tripadvisor-booking-kitchen_wide.jpg?crop=0%2C56%2C1223%2C688&width=1140", "https://image-tc.galaxy.tf/wijpeg-8cq2hvvuv1q3wzrv8x46vwqpb/delfines-hotel-peru-lima-accommodation-olimpo-suite-room-tripadvisor-booking-sauna_wide.jpg?crop=0%2C105%2C2000%2C1125&width=1140", "https://image-tc.galaxy.tf/wijpeg-6nnwgo0p63wvlzoerbtrtousm/delfines-hotel-peru-lima-accommodation-olimpo-suite-room-tripadvisor-booking-bathroom_wide.jpg?crop=0%2C105%2C2000%2C1125&width=1140"],
+        "pax": 5,
+        "services": ["Sala de estar", "Cocina", "Baño privado", "MiniBar", "Jacuzzi", "Sauna"],
+        "price": "300",
+        "floorNumber": "5",
+        "hotelId": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6"
+      },
+      {
+        "name": "Habitacion Doble",
+        "description": "Están elegantemente decoradas con mobiliario de estilo mediterráneo muy luminoso y lencería de cama blanca de máxima calidad en sus algodones garantizándole el descanso durante su estancia. Todas disponen de dos camas de 1,05metros por 2 metros y se encuentran totalmente equipadas con todo lo que usted pueda necesitar durante su alojamiento. 2 camas individuales (1,05 x 2m)",
+        "photo": ["https://hotellalaguna.com/wp-content/uploads/2017/10/1892_rec.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/DSC_1876_rec.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-doble-bano.jpg"],
+        "pax": 2,
+        "services": ["Caja de seguridad", "Aire acondicionado", "TV", "Wi-Fi", "Secador de pelo"],
+        "price": "63",
+        "floorNumber": "3",
+        "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
+      },
+      {
+        "name": "Habitacion Junior Suite",
+        "description": "Al entrar en una Junior Suite experimentará una agradable sensación de completa tranquilidad que ofrece la combinación de una decoración mediterránea en un único espacio. Encontrará dos zonas amplias de salón y dormitorio diáfano, pero bien definidas para dormir y trabajar. Ideal para huéspedes que buscan un refugio tranquilo y acogedor.",
+        "photo": ["https://hotellalaguna.com/wp-content/uploads/2017/10/Habitaci%C3%B3n-Junior-Suite-4-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/Habitaci%C3%B3n-Junior-Suite-bis-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitaci%C3%B3n-Junior-Suite-1-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/Terraza-Junior-Suite-768x512.jpg"],
+        "pax": 4,
+        "services": ["Caja de seguridad", "Aire acondicionado", "TV", "Wi-Fi", "Secador de pelo", "Sala de estar"],
+        "price": "90",
+        "floorNumber": "7",
+        "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
+      },
+      {
+        "name": "Suite Presidencial",
+        "description": "Superficie: 82 m² Esta suite incluye dos (3) cuartos de baño, una zona de estar independiente con TV por cable y privilegiada vista al parque 9 de Julio ",
+        "photo": ["https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/BPa9k6YNYNNgXzsOFeGH-cropped.jpg", "https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/uAlfUC21ocv5ef2N0QS6-cropped.jpg", "https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/zfB4UPUrSPYkwDwxO56J-cropped.jpg"],
+        "pax": 5,
+        "services": ["Aire acondicionado", "Caja de seguridad", "Calefaccion", "Sofa", "Escritorio", "Secador de pelo", "Wi-Fi", "TV"],
+        "price": "220",
+        "floorNumber": "10",
+        "hotelId": "19cf4e0d-225c-4026-9dc6-d1bd77688df4"
+      },
+      {
+        "name": "Suite Premium con bañera de hidromasaje",
+        "description": "Una habitación para aquellos que aprecian la comodidad y la calidad más exquisita, visible en el cuidado de los innumerables detalles de este renovado hotel lleno de estilo. Disfrute de una lujosa y amplia habitación. Situada en la parte más tranquila del edificio e inundada de luz natural, la Suite Premium con bañera de hidromasaje ofrece a los huéspedes un remanso de tranquilidad que la convierte en la elección perfecta para las parejas en sus escapadas especiales hasta para estancias más largas. La cama de está preciosa habitación es matrimonial y de gran tamaño: 2 metros por 2 metros.",
+        "photo": ["https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-suite-premium-DSC_0508.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-suite-premium-DSC_0530.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-suite-premium-DSC_0523.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-suite-premium-DSC_0535.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-suite-premium-DSC_0618.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-suite-premium-DSC_0544.jpg"],
+        "pax": 3,
+        "services": ["Caja de seguridad", "Aire acondicionado", "TV", "Wi-Fi", "Secador de pelo", "Sala de estar"],
+        "price": "250",
+        "floorNumber": "6",
+        "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
+      }
+    ]
+  }
+  
