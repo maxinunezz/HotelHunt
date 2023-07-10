@@ -9,6 +9,7 @@ import axios from 'axios';
 import { errorToast, successToast } from '../../components/toast';
 import Hotel from "./Hotel.png"
 import { tokenStore } from '../../Store';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -43,6 +44,7 @@ const formValidationSchema = yup.object().shape({
 });
 
 export default function FormPageH() {
+	const navigate = useNavigate()
 	const [isCreated, setIsCreated] = useState(false);
 	const token = tokenStore((state) => state.userState)
 
@@ -81,10 +83,12 @@ export default function FormPageH() {
 						},
 					}
 				);
-
+				
+				helpers.resetForm()
 				setIsCreated(true);
 				successToast('Hotel creado correctamente');
 				console.log('data', data);
+				navigate(-1)
 			} catch (error) {
 
 				errorToast('Hubo un error, intenta de nuevo');

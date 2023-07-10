@@ -1,8 +1,7 @@
-
 import { Button, FormControl } from '@rewind-ui/core';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import gif from './gif.gif'
 import { tokenStore } from '../../Store';
@@ -38,15 +37,15 @@ const LogingPage = () => {
 						const tokenRaw = response.data.token
 						const statusadmin = response.data.admin
 						const logeado = true
-						const userdata = response.data.data
 						arrayAux.push(tokenRaw)
 						arrayAux.push(statusadmin)
 						arrayAux.push(logeado)
-						arrayAux.push(userdata)
 						saveInfo(arrayAux)
 					}
+					console.log("values",values);
+					
 					successToast('Usuario logeado correctamente');
-					navigate('/home')
+					navigate('/')
 				}
 				)
 
@@ -72,16 +71,16 @@ const LogingPage = () => {
 					userInfoState.length === 0 ?
 						<div className="bg-green-700 flex m-10 p-5 space-x-1 rounded-md ">
 							<h1 className="text-white ">Ingresa como </h1>
-							<Link to="/home">
-								<button className="mr-2">invitado</button>
-							</Link>
+							
+								<button onClick={() => navigate('/')} className="mr-2">invitado</button>
+							
 						</div>
 						:
 						<div className="bg-green-700 flex m-10 p-5 space-x-1 rounded-md ">
 							<h1 className="text-white ">Ingresa al </h1>
-							<Link to="/home">
-								<button className="mr-2">home</button>
-							</Link>
+
+							<button onClick={() => navigate('/')} className="mr-2">home</button>
+
 						</div>
 				}
 			</div>
@@ -158,9 +157,9 @@ const LogingPage = () => {
 
 					<div className="bg-slate-400 flex m-10 p-5 space-x-1 rounded-md ">
 						<h1 className="text-white ">No tienes cuenta? Registrate</h1>
-						<Link to="/usercreate">
-							<button className="mr-2">aquí</button>
-						</Link>
+						
+							<button onClick={()=>navigate('/usercreate')} className="mr-2">aquí</button>
+						
 					</div>
 
 				</div>)
@@ -177,4 +176,3 @@ const LogingPage = () => {
 
 };
 export default LogingPage;
-
