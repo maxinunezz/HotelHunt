@@ -26,5 +26,6 @@ export const tokenStore = create<States & Actions>((set) => ({
         set(() => ({
             userState: arrayAux
         }))
-    }
+    },
+    
 }))
