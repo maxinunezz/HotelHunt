@@ -159,7 +159,7 @@ const LogingPage = () => {
 					<div className="bg-slate-400 flex m-10 p-5 space-x-1 rounded-md ">
 						<h1 className="text-white ">No tienes cuenta? Registrate</h1>
 						
-							<button onClick={()=>navigate('/dashboard')} className="mr-2">aquí</button>
+							<button onClick={()=>navigate('/usercreate')} className="mr-2">aquí</button>
 						
 					</div>
 
