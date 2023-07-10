@@ -1,7 +1,10 @@
 import { Button, FormControl } from '@rewind-ui/core';
 import { Form, Formik, FormikHelpers } from 'formik';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
+import axios from 'axios';
+import { errorToast, successToast } from '../../components/toast';
 import * as yup from 'yup';
+
 
 interface UserCreateValues {
   name: string;
@@ -43,14 +46,37 @@ const loginValidationSchema = yup.object().shape({
 });
 
 const FormPageUser = () => {
+  const [isCreated, setIsCreated] = useState(false);
+
   const handleSubmit = useCallback(
     async (values: UserCreateValues, helpers: FormikHelpers<UserCreateValues>) => {
-      console.log('values', values);
+      try {
+
+        const data = await axios.post(
+          'http://localhost:3001/user/signup',
+          {
+            name: values.name,
+            lastName: values.lastName,
+            birthDate: values.birthDate,
+            phoneNumber: values.phoneNumber,
+            admin: values.admin,
+            email: values.email,
+            password: values.password,
+          }
+        );
+        setIsCreated(true);
+        successToast('Usuario creado con exito');
+        console.log('data', data);
+      } catch (error) {
+
+        errorToast('Hubo un error, intenta de nuevo');
+      }
 
       helpers.setSubmitting(false);
     },
-    []
+    [setIsCreated]
   );
+
   return (
     <div className="h-screen bg-slate-600 flex items-center justify-center ">
       <div className="bg-gray-800 p-8 rounded-md">
@@ -235,7 +261,6 @@ const FormPageUser = () => {
                 <Button
                   color="blue"
                   type="submit"
-                  onClick={submitForm}
                   disabled={Object.keys(errors).length > 0}
                   className="py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                 >
