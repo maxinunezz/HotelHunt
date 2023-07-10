@@ -1,12 +1,9 @@
-
-
-
 import HotelList from '../../components/HotelsList/HotelsList';
 import NavBar from '../../components/NavBar/NavBar';
 
 
 export default function HomePage() {
-
+	
 
 
 
@@ -22,4 +19,3 @@ export default function HomePage() {
 
 	);
 }
-

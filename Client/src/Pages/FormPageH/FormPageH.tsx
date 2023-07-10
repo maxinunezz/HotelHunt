@@ -9,6 +9,7 @@ import axios from 'axios';
 import { errorToast, successToast } from '../../components/toast';
 import Hotel from "./Hotel.png"
 import { tokenStore } from '../../Store';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -19,7 +20,7 @@ interface FormValues {
 	city: string;
 	photo: string;
 	category: string;
-	services:string;
+	services: string;
 }
 
 const formValidationSchema = yup.object().shape({
@@ -43,6 +44,7 @@ const formValidationSchema = yup.object().shape({
 });
 
 export default function FormPageH() {
+	const navigate = useNavigate()
 	const [isCreated, setIsCreated] = useState(false);
 	const token = tokenStore((state) => state.userState)
 
@@ -72,7 +74,7 @@ export default function FormPageH() {
 						country: values.country,
 						city: values.city,
 						photo: values.photo,
-						category: values.category,
+						hotelCategory: values.category,
 						services: values.services,
 					},
 					{
@@ -81,10 +83,12 @@ export default function FormPageH() {
 						},
 					}
 				);
-
+				
+				helpers.resetForm()
 				setIsCreated(true);
 				successToast('Hotel creado correctamente');
 				console.log('data', data);
+				navigate(-1)
 			} catch (error) {
 
 				errorToast('Hubo un error, intenta de nuevo');
@@ -93,7 +97,7 @@ export default function FormPageH() {
 		},
 		[setIsCreated, token]
 	);
-		
+
 	return (
 		<div className="flex h-screen">
 			<div className="w-full bg-blue-500 flex flex-col justify-center">
