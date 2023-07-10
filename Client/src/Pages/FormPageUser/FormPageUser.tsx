@@ -52,8 +52,8 @@ const FormPageUser = () => {
     []
   );
   return (
-    <div className="h-screen bg-slate-600 flex items-center justify-center ">
-      <div className="bg-gray-800 p-8 rounded-md">
+    <div className="bg-slate-600 flex items-center h-screen justify-center">
+      <div className="bg-gray-800 p-8 rounded-md w-[600px]">
         <Formik
           initialValues={{
             name: '',
@@ -69,7 +69,7 @@ const FormPageUser = () => {
           validationSchema={loginValidationSchema}
         >
           {({ values, errors, submitForm, setFieldValue }) => (
-            <Form className="space-y-4">
+            <Form className="space-y-4 h-[700px] overflow-y-auto">
               <div className="flex flex-col">
                 <FormControl
                   validation={
@@ -214,7 +214,7 @@ const FormPageUser = () => {
 
               <div className="flex flex-col">
                 <FormControl>
-                  <FormControl.Label className="text-white">
+                  <FormControl.Label className="text-white text-center">
                     Quiero publicar mi hotel
                   </FormControl.Label>
                   <FormControl.Input

@@ -28,7 +28,7 @@ export const RoomsPagination = () => {
 	}
 
 	return (
-		<nav className="flex justify-center">
+		<nav className="flex justify-center mt-10">
 			<div>
 				<div className="flex justify-center">
 					<button
