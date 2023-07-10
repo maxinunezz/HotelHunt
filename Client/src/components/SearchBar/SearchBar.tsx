@@ -18,9 +18,9 @@ const SearchBar = () => {
 	const { fetchSearchResults } = searchStore()
 
 
-	const handleSearch = async () => {
+	const handleSearch = async (element) => {
+		element.preventDefault()
 		console.log("Estoy en el handler");
-
 		if (!selectedOption) {
 			return
 		}
@@ -30,7 +30,6 @@ const SearchBar = () => {
 		})
 
 		await fetchSearchResults(data);
-
 
 	}
 
@@ -53,11 +52,11 @@ const SearchBar = () => {
 			/>
 			<Dropdown>
 				<Dropdown.Trigger>
-					<Button className="w-40">{selectedOption ?? 'Buscar por'}</Button>
+					<Button className="w-40 justify-center">{selectedOption ?? 'Buscar por'}</Button>
 				</Dropdown.Trigger>
 				<Dropdown.Content>
-					<Dropdown.Item onClick={() => setSelectedOption("city")}>
-						Región
+					<Dropdown.Item className='w-20' onClick={() => setSelectedOption("city")}>
+						Pais
 					</Dropdown.Item>
 					<Dropdown.Item onClick={() => setSelectedOption("name")}>
 						Nombre
@@ -65,7 +64,7 @@ const SearchBar = () => {
 				</Dropdown.Content>
 			</Dropdown>
 
-			<button className="p-2" type="submit" onClick={handleSearch}>
+			<button className="p-2" onClick={(element) => handleSearch(element)}>
 				<MagnifyingGlass size={28} weight="bold" />
 			</button>
 		</div>

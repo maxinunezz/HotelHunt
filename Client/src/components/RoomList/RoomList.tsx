@@ -12,7 +12,7 @@ const RoomList = () => {
 	}));
 
 	const roomsHotelValid = roomsHotelSelect?.length;
-	console.log(roomsHotelSelect[0]);
+	
 
 	const totalRooms = roomsHotelSelect?.length;
 	const firstIndex = (currentPage - 1) * roomsPerPage;
@@ -21,8 +21,7 @@ const RoomList = () => {
 
 	return (
 		<div>
-			<div className="justify-center items-center">
-				<p>{roomsHotelValid} blablablabla</p>
+			<div className="grid grid-cols-3 justify-center mb-4 gap-5">
 				{totalRooms ? (
 					currentRooms.map((room) => {
 						return (
@@ -48,6 +47,7 @@ const RoomList = () => {
 			<RoomsPagination />
 		</div>
 	);
+
 };
 
 export default RoomList;

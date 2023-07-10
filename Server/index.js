@@ -15,7 +15,7 @@ conn
 	.sync({ force: false })
 	.then(() => {
 		/* cambiar a true en primera carga */
-		// firstload(); // descomentar para primera carga
+		 //firstload(); // descomentar para primera carga
 		server.listen(PORT, () => {
 			console.log(`Server listening on port ${PORT}`);
 		});
