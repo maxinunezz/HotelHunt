@@ -164,7 +164,8 @@ const LogingPage = () => {
 
 				</div>)
 					:
-					(<div className="bg-gray-800 w-[35%] flex flex-col items-center justify-center">Test</div>)
+					(<div className="bg-gray-800 w-[35%] flex flex-col items-center justify-center">Test</div>)				
+					
 
 			}
 

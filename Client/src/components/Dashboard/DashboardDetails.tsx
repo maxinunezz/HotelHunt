@@ -4,9 +4,11 @@ import { Hotel } from '../../models/hotel';
 import { useEffect, useState } from 'react'
 import { tokenStore } from "../../Store";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function DashboardDetails() {
-
+    const { getHotelByUser } = tokenStore()
+    const navigate = useNavigate()
     const token = tokenStore((state) => state.userState)
 
     const [hotelByUser, setHotelByUser] = useState()
@@ -24,7 +26,9 @@ export default function DashboardDetails() {
                 },
             )
             if (response.data) {
+
                 setHotelByUser(response.data);
+                getHotelByUser(response.data);
             }
         } catch (error) {
             console.log(error);
@@ -44,15 +48,19 @@ export default function DashboardDetails() {
             <hr />
             <div className="flex flex-col h-full overflow-y-auto">
                 {hotelByUser?.length > 0 ? (
-                    hotelByUser?.map((element: {id:string, name:string, country:string, city:string, photo:string}) => (
+                    hotelByUser?.map((element: { id: string, name: string, country: string, city: string, photo: string }) => (
                         (
-                            <DashboardRow
-                                key={element.id}
-                                name={element.name}
-                                country={element.country}
-                                city={element.city}
-                                photo={element.photo}
-                            />
+                            <button onClick={() => navigate(`/dashboard/hoteldetail/${element.id}`)}>
+                                <DashboardRow
+                                    key={element.id}
+                                    name={element.name}
+                                    country={element.country}
+                                    city={element.city}
+                                    photo={element.photo}
+
+                                />
+
+                            </button>
                         )
                     ))
                 ) : (
