@@ -20,7 +20,7 @@ interface FormValues {
 	city: string;
 	photo: string;
 	category: string;
-	services:string;
+	services: string;
 }
 
 const formValidationSchema = yup.object().shape({
@@ -97,7 +97,7 @@ export default function FormPageH() {
 		},
 		[setIsCreated, token]
 	);
-		
+
 	return (
 		<div className="flex h-screen">
 			<div className="w-full bg-blue-500 flex flex-col justify-center">
