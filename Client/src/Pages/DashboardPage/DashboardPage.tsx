@@ -1,22 +1,20 @@
-import CrearRoomButton from '../../components/D-CrearRoomButton/CrearRoomButton';
-import CrearHostelButton from '../../components/D-CrearHotelButton/CrearHostelButton';
-import UpdateAndDeleteHotel from '../../components/UpdateAndDeleteHotels/UpdateAndDeleteHotels';
+import DashboardDetails from "../../components/Dashboard/DashboardDetails";
+import DashboardHeader from "../../components/Dashboard/DashboardHeader";
+import NavBarDashboard1 from "../../components/Dashboard/NavBarDashboard1";
+
+
+
+
+
 
 const DashBoardPage = () => {
-	return (
-		<div>
-			<div>Este es el dashboard</div>
-
-			<div>
-				<CrearHostelButton />
-				<CrearRoomButton />
-			</div>
-			<div className='bg-amber-800 w-[1500px] h-[500px] flex-col text-center items-center justify-center'>
-				Acá
-				
-			</div>
-		</div>
-	);
+    return (
+        <div className="flex flex-col bg-slate-100 rounded-lg p-4 h-full overflow-hidden">
+            <DashboardHeader />
+            <NavBarDashboard1  />
+            <DashboardDetails/>
+        </div>
+    );
 };
 
 export default DashBoardPage;

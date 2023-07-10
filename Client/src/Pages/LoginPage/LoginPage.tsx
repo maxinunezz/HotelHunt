@@ -38,9 +38,11 @@ const LogingPage = () => {
 						const tokenRaw = response.data.token
 						const statusadmin = response.data.admin
 						const logeado = true
+						const userdata = response.data.data
 						arrayAux.push(tokenRaw)
 						arrayAux.push(statusadmin)
 						arrayAux.push(logeado)
+						arrayAux.push(userdata)
 						saveInfo(arrayAux)
 					}
 					console.log("values",values);
@@ -164,6 +166,8 @@ const LogingPage = () => {
 					</div>
 
 				</div>)
+					:
+					(<div className="bg-gray-800 w-[35%] flex flex-col items-center justify-center">Test</div>)
 					:
 					(<div className="bg-gray-800 w-[35%] flex flex-col items-center justify-center">Test</div>)
 

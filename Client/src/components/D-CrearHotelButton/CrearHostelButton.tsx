@@ -1,6 +1,6 @@
 
 import { Button } from '@rewind-ui/core';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function CrearHostelButton() {
     const navigate = useNavigate()
