@@ -1,21 +1,25 @@
 
 import SearchBar from '../SearchBar/SearchBar';
 import { useNavigate } from 'react-router-dom';
-import { tokenStore } from '../../Store';
+import { searchStore, tokenStore } from '../../Store';
 import UserMenu from '../UserMenuDropDown/UserMenu';
 import AdminMenu from '../UserMenuDropDown/AdminMenu';
 
 export default function NavBar() {
 	const navigate = useNavigate()
 	const isLogged = tokenStore((state) => state.userState)
-	console.log(isLogged);
-	console.log("isLogged");
+	const { reset } = searchStore()
+	
+	const handleAllHotels = (element) => {
+		element.preventDefault()
+		reset()
+	}
 
 	return (
 		<nav className="fixed top-0 left-0 right-0 bg-gray-900 text-white p-4 space-x-5 flex items-center justify-between w-full">
 			{
 				isLogged.length ? (
-					isLogged[1] === "normal" ? <UserMenu />: <AdminMenu/>)
+					isLogged[1] === "normal" ? <UserMenu /> : <AdminMenu />)
 					:
 					(
 						<h1 onClick={() => navigate('/login')}>Login</h1>
@@ -26,7 +30,7 @@ export default function NavBar() {
 
 
 			<SearchBar />
-
+			<button onClick={handleAllHotels} >Mostrar todos los hoteles</button>
 			<div>
 				<h1 className="text-white">
 					<span className="text-4xl font-bold">HOTEL</span>

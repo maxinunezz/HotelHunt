@@ -11,14 +11,17 @@ interface User {
 
 type States = {
     userState: User[];
+    hotelsUserById: any[];
 }
 
 type Actions = {
     saveInfo: (arrayAux) => Promise<void>
+    getHotelByUser: (hotelsArray) => Promise<void>
 }
 
 const initialState: States = {
-    userState: []
+    userState: [],
+    hotelsUserById: []
 }
 
 export const tokenStore = create<States & Actions>((set) => ({
@@ -27,6 +30,12 @@ export const tokenStore = create<States & Actions>((set) => ({
     saveInfo: async(arrayAux) => {
         set(() => ({
             userState: arrayAux
+        }))
+    },
+
+    getHotelByUser: async(hotelsArray:any) => {
+        set(() => ({
+            hotelsUserById: hotelsArray
         }))
     },
     
