@@ -13,17 +13,11 @@ export default function DashboardDetails() {
 
     return (
         <div className="flex flex-col h-full mt-2 bg-slate-300 rounded-xl">
-            <DashboardRow
-                name=""
-                country=""
-                city=""
-                photo=""
-            />
             <hr />
             <div className="flex flex-col h-full overflow-y-auto">
                 {hoteles?.length > 0 ? (
                     hoteles.map((hotel: Hotel, index: number) => (
-                        index > 0 ? (
+                        index >= 0  ? (
                             <DashboardRow
                                 key={hotel.id}
                                 name={hotel.name}
