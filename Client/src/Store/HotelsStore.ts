@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { create } from 'zustand';
 import { Hotel } from '../models';
+import calculatePageNumbers from '../utils/calculatePageNamber';
 
 type States = {
 	hotels: Hotel[];
@@ -19,16 +20,6 @@ const initialState: States = {
 	searchResoults: [],
 	currentPage: 1,
 	pageNumbers: [],
-};
-
-const calculatePageNumbers = (hotelsLength: number): number[] => {
-	const tempPageNumberArray: number[] = [];
-
-	for (let i = 1; i <= Math.ceil(hotelsLength / 9); i++) {
-		tempPageNumberArray.push(i);
-	}
-
-	return tempPageNumberArray;
 };
 
 export const hotelStore = create<States & Actions>((set) => ({

@@ -1,12 +1,13 @@
 
 import { Button } from '@rewind-ui/core';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function CrearHostelButton() {
+    const navigate = useNavigate()
     return (
-        <Link to='/formHotel' className='ml-auto'><Button color="purple" shadow="base" shadowColor="blue" radius="base" size="lg" >
-            <span className='text-2xl'>+ Agregar Hotel</span>
-        </Button> </Link>
+        <Button onClick={() => navigate('../formHotel')} className="w-44" color="purple" shadow="base" shadowColor="blue" radius="base" size="lg" >
+            <span className='text-2xl'>Registrar</span>
+        </Button>
     );
 }
 

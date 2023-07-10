@@ -1,12 +1,12 @@
-import { hotelStore } from '../../Store';
+import { roomsStore } from '../../Store';
 
-export const Pagination = () => {
-	const { currentPage, pageNumbers } = hotelStore((state) => ({
+export const RoomsPagination = () => {
+	const { currentPage, pageNumbers } = roomsStore((state) => ({
 		currentPage: state.currentPage,
 		pageNumbers: state.pageNumbers,
 	}));
 
-	const { changeCurrentPage } = hotelStore();
+	const { changeCurrentPage } = roomsStore();
 
 	const onPreviusPage = () => {
 		if (currentPage === 1) {
