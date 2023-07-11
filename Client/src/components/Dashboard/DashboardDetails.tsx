@@ -12,6 +12,7 @@ export default function DashboardDetails() {
     const token = tokenStore((state) => state.userState)
 
     const [hotelByUser, setHotelByUser] = useState()
+    console.log(token[1])
 
     const getHotels = async () => {
         try {
@@ -21,10 +22,11 @@ export default function DashboardDetails() {
                     headers:
                     {
                         authorization:
-                            `Bearer ${token[0]}`
+                            `Bearer ${token[1]}`,
                     },
                 },
             )
+            console.log(token[0])
             if (response.data) {
 
                 setHotelByUser(response.data);

@@ -37,6 +37,8 @@ const LogingPage = () => {
 						const tokenRaw = response.data.token
 						const statusadmin = response.data.admin
 						const logeado = true
+						const userData = response.data.data
+						arrayAux.push(userData)
 						arrayAux.push(tokenRaw)
 						arrayAux.push(statusadmin)
 						arrayAux.push(logeado)

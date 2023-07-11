@@ -9,7 +9,7 @@ import { MapPinLine } from '@phosphor-icons/react'
 
 const HotelPage = () => {
 	const { id } = useParams();
-	const [roomsId, setroomsId] = useState([]);
+	const [hotelOnScreen, setroomsId] = useState([]);
 
 	const { hotelIdSetter } = roomsStore();
 
@@ -41,7 +41,7 @@ const HotelPage = () => {
 						<div className="w-1/3 mr-6">
 							<div className="w-full h-full rounded-lg overflow-hidden">
 								<img
-									src={roomsId?.photo}
+									src={hotelOnScreen?.photo}
 									alt="Foto de la habitación"
 									className="w-full h-full object-cover"
 								/>
@@ -49,19 +49,19 @@ const HotelPage = () => {
 						</div>
 						<div className="w-2/3">
 							<div className="bg-white p-6 rounded-lg shadow-lg">
-								<h2 className="text-3xl font-bold mb-4">🏨{roomsId?.name}</h2>
+								<h2 className="text-3xl font-bold mb-4">🏨{hotelOnScreen?.name}</h2>
 								<div className="flex items-center">
 									<MapPinLine size={20} className="mr-2" />
-									<h3>{roomsId?.country}, {roomsId?.city}</h3>
+									<h3>{hotelOnScreen?.country}, {hotelOnScreen?.city}</h3>
 								</div>
 								<h3 className="text-lg font-bold mb-4">Descripción</h3>
-								<p>{roomsId?.description}</p>
+								<p>{hotelOnScreen?.description}</p>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div className="max-w-screen-lg mx-auto p-8 mt-8 overflow-hidden">
-					{roomsId ? (
+					{hotelOnScreen ? (
 						<div className="room-list transform transition duration-300">
 							<RoomList />
 						</div>

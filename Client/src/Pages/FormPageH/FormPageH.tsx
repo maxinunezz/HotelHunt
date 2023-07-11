@@ -79,7 +79,7 @@ export default function FormPageH() {
 					},
 					{
 						headers: {
-							authorization: `Bearer ${token[0]}`,
+							authorization: `Bearer ${token[1]}`,
 						},
 					}
 				);
