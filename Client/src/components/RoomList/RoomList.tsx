@@ -9,15 +9,13 @@ const RoomList = () => {
 	const { roomsHotelSelect, currentPage } = roomsStore((state) => ({
 		roomsHotelSelect: state.roomsHotelSelect,
 		currentPage: state.currentPage,
-	}));
-
-	const roomsHotelValid = roomsHotelSelect?.length;
-	
+	}));	
 
 	const totalRooms = roomsHotelSelect?.length;
 	const firstIndex = (currentPage - 1) * roomsPerPage;
 	const lastIndex = currentPage * roomsPerPage;
 	const currentRooms = roomsHotelSelect?.slice(firstIndex, lastIndex);
+	console.log(currentRooms);
 
 	return (
 		<div>

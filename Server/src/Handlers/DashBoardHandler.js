@@ -160,6 +160,9 @@ const createHotelByUser = async (req, res) => {
       return res.status(404).send("Hotel already exist");
     }
 
+    const photosArray = []
+    photosArray.push(photo);
+
     if (!hotel) {
       await Hotel.create({
         userId: id,
@@ -167,7 +170,7 @@ const createHotelByUser = async (req, res) => {
         description,
         country,
         city,
-        photo,
+        photo: photosArray,
         services,
         hotelCategory,
         roomsId: [],

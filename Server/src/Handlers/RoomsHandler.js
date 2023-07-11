@@ -15,11 +15,15 @@ const getAllRooms = async (req, res) => {
     data.forEach((room) => {
       const one_room = {
         id: room.id,
+        name: room.name,
         hotelId: room.hotelId,
         description: room.description,
         pax: room.pax,
+        photo: room.photo,
         services: room.services,
         price: room.price,
+        floorNumber: room.floorNumber,
+        disabled: room.disabled,
       };
       rooms_array.push(one_room);
     });

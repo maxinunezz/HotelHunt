@@ -8,10 +8,12 @@ interface Room {
 	name: string;
 	description: string;
 	services: string;
-	photo: string;
+	photo: string[];
 	pax: number;
 	hotelId: string;
 	price: string;
+	floorNumber: string;
+	disabled: boolean;
 }
 
 type States = {
@@ -41,7 +43,9 @@ export const roomsStore = create<States & Actions>((set) => ({
 	...initialState,
 
 	fetchRooms: async () => {
-		const { data } = await axios.get<Room[]>('http://localhost:3001/room');
+		console.log('estoy en roomsstore')
+		const { data } = await axios.get('http://localhost:3001/room');
+		console.log("este es tu identificador hdp" ,data)
 		if (data.length > 0) {
 			set((state) => ({
 				...state,
@@ -65,6 +69,7 @@ export const roomsStore = create<States & Actions>((set) => ({
 					}
 				}
 			}
+
 			set((state) => ({
 				...state,
 				roomsHotelSelect: arrayAux,
@@ -78,7 +83,6 @@ export const roomsStore = create<States & Actions>((set) => ({
 		const auxArray: Room[] = [];
 		return await axios.get(`http://localhost:3001/room`).then((response) => {
 			const allroomsAux = response.data;
-			console.log(allroomsAux);
 			for (let i = 0; i < allroomsAux?.length; i++) {
 				if (allroomsAux[i].id === roomId) {
 					auxArray.push(allroomsAux[i]);

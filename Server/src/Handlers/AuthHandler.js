@@ -32,6 +32,7 @@ const AuthHandler = async (req, res) => {
 
         const admin = user.admin;
         const data = {id: user.id, name: user.name, lastName: user.lastName, birthDate: user.birthDate, phoneNumber: user.phoneNumber }
+        console.log(token)
 
         return res.status(200).json({token, admin, data});
 

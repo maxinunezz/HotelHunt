@@ -9,7 +9,8 @@ export default function DashboardHeader() {
     const handleNavigate = () => navigate("/formHotel");
 
     const token = tokenStore((state) => state.userState)
-    const userSave = token[3]
+    const userSave = token[0]
+    console.log(token);
 
 
     return (
