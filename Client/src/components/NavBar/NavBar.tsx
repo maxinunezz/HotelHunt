@@ -10,7 +10,7 @@ export default function NavBar() {
 	const isLogged = tokenStore((state) => state.userState)
 	const { reset } = searchStore()
 	
-	const handleAllHotels = (element) => {
+	const handleAllHotels = (element:Event) => {
 		element.preventDefault()
 		reset()
 	}

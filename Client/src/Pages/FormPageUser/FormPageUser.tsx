@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import axios from 'axios';
 import { errorToast, successToast } from '../../components/toast';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 
 
 interface UserCreateValues {
@@ -47,7 +48,7 @@ const loginValidationSchema = yup.object().shape({
 
 const FormPageUser = () => {
   const [isCreated, setIsCreated] = useState(false);
-
+  const navigate = useNavigate()
   const handleSubmit = useCallback(
     async (values: UserCreateValues, helpers: FormikHelpers<UserCreateValues>) => {
       try {
@@ -67,6 +68,7 @@ const FormPageUser = () => {
         setIsCreated(true);
         successToast('Usuario creado con exito');
         console.log('data', data);
+        navigate('/')
       } catch (error) {
 
         errorToast('Hubo un error, intenta de nuevo');

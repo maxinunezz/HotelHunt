@@ -12,7 +12,7 @@ type States = {
 
 type Actions = {
 	fetchHotels: () => Promise<void>;
-	changeCurrentPage: (payload: number | boolean) => void;
+	setCurrentPage: (pageNum) => void;
 };
 
 const initialState: States = {
@@ -31,20 +31,12 @@ export const hotelStore = create<States & Actions>((set) => ({
 		set((state) => ({
 			...state,
 			hotels: data,
-			pageNumbers: calculatePageNumbers(data.length),
-			currentPage: 1,
 		}));
 	},
 
-	changeCurrentPage: (payload) => {
-		set((state) => ({
-			...state,
-			currentPage:
-				typeof payload === 'number'
-					? payload
-					: payload
-					? state.currentPage + 1
-					: state.currentPage - 1,
-		}));
+	setCurrentPage: (pageNum) => {
+		set(() => ({
+			currentPage: pageNum
+		}))
 	},
 }));
