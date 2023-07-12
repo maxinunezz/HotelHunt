@@ -9,6 +9,9 @@ import HotelPage from './Pages/HotelPage/HotelPage';
 import RoomPage from './Pages/RoomPage/RoomPage';
 import FormPageR from './Pages/FormPageR/ForrmPageR';
 import DashboardPageHotelDetail from './Pages/DashboardPage/DashboardPageHotelDetail';
+import ProfilePage from './Pages/ProfilePage/ProfilePage';
+import FarewellPage from './Pages/FarewellPage/FarewellPage';
+import AdminProfilePage from './Pages/ProfilePage/AdminProfilePage';
 
 function App() {
 	return (
@@ -16,6 +19,8 @@ function App() {
 			<Routes>
 				<Route path="/" element={<HomePage />}></Route>
 				<Route path="/login" element={<LogingPage />}></Route>
+				<Route path="/userprofile/:name" element={<ProfilePage />}></Route>
+				<Route path="/adminprofile/:name" element={<AdminProfilePage />}></Route>
 				<Route path="/dashboard" element={<DashBoardPage />}></Route>
 				<Route path="/dashboard/hoteldetail/:id" element={<DashboardPageHotelDetail />}></Route>
 				<Route path="/formHotel" element={<FormPageH />}></Route>
@@ -23,6 +28,7 @@ function App() {
 				<Route path="/usercreate" element={<FormPageUser />}></Route>
 				<Route path="/hotelpage/:id" element={<HotelPage />}></Route>
 				<Route path="/roompage/:id" element={<RoomPage />}></Route>
+				<Route path="/farewell" element={<FarewellPage />}></Route>
 			</Routes>
 		</div>
 	);

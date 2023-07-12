@@ -67,8 +67,9 @@ const FormPageUser = () => {
         );
         setIsCreated(true);
         successToast('Usuario creado con exito');
+        successToast('Por favor logueate');
         console.log('data', data);
-        navigate('/')
+        navigate(-1)
       } catch (error) {
 
         errorToast('Hubo un error, intenta de nuevo');

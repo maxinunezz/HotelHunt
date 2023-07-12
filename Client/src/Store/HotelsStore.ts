@@ -13,6 +13,8 @@ type States = {
 type Actions = {
 	fetchHotels: () => Promise<void>;
 	setCurrentPage: (pageNum) => void;
+	orderByNameASC: (array:Hotel[]) => void;
+	resetHotels: () => void;
 };
 
 const initialState: States = {
@@ -39,4 +41,25 @@ export const hotelStore = create<States & Actions>((set) => ({
 			currentPage: pageNum
 		}))
 	},
+	orderByNameASC: (array) => {
+		const arrayAux = array.sort(function(a,b) {
+			if (a.name > b.name) {
+				return 1
+			}
+			if (a.name < b.name) {
+				return -1
+			}
+			return 0
+		})
+		set((state) => ({
+			...state,
+			hotels: arrayAux,
+		}));
+	},
+
+	resetHotels: () => {
+		set(initialState);
+	},
+
+
 }));
