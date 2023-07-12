@@ -66,8 +66,7 @@ const FormPageUser = () => {
           }
         );
         setIsCreated(true);
-        successToast('Usuario creado con exito');
-        successToast('Por favor logueate');
+        successToast('Correo de confirmación enviado. Revisa tu email para continuar.');
         console.log('data', data);
         navigate(-1)
       } catch (error) {

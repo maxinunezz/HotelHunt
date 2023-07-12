@@ -32,6 +32,10 @@ module.exports = (sequelize) => {
         defaultValue: "normal",
         allowNull: false,
       },
+      disabled:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
     },
     { paranoid: true,
       deletedAt: 'destroyTime',
