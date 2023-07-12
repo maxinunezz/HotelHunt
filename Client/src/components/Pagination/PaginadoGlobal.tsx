@@ -25,18 +25,26 @@ export const PaginadoGlobal = ({elementsPerPage, elementToShow, pageSet, current
     const pageNumbers = getPageRange();     //Setea pagenumbers con los datos que recibe por parámetro en la funcion anterior
 
     return (
-        <nav className='flex justify-center'>
-          <ul className='list-none'>
-            {pageNumbers.map((number) => (
-              <li
-                className="w-100 text-center
-                {{ number === currentPage ? 'active' : '' }}"
-                key={number}
+      <nav className="flex justify-center">
+        <ul className="list-none flex">
+          {pageNumbers.map((number) => (
+            <li
+              className={`w-100 text-center ${
+                number === currentPage ? 'bg-blue-500 text-white' : 'bg-gray-200'
+              }`}
+              key={number}
+            >
+              <button
+                onClick={() => pageSet(number)}
+                className={`py-2 px-4 rounded ${
+                  number === currentPage ? 'font-bold' : 'font-normal'
+                }`}
               >
-                <a onClick={() => pageSet(number)}>{number}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      );
+                {number}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    );
 }
