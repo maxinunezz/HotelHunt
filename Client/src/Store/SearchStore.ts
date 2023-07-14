@@ -3,15 +3,18 @@ import { create } from 'zustand';
 
 type States = {
 	searchResults: any[];
+	currentPageSearch: number;
 };
 
 type Actions = {
 	fetchSearchResults: (data: {}) => Promise<void>;
+	setCurrentPageSearch: (newPages:any) => void;
 	reset: () => void;
 };
 
 const initialState: States = {
 	searchResults: [],
+	currentPageSearch: 1
 };
 
 export const searchStore = create<States & Actions>((set) => ({
@@ -34,6 +37,11 @@ export const searchStore = create<States & Actions>((set) => ({
 			console.error(error, "Server Error");
 		})
 		
+	},
+	setCurrentPageSearch: (pageNum) => {
+		set(() => ({
+			currentPageSearch: pageNum
+		}))
 	},
 
 	reset: () => {

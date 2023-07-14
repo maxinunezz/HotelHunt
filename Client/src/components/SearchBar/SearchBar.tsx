@@ -1,5 +1,5 @@
 import { MagnifyingGlass } from '@phosphor-icons/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useFetchHotels } from '../../hooks';
 import { Dropdown, Button, Input } from '@rewind-ui/core';
 import { searchStore } from '../../Store';
@@ -7,16 +7,21 @@ import { useStore } from 'zustand'
 
 
 const SearchBar = () => {
-	useFetchHotels();
-
 	const [input, setinput] = useState('');
 	const [selectedOption, setSelectedOption] = useState<string | undefined>();
 	const [data, setData] = useState({
 		criterion: "",
 		value: "",
 	})
-	const { fetchSearchResults } = searchStore()
-
+	const { fetchSearchResults, setCurrentPageSearch } = searchStore()
+	const searchResultsAux = searchStore((state) => state.searchResults)
+	console.log(searchResultsAux);
+	
+	useEffect(() => {
+		if(data.criterion !== "" && data.value !== "") {
+			fetchSearchResults(data);
+		}
+	}, [data])
 
 	const handleSearch = async (element) => {
 		element.preventDefault()
@@ -28,11 +33,10 @@ const SearchBar = () => {
 			criterion: selectedOption,
 			value: input,
 		})
-
-		await fetchSearchResults(data);
+		setCurrentPageSearch(1)
 
 	}
-
+	
 	// const handleChange = (selectedOption: string, input: string) => {
 	// 	let data = {
 	// 		selectedOption,
@@ -55,7 +59,7 @@ const SearchBar = () => {
 					<Button className="w-40 justify-center">{selectedOption ?? 'Buscar por'}</Button>
 				</Dropdown.Trigger>
 				<Dropdown.Content>
-					<Dropdown.Item className='w-20' onClick={() => setSelectedOption("city")}>
+					<Dropdown.Item className='w-20' onClick={() => setSelectedOption("country")}>
 						Pais
 					</Dropdown.Item>
 					<Dropdown.Item onClick={() => setSelectedOption("name")}>

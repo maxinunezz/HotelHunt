@@ -16,7 +16,7 @@ const Card: React.FC<CardProps> = ({
 	photo,
 }) => {
 	return (
-		<div className="bg-white min-h-[340px] rounded-md shadow-md flex">
+		<div className="bg-white min-h-[340px] max-h-[340px] rounded-md shadow-md flex">
 			<img
 				src={photo}
 				alt={name}

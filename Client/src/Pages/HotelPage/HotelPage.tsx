@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { hotelStore, roomsStore } from '../../Store';
 import { useFetchHotels, useHotelIdSetter } from '../../hooks';
 import RoomList from '../../components/RoomList/RoomList';
@@ -8,6 +8,7 @@ import { MapPinLine } from '@phosphor-icons/react'
 
 
 const HotelPage = () => {
+	const navigate = useNavigate()
 	const { id } = useParams();
 	const [hotelOnScreen, setroomsId] = useState([]);
 
@@ -32,6 +33,10 @@ const HotelPage = () => {
 		hotelIdSetter(hotelOnScreen?.roomsId);
 	}, [allHotels, hotelIdSetter, id]);
 
+	const handleBackButton = () => {
+		navigate(-1)
+	}
+
 	return (
 		<div className="bg-slate-600 h-screen flex flex-col overflow-hidden">
 			<NavBar />
@@ -47,6 +52,7 @@ const HotelPage = () => {
 								/>
 							</div>
 						</div>
+						
 						<div className="w-2/3">
 							<div className="bg-white p-6 rounded-lg shadow-lg">
 								<h2 className="text-3xl font-bold mb-4">🏨{hotelOnScreen?.name}</h2>
@@ -60,6 +66,7 @@ const HotelPage = () => {
 						</div>
 					</div>
 				</div>
+						<button onClick={()=>handleBackButton()} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Atrás</button>
 				<div className="max-w-screen-lg mx-auto p-8 mt-8 overflow-hidden">
 					{hotelOnScreen ? (
 						<div className="room-list transform transition duration-300">
