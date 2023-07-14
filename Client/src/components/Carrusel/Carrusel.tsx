@@ -18,8 +18,14 @@ export default function Carrusel() {
     };
 
     return (
-        <div className="flex justify-center items-center">
-            <Carousel containerClass="w-1/2" responsive={responsive} autoPlay autoPlaySpeed={3000} infinite>
+        <div className="flex justify-center items-center ">
+           <Carousel
+        containerClass="w-full max-w-5xl"
+        responsive={responsive}
+        autoPlay
+        autoPlaySpeed={3000}
+        infinite
+      >
                 <div className="flex justify-center items-center"><img src="https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_600,q_auto,w_600//itemimages/37/36/37363_v4.jpeg" /></div>
                 <div className="flex justify-center items-center"><img src="https://graziamagazine.com/mx/wp-content/uploads/sites/13/2022/11/On-The-Slope-Exterior-Shot-Ultima-Courchevel-Belvedere.jpg"/></div>
                 <div className="flex justify-center items-center"><img src="https://cf.bstatic.com/images/hotel/max600/511/51168179.jpg"/></div>

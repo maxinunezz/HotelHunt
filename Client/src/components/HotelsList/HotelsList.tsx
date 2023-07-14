@@ -42,7 +42,10 @@ const HotelList = () => {
 					<p className="bg-neutral-800">No hay hoteles</p>
 				)}
 			</div>
-			<PaginadoGlobal elementsPerPage={hotelsPerPage} elementToShow={hotels} pageSet={handlePaginadoHome} currentPage={currentPage} />
+			<PaginadoGlobal elementsPerPage={hotelsPerPage}
+				elementToShow={hotels}
+				pageSet={handlePaginadoHome}
+				currentPage={currentPage} />
 
 		</div>
 	);
