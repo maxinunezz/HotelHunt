@@ -1,4 +1,4 @@
-import { Bug, MaskHappy } from '@phosphor-icons/react';
+import { Bug, MaskHappy, SealWarning } from '@phosphor-icons/react';
 import { toast } from 'react-hot-toast';
 
 export const errorToast = (text: string) => {
@@ -28,6 +28,22 @@ export const successToast = (text: string) => {
 			fontWeight: 'bold',
 		},
 		icon: <MaskHappy size={32} />,
+		ariaProps: {
+			role: 'status',
+			'aria-live': 'polite',
+		},
+	});
+};
+export const reserveErrorToast = (text: string) => {
+	return toast(text, {
+		duration: 4000,
+		position: 'bottom-center',
+		style: {
+			backgroundColor: '#26a69a',
+			color: 'white',
+			fontWeight: 'bold',
+		},
+		icon: <SealWarning size={32} />,
 		ariaProps: {
 			role: 'status',
 			'aria-live': 'polite',

@@ -1,7 +1,7 @@
 const Stripe = require('stripe');
 const { Booking, Room, User, Auth } = require('../db');
 const { Op } = require('sequelize');
-const stripe = new Stripe('sk_test_51NRjhwAYwVhROlt981ggLGqQf8k4VDlAyhC9zuBPsKLeBP5NU95V76pm3yKU9ivW9e7RsBfEa8WJMcPyJ91hqNW600YkcHrnjL');
+const stripe = new Stripe('sk_test_51NTrfKHJDBCJMNrhc1URooDk9yKEJU0TONg60genqgT77WYcIyNQlhGdEa7Gn7pvado3D6WLIbXwDwKlGBitKNF000mPbEiXwv');
 const nodemailer = require('nodemailer');
 
 const createSession = async (req, res) => {
@@ -83,7 +83,7 @@ const createSession = async (req, res) => {
   
       return res.json({ sessionId, urlpago, booking });
     } catch (error) {
-      return res.status(500).send('Error al crear la sesión de pago');
+      return res.status(500).send( error);
     }
 };
 

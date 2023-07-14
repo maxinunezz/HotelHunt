@@ -11,6 +11,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { tokenStore } from '../../Store';
 import { string } from "yup";
 import { userStore } from "../../Store/UserStore";
+import { reserveErrorToast } from "../../components/toast";
+
 
 
   export interface ReserveBooking {
@@ -31,7 +33,7 @@ const RoomPage = () => {
     const [arrivalDate, setArrivalDate] = useState('');
     const [departureDate, setDepartureDate] = useState(null);
     const [date, setDate] = useState({in:'', out:''})
-    const [reserve, setReserve] = useState<ReserveBooking | null>(null);
+    const [reserve, setReserve] = useState<ReserveBooking[] | null>(null);
     const token = tokenStore((state) => state.userState)
     const room = roomsStore((state)=>state.rooms)
     const {reserveRoomPayment} = userStore()
@@ -102,8 +104,23 @@ const RoomPage = () => {
             price: roomRender.price
             
         };
-        setReserve(newReserve);
-        reserveRoomPayment(newReserve)
+        setReserve([newReserve]);
+
+
+
+        for(let i= 0; i<userReserve.length; i++){
+            if (userReserve[i].roomId===newReserve.roomId) {
+                console.log('esta room ya tiene una reserva activa');
+
+                reserveErrorToast('esta room ya tiene una reserva activa')
+                return
+            }
+        }
+
+        reserveRoomPayment([...userReserve,newReserve])
+
+        console.log(userReserve);
+        
         
         
     }

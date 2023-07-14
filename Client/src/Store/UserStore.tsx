@@ -9,7 +9,7 @@ type States = {
 };
 
 type Actions = {
-	reserveRoomPayment: (data: {}) => Promise<void>;
+	reserveRoomPayment: (data: []) => Promise<void>;
 	reset: () => void;
 };
 
@@ -23,9 +23,11 @@ export const userStore = create<States & Actions>((set) => ({
 	reserveRoomPayment: async (data) => {
 	try {
 
-        const arrayAux:[] = []
-        arrayAux.push(data)
-        set((state)=>  ({...state, reserves:arrayAux}))
+		console.log(data);
+		
+       
+        set((state)=>  ({...state,reserves:data}))
+		
         	
         		 
         		
