@@ -52,7 +52,7 @@ const LogingPage = () => {
 				)
 
 			} catch (error) {
-				errorToast('Hubo un error, intenta de nuevo');
+				errorToast(error.response.data 	);
 				console.log(error);
 
 			}
