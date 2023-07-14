@@ -6,6 +6,7 @@ import UserMenu from '../UserMenuDropDown/UserMenu';
 import AdminMenu from '../UserMenuDropDown/AdminMenu';
 import { Dropdown, Button, Input } from '@rewind-ui/core';
 import {useState} from "react"
+import CartComponent from '../CartComponent/CartComponent';
 
 
 export default function NavBar() {
@@ -68,7 +69,7 @@ export default function NavBar() {
 				</h1>
 
 			</div>
-
+			<CartComponent/>
 
 		</nav>
 	);
