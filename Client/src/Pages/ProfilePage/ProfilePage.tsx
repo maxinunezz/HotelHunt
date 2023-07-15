@@ -18,7 +18,7 @@ const ProfilePage = () => {
         <ProfileSideBar />
         <div className="w-3/4 mx-auto p-8">
           <h1 className="text-2xl font-bold mb-6 ml-4">Configuración de la cuenta</h1>
-          <h3 className="text-1 mt-5 mb-4 ml-4">Cuenta de Administrador</h3>
+          <h3 className="text-1 mt-5 mb-4 ml-4">Cuenta de Usuario</h3>
           <div className="bg-white rounded shadow p-6">
 
             {/* Formulario */}
@@ -35,7 +35,7 @@ const ProfilePage = () => {
               <input type="date" name="birthDate" className="h-11 w-full px-3 border border-solid rounded text-grey-900 text-l 2xl:rounded-sm border-grey-500" placeholder="dd/mm/aaaa" aria-invalid="false" value={user.dateOfBirth} />
             </label>
             <label className="block mb-4">
-              <span className="text-gray-700 font-semibold">Número de Contacto</span>
+              <span className="text-gray-700 font-semibold">Número de Teléfono</span>
               <input type="tel" name="phoneNumber" className="h-11 w-full px-3 border border-solid rounded text-grey-900 text-l 2xl:rounded-sm border-grey-500" placeholder="Ingresa tu número de teléfono" aria-invalid="false" value={user.phoneNumber} />
             </label>
             <div className="flex justify-between">
