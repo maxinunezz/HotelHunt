@@ -28,9 +28,6 @@ export const userStore = create<States & Actions>((set) => ({
        
         set((state)=>  ({...state,reserves:data}))
 		
-        	
-        		 
-        		
     } catch (error) {
         console.log(error)
     }

@@ -15,7 +15,7 @@ const SearchBar = () => {
 	})
 	const { fetchSearchResults, setCurrentPageSearch } = searchStore()
 	const searchResultsAux = searchStore((state) => state.searchResults)
-	console.log(searchResultsAux);
+
 	
 	useEffect(() => {
 		if(data.criterion !== "" && data.value !== "") {
