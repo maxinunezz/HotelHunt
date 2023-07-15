@@ -1,6 +1,4 @@
 import DashboardRow from "./DashboardRow";
-import { hotelStore } from "../../Store/HotelsStore";
-import { Hotel } from '../../models/hotel';
 import { useEffect, useState } from 'react'
 import { tokenStore } from "../../Store";
 import axios from "axios";

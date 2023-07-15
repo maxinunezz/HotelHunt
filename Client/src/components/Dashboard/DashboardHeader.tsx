@@ -9,14 +9,14 @@ export default function DashboardHeader() {
     const handleNavigate = () => navigate("/formHotel");
 
     const token = tokenStore((state) => state.userState)
-    const userSave = token[0]
+    const userSave = `${token[0].name} ${token[0].lastName}`
     console.log(token);
 
 
     return (
         <div className="flex items-center mb-2">
             <div className={titleClass}>
-                <h3>{userSave.name}</h3>
+                <h3>{userSave}</h3>
             </div>
             <div className="w-1 h-12 bg-slate-400 mx-2 rounded-xl" />
             <div className={titleClass}>
