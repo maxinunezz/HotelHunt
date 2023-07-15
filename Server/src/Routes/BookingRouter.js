@@ -1,12 +1,12 @@
 const { Router } = require("express");
 const { authMiddleware } = require("../Middleware/AuthMiddleware");
-const { createSession, obtenerIdSeccion } = require("../Handlers/BookingHandler")
+const { createBooking, obtenerIdSeccion } = require("../Handlers/BookingHandler")
 
 
 const BookingRouter = Router();
 
-BookingRouter.post("/reserva", createSession);
-BookingRouter.get("/obtener-informacion-sesion", obtenerIdSeccion);
+BookingRouter.post("/reserva", createBooking);
+BookingRouter.get("/obtener-informacion-sesion",authMiddleware, obtenerIdSeccion);
 BookingRouter.get("/success", );
 BookingRouter.get("/cancel",);
 

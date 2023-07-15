@@ -74,7 +74,7 @@ const ShoppingCartPage = () => {
         </div>
       )}
 
-      <button onClick={()=>navigate('/')} className="mt-4 inline-block underline">
+      <button onClick={()=>navigate(-1)} className="mt-4 inline-block underline">
         Continue Shopping
       </button>
     </div>

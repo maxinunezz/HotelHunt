@@ -11,11 +11,14 @@ import { useNavigate } from "react-router-dom";
 import { userStore } from "../../Store/UserStore";
 import { useState } from "react";
 import { roomsStore } from "../../Store/RoomsStores";
+import { tokenStore } from "../../Store";
 
 const CartComponent = () => {
   const navigate = useNavigate();
   const userReserve = userStore((state) => state.reserves);
+  const urlPayment = userStore((state) => state.urlPayment);
   const allRooms = roomsStore((state) => state.rooms);
+  const token = tokenStore((state) => state.userState);
 
   const calculateDays = (item) => {
     // Convertir las fechas a objetos Date
@@ -33,7 +36,7 @@ const CartComponent = () => {
     return differenceInDays;
   };
 
-  const { reserveRoomPayment } = userStore();
+  const { reserveRoomPayment, roomPayment, reset} = userStore();
 
   const [cartItems, setCartItems] = useState(userReserve); // Aquí se almacenarán los elementos del carrito
   const [totalPay, setTotalPay] = useState([])
@@ -43,6 +46,8 @@ const CartComponent = () => {
 
     reserveRoomPayment(newArray);
     setCartItems(newArray);
+  
+    
   };
 
   const calculateTotalPay = ()=>{
@@ -83,7 +88,30 @@ const CartComponent = () => {
       }
     }
   };
-  for (let i = 0; i < userReserve.length; i++) {}
+  
+  const handleCheckout = () => {
+    if (userReserve.length === 0) {
+      return alert('Agregar habitación');
+    }
+  
+    const data = {
+      userId: token[0].id,
+      roomsToReserve: userReserve
+    };
+    console.log(data);
+  
+    roomPayment(data);
+  
+    // Redireccionar a la URL externa en una nueva pestaña
+    window.open(urlPayment, '_blank');
+
+    reset()
+
+  };
+
+ console.log(urlPayment);
+    
+
   return (
     <div>
       <Dropdown
@@ -99,7 +127,9 @@ const CartComponent = () => {
         <Dropdown.Trigger>
           <Button>
             <ShoppingCart size={30} weight="duotone" className="mr-1.5" />
-            Cart
+            Cart ({
+              userReserve.length
+            })
           </Button>
         </Dropdown.Trigger>
         <Dropdown.Content>
@@ -147,10 +177,11 @@ const CartComponent = () => {
           </Dropdown.Label>
           <Dropdown.Divider />
           <Dropdown.Item
+          onClick={handleCheckout}
             color="green"
             className="flex justify-center items-center"
           >
-            <Money size={20} weight="duotone" className="mr-1.5" />
+            <Money size={20} weight="duotone" className="mr-1.5"  />
             Checkout
           </Dropdown.Item>
           <Dropdown.Divider />

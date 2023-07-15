@@ -4,153 +4,131 @@ const { Op } = require('sequelize');
 const stripe = new Stripe('sk_test_51NTrfKHJDBCJMNrhc1URooDk9yKEJU0TONg60genqgT77WYcIyNQlhGdEa7Gn7pvado3D6WLIbXwDwKlGBitKNF000mPbEiXwv');
 const nodemailer = require('nodemailer');
 
-const createSession = async (req, res) => {
-    try {
-      const roomId = req.body.roomId;
-      // console.log(roomId);
-  
-      const room = await Room.findByPk(roomId);
-      if (!room) {
-        return res.status(404).json({ error: 'Habitación no encontrada.' });
+async function createBooking(req, res) {
+  try {
+    const { userId } = req.body;
+    const { roomsToReserve } = req.body;
+    
+
+    if (!roomsToReserve || !Array.isArray(roomsToReserve) || roomsToReserve.length === 0) {
+      return res.status(400).json({ error: "No rooms to reserve provided" });
+    }
+
+    const bookings = [];
+
+    const rooms = await Promise.all(
+      roomsToReserve.map(async (room) => {
+        const roomDetails = await Room.findByPk(room.roomId);
+        return {
+          ...room,
+          name: roomDetails.name,
+          price: roomDetails.price,
+        };
+      })
+    );
+
+    const isRoomAlreadyReserved = async (roomId, checkin, checkout) => {
+      const existingBooking = await Booking.findOne({
+        where: {
+          roomId,
+          checkin: {
+            [Op.lt]: checkout,
+          },
+          checkout: {
+            [Op.gt]: checkin,
+          },
+        },
+      });
+
+      return existingBooking !== null;
+    };
+
+
+
+    for (const room of rooms) {
+      const { roomId, checkin, checkout, amount, name, price } = room;
+
+      const isReserved = await isRoomAlreadyReserved(roomId, checkin, checkout);
+      if (isReserved) {
+        return res.status(400).json({ error: `Room with ID ${roomId} is already reserved for the selected dates` });
       }
-  
-      const checkinDate = new Date(req.body.checkin);
-      const checkoutDate = new Date(req.body.checkout);
-  
-      const formattedCheckin = checkinDate.toISOString().split('T')[0];
-      const formattedCheckout = checkoutDate.toISOString().split('T')[0];
-  
-      // const existingBooking = await Booking.findOne({
-      //   where: {
-      //     roomId: roomId,
-      //     userId: req.body.userId,
-      //     [Op.or]: [
-      //       {
-      //         checkin: { [Op.between]: [formattedCheckin, formattedCheckout] },
-      //       },
-      //       {
-      //         checkout: { [Op.between]: [formattedCheckin, formattedCheckout] },
-      //       },
-      //       {
-      //         [Op.and]: [
-      //           { checkin: { [Op.lte]: formattedCheckin } },
-      //           { checkout: { [Op.gte]: formattedCheckout } },
-      //         ],
-      //       },
-      //     ],
-      //   },
-      // });
-      
-      // if (existingBooking) {
-      //   return res
-      //     .status(400)
-      //     .json({ error: 'Ya existe una reserva para esta habitación en las fechas indicadas.' });
-      // }
-  
-      const unitAmount = Math.round(room.price * 100 * 0.1);
 
       const booking = await Booking.create({
-        checkin: formattedCheckin,
-        checkout: formattedCheckout,
-        roomId: roomId,
-        userId: req.body.userId,
-        paymentStatus: 'outstanding',
+        roomId,
+        userId,
+        checkin,
+        checkout,
+        paymentStatus: "unpaid",
       });
-  
-      const session = await stripe.checkout.sessions.create({
-        line_items: [
-          {
-            price_data: {
-              currency: 'usd',
-              unit_amount: unitAmount,
-              product_data: {
-                name: 'Reserva de habitación',
-                description: `Reserva de la habitación ${room.name}`,
-              },
-            },
-            quantity: 1,
-          },
-        ],
-        mode: 'payment',
-        success_url: 'http://localhost:5173/',
-        cancel_url: 'http://localhost:3001/booking/cancel',
-      });
-      const urlpago = session.url;
-      const sessionId = session.id;
 
-      confirmationEmail(req.body.userId, room.name)
-      // console.log(confirmationEmail);
-  
-      return res.json({ sessionId, urlpago, booking });
-    } catch (error) {
-      return res.status(500).send( error);
+      bookings.push(booking);
     }
-};
 
+    const calculateDays = (item) => {
 
+      const checkinDate = new Date(item.checkin);
+      const checkoutDate = new Date(item.checkout);
 
-const CUSTOMERS = [{stripeId: "cus_123456789", email: "jenny.rosen@example.com"}];
+      const differenceInMs = checkoutDate.getTime() - checkinDate.getTime();
+      const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
 
-const PRICES = {basic: "price_123456789", professional: "price_987654321"};
+      return differenceInDays;
+    };
 
-const sendInvoice = async function (email) {
-
-  let customer = CUSTOMERS.find(c => c.email === email);
-  let customerId;
-  if (!customer) {
-    customer = await stripe.customers.create({
-      email,
-      description: 'Customer to invoice',
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: rooms.map((room) => ({
+        price_data: {
+          currency: 'usd',
+          unit_amount: room.price * calculateDays(room) * 100,
+          product_data: {
+            name: room.name,
+          },
+        },
+        quantity: 1,
+      })),
+      mode: 'payment',
+      success_url: 'https://example.com/success',
+      cancel_url: 'https://example.com/cancel',
     });
 
-    CUSTOMERS.push({stripeId: customer.id, email: email});
-    customerId = customer.id;
-  } else {
-  
-    customerId = customer.stripeId;
+    const sessionId = session.id;
+    const urlpago = session.url;
+    await confirmationEmail(req.body.userId, urlpago, rooms.name, req.body.checkin, req.body.checkout);
+
+    res.status(200).json({ sessionId, urlpago, bookings });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
+}
+
+
+
 
   
-  const invoice = await stripe.invoices.create({
-    customer: customerId,
-    collection_method: 'send_invoice',
-    days_until_due: 30,
-  });
 
-  // Create an Invoice Item with the Price, and Customer you want to charge
-  const invoiceItem = await stripe.invoiceItems.create({ 
-    customer: customerId,
-    price: PRICES.basic,
-    invoice: invoice.id
-  });
-
-  await stripe.invoices.sendInvoice(invoice.id);
-};
-  
-
-const confirmationEmail = async (userId, roomName) => {
+const confirmationEmail = async (userId, urlpago, roomName, checkin, checkout) => {
   try {
-
     const getUserEmail = async (userId) => {
       const authUser = await Auth.findOne({
         where: { userId },
-        include: [{ model: User, attributes: ['email'] }]
+        attributes: ['email']
       });
-    
-      if (authUser && authUser.User) {
-        return authUser.User.email;
+
+      if (authUser) {
+        return authUser.email;
       } else {
         throw new Error('Usuario no encontrado');
       }
     };
-    
+
     const userEmail = await getUserEmail(userId);
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: 'hotelhuntservices@gmail.com',
-        pass: 'Hostalpf8'
+        pass: 'jxovkrctxiokhbwj'
       }
     });
 
@@ -158,7 +136,10 @@ const confirmationEmail = async (userId, roomName) => {
       from: 'hotelhuntservices@gmail.com',
       to: userEmail,
       subject: 'Confirmación de la reserva',
-      text: `¡Gracias por reservar la habitación! Su reserva para la habitación ${roomName} ha sido confirmada.`,
+      text: `¡Gracias por reservar la habitación: 🛏️🛏️ ${roomName}!
+      La fecha de entrada es: ${checkin} y la de salida es: ${checkout}
+      En caso de no haber realizado el pago haga click en el siguente link: ${urlpago}.
+      ¡Gracias por elegir HotelHunt!`,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -169,7 +150,7 @@ const confirmationEmail = async (userId, roomName) => {
       }
     });
   } catch (error) {
-    console.log("Error en el servidor");
+    console.log('Error en el servidor');
   }
 };
 
@@ -188,7 +169,7 @@ const obtenerIdSeccion = async (req, res) => {
 };
 
 module.exports = {
-    createSession,
+  createBooking,
     obtenerIdSeccion,
     confirmationEmail
 };

@@ -22,7 +22,7 @@ export interface ReserveBooking {
   roomId: string;
   checkin: string;
   checkout: string;
-  userId: string;
+ 
   price: string;
 }
 
@@ -110,7 +110,7 @@ const RoomPage = () => {
       roomId: id,
       checkin: date.in,
       checkout: date.out,
-      userId: token[0].id,
+     
       price: roomRender.price,
     };
 
@@ -126,7 +126,7 @@ const RoomPage = () => {
     setReserve([newReserve]);
 
 
-
+//Arreglar poder reservare la misma habitacion en distinta fecha
     for (let i = 0; i < userReserve.length; i++) {
       if (userReserve[i].roomId === newReserve.roomId) {
         console.log("esta room ya tiene una reserva activa");
@@ -138,8 +138,10 @@ const RoomPage = () => {
 
     reserveRoomPayment([...userReserve, newReserve]);
     reserveSuccessToast("Habitacion Reservada");
+  
+    
   };
-
+  console.log(userReserve);
  
 
   return (
