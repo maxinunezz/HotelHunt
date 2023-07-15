@@ -89,7 +89,7 @@ const CartComponent = () => {
     }
   };
   
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (userReserve.length === 0) {
       return alert('Agregar habitación');
     }
@@ -100,16 +100,17 @@ const CartComponent = () => {
     };
     console.log(data);
   
-    roomPayment(data);
+   await roomPayment(data);
   
     // Redireccionar a la URL externa en una nueva pestaña
-    window.open(urlPayment, '_blank');
+   navigate('/paymenttransition')
 
-    reset()
+  //  reset() //esta linea resetea el estado global del carrito  porque la app aun no tiene respuesta del pago
 
   };
+ 
 
- console.log(urlPayment);
+
     
 
   return (
