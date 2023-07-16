@@ -14,6 +14,7 @@ interface Room {
 	price: string;
 	floorNumber: string;
 	disabled: boolean;
+	hotelCategory: string;
 }
 
 type States = {
