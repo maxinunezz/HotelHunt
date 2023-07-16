@@ -87,201 +87,226 @@ const FormPageUser = () => {
   );
 
   return (
-    <div className="bg-slate-600 flex items-center h-screen justify-center">
-      <div className="bg-gray-800 p-8 rounded-md w-[600px]">
-        <Formik
-          initialValues={{
-            name: '',
-            lastName: '',
-            birthDate: '',
-            phoneNumber: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-            admin: false
-          }}
-          onSubmit={handleSubmit}
-          validationSchema={loginValidationSchema}
-        >
-          {({ values, errors, submitForm, setFieldValue }) => (
-            <Form className="space-y-4 h-[700px] overflow-y-auto">
-              <div className="flex flex-col">
-                <FormControl
-                  validation={
-                    values.name.length === 0
-                      ? 'none'
-                      : errors.name
-                        ? 'invalid'
-                        : 'valid'
-                  }
-                >
-                  <FormControl.Label className="text-white">Nombre</FormControl.Label>
-                  <FormControl.Input
-                    type="text"
-                    placeholder="Nombre"
-                    onChange={(event) => {
-                      setFieldValue('name', event.target.value);
-                    }}
-                    value={values.name}
-                    className="bg-white rounded-md py-2 px-4"
-                  />
-                  <FormControl.Text className="text-red-500">
-                    {errors.name}
-                  </FormControl.Text>
-                </FormControl>
-              </div>
+    <div className="bg-blue-500 flex items-center h-screen justify-center">
+      <div className="flex w-full justify-center">
+        <div className="bg-white w-[600px] rounded-md p-8">
+          <h1 className="text-5xl text-center text-gray-800 font-bold mt-10">
+            Bienvenido al registro de
+            <br />
+            <span className="text-5xl text-blue-500 font-extrabold tracking-wider">
+              HOTELHUNT
+            </span>
+          </h1>
+          <p className="text-lg text-center text-gray-600 mt-10 font-bold">
+            Descubre una experiencia única en el mundo de los viajes.
+            Regístrate en HOTELHUNT y disfruta de las siguientes ventajas:
+          </p>
+          <ul className="text-lg text-gray-600 mt-10 list-disc list-inside">
+            <li className="mb-2">Acceso exclusivo a ofertas y descuentos especiales.✨</li>
+            <li className="mb-2">Posibilidad de publicar y gestionar tu propio hotel.✨</li>
+            <li className="mb-2">Reservas sencillas y rápidas.✨</li>
+            <li className="mb-2">Recomendaciones personalizadas según tus preferencias.✨</li>
+            <li className="mb-2">Soporte y atención al cliente dedicados.✨</li>
+          </ul>
+        </div>
+        <div className="bg-gray-800 p-8 rounded-md w-[500px]">
+          <Formik
+            initialValues={{
+              name: '',
+              lastName: '',
+              birthDate: '',
+              phoneNumber: '',
+              email: '',
+              password: '',
+              confirmPassword: '',
+              admin: false
+            }}
+            onSubmit={handleSubmit}
+            validationSchema={loginValidationSchema}
+          >
+            {({ values, errors, submitForm, setFieldValue }) => (
+              <Form className="space-y-4 h-[530px]">
+                <div className="flex space-x-4">
+                  <div className="w-1/2">
+                    <FormControl
+                      validation={
+                        values.name.length === 0
+                          ? 'none'
+                          : errors.name
+                            ? 'invalid'
+                            : 'valid'
+                      }
+                    >
+                      <FormControl.Label className="text-white">Nombre</FormControl.Label>
+                      <FormControl.Input
+                        type="text"
+                        placeholder="Nombre"
+                        onChange={(event) => {
+                          setFieldValue('name', event.target.value);
+                        }}
+                        value={values.name}
+                        className="bg-white rounded-md py-2 px-4"
+                      />
+                      <FormControl.Text className="text-red-500">
+                        {errors.name}
+                      </FormControl.Text>
+                    </FormControl>
+                  </div>
 
-              <div className="flex flex-col">
-                <FormControl>
-                  <FormControl.Label className="text-white">
-                    Apellido
-                  </FormControl.Label>
-                  <FormControl.Input
-                    type="text"
-                    placeholder="Apellido"
-                    onChange={(event) => {
-                      setFieldValue('lastName', event.target.value);
-                    }}
-                    value={values.lastName}
-                    className="bg-white rounded-md py-2 px-4"
-                  />
-                  <FormControl.Text className="text-red-500">
-                    {errors.lastName}
-                  </FormControl.Text>
-                </FormControl>
-              </div>
+                  <div className="w-1/2">
+                    <FormControl>
+                      <FormControl.Label className="text-white">
+                        Apellido
+                      </FormControl.Label>
+                      <FormControl.Input
+                        type="text"
+                        placeholder="Apellido"
+                        onChange={(event) => {
+                          setFieldValue('lastName', event.target.value);
+                        }}
+                        value={values.lastName}
+                        className="bg-white rounded-md py-2 px-4"
+                      />
+                      <FormControl.Text className="text-red-500">
+                        {errors.lastName}
+                      </FormControl.Text>
+                    </FormControl>
+                  </div>
+                </div>
 
-              <div className="flex flex-col">
-                <FormControl>
-                  <FormControl.Label className="text-white">
-                    Fecha de nacimiento
-                  </FormControl.Label>
-                  <FormControl.Input
-                    type="date"
-                    placeholder="Fecha de nacimiento"
-                    onChange={(event) => {
-                      setFieldValue('birthDate', event.target.value);
-                    }}
-                    value={values.birthDate}
-                    className="bg-white rounded-md py-2 px-4"
-                  />
-                  <FormControl.Text className="text-red-500">
-                    {errors.birthDate}
-                  </FormControl.Text>
-                </FormControl>
-              </div>
+                <div className="flex space-x-4">
+                  <div className="w-1/2">
+                    <FormControl>
+                      <FormControl.Label className="text-white">
+                        Fecha de nacimiento
+                      </FormControl.Label>
+                      <FormControl.Input
+                        type="date"
+                        placeholder="Fecha de nacimiento"
+                        onChange={(event) => {
+                          setFieldValue('birthDate', event.target.value);
+                        }}
+                        value={values.birthDate}
+                        className="bg-white rounded-md py-2 px-4"
+                      />
+                      <FormControl.Text className="text-red-500">
+                        {errors.birthDate}
+                      </FormControl.Text>
+                    </FormControl>
+                  </div>
 
-              <div className="flex flex-col">
-                <FormControl>
-                  <FormControl.Label className="text-white">
-                    Fono de contacto
-                  </FormControl.Label>
-                  <FormControl.Input
-                    type="text"
-                    placeholder="Fono de contacto"
-                    onChange={(event) => {
-                      setFieldValue('phoneNumber', event.target.value);
-                    }}
-                    value={values.phoneNumber}
-                    className="bg-white rounded-md py-2 px-4"
-                  />
-                  <FormControl.Text className="text-red-500">
-                    {errors.phoneNumber}
-                  </FormControl.Text>
-                </FormControl>
-              </div>
+                  <div className="w-1/2">
+                    <FormControl>
+                      <FormControl.Label className="text-white">
+                        Fono de contacto
+                      </FormControl.Label>
+                      <FormControl.Input
+                        type="text"
+                        placeholder="Fono de contacto"
+                        onChange={(event) => {
+                          setFieldValue('phoneNumber', event.target.value);
+                        }}
+                        value={values.phoneNumber}
+                        className="bg-white rounded-md py-2 px-4"
+                      />
+                      <FormControl.Text className="text-red-500">
+                        {errors.phoneNumber}
+                      </FormControl.Text>
+                    </FormControl>
+                  </div>
+                </div>
 
-              <div className="flex flex-col">
-                <FormControl>
-                  <FormControl.Label className="text-white">Email</FormControl.Label>
-                  <FormControl.Input
-                    type="email"
-                    placeholder="Email"
-                    onChange={(event) => {
-                      setFieldValue('email', event.target.value);
-                    }}
-                    value={values.email}
-                    className="bg-white rounded-md py-2 px-4"
-                  />
-                  <FormControl.Text className="text-red-500">
-                    {errors.email}
-                  </FormControl.Text>
-                </FormControl>
-              </div>
+                <div className="flex space-x-4">
+                  <div className="w-1/2">
+                    <FormControl>
+                      <FormControl.Label className="text-white">Email</FormControl.Label>
+                      <FormControl.Input
+                        type="email"
+                        placeholder="Email"
+                        onChange={(event) => {
+                          setFieldValue('email', event.target.value);
+                        }}
+                        value={values.email}
+                        className="bg-white rounded-md py-2 px-4"
+                      />
+                      <FormControl.Text className="text-red-500">
+                        {errors.email}
+                      </FormControl.Text>
+                    </FormControl>
+                  </div>
 
-              <div className="flex flex-col">
-                <FormControl>
-                  <FormControl.Label className="text-white">
-                    Contraseña
-                  </FormControl.Label>
-                  <FormControl.Input
-                    type="password"
-                    placeholder="Contraseña"
-                    onChange={(event) => {
-                      setFieldValue('password', event.target.value);
-                    }}
-                    value={values.password}
-                    className="bg-white rounded-md py-2 px-4"
-                  />
-                  <FormControl.Text className="text-red-500">
-                    {errors.password}
-                  </FormControl.Text>
+                  <div className="w-1/2">
+                    <FormControl>
+                      <FormControl.Label className="text-white">
+                        Contraseña
+                      </FormControl.Label>
+                      <FormControl.Input
+                        type="password"
+                        placeholder="Contraseña"
+                        onChange={(event) => {
+                          setFieldValue('password', event.target.value);
+                        }}
+                        value={values.password}
+                        className="bg-white rounded-md py-2 px-4"
+                      />
+                      <FormControl.Text className="text-red-500">
+                        {errors.password}
+                      </FormControl.Text>
+                    </FormControl>
+                    <FormControl.Label className="text-white">
+                      Confirmar contraseña
+                    </FormControl.Label>
+                    <FormControl.Input
+                      type="password"
+                      placeholder="Confirmar contraseña"
+                      onChange={(event) => {
+                        setFieldValue('confirmPassword', event.target.value);
+                      }}
+                      value={values.confirmPassword}
+                      className="bg-white rounded-md py-2 px-4"
+                    />
+                    <FormControl.Text className="text-red-500">
+                      {errors.confirmPassword}
+                    </FormControl.Text>
+                  </div>
+                </div>
 
-                </FormControl>
-                <FormControl.Label className="text-white">
-                  Confirmar contraseña
-                </FormControl.Label>
-                <FormControl.Input
-                  type="password"
-                  placeholder="Confirmar contraseña"
-                  onChange={(event) => {
-                    setFieldValue('confirmPassword', event.target.value);
-                  }}
-                  value={values.confirmPassword}
-                  className="bg-white rounded-md py-2 px-4"
-                />
-                <FormControl.Text className="text-red-500">
-                  {errors.confirmPassword}
-                </FormControl.Text>
-              </div>
-
-
-
-              <div className="flex flex-col">
-                <FormControl>
-                  <FormControl.Label className="text-white text-center">
+                <div className="flex justify-center">
+                  <FormControl.Label className="text-white items-center">
                     Quiero publicar mi hotel
                   </FormControl.Label>
-                  <FormControl.Input
-                    type="checkbox"
-                    onChange={(event) => {
-                      setFieldValue('admin', event.target.checked);
-                    }}
-                    value={values.admin}
-                    className="bg-white rounded-md py-2 px-4"
-                  />
-                  <FormControl.Text className="text-red-500">
-                    {errors.admin}
-                  </FormControl.Text>
-                </FormControl>
-              </div>
+                  <div className="flex items-center ml-2">
+                    <FormControl.Input
+                      type="checkbox"
+                      onChange={(event) => {
+                        setFieldValue('admin', event.target.checked);
+                      }}
+                      value={values.admin}
+                      className="form-checkbox w-6 h-6 text-blue-500"
+                    />
+                  </div>
+                </div>
 
-              <div className="flex items-center justify-center">
-                <Button
-                  color="blue"
-                  type="submit"
-                  disabled={Object.keys(errors).length > 0}
-                  className="py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                >
-                  Registrarse
-                </Button>
-              </div>
-            </Form>
-          )}
-        </Formik>
+                <div className="flex items-center justify-center">
+                  <Button
+                    color="blue"
+                    type="submit"
+                    disabled={Object.keys(errors).length > 0}
+                    className="py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                  >
+                    Registrarse
+                  </Button>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </div>
       </div>
     </div>
   );
+
+
+
 
 }
 
