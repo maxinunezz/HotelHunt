@@ -1,5 +1,20 @@
 const { User, Auth, conn } = require("../db");
 const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
+const jwt = require('jsonwebtoken');
+require("dotenv").config();
+
+const { PASSMAIL, COMPANYMAIL, JWT_SECRET } = process.env;
+
+const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: COMPANYMAIL,
+      pass: PASSMAIL,
+    }
+});
 
 const createUserForEmail = async (req, res) => {
   try {
@@ -31,6 +46,7 @@ const createUserForEmail = async (req, res) => {
         birthDate,
         phoneNumber,
         admin: adminvalue,
+        disabled: true,
       });
 
       const authcreate = await Auth.create({
@@ -38,9 +54,26 @@ const createUserForEmail = async (req, res) => {
         password: hashedpass,
         userId: usercreate.id,
       });
+      
+      const token = jwt.sign({email: authcreate.email }, JWT_SECRET, { expiresIn: '1h' });
+      const verificationLink = `http://localhost:3001/user/confirmEmail/${token}`
+
+
       await usercreate.reload();
 
       await Promise.all([usercreate, authcreate]);
+
+    await transporter.sendMail({
+      from: `"Hotel Hunt"  <${COMPANYMAIL}>`, 
+      to: email, 
+      subject: "CONFIRM YOUR ACCOUNT", 
+      html: `
+      <b>Please click on the following link to confirm your account:</b>
+      ,<a href="${verificationLink}">${verificationLink}</a>
+      <b> Link expires in 1 hr <b>
+      `, 
+    });
+
 
       return res.status(201).send("Successfull");
     } else {

@@ -7,6 +7,7 @@ import gif from './gif.gif'
 import { tokenStore } from '../../Store';
 import { errorToast, successToast } from '../../components/toast';
 import axios from 'axios';
+import GoogleSignInButton from '../../components/Google/GoogleSignIn';
 
 interface LoginValues {
 	email: string;
@@ -25,6 +26,11 @@ const loginValidationSchema = yup.object().shape({
 const LogingPage = () => {
 	const navigate = useNavigate()
 	const userInfoState = tokenStore((state) => state.userState)
+	const CLIENT_GOOGLE_ID = import.meta.env.VITE_CLIENT_GOOGLE_ID;
+	const URL = import.meta.env.VITE_URL;
+	const endpoint = URL + (`/user/google_singin`);
+
+
 
 	const { saveInfo } = tokenStore();
 	const handleSubmit = useCallback(
@@ -32,7 +38,7 @@ const LogingPage = () => {
 			try {
 				console.log('values', values);
 				const arrayAux: [] = [];
-				return await axios.post('http://localhost:3001/user/auth', values).then((response) => {
+				return await axios.post(`${URL}/user/auth`, values).then((response) => {
 					if (response.data) {
 						const tokenRaw = response.data.token
 						const statusadmin = response.data.admin
@@ -44,8 +50,8 @@ const LogingPage = () => {
 						arrayAux.push(logeado)
 						saveInfo(arrayAux)
 					}
-					console.log("values",values);
-					
+					console.log("values", values);
+
 					successToast('Usuario logeado correctamente');
 					navigate('/')
 				}
@@ -73,9 +79,9 @@ const LogingPage = () => {
 					userInfoState.length === 0 ?
 						<div className="bg-green-700 flex m-10 p-5 space-x-1 rounded-md ">
 							<h1 className="text-white ">Ingresa como </h1>
-							
-								<button onClick={() => navigate('/')} className="mr-2">invitado</button>
-							
+
+							<button onClick={() => navigate('/')} className="mr-2">invitado</button>
+
 						</div>
 						:
 						<div className="bg-green-700 flex m-10 p-5 space-x-1 rounded-md ">
@@ -156,21 +162,20 @@ const LogingPage = () => {
 							)}
 						</Formik>
 					</div>
+					<GoogleSignInButton clientID={CLIENT_GOOGLE_ID} endpoint={endpoint} />
 
 					<div className="bg-slate-400 flex m-10 p-5 space-x-1 rounded-md ">
 						<h1 className="text-white ">No tienes cuenta? Registrate</h1>
-						
-							<button onClick={()=>navigate('/usercreate')} className="mr-2">aquí</button>
-						
-					</div>
 
+						<button onClick={() => navigate('/usercreate')} className="mr-2">aquí</button>
+
+					</div>
 				</div>)
 					:
-					(<div className="bg-gray-800 w-[35%] flex flex-col items-center justify-center">Test</div>)				
-					
+					(<div className="bg-gray-800 w-[35%] flex flex-col items-center justify-center">Test</div>)
+
 
 			}
-
 
 		</div>
 	);

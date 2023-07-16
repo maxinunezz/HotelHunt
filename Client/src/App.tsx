@@ -14,6 +14,7 @@ import FarewellPage from './Pages/FarewellPage/FarewellPage';
 import AdminProfilePage from './Pages/ProfilePage/AdminProfilePage';
 import RoomFilter from './Pages/RoomFilter/RoomFilter';
 
+
 function App() {
 	return (
 		<div id="app">
@@ -31,7 +32,6 @@ function App() {
 				<Route path="/roompage/:id" element={<RoomPage />}></Route>
 				<Route path="/farewell" element={<FarewellPage />}></Route>
 				<Route path="/roomSearch" element={<RoomFilter />}></Route>
-
 
 			</Routes>
 		</div>
