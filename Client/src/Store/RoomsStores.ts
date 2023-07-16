@@ -14,6 +14,7 @@ interface Room {
 	price: string;
 	floorNumber: string;
 	disabled: boolean;
+	hotelCategory: string;
 }
 
 type States = {
@@ -45,7 +46,6 @@ export const roomsStore = create<States & Actions>((set) => ({
 	fetchRooms: async () => {
 		console.log('estoy en roomsstore')
 		const { data } = await axios.get('http://localhost:3001/room');
-		console.log("este es tu identificador hdp" ,data)
 		if (data.length > 0) {
 			set((state) => ({
 				...state,

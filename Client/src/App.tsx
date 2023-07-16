@@ -12,7 +12,7 @@ import DashboardPageHotelDetail from './Pages/DashboardPage/DashboardPageHotelDe
 import ProfilePage from './Pages/ProfilePage/ProfilePage';
 import FarewellPage from './Pages/FarewellPage/FarewellPage';
 import AdminProfilePage from './Pages/ProfilePage/AdminProfilePage';
-import ConfirmPage from './Pages/ConfirmEmailPage/ConfirmEmail';
+import RoomFilter from './Pages/RoomFilter/RoomFilter';
 
 
 function App() {
@@ -31,7 +31,8 @@ function App() {
 				<Route path="/hotelpage/:id" element={<HotelPage />}></Route>
 				<Route path="/roompage/:id" element={<RoomPage />}></Route>
 				<Route path="/farewell" element={<FarewellPage />}></Route>
-				<Route path="/confirmPage/" element={<ConfirmPage />}></Route>
+				<Route path="/roomSearch" element={<RoomFilter />}></Route>
+
 			</Routes>
 		</div>
 	);
