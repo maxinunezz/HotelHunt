@@ -84,11 +84,7 @@ const FormPageR: React.FC = () => {
 			}
 
 			const response = await axios.post('http://localhost:3001/room', formData);
-			console.log('data', response.data);
-
-			console.log('Formulario enviado con éxito.');
-
-			// Reinicia los campos del formulario después de enviarlo
+			
 			resetForm();
 		} catch (error) {
 			console.log('Hubo un error:', error);

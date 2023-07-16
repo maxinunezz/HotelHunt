@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 
 export default function NavbarDetail() {
+    const navigate = useNavigate();
     return (
         <nav className="bg-gray-900 p-4">
             <div className="flex items-center">
@@ -17,17 +19,17 @@ export default function NavbarDetail() {
                 </div>
             </div>
             <ul className="flex">
-                <li className="mr-4">
-                    <a href="#" className="text-white">Inicio</a>
+                <li className="mr-4 text-white">
+                    <a onClick={() => navigate('/')} className="text-white">Inicio</a>
                 </li>
-                <li className="mr-4">
-                    <a href="#" className="text-white">Servicios</a>
+                <li className="mr-4 text-white">
+                    <a onClick={() => navigate('/')} className="text-white">Servicios</a>
                 </li>
-                <li className="mr-4">
-                    <a href="#" className="text-white">Reservas</a>
+                <li className="mr-4 text-white">
+                    <a onClick={() => navigate('/')} className="text-white">Reservas</a>
                 </li>
-                <li>
-                    <a href="#" className="text-white">Contacto</a>
+                <li className="mr-4 text-white">
+                    <a onClick={() => navigate('/')} className="text-white">Contacto</a>
                 </li>
             </ul>
         </nav>

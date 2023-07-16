@@ -15,7 +15,7 @@ const confirmedAccount = async (req, res) => {
         
         const authverify = await Auth.findOne({where: {email}});
 
-        const userVerify = await User.findOne({where: {id: authverify.userId}});
+        const userVerify = await User.findOne({where: {id: authverify.userId, disabled:true}});
 
         await userVerify.update({disabled: false})
 

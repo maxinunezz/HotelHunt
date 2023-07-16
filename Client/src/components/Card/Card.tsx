@@ -48,7 +48,7 @@ const Card: React.FC<CardProps> = ({
 				</div>
 				<div className="flex justify-end items-center">
 					<Button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-						Reservar
+						Ver habitaciones
 					</Button>
 				</div>
 			</div>

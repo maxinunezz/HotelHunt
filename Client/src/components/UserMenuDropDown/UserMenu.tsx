@@ -7,15 +7,14 @@ import { farewellToast } from '../toast';
 
 const UserMenu = () => {
     const navigate = useNavigate()
-    const isAdmin = tokenStore((state) => state.userState)  //análogo a AdminMenu
-    console.log('isAdmin' ,isAdmin);   
+    const isAdmin = tokenStore((state) => state.userState)  //análogo a AdminMenu  
     const { reset } = tokenStore()
 
 
 
     const handleClick = (event) => {
         event.preventDefault()
-        console.log(isAdmin[0])
+        document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         reset()
         farewellToast("Adiós y buena suerte!")
         navigate('/farewell')

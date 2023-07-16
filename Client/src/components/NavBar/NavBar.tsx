@@ -44,12 +44,9 @@ export default function NavBar() {
 
 					)
 			}
-
-
-
 			<SearchBar />
-
 			<button onClick={handleAllHotels} >Mostrar todos los hoteles</button>
+			<button onClick={()=> navigate('/roomSearch')}> Rooms Searchs </button>
 			<Dropdown size='md'>
 				<Dropdown.Trigger>
 					<Button className="w-500">{`Ordenar por: `}</Button>
