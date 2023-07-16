@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const { AuthHandler } = require('../Handlers/AuthHandler');
-
 const {
     createUserForEmail,
     deleteUser,
