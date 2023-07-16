@@ -58,8 +58,6 @@ const createUserForEmail = async (req, res) => {
       const token = jwt.sign({email: authcreate.email }, JWT_SECRET, { expiresIn: '1h' });
       const verificationLink = `http://localhost:3001/user/confirmEmail/${token}`
 
-      console.log(token)
-
 
       await usercreate.reload();
 

@@ -24,7 +24,9 @@ const confirmedAccount = async (req, res) => {
         const token = jwt.sign({id: userVerify.id, admin: userVerify.admin}, JWT_SECRET, { expiresIn: '6h' });
         const data = {id: userVerify.id, name: userVerify.name, lastName: userVerify.lastName, birthDate: userVerify.birthDate, phoneNumber: userVerify.phoneNumber, createdAt: userVerify.createdAt }
 
-        return res.status(200).json({token, admin, data});
+        const allInfo = { admin: admin, token: token, data: data }
+        res.cookie('json', allInfo)
+        return res.status(200).redirect('http://localhost:5173/');
 
     } catch (error) {
         return res.status(401).send(error.message);        

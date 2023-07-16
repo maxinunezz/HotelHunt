@@ -37,25 +37,31 @@ const authGoogle = async (req, res) => {
             return res.status(201).redirect('http://localhost:5173/');
           }
         } else {
-          const newUser = await User.create({
-            name: name,
-            lastName: lastName,
-            disabled: false,
-          });
-      
-          await Auth.create({
-            userId: newUser.id,
-            email: email,
-            password: hashedpass,
-          });
-      
-          const token = jwt.sign({ id: newUser.id }, JWT_SECRET, { expiresIn: '6h' });
-          const userData = { id: newUser.id, email: email, name: name, lastName: lastName };
-          const allInfo = { token: token, userData: userData}
-      
-          
-      
-          res.cookie('json', allInfo );
+
+            const newUser = await User.create({
+                name: name,
+                lastName: lastName,
+                disabled: false,
+            });
+
+            await Auth.create({
+                userId: newUser.id,
+                email: email,
+                password: hashedpass,
+            });
+            const admin = newUser.admin
+            const token = jwt.sign({ id: newUser.id }, JWT_SECRET, { expiresIn: '6h' });
+            const userData = { id: newUser.id, email: email, name: name, lastName: lastName };
+            
+            const allInfo = {admin: admin, token: token, data: userData}
+
+            // res.cookie('access', token, {
+            //     expires: expirationDate,
+            //     secure: true,
+            //     httpOnly: true,
+            // });
+    
+            res.cookie('json', allInfo);
         }
       
         return res.status(200).redirect('http://localhost:5173/');

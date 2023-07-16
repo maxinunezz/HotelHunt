@@ -10,13 +10,25 @@ import { tokenStore } from '../../Store';
 export default function HomePage() {
 	const searchResults = searchStore((state) => state.searchResults)
 	const { fetchHotels } = hotelStore()
-	const [cookies, setCookie] = useCookies(['access']);
+	const [cookies, setCookie] = useCookies(["json"]);
 	const { saveInfo } = tokenStore();
-
+	
 
 	const findCookie = () => {
-		const accessToken = cookies.access;
-		console.log('Valor de la cookie "access":', accessToken);
+		if(cookies.json) {
+			const arrayAux: [] = [];
+			const logeado = true
+			const userData = cookies.json && cookies.json.data;
+			const tokenRaw = cookies.json && cookies.json.token;
+			const statusadmin = cookies.json && cookies.json.admin;
+			arrayAux.push(userData)
+			arrayAux.push(tokenRaw)
+			arrayAux.push(statusadmin)
+			arrayAux.push(logeado)
+			saveInfo(arrayAux)
+		}
+		// const accessToken = cookies;
+		// console.log('Valor de la cookie "access":', accessToken);
 	}
 
 	useEffect(() => {

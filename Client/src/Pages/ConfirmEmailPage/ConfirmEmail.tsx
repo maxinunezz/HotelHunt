@@ -9,7 +9,6 @@ const ConfirmPage = () => {
 
     const [countdown, setCountdown] = useState(5)
     const navigate = useNavigate();
-    const { token } = useParams();
     const { saveInfo } = tokenStore();
 
     const sendConfirm = async () => {
