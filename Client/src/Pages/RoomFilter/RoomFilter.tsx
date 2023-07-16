@@ -6,13 +6,14 @@ import { useFetchRooms } from "../../hooks";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Dropdown } from "@rewind-ui/core";
+import { filterResetToast } from "../../components/toast";
 
 const RoomFilter = () => {
   const navigate = useNavigate();
   useFetchRooms();
   const allRooms = roomsStore((state) => state.rooms);
   const roomsFiltered = roomsSearchStore((state) => state.roomsFilter)
-  const { fetchFilterRooms, sortByPrice } = roomsSearchStore()
+  const { fetchFilterRooms, sortByPrice, reset } = roomsSearchStore()
   const [filters, setFilters] = useState({
     minPrice: "",
     maxPrice: ""
@@ -68,6 +69,11 @@ const RoomFilter = () => {
 
 
   };
+
+  const handleReset = () => {
+    filterResetToast("Filtros reseteados")
+    reset()
+  }
 
   return (
     <div className="flex-col">
@@ -284,6 +290,7 @@ const RoomFilter = () => {
           </div>
 
           <button onClick={applyFilters}>Aplicar filtros</button>
+          <button onClick={handleReset}>Reset filtros</button>
         </div>
 
         {/* Lista de habitaciones */}

@@ -24,6 +24,7 @@ type States = {
 type Actions = {
     fetchFilterRooms: (arrayToFilter: Room[], price: object, category: object, capacity: object) => void;
     sortByPrice: (elements: Room[], sortBy: string) => void;
+    reset: () => void;
 };
 
 const initialState: States = {
