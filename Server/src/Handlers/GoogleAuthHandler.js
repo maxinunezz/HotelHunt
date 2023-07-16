@@ -51,17 +51,19 @@ const authGoogle = async (req, res) => {
                 email: email,
                 password: hashedpass,
             });
+            const admin = newUser.admin
             const token = jwt.sign({ id: newUser.id }, JWT_SECRET, { expiresIn: '6h' });
-            console.log(token)
             const userData = { id: newUser.id, email: email, name: name, lastName: lastName };
+            
+            const allInfo = {admin: admin, token: token, data: userData}
+
+            // res.cookie('access', token, {
+            //     expires: expirationDate,
+            //     secure: true,
+            //     httpOnly: true,
+            // });
     
-            res.cookie('access', token, {
-                expires: expirationDate,
-                secure: true,
-                httpOnly: true,
-            });
-    
-            res.cookie('json', JSON.stringify(userData));
+            res.cookie('json', allInfo);
         }
         
         return res.status(200).redirect('http://localhost:5173/');
