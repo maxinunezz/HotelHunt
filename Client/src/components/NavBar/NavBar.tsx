@@ -1,4 +1,3 @@
-
 import SearchBar from '../SearchBar/SearchBar';
 import { useNavigate } from 'react-router-dom';
 import { hotelStore, searchStore, tokenStore } from '../../Store';
@@ -73,13 +72,4 @@ export default function NavBar() {
 
 		</nav>
 	);
-
-
-
-
-
-
-
-
 }
-

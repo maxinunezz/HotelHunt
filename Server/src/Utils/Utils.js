@@ -108,7 +108,9 @@ async function firstload() {
       });
       const hotel = await Hotel.findByPk(hotelId);
       const RoomsIds = hotel.roomsId;
-
+      await newRoom.update({
+        hotelCategory: hotel.hotelCategory
+      })
       RoomsIds.push(newRoom.id);
 
       await Hotel.update(

@@ -22,6 +22,7 @@ const AdminMenu = () => {
             <Dropdown trigger="hover">
                 <Dropdown.Trigger>
                     <Button className="w-500">{selectedOption ?? `${isAdmin[0].name} ${isAdmin[0].lastName[0]}.`}</Button>
+                    
                 </Dropdown.Trigger>
                 <Dropdown.Content>
                     <Dropdown.Item onClick={() => navigate(`/adminprofile/${isAdmin[0].name}+${isAdmin[0].lastName}`)}>

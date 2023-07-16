@@ -14,6 +14,7 @@ interface Room {
 	price: string;
 	floorNumber: string;
 	disabled: boolean;
+	hotelCategory: string;
 }
 
 type States = {
@@ -45,6 +46,7 @@ export const roomsStore = create<States & Actions>((set) => ({
 	fetchRooms: async () => {
 	
 		const { data } = await axios.get('http://localhost:3001/room');
+
 
 		if (data.length > 0) {
 			set((state) => ({

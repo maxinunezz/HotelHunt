@@ -25,7 +25,7 @@ const SearchBar = () => {
 
 	const handleSearch = async (element) => {
 		element.preventDefault()
-		console.log("Estoy en el handler");
+	 
 		if (!selectedOption) {
 			return
 		}

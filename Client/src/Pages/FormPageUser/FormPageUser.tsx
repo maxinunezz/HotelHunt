@@ -7,6 +7,8 @@ import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 
 
+
+
 interface UserCreateValues {
   name: string;
   lastName: string;
@@ -49,12 +51,17 @@ const loginValidationSchema = yup.object().shape({
 const FormPageUser = () => {
   const [isCreated, setIsCreated] = useState(false);
   const navigate = useNavigate()
+  const url = import.meta.env.VITE_URL;
+
+  console.log(import.meta.env.VITE_URL);
+
+
   const handleSubmit = useCallback(
     async (values: UserCreateValues, helpers: FormikHelpers<UserCreateValues>) => {
       try {
 
         const data = await axios.post(
-          'http://localhost:3001/user/signup',
+          `${url}/user/signup`,
           {
             name: values.name,
             lastName: values.lastName,
@@ -66,8 +73,7 @@ const FormPageUser = () => {
           }
         );
         setIsCreated(true);
-        successToast('Usuario creado con exito');
-        successToast('Por favor logueate');
+        successToast('Correo de confirmación enviado. Revisa tu email para continuar.');
         console.log('data', data);
         navigate(-1)
       } catch (error) {

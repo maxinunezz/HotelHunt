@@ -21,17 +21,27 @@ module.exports = (sequelize) => {
       },
       birthDate: {
         type: DataTypes.DATEONLY,
-        allowNull: false,
+        allowNull: true,
       },
       phoneNumber: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       admin: {
         type: DataTypes.STRING,
         defaultValue: "normal",
         allowNull: false,
       },
+      disabled:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      },
+      google_id:{
+        type: DataTypes.STRING,
+        defaultValue: null,
+        allowNull: true,
+      }
     },
     { paranoid: true,
       deletedAt: 'destroyTime',

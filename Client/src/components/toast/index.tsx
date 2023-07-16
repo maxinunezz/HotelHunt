@@ -1,3 +1,4 @@
+
 import { Bug, MaskHappy,Cactus, SealWarning , Rocket, BookmarkSimple, StackOverflowLogo} from '@phosphor-icons/react';
 
 import { toast } from 'react-hot-toast';
@@ -112,6 +113,22 @@ export const farewellAdminToast = (text: string) => {
 			fontWeight: 'bold',
 		},
 		icon: <Rocket size={32} />,
+		ariaProps: {
+			role: 'status',
+			'aria-live': 'polite',
+		},
+	});
+};
+export const filterResetToast = (text: string) => {
+	return toast(text, {
+		duration: 2000,
+		position: 'top-center',
+		style: {
+			backgroundColor: '#D7BBF5',
+			color: 'black',
+			fontWeight: 'bold',
+		},
+		icon: <ClockCounterClockwise size={32} />,
 		ariaProps: {
 			role: 'status',
 			'aria-live': 'polite',

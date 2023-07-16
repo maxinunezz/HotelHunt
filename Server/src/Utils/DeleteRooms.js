@@ -8,7 +8,7 @@ const scheduledDeletion = async () => {
 
     const roomsToDelete = await Room.findAll({
         where: {
-          deletedAt: {
+          destroyTime: {
             [Op.lt]: thirtyDaysAgo
           }
         }
