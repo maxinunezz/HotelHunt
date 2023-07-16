@@ -6,6 +6,7 @@ import AdminMenu from '../UserMenuDropDown/AdminMenu';
 import { Dropdown, Button, Input } from '@rewind-ui/core';
 import { UserCircle } from '@phosphor-icons/react';
 import CartComponent from '../CartComponent/CartComponent';
+import { useState } from 'react';
 
 export default function NavBar() {
 	const navigate = useNavigate()
