@@ -1,4 +1,6 @@
-import { Bug, Cactus, ClockCounterClockwise, MaskHappy, Rocket } from '@phosphor-icons/react';
+
+import { Bug, MaskHappy,Cactus, SealWarning , Rocket, BookmarkSimple, StackOverflowLogo} from '@phosphor-icons/react';
+
 import { toast } from 'react-hot-toast';
 
 export const errorToast = (text: string) => {
@@ -34,6 +36,55 @@ export const successToast = (text: string) => {
 		},
 	});
 };
+export const reserveSuccessToast = (text: string) => {
+	return toast(text, {
+		duration: 4000,
+		position: 'bottom-center',
+		style: {
+			backgroundColor: '#fffc31',
+			color: 'black',
+			fontWeight: 'bold',
+		},
+		icon: <BookmarkSimple size={32} />,
+		ariaProps: {
+			role: 'status',
+			'aria-live': 'polite',
+		},
+	});
+};
+
+export const reserveErrorToast = (text: string) => {
+	return toast(text, {
+		duration: 4000,
+		position: 'bottom-center',
+		style: {
+			backgroundColor: '#26a69a',
+			color: 'white',
+			fontWeight: 'bold',
+		},
+		icon: <SealWarning size={32} />,
+		ariaProps: {
+			role: 'status',
+			'aria-live': 'polite',
+		},
+	});
+	}
+export const reserveFullToast = (text: string) => {
+	return toast(text, {
+		duration: 4000,
+		position: 'bottom-center',
+		style: {
+			backgroundColor: '#8B687F',
+			color: 'white',
+			fontWeight: 'bold',
+		},
+		icon: <StackOverflowLogo size={32} />,
+		ariaProps: {
+			role: 'status',
+			'aria-live': 'polite',
+		},
+	});
+	}
 
 export const farewellToast = (text: string) => {
 	return toast(text, {

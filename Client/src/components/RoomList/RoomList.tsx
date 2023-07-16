@@ -15,7 +15,7 @@ const RoomList = () => {
 	const firstIndex = (currentPage - 1) * roomsPerPage;
 	const lastIndex = currentPage * roomsPerPage;
 	const currentRooms = roomsHotelSelect?.slice(firstIndex, lastIndex);
-	console.log(currentRooms);
+
 
 	return (
 		<div>

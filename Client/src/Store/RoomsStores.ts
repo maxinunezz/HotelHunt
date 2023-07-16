@@ -44,8 +44,10 @@ export const roomsStore = create<States & Actions>((set) => ({
 	...initialState,
 
 	fetchRooms: async () => {
-		console.log('estoy en roomsstore')
+	
 		const { data } = await axios.get('http://localhost:3001/room');
+
+
 		if (data.length > 0) {
 			set((state) => ({
 				...state,

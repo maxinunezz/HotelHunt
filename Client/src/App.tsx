@@ -12,6 +12,8 @@ import DashboardPageHotelDetail from './Pages/DashboardPage/DashboardPageHotelDe
 import ProfilePage from './Pages/ProfilePage/ProfilePage';
 import FarewellPage from './Pages/FarewellPage/FarewellPage';
 import AdminProfilePage from './Pages/ProfilePage/AdminProfilePage';
+import ShoppingCartPage from './Pages/ShoppingCartPage/ShoppingCartPage';
+import CheckoutTransitionPage from './Pages/CheckoutTransitionPage/CheckoutTransitionPage';
 import RoomFilter from './Pages/RoomFilter/RoomFilter';
 
 
@@ -31,8 +33,9 @@ function App() {
 				<Route path="/hotelpage/:id" element={<HotelPage />}></Route>
 				<Route path="/roompage/:id" element={<RoomPage />}></Route>
 				<Route path="/farewell" element={<FarewellPage />}></Route>
+				<Route path="/shoppingcart" element={<ShoppingCartPage />}></Route>
+				<Route path="/paymenttransition" element={<CheckoutTransitionPage />}></Route>
 				<Route path="/roomSearch" element={<RoomFilter />}></Route>
-
 			</Routes>
 		</div>
 	);
