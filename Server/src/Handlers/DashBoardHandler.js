@@ -206,6 +206,7 @@ const createRoomByHotel = async (req, res) => {
         price,
         photo,
         floorNumber,
+        hotelCategory:hotel.hotelCategory
       });
 
       const RoomsIds = hotel.roomsId;

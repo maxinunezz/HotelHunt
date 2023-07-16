@@ -12,6 +12,7 @@ interface RoomCardProps {
   photo: string[];
   floorNumber: string;
   disabled: boolean;
+  hotelCategory: string;
 }
 
 
@@ -21,7 +22,8 @@ const RoomCard: React.FC<RoomCardProps> = ({
   pax,
   services,
   photo,
-  disabled
+  disabled,
+  hotelCategory
 }) => {
   const mainPhoto = Array.isArray(photo) && photo.length > 0 ? photo[0] : null;
   return (
@@ -33,6 +35,9 @@ const RoomCard: React.FC<RoomCardProps> = ({
       </div>
   
       <div className="p-[15px]">
+      <div className="text-right">
+            <h2 className="font-bold text-md">Categoría: {hotelCategory}</h2>
+          </div>
         <h2 className="text-[20px] font-bold h-[40px] overflow-hidden">{name}</h2>
   
         <div className="mb-[30px]">
@@ -44,6 +49,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
           <div className="text-right">
             <h2 className="font-bold text-lg">Precio: $ {price}</h2>
           </div>
+          
           <div className="flex items-center ml-[125px]">
             <Person size={20} color="#317ba0" weight="fill" />
             <p className="mb-0">{pax}</p>

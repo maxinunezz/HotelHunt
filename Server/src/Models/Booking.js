@@ -11,11 +11,11 @@ module.exports = (sequelize) => {
         defaultValue: () => uuidv4(),
         allowNull: false,
       },
-      dateStart: {
+      checkin: {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      dataEnd: {
+      checkout: {
         type: DataTypes.DATE,
         allowNull: false,
       },
@@ -30,11 +30,15 @@ module.exports = (sequelize) => {
       userId: {
         type: DataTypes.UUID,
         reference: {
-          moodel: "Users",
+          model: "Users",
           key: "id",
         },
         allowNull: false,
       },
+      paymentStatus: {
+        type: DataTypes.ENUM("paid", "unpaid", "outstanding"),
+        allowNull: false,
+      }
     },
     { timestamps: false }
   );

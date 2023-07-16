@@ -1,13 +1,11 @@
-
 import SearchBar from '../SearchBar/SearchBar';
 import { useNavigate } from 'react-router-dom';
 import { hotelStore, searchStore, tokenStore } from '../../Store';
 import UserMenu from '../UserMenuDropDown/UserMenu';
 import AdminMenu from '../UserMenuDropDown/AdminMenu';
 import { Dropdown, Button, Input } from '@rewind-ui/core';
-import { useState } from "react"
 import { UserCircle } from '@phosphor-icons/react';
-
+import CartComponent from '../CartComponent/CartComponent';
 
 export default function NavBar() {
 	const navigate = useNavigate()
@@ -71,6 +69,7 @@ export default function NavBar() {
 					</Dropdown.Item>
 				</Dropdown.Content>
 			</Dropdown>
+
 			{
 				isLogged.length ? (
 					isLogged[2] === "normal" ? <UserMenu /> : <AdminMenu />)
@@ -82,10 +81,9 @@ export default function NavBar() {
 						</div>
 					)
 			}
+        <CartComponent/>
 
 		</nav>
 	);
 
-
 }
-

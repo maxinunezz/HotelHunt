@@ -5,10 +5,9 @@ const NavBarDashboard1 = () => {
         <div className="grid grid-cols-7 gap-4 bg-white">
                 <div className="col-span-2">
                     <Text>
-
                     </Text>
                 </div>
-                <div className="col-span-1 flex flex-col justify-center">
+                <div className="col-span-1 flex items-center justify-center">
                     <Text variant="h6" className="text-lg font-medium">
                         Nombre
                     </Text>

@@ -6,7 +6,10 @@ interface CardProps {
 	description: string;
 	country: string;
 	city: string;
-	photo: string;
+	photo: string[];
+	services:string[];
+	hotelCategory:string;
+
 }
 const Card: React.FC<CardProps> = ({
 	name,
@@ -14,7 +17,11 @@ const Card: React.FC<CardProps> = ({
 	country,
 	city,
 	photo,
+	services, 
+	hotelCategory
+
 }) => {
+	
 	return (
 		<div className="bg-white h-80 max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
 			<img
@@ -38,17 +45,17 @@ const Card: React.FC<CardProps> = ({
 							Ubicación: {city}, {country}
 						</p>
 					</div>
-					<div className="flex justify-end">
+				<div>
+					<p>Categoria: {hotelCategory}</p>
+					<p>Services: {services+''}</p>
+				</div>
+				<div className="flex justify-end">
 						<button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
 							Reservar
 						</button>
 					</div>
-				</div>
 			</div>
 		</div>
 	);
-
-
-
 };
 export default Card;
