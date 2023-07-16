@@ -7,9 +7,8 @@ import { errorToast, successToast } from '../../components/toast';
 
 const ConfirmPage = () => {
 
-    const [countdown, setCountdown] = useState(60)
+    const [countdown, setCountdown] = useState(5)
     const navigate = useNavigate();
-    const { token } = useParams();
     const { saveInfo } = tokenStore();
 
     const sendConfirm = async () => {
@@ -43,13 +42,14 @@ const ConfirmPage = () => {
             setCountdown((prevCountdown) => prevCountdown - 1);
         }, 1000);
 
-        
-        clearInterval(interval);
         if(countdown === 0){
             navigate('/')
         }
+        
+        return clearInterval(interval);
+        
        
-    }, []);
+    }, [countdown]);
 
     return (
         <div>

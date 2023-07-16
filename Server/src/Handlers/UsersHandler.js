@@ -55,8 +55,7 @@ const createUserForEmail = async (req, res) => {
         userId: usercreate.id,
       });
       
-      const token = jwt.sign({email: authcreate.email }, JWT_SECRET, { expiresIn: '24h' });
-      console.log(token);
+      const token = jwt.sign({email: authcreate.email }, JWT_SECRET, { expiresIn: '1h' });
       const verificationLink = `http://localhost:3001/user/confirmEmail/${token}`
 
 
@@ -71,6 +70,7 @@ const createUserForEmail = async (req, res) => {
       html: `
       <b>Please click on the following link to confirm your account:</b>
       ,<a href="${verificationLink}">${verificationLink}</a>
+      <b> Link expires in 1 hr <b>
       `, 
     });
 
