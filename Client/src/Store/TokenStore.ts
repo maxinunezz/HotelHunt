@@ -2,6 +2,9 @@ import axios from 'axios';
 import { create } from 'zustand';
 
 interface User {
+    phoneNumber: any;
+    lastName: any;
+    birthDate: any;
     name: ReactNode;
     token: string;
     userState: string;
