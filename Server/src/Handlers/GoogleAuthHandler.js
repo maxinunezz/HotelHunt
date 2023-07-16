@@ -30,45 +30,39 @@ const authGoogle = async (req, res) => {
     try {
         const Authexist = await Auth.findOne({ where: { email: email } });
         if (Authexist) {
-            
-            const findUserData = await User.findOne({ where: { id: Authexist.userId } });
-
-            if (findUserData.google_id === sub) {
-                return res.status(201).redirect('http://localhost:5173/');
-            }
-
+          const findUserData = await User.findOne({ where: { id: Authexist.userId } });
+      
+          if (findUserData.google_id === sub) {
             await findUserData.update({ google_id: sub });
+            return res.status(201).redirect('http://localhost:5173/');
+          }
         } else {
-
-            const newUser = await User.create({
-                name: name,
-                lastName: lastName,
-                disabled: false,
-            });
-
-            await Auth.create({
-                userId: newUser.id,
-                email: email,
-                password: hashedpass,
-            });
-            const token = jwt.sign({ id: newUser.id }, JWT_SECRET, { expiresIn: '6h' });
-            console.log(token)
-            const userData = { id: newUser.id, email: email, name: name, lastName: lastName };
-    
-            res.cookie('access', token, {
-                expires: expirationDate,
-                secure: true,
-                httpOnly: true,
-            });
-    
-            res.cookie('json', JSON.stringify(userData));
+          const newUser = await User.create({
+            name: name,
+            lastName: lastName,
+            disabled: false,
+          });
+      
+          await Auth.create({
+            userId: newUser.id,
+            email: email,
+            password: hashedpass,
+          });
+      
+          const token = jwt.sign({ id: newUser.id }, JWT_SECRET, { expiresIn: '6h' });
+          const userData = { id: newUser.id, email: email, name: name, lastName: lastName };
+          const allInfo = { token: token, userData: userData}
+      
+          
+      
+          res.cookie('json', allInfo );
         }
-        
+      
         return res.status(200).redirect('http://localhost:5173/');
-       
-    } catch (error) {
+      } catch (error) {
         return res.status(500).json(error);
-    }
+      }
+      
 };
 
 module.exports = {
