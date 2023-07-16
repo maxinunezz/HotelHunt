@@ -35,6 +35,8 @@ const HotelList = () => {
 								country={hotel.country}
 								city={hotel.city}
 								photo={hotel.photo}
+								hotelCategory={hotel.hotelCategory}
+								services={hotel.services}
 							/>
 						</Link>
 					))

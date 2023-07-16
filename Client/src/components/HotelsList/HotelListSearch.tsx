@@ -39,6 +39,8 @@ const HotelListSearch = () => {
                                 country={hotel.country}
                                 city={hotel.city}
                                 photo={hotel.photo}
+                                hotelCategory={hotel.hotelcategory}
+                                services={hotel.services}
                             />
                         </Link>
                     ))

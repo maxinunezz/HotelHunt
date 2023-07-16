@@ -7,7 +7,7 @@ const { BothAccess } = require('../Middleware/BothMiddleware');
 
 const dashBoardRouter = Router()
 
-dashBoardRouter.get('/', authMiddleware, AdminCheck, getAllHotelsById);
+dashBoardRouter.get('/', authMiddleware,AdminCheck, getAllHotelsById);
 dashBoardRouter.get('/room/:hotelId',authMiddleware, AdminCheck, getRoomsByHotel);
 dashBoardRouter.post('/room/:hotelId', authMiddleware, AdminCheck, createRoomByHotel);
 dashBoardRouter.post('/hotel',authMiddleware, AdminCheck,createHotelByUser);

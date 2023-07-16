@@ -1,25 +1,24 @@
 import axios from 'axios';
 import { create } from 'zustand';
 import { Hotel } from '../models';
-import calculatePageNumbers from '../utils/calculatePageNamber';
+
 
 type States = {
 	hotels: Hotel[];
-	searchResoults: any[];
 	currentPage: number;
 	pageNumbers: number[];
 };
 
 type Actions = {
 	fetchHotels: () => Promise<void>;
-	setCurrentPage: (pageNum) => void;
-	orderByNameASC: (array:Hotel[]) => void;
+	setCurrentPage: (pageNum:number) => void;
+	orderByName: (array:Hotel[], event:string) => void;
+	orderByCategory: (array:Hotel[], event:string) => void;
 	resetHotels: () => void;
 };
 
 const initialState: States = {
 	hotels: [],
-	searchResoults: [],
 	currentPage: 1,
 	pageNumbers: [],
 };
@@ -41,7 +40,11 @@ export const hotelStore = create<States & Actions>((set) => ({
 			currentPage: pageNum
 		}))
 	},
-	orderByNameASC: (array) => {
+	orderByName: (array, event) => {
+		
+     
+
+		if(event==='ASC'){
 		const arrayAux = array.sort(function(a,b) {
 			if (a.name > b.name) {
 				return 1
@@ -54,7 +57,45 @@ export const hotelStore = create<States & Actions>((set) => ({
 		set((state) => ({
 			...state,
 			hotels: arrayAux,
-		}));
+		}));}
+
+		else if(event==='DES'){
+			const arrayAux = array.sort((a, b) => b.name.localeCompare(a.name));
+			set((state) => ({
+				...state,
+				hotels: arrayAux,
+			}))
+
+		}
+	},
+	orderByCategory: (array, event) => {
+		
+		if(event==='ASC'){
+		const arrayAux = array.sort(function(a,b) {
+			if (a.hotelCategory > b.hotelCategory) {
+				return 1
+			}
+			if (a.hotelCategory < b.hotelCategory) {
+				return -1
+			}
+			return 0
+		})
+		set((state) => ({
+			...state,
+			hotels: arrayAux,
+			
+		}));}
+
+		else if(event==='DES'){
+			const arrayAux = array.sort((a, b) => b.hotelCategory.localeCompare(a.hotelCategory));
+			set((state) => ({
+				...state,
+				hotels: arrayAux,
+				
+				
+			}))
+
+		}
 	},
 
 	resetHotels: () => {
