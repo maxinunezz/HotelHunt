@@ -1,8 +1,9 @@
-
 import { House, Phone, ClipboardText } from '@phosphor-icons/react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+
 
 export default function NavbarDetail() {
+  const navigate = useNavigate();
   return (
     <nav className="bg-gray-900 p-4">
       <div className="flex items-center justify-between">
@@ -21,7 +22,7 @@ export default function NavbarDetail() {
           <ul className="flex ml-8">
             <li className="mr-4 flex items-center">
               <House size={32} weight="thin" className="mr-4 text-blue-500" />
-              <Link to="/" className="text-white">Inicio</Link>
+              <onClick={() => navigate('/')} className="text-white">Inicio</Link>
             </li>
             <li className="mr-4 flex items-center">
               <Phone size={32} weight="thin" className="mr-4 text-blue-500" />
