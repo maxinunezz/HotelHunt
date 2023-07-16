@@ -4,12 +4,15 @@ import App from './App.tsx';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { CookiesProvider } from 'react-cookie';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<App />
-			<Toaster />
-		</BrowserRouter>
+		<CookiesProvider>
+			<BrowserRouter>
+				<App />
+				<Toaster />
+			</BrowserRouter>
+		</CookiesProvider>
 	</React.StrictMode>
 );

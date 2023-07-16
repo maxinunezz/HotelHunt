@@ -14,6 +14,7 @@ import FarewellPage from './Pages/FarewellPage/FarewellPage';
 import AdminProfilePage from './Pages/ProfilePage/AdminProfilePage';
 import ConfirmPage from './Pages/ConfirmEmailPage/ConfirmEmail';
 
+
 function App() {
 	return (
 		<div id="app">
@@ -30,7 +31,7 @@ function App() {
 				<Route path="/hotelpage/:id" element={<HotelPage />}></Route>
 				<Route path="/roompage/:id" element={<RoomPage />}></Route>
 				<Route path="/farewell" element={<FarewellPage />}></Route>
-				<Route path="/confirmPage/:token" element={<ConfirmPage />}></Route>
+				<Route path="/confirmPage/" element={<ConfirmPage />}></Route>
 			</Routes>
 		</div>
 	);

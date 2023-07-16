@@ -11,6 +11,10 @@ const AuthHandler = async (req, res) => {
         const { email, password } = req.body;
 
         const results = await Auth.findOne({ where: { email: email } });
+
+        if(!results){
+            return res.status(401).send("User doesn't exist");
+        }
         
         if(results){
             await User.restore({ where: { id: results.userId } });

@@ -5,6 +5,7 @@ const { JWT_SECRET } = process.env;
 const confirmedAccount = async (req, res) => {
 
     const { token } = req.params;
+    console.log(token)
     const decodedToken = jwt.verify(token, JWT_SECRET );
     console.log(decodedToken);
 
