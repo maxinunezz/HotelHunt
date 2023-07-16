@@ -43,6 +43,7 @@ const RoomPage = () => {
   useFetchRooms();
   const allRooms = roomsStore((state) => state.rooms);
 
+
   useEffect(() => {
     const roomOnScreen = allRooms.find((roomRender) => {
       if (typeof roomRender.id === "number") {
@@ -195,6 +196,7 @@ const RoomPage = () => {
               <ul className="list-disc list-inside mb-4 ml-4">
                 {roomRender?.services.map((service) => (
                   <li key={service}>{service}</li>
+
                 ))}
               </ul>
             </div>
@@ -205,5 +207,6 @@ const RoomPage = () => {
     </div>
   );
 };
+
 
 export default RoomPage;
