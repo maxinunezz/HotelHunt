@@ -171,10 +171,27 @@ const obtenerIdSeccion = async (req, res) => { // para q?
     }
 };
 
-// obtener las reservas. 
+const getReserves = async (req,res) => {
+  const { id } = userData;
+  
+  try {
+      const reserves = await Booking.findAll({where:{
+          userId: id
+      }})
+      if(reserves){
+        return res.status(200).json(reserves);
+      }else{
+        return res.status(404).send('No se encontraron reservas')
+      }
+
+  }catch(error){
+      return res.status(500).json(error)
+  }
+} 
 
 module.exports = {
   createBooking,
     obtenerIdSeccion,
-    confirmationEmail
+    confirmationEmail,
+    getReserves
 };
