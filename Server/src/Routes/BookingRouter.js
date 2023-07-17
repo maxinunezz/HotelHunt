@@ -5,10 +5,9 @@ const { createBooking, obtenerIdSeccion } = require("../Handlers/BookingHandler"
 
 const BookingRouter = Router();
 
-BookingRouter.post("/reserva", createBooking);
-BookingRouter.get("/obtener-informacion-sesion", obtenerIdSeccion);
-BookingRouter.get("/success", );
-BookingRouter.get("/cancel",);
+BookingRouter.post("/reserva",authMiddleware, createBooking);
+BookingRouter.get("/obtener-informacion-sesion",authMiddleware, obtenerIdSeccion);
+
 
 
 module.exports = BookingRouter;

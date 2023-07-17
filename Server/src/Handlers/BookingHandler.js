@@ -6,7 +6,7 @@ const nodemailer = require('nodemailer');
 
 async function createBooking(req, res) {
   try {
-    const { userId } = req.body;
+    const { id } = userData
     const { roomsToReserve } = req.body;
     
 
@@ -49,19 +49,22 @@ async function createBooking(req, res) {
       const { roomId, checkin, checkout, amount, name, price } = room;
 
       const isReserved = await isRoomAlreadyReserved(roomId, checkin, checkout);
-      if (isReserved) {
+      if (!isReserved) {
+        const booking = await Booking.create({
+          roomId,
+          userId: id,
+          checkin,
+          checkout,
+          paymentStatus: "unpaid",
+        });
+  
+        bookings.push(booking);
+        
+      }else{
         return res.status(400).json({ error: `Room with ID ${roomId} is already reserved for the selected dates` });
       }
 
-      const booking = await Booking.create({
-        roomId,
-        userId,
-        checkin,
-        checkout,
-        paymentStatus: "unpaid",
-      });
-
-      bookings.push(booking);
+      
     }
 
     const calculateDays = (item) => {
@@ -74,6 +77,8 @@ async function createBooking(req, res) {
 
       return differenceInDays;
     };
+
+    const user = await User.findByPk(id);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -88,30 +93,27 @@ async function createBooking(req, res) {
         quantity: 1,
       })),
       mode: 'payment',
-      success_url: 'https://example.com/success',
-      cancel_url: 'https://example.com/cancel',
+      success_url: `http://localhost:5173/userprofile/${user.name}`,
+      cancel_url: `http://localhost:5173/userprofile/${user.name}`,
     });
 
     const sessionId = session.id;
     const urlpago = session.url;
-    await confirmationEmail(req.body.userId, urlpago, rooms.name, req.body.checkin, req.body.checkout);
+    await confirmationEmail(id, urlpago, rooms.name, req.body.checkin, req.body.checkout, user.name);
+    
 
-    res.status(200).json({ sessionId, urlpago, bookings });
+    res.status(200).json({ sessionId, urlpago, bookings })
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 }
-
-
-
-
   
 
-const confirmationEmail = async (userId, urlpago, roomName, checkin, checkout) => {
+const confirmationEmail = async (id, urlpago, roomName, checkin, checkout, name) => {
   try {
-    const getUserEmail = async (userId) => {
+    const getUserEmail = async (id) => {
       const authUser = await Auth.findOne({
-        where: { userId },
+        where: { id },
         attributes: ['email']
       });
 
@@ -122,7 +124,7 @@ const confirmationEmail = async (userId, urlpago, roomName, checkin, checkout) =
       }
     };
 
-    const userEmail = await getUserEmail(userId);
+    const userEmail = await getUserEmail(id);
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -136,9 +138,10 @@ const confirmationEmail = async (userId, urlpago, roomName, checkin, checkout) =
       from: 'hotelhuntservices@gmail.com',
       to: userEmail,
       subject: 'Confirmación de la reserva',
-      text: `¡Gracias por reservar la habitación: 🛏️🛏️ ${roomName}!
-      La fecha de entrada es: ${checkin} y la de salida es: ${checkout}
+      text: `¡Gracias ${name} por reservar con nosotros!
+      En tu perfil, de nuestra página, puedes ver los detalles de la/s reserva/s.
       En caso de no haber realizado el pago haga click en el siguente link: ${urlpago}.
+      Recuerda realizar el pago en las proximas 24 horas o la reserva será dada de baja.
       ¡Gracias por elegir HotelHunt!`,
     };
 
@@ -155,7 +158,7 @@ const confirmationEmail = async (userId, urlpago, roomName, checkin, checkout) =
 };
 
 
-const obtenerIdSeccion = async (req, res) => {
+const obtenerIdSeccion = async (req, res) => { // para q?
     try {
       const sessionId = req.query.sessionId;
       console.log(sessionId)
@@ -167,6 +170,8 @@ const obtenerIdSeccion = async (req, res) => {
       return res.status(500).send("Error al obtener información de la sesión de pago");
     }
 };
+
+// obtener las reservas. 
 
 module.exports = {
   createBooking,
