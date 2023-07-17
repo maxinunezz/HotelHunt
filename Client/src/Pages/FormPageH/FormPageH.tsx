@@ -10,6 +10,7 @@ import { errorToast, successToast } from '../../components/toast';
 import Hotel from "./Hotel.png"
 import { tokenStore } from '../../Store';
 import { useNavigate } from 'react-router-dom';
+const url = import.meta.env.VITE_URL;
 
 
 
@@ -67,7 +68,7 @@ export default function FormPageH() {
 				console.log(token[1]);
 
 				const data = await axios.post(
-					'http://localhost:3001/dashboard/hotel/',
+					`${url}/dashboard/hotel/`,
 					{
 						name: values.name,
 						description: values.description,

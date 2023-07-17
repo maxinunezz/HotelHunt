@@ -2,6 +2,7 @@ import axios from "axios";
 import { create } from "zustand";
 import { ReserveBooking } from "../Pages/RoomPage/RoomPage";
 import { array } from "yup";
+const url = import.meta.env.VITE_URL;
 
 type States = {
   reserves: ReserveBooking[];
@@ -37,7 +38,7 @@ export const userStore = create<States & Actions>((set) => ({
   roomPayment: async (info, token) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/booking/reserva",
+        `${url}/booking/reserva`,
         info,
         {
           headers: {
