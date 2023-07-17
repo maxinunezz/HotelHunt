@@ -37,10 +37,10 @@ const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({ clientID, endpo
   return (
     <div>
       <div id="g_id_onload"
-        data-client_id="302631688539-a4hemnv3hsck7g1qjk9ti37s2t5mmvnh.apps.googleusercontent.com"
+        data-client_id={clientID}
         data-context="signin"
         data-ux_mode="popup"
-        data-login_uri="http://localhost:3001/user/google_singin"
+        data-login_uri={endpoint}
         data-auto_prompt="false">
       </div>
 
