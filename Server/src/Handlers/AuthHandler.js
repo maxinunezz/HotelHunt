@@ -11,6 +11,10 @@ const AuthHandler = async (req, res) => {
         const { email, password } = req.body;
 
         const results = await Auth.findOne({ where: { email: email } });
+
+        if(!results){
+            return res.status(401).send("User doesn't exist");
+        }
         
         if(results){
             await User.restore({ where: { id: results.userId } });
@@ -22,7 +26,7 @@ const AuthHandler = async (req, res) => {
         if(!access){
             return res.status(401).send("Wrong password");
         }
-        const user = await User.findOne({ where: { id: results.userId } })
+        const user = await User.findOne({ where: { id: results.userId, disabled: false } })
         
         if(!user){
             return res.status(401).send("User doesnt exist");
@@ -30,7 +34,10 @@ const AuthHandler = async (req, res) => {
 
         const token = jwt.sign({id: user.id, admin: user.admin}, JWT_SECRET, { expiresIn: '6h' });
 
-        return res.status(200).json(token);
+        const admin = user.admin;
+        const data = {id: user.id, email: email, name: user.name, lastName: user.lastName, birthDate: user.birthDate, phoneNumber: user.phoneNumber, createdAt: user.createdAt }
+
+        return res.status(200).json({token, admin, data});
 
     } catch (error) {
         return res.status(401).send(error.message);

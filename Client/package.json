@@ -10,17 +10,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@googleapis/docs": "^2.0.1",
     "@phosphor-icons/react": "^2.0.10",
     "@rewind-ui/core": "^0.10.1",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "axios": "^1.4.0",
+    "date-fns": "^2.30.0",
+    "dotenv": "^16.3.1",
     "formik": "^2.4.2",
+    "gapi-script": "^1.2.0",
+    "googleapis": "^122.0.0",
     "react": "^18.2.0",
+    "react-datepicker": "^4.16.0",
+    "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
-
+    "react-hot-toast": "^2.4.1",
     "react-icons": "^4.10.1",
-
+    "react-image-gallery": "^1.2.12",
     "react-multi-carousel": "^2.8.4",
     "react-router-dom": "^6.14.1",
     "tailwind-scrollbar": "^3.0.4",
@@ -28,12 +35,15 @@
     "zustand": "^4.3.9"
   },
   "devDependencies": {
+    "@esbuild/win32-x64": "^0.18.11",
+    "@types/node": "^20.4.2",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.14",
+    "esbuild": "^0.18.11",
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
@@ -41,7 +51,8 @@
     "standard": "^17.1.0",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.2",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "webpack": "^5.88.1"
   },
   "eslintConfig": {
     "extends": "./node_modules/standard/eslintrc.json"

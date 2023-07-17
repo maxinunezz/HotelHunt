@@ -1,17 +1,24 @@
 import axios from 'axios';
 import { create } from 'zustand';
+import { Hotel } from '../models';
+const url = import.meta.env.VITE_URL;
 
 type States = {
-	searchResults: any[];
+	searchResults: Hotel[];
+	currentPageSearch: number;
 };
 
 type Actions = {
 	fetchSearchResults: (data: {}) => Promise<void>;
+	setCurrentPageSearch: (newPages:any) => void;
 	reset: () => void;
+	orderByNameSearch: (array:Hotel[], event:string) => void;
+	orderByCategorySearch: (array:Hotel[], event:string) => void;
 };
 
 const initialState: States = {
 	searchResults: [],
+	currentPageSearch: 1
 };
 
 export const searchStore = create<States & Actions>((set) => ({
@@ -19,12 +26,13 @@ export const searchStore = create<States & Actions>((set) => ({
 
 	fetchSearchResults: async (data) => {
 		
-		console.log(data);
+		
 		return await axios.post(
-			`http://localhost:3001/hotel/search`, data
+			`${url}/hotel/search`, data
 		).then((response) => {
 			if(response.data.length > 0) {
 				const result = response.data;
+				
 				set((state) => ({
 					...state,
 					searchResults: result,
@@ -35,11 +43,86 @@ export const searchStore = create<States & Actions>((set) => ({
 		})
 		
 	},
+	setCurrentPageSearch: (pageNum) => {
+		set(() => ({
+			currentPageSearch: pageNum
+		}))
+	},
 
 	reset: () => {
 		set(initialState);
 	},
+
+	orderByNameSearch: (array, event) => {
+		
+     
+
+		if(event==='ASC'){
+		const arrayAux = array.sort(function(a,b) {
+			if (a.name > b.name) {
+				return 1
+			}
+			if (a.name < b.name) {
+				return -1
+			}
+			return 0
+		})
+		set((state) => ({
+			...state,
+			searchResults: arrayAux,
+		}));}
+
+		else if(event==='DES'){
+			const arrayAux = array.sort((a, b) => b.name.localeCompare(a.name));
+			set((state) => ({
+				...state,
+				searchResults: arrayAux,
+			}))
+
+		}
+	},
+	orderByCategorySearch: (array, event) => {
+		
+		if(event==='ASC'){
+		const arrayAux = array.sort(function(a,b) {
+			if (a.hotelcategory > b.hotelcategory) {
+				return 1
+			}
+			if (a.hotelcategory < b.hotelcategory) {
+				return -1
+			}
+			return 0
+		})
+		set((state) => ({
+			...state,
+			searchResults: arrayAux,
+			
+		}));}
+
+		else if(event==='DES'){
+			const arrayAux = array.sort(function (a, b) {
+				if (a.hotelcategory > b.hotelcategory) {
+					return -1
+				}
+				if (a.hotelcategory < b.hotelcategory) {
+					return 1
+				}
+				return 0
+			})
+			set((state) => ({
+				...state,
+				searchResults: arrayAux,
+				
+				
+			}))
+
+		}
+	},
 }));
+
+
+
+
 
 /* type Actions = {
 	fetchSearchResults: (data: {}) => Promise<void>;

@@ -1,5 +1,5 @@
 import { MagnifyingGlass } from '@phosphor-icons/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useFetchHotels } from '../../hooks';
 import { Dropdown, Button, Input } from '@rewind-ui/core';
 import { searchStore } from '../../Store';
@@ -7,20 +7,25 @@ import { useStore } from 'zustand'
 
 
 const SearchBar = () => {
-	useFetchHotels();
-
 	const [input, setinput] = useState('');
 	const [selectedOption, setSelectedOption] = useState<string | undefined>();
 	const [data, setData] = useState({
 		criterion: "",
 		value: "",
 	})
-	const { fetchSearchResults } = searchStore()
+	const { fetchSearchResults, setCurrentPageSearch } = searchStore()
+	const searchResultsAux = searchStore((state) => state.searchResults)
 
+	
+	useEffect(() => {
+		if(data.criterion !== "" && data.value !== "") {
+			fetchSearchResults(data);
+		}
+	}, [data])
 
-	const handleSearch = async () => {
-		console.log("Estoy en el handler");
-
+	const handleSearch = async (element) => {
+		element.preventDefault()
+	 
 		if (!selectedOption) {
 			return
 		}
@@ -28,12 +33,10 @@ const SearchBar = () => {
 			criterion: selectedOption,
 			value: input,
 		})
-
-		await fetchSearchResults(data);
-
+		setCurrentPageSearch(1)
 
 	}
-
+	
 	// const handleChange = (selectedOption: string, input: string) => {
 	// 	let data = {
 	// 		selectedOption,
@@ -53,11 +56,11 @@ const SearchBar = () => {
 			/>
 			<Dropdown>
 				<Dropdown.Trigger>
-					<Button className="w-40">{selectedOption ?? 'Buscar por'}</Button>
+					<Button className="w-40 justify-center">{selectedOption ?? 'Buscar por'}</Button>
 				</Dropdown.Trigger>
 				<Dropdown.Content>
-					<Dropdown.Item onClick={() => setSelectedOption("city")}>
-						Región
+					<Dropdown.Item className='w-20' onClick={() => setSelectedOption("country")}>
+						Pais
 					</Dropdown.Item>
 					<Dropdown.Item onClick={() => setSelectedOption("name")}>
 						Nombre
@@ -65,7 +68,7 @@ const SearchBar = () => {
 				</Dropdown.Content>
 			</Dropdown>
 
-			<button className="p-2" type="submit" onClick={handleSearch}>
+			<button className="p-2" onClick={(element) => handleSearch(element)}>
 				<MagnifyingGlass size={28} weight="bold" />
 			</button>
 		</div>

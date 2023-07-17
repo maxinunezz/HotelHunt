@@ -2,9 +2,13 @@ const { Room, Hotel, conn } = require("../db");
 
 const getAllRooms = async (req, res) => {
   try {
-    const data = await Room.findAll({where:{
+    const data = await Room.findAll(
+      {
+        where:{
       disabled: false,
-    }});
+    },
+ 
+  });
 
     if (data.length === 0) {
       throw Error("Not rooms found");
@@ -15,11 +19,16 @@ const getAllRooms = async (req, res) => {
     data.forEach((room) => {
       const one_room = {
         id: room.id,
+        name: room.name,
         hotelId: room.hotelId,
         description: room.description,
         pax: room.pax,
+        photo: room.photo,
         services: room.services,
         price: room.price,
+        floorNumber: room.floorNumber,
+        disabled: room.disabled,
+        hotelCategory: room.hotelCategory
       };
       rooms_array.push(one_room);
     });
@@ -62,6 +71,7 @@ const deleteRoom = async (req, res) => {
     const newRoomsId = hotel.roomsId.filter((roomId) => roomId !== room.id);
 
     const poproom = await hotel.update({ roomsId: newRoomsId });
+    await room.update({disabled: true});
     const destroyroom = await room.destroy();
 
     await Promise.all([poproom, destroyroom])

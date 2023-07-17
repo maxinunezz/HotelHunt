@@ -53,6 +53,11 @@ module.exports = (sequelize) => {
         defaultValue: false,
         allowNull: false,
       },
+       hotelCategory: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        
+      }
       
     },
     { 

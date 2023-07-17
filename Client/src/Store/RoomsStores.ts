@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { create } from 'zustand';
 import calculatePageNumbers from '../utils/calculatePageNamber';
+const url = import.meta.env.VITE_URL;
 
 interface Room {
 	key: string;
@@ -8,10 +9,13 @@ interface Room {
 	name: string;
 	description: string;
 	services: string;
-	photo: string;
+	photo: string[];
 	pax: number;
 	hotelId: string;
 	price: string;
+	floorNumber: string;
+	disabled: boolean;
+	hotelCategory: string;
 }
 
 type States = {
@@ -41,7 +45,10 @@ export const roomsStore = create<States & Actions>((set) => ({
 	...initialState,
 
 	fetchRooms: async () => {
-		const { data } = await axios.get<Room[]>('http://localhost:3001/room');
+	
+		const { data } = await axios.get(`${url}/room`);
+
+
 		if (data.length > 0) {
 			set((state) => ({
 				...state,
@@ -52,11 +59,11 @@ export const roomsStore = create<States & Actions>((set) => ({
 
 	hotelIdSetter: async (roomsHotelSelected) => {
 		const arrayAux: Room[] = [];
-		console.log('roomsHotelSelected' + roomsHotelSelected);
+		
 
-		return await axios.get(`http://localhost:3001/room`).then((response) => {
+		return await axios.get(`${url}/room`).then((response) => {
 			const allroomsAux = response.data;
-			console.log(allroomsAux);
+			
 
 			for (let i = 0; i < roomsHotelSelected?.length; i++) {
 				for (let j = 0; j < allroomsAux.length; j++) {
@@ -65,6 +72,7 @@ export const roomsStore = create<States & Actions>((set) => ({
 					}
 				}
 			}
+
 			set((state) => ({
 				...state,
 				roomsHotelSelect: arrayAux,
@@ -76,9 +84,8 @@ export const roomsStore = create<States & Actions>((set) => ({
 
 	setRoom: async (roomId) => {
 		const auxArray: Room[] = [];
-		return await axios.get(`http://localhost:3001/room`).then((response) => {
+		return await axios.get(`${url}/room`).then((response) => {
 			const allroomsAux = response.data;
-			console.log(allroomsAux);
 			for (let i = 0; i < allroomsAux?.length; i++) {
 				if (allroomsAux[i].id === roomId) {
 					auxArray.push(allroomsAux[i]);
