@@ -1,4 +1,4 @@
-import { House, Phone, ClipboardText } from '@phosphor-icons/react';
+import { House,Bed } from '@phosphor-icons/react';
 import { useNavigate } from 'react-router';
 
 
@@ -19,19 +19,16 @@ export default function NavbarDetail() {
           </h1>
         </div>
         <div className="flex items-center">
-          <ul className="flex ml-8">
+        <ul className="flex ml-8">
             <li className="mr-4 flex items-center">
               <House onClick={() => navigate('/')} size={32} weight="thin" className="mr-4 text-blue-500" />
-              <a href="#" className="text-white">Inicio</a>
+              <a href="/" className="text-white">Inicio</a>
             </li>
             <li className="mr-4 flex items-center">
-              <Phone size={32} weight="thin" className="mr-4 text-blue-500" />
-              <a href="#" className="text-white">Servicios</a>
+              <Bed onClick={() => navigate('/roomsearch')} size={32}  weight="thin" className="mr-4 text-blue-500" />
+              <a href="/roomsearch" className="text-white">All Rooms</a>
             </li>
-            <li className="mr-4 flex items-center">
-              <ClipboardText size={32} weight="thin" className=" mr-4 text-blue-500" />
-              <a href="#" className="text-white">Reservas</a>
-            </li>
+
           </ul>
         </div>
       </div>

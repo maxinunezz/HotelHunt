@@ -31,12 +31,12 @@ const CartComponent = () => {
     // Convertir la diferencia en dÃ­as
     const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
 
-    
+
 
     return differenceInDays;
   };
 
-  const { reserveRoomPayment, roomPayment, reset} = userStore();
+  const { reserveRoomPayment, roomPayment, reset } = userStore();
 
   const [cartItems, setCartItems] = useState(userReserve); // Aquí se almacenarán los elementos del carrito
   const [totalPay, setTotalPay] = useState([])
@@ -46,23 +46,23 @@ const CartComponent = () => {
 
     reserveRoomPayment(newArray);
     setCartItems(newArray);
-  
-    
+
+
   };
 
-  const calculateTotalPay = ()=>{
-    
-    const totales = userReserve.map(element=>{
-        
-        
-        return (element.price * calculateDays(element))
+  const calculateTotalPay = () => {
+
+    const totales = userReserve.map(element => {
+
+
+      return (element.price * calculateDays(element))
     })
-    
+
     const sum = totales.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    
+
     return sum
-    
-    
+
+
   }
 
   const roomPhoto = (item) => {
@@ -88,30 +88,30 @@ const CartComponent = () => {
       }
     }
   };
-  
+
   const handleCheckout = async () => {
     if (userReserve.length === 0) {
       return alert('Agregar habitación');
     }
-  
+
     const data = {
       userId: token[0].id,
       roomsToReserve: userReserve
     };
     console.log(data);
-  
-   await roomPayment(data);
-  
-    // Redireccionar a la URL externa en una nueva pestaña
-   navigate('/paymenttransition')
 
-  //  reset() //esta linea resetea el estado global del carrito  porque la app aun no tiene respuesta del pago
+    await roomPayment(data);
+
+    // Redireccionar a la URL externa en una nueva pestaña
+    navigate('/paymenttransition')
+
+    //  reset() //esta linea resetea el estado global del carrito  porque la app aun no tiene respuesta del pago
 
   };
- 
 
 
-    
+
+
 
   return (
     <div>
@@ -125,7 +125,7 @@ const CartComponent = () => {
         tone="light"
         withChevron={false}
       >
-        <Dropdown.Trigger>
+        <Dropdown.Trigger className="flex items-center">
           <Button>
             <ShoppingCart size={30} weight="duotone" className="mr-1.5" />
             Cart ({
@@ -133,56 +133,56 @@ const CartComponent = () => {
             })
           </Button>
         </Dropdown.Trigger>
-        <Dropdown.Content>
+        <Dropdown.Content className="rounded" >
           <Dropdown.Divider />
 
           <div>
-  {userReserve.map((item: any) => (
-    <Dropdown.Item className="my-2 justify-center items-center text-center">
-      <Button
-        onClick={() => handleDeleteItem(item.roomId)}
-        className="w-[80px]"
-        variant="danger"
-      >
-        <Trash size={25} weight="duotone" className="mr-1.5" />
-      </Button>
-      <div className="flex">
-        <div className="w-[100px] h-[100px] flex justify-center items-center text-center">
-          <img src={roomPhoto(item)} alt="" />
-        </div>
-        <div className="flex flex-col ml-2">
-          <div>{roomName(item)}</div>
-          <p>Dias: {calculateDays(item)}</p>
-          <p>Precio: ${item.price*calculateDays(item)}</p>
-        </div>
-      </div>
-    </Dropdown.Item>
-  ))}
-</div>
+            {userReserve.map((item: any) => (
+              <Dropdown.Item className="my-2 justify-center items-center text-center">
+                <Button
+                  onClick={() => handleDeleteItem(item.roomId)}
+                  className="w-[80px]"
+                  variant="danger"
+                >
+                  <Trash size={25} weight="duotone" className="mr-1.5" />
+                </Button>
+                <div className="flex">
+                  <div className="w-[100px] h-[100px] flex justify-center items-center text-center">
+                    <img src={roomPhoto(item)} alt="" />
+                  </div>
+                  <div className="flex flex-col ml-2">
+                    <div>{roomName(item)}</div>
+                    <p>Dias: {calculateDays(item)}</p>
+                    <p>Precio: ${item.price * calculateDays(item)}</p>
+                  </div>
+                </div>
+              </Dropdown.Item>
+            ))}
+          </div>
 
           <Dropdown.Divider color="slate" />
 
           <Dropdown.Divider color="dark" />
-          
+
           <Dropdown.Label
             className="flex justify-start items-center"
             weight="Bold"
           >
-           <div>Total:</div>
-            <span className="ml-20 flex justify-end items-center">
+            <div className="text-black">Total:</div>
+            <span className="ml-20 flex justify-end items-center text-green-500">
               <CurrencyDollar size={21} weight="duotone" />
             </span>
-             <div>
-                {calculateTotalPay()}
-             </div>
+            <div>
+              {calculateTotalPay()}
+            </div>
           </Dropdown.Label>
           <Dropdown.Divider />
           <Dropdown.Item
-          onClick={handleCheckout}
+            onClick={handleCheckout}
             color="green"
             className="flex justify-center items-center"
           >
-            <Money size={20} weight="duotone" className="mr-1.5"  />
+            <Money size={20} weight="duotone" className="mr-1.5" />
             Checkout
           </Dropdown.Item>
           <Dropdown.Divider />

@@ -13,10 +13,10 @@ export default function HomePage() {
 	const { fetchHotels } = hotelStore()
 	const [cookies, setCookie] = useCookies(["json"]);
 	const { saveInfo } = tokenStore();
-	
+
 
 	const findCookie = () => {
-		if(cookies.json) {
+		if (cookies.json) {
 			const arrayAux: [] = [];
 			const logeado = true
 			const userData = cookies.json && cookies.json.data;
@@ -45,21 +45,23 @@ export default function HomePage() {
 				<NavBar />
 
 			</div>
-			
+
 			<div className="p-10">
 				<div className="mt-[70px]">
 				</div>
 
 
-				
+
 
 
 				<div className="mt-8">
 					{searchResults?.length ? <HotelListSearch /> : <HotelList />}
 				</div>
 			</div>
+			<div className='mt-[4%]'>
+				<Footer />
+				</div>
 
-			<Footer />
 		</div>
 
 	);
