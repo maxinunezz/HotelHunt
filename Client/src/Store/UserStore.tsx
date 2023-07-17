@@ -62,7 +62,7 @@ export const userStore = create<States & Actions>((set) => ({
 
   deleteAccount: async (userId) => {
     try {
-      const {data} = await axios.delete(`http://localhost:3001/user/${userId}`)
+      const {data} = await axios.delete(`${url}/user/${userId}`)
       console.log(data);
       
     } catch (error) {
