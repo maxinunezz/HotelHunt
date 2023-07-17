@@ -17,5 +17,12 @@ export default defineConfig({
       },
     },
     react(),
+    root: "./src",
+  build: {
+    outDir: "dist",
+  },
+  rollupOptions: {
+    input: "main.tsx",
+  },
   ],
 })
