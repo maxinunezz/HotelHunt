@@ -378,7 +378,7 @@
         "name": "Standard Twin",
         "description": "2 camas Queen Size (1.40 x 2.00 mts) TV de LCD con servicio de televisión satelital Caja de seguridad Minibar Secador de pelo Escritorio Teléfono Sistema de calefacción y aire acondicionado individual",
         "photo": ["https://d1ofesossdj49a.cloudfront.net/h_285/TN/p_2475/Rooms_B-28_593431.jpg", "https://cdn.pixabay.com/photo/2016/04/15/11/43/hotel-1330831_640.jpg", "https://cdn.pixabay.com/photo/2019/05/28/00/15/indoors-4234071_640.jpg", "https://cdn.pixabay.com/photo/2016/08/29/10/42/buddha-bar-hotel-budapest-1627852_640.jpg"],
-        "pax": 5,
+        "pax": 4,
         "services": ["Balcon", "TV", "Aire acondicionado", "Baño privado", "MiniBar"],
         "price": "230",
         "floorNumber": "6",
@@ -508,7 +508,7 @@
         "name": "Classic pequeña",
         "description": "Las habitaciones Classic son espaciosas y cómodas. El mobiliario de madera clara crea un ambiente elegante, mientras que la vista a la ciudad constituye un telón de fondo encantador. También ofrecemos acceso por cable a Internet de alta velocidad.",
         "photo": ["https://s7d1.scene7.com/is/image/marriotts7prod/si-buesc-king-classic-small-31692-52675:Wide-Hor?wid=1336&fit=constrain", "https://img.freepik.com/fotos-premium/habitaciones-hotel-modernas-elegantes_1417-8490.jpg", "https://images.trvl-media.com/lodging/2000000/1670000/1665300/1665211/3cd9267e.jpg?impolicy=fcrop&w=1200&h=800&p=1&q=medium"],
-        "pax": 1,
+        "pax": 2,
         "services": ["Escritorio", "Baño privado ", "Aire acondicionado", "Desayuno incluido", "Caja de seguridad"],
         "price": "160",
         "floorNumber": "6",
@@ -548,7 +548,7 @@
         "name": "Cuadruple",
         "description": "Con una espectacular vista al Lago Nauhel Huapi, estas habitaciones disponen de un Sommier matrimonial queen size + un sommier individual o 4 sommiers individuales , permitiendo una ocupación máxima de 4 personas por habitación.",
         "photo": ["https://media-cdn.tripadvisor.com/media/photo-s/0f/42/ac/d8/habitacion-cuadruple.jpg", "https://www.hoteltierrainka.com/images/habitaciones/h_cuadruple_001.jpg","https://www.hoteltierrainka.com/images/habitaciones/h_triple_001.jpg"],
-        "pax": 1,
+        "pax": 4,
         "services": ["Calefaccion", "Caja de seguridad", "Baño privado", "TV"],
         "price": "210",
         "floorNumber": "6",
@@ -678,7 +678,7 @@
         "name": "Junior Suite",
         "description": "Para aquellos que esperan aún más. Más espacio, más exclusividad... Un amplio dormitorio con cama de matrimonio, sala de estar y una terraza más grande, totalmente equipada para los días soleados",
         "photo": ["https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/3/js1496.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/3/js3973.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/3/lavabo-suite2283.jpg", "https://www.hotelcalipolis.com/content/imgsxml/galerias/panel_habitaciones/3/junior-suite11730.jpg"],
-        "pax": 3,
+        "pax": 2,
         "services": ["Balcon", "Sofa", "Baño privado", "Caja de seguridad"],
         "price": "200",
         "floorNumber": "11",
@@ -758,7 +758,7 @@
         "name": "SUITE OLIMPO",
         "description": "Esta elegante suite es ideal para alojar a nuestros visitantes más importantes y posee una vista espectacular del Lima Golf Club. Cuenta con una sala de estar, comedor, kitchenette, baño para visitas, un encantador dormitorio con cama King y un amplio y lujoso baño principal de mármol blanco que incluye sauna y jacuzzi. La Suite Olimpo está equipada con conexión inalámbrica a Internet, Smart TV curvo de 65 con señal digital,vestidor, dos líneas telefónicas con buzón de voz, despertador, caja de seguridad, plancha y tabla de planchar y un mini bar. En su ambiente distinguido, la Suite Olimpo tambien es ideal para impresionar durante sus cenas y reuniones de negocios.",
         "photo": ["https://image-tc.galaxy.tf/wijpeg-47mkdpclcbxmu5ovwpromghft/hotellosdelfines-2018-511_wide.jpg?crop=0%2C94%2C1800%2C1013&width=1140", "https://image-tc.galaxy.tf/wijpeg-9a5a4rpfp2o4ou84ix3c90hak/delfines-hotel-peru-lima-accommodation-olimpo-suite-room-tripadvisor-booking-living-room_wide.jpg?crop=0%2C63%2C1200%2C675&width=1140", "https://image-tc.galaxy.tf/wijpeg-bhh5i6rm9wuht6kjkmiakztzi/delfines-hotel-peru-lima-accommodation-olimpo-suite-room-tripadvisor-booking-living-room_wide.jpg?crop=0%2C105%2C2000%2C1125&width=1140", "https://image-tc.galaxy.tf/wijpeg-bhh5i6rm9wuht6kjkmiakztzi/delfines-hotel-peru-lima-accommodation-olimpo-suite-room-tripadvisor-booking-living-room_wide.jpg?crop=0%2C105%2C2000%2C1125&width=1140", "https://image-tc.galaxy.tf/wijpeg-30c02z1cf1o3d8hxyw2x1zl8v/delfines-hotel-peru-lima-accommodation-olimpo-suite-room-tripadvisor-booking-kitchen_wide.jpg?crop=0%2C56%2C1223%2C688&width=1140", "https://image-tc.galaxy.tf/wijpeg-8cq2hvvuv1q3wzrv8x46vwqpb/delfines-hotel-peru-lima-accommodation-olimpo-suite-room-tripadvisor-booking-sauna_wide.jpg?crop=0%2C105%2C2000%2C1125&width=1140", "https://image-tc.galaxy.tf/wijpeg-6nnwgo0p63wvlzoerbtrtousm/delfines-hotel-peru-lima-accommodation-olimpo-suite-room-tripadvisor-booking-bathroom_wide.jpg?crop=0%2C105%2C2000%2C1125&width=1140"],
-        "pax": 5,
+        "pax": 2,
         "services": ["Sala de estar", "Cocina", "Baño privado", "MiniBar", "Jacuzzi", "Sauna"],
         "price": "300",
         "floorNumber": "5",
@@ -778,7 +778,7 @@
         "name": "Habitacion Junior Suite",
         "description": "Al entrar en una Junior Suite experimentará una agradable sensación de completa tranquilidad que ofrece la combinación de una decoración mediterránea en un único espacio. Encontrará dos zonas amplias de salón y dormitorio diáfano, pero bien definidas para dormir y trabajar. Ideal para huéspedes que buscan un refugio tranquilo y acogedor.",
         "photo": ["https://hotellalaguna.com/wp-content/uploads/2017/10/Habitaci%C3%B3n-Junior-Suite-4-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/Habitaci%C3%B3n-Junior-Suite-bis-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitaci%C3%B3n-Junior-Suite-1-768x512.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/Terraza-Junior-Suite-768x512.jpg"],
-        "pax": 4,
+        "pax": 2,
         "services": ["Caja de seguridad", "Aire acondicionado", "TV", "Wi-Fi", "Secador de pelo", "Sala de estar"],
         "price": "90",
         "floorNumber": "7",
@@ -788,7 +788,7 @@
         "name": "Suite Presidencial",
         "description": "Superficie: 82 m² Esta suite incluye dos (3) cuartos de baño, una zona de estar independiente con TV por cable y privilegiada vista al parque 9 de Julio ",
         "photo": ["https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/BPa9k6YNYNNgXzsOFeGH-cropped.jpg", "https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/uAlfUC21ocv5ef2N0QS6-cropped.jpg", "https://hotelcatalinastucuman.com.ar/storage/habitaciones/October2022/zfB4UPUrSPYkwDwxO56J-cropped.jpg"],
-        "pax": 5,
+        "pax": 2,
         "services": ["Aire acondicionado", "Caja de seguridad", "Calefaccion", "Sofa", "Escritorio", "Secador de pelo", "Wi-Fi", "TV"],
         "price": "220",
         "floorNumber": "10",
@@ -798,12 +798,13 @@
         "name": "Suite Premium con bañera de hidromasaje",
         "description": "Una habitación para aquellos que aprecian la comodidad y la calidad más exquisita, visible en el cuidado de los innumerables detalles de este renovado hotel lleno de estilo. Disfrute de una lujosa y amplia habitación. Situada en la parte más tranquila del edificio e inundada de luz natural, la Suite Premium con bañera de hidromasaje ofrece a los huéspedes un remanso de tranquilidad que la convierte en la elección perfecta para las parejas en sus escapadas especiales hasta para estancias más largas. La cama de está preciosa habitación es matrimonial y de gran tamaño: 2 metros por 2 metros.",
         "photo": ["https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-suite-premium-DSC_0508.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-suite-premium-DSC_0530.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-suite-premium-DSC_0523.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-suite-premium-DSC_0535.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-suite-premium-DSC_0618.jpg", "https://hotellalaguna.com/wp-content/uploads/2017/10/habitacion-suite-premium-DSC_0544.jpg"],
-        "pax": 3,
+        "pax": 2,
         "services": ["Caja de seguridad", "Aire acondicionado", "TV", "Wi-Fi", "Secador de pelo", "Sala de estar"],
         "price": "250",
         "floorNumber": "6",
         "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
       }
     ]
-  }
+}
+  
   
