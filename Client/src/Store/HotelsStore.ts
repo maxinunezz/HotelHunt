@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { create } from 'zustand';
 import { Hotel } from '../models';
+const url = import.meta.env.VITE_URL;
 
 
 type States = {
@@ -27,7 +28,7 @@ export const hotelStore = create<States & Actions>((set) => ({
 	...initialState,
 
 	fetchHotels: async () => {
-		const { data } = await axios.get<Hotel[]>('http://localhost:3001/hotel');
+		const { data } = await axios.get<Hotel[]>(`${url}/hotel`);
 
 		set((state) => ({
 			...state,
