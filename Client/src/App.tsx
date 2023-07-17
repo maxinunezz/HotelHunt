@@ -19,6 +19,7 @@ import UserSettings from './Pages/UserSettings/UserSettings';
 import ShoppingCartPage from './Pages/ShoppingCartPage/ShoppingCartPage';
 import CheckoutTransitionPage from './Pages/CheckoutTransitionPage/CheckoutTransitionPage';
 import RoomFilter from './Pages/RoomFilter/RoomFilter';
+import FormPageHotelUpdate from './Pages/FormPageH/FormPageHotelUpdate';
 
 function App() {
 	return (
@@ -34,6 +35,7 @@ function App() {
 				<Route path='/adminprofile/configuracion' element={<AdminSettings />}></Route>
 				<Route path="/dashboard" element={<DashBoardPage />}></Route>
 				<Route path="/dashboard/hoteldetail/:id" element={<DashboardPageHotelDetail />}></Route>
+				<Route path="/dashboard/hotelupdate/:id" element={<FormPageHotelUpdate />}></Route>
 				<Route path="/formHotel" element={<FormPageH />}></Route>
 				<Route path="/formRoom" element={<FormPageR />}></Route>
 				<Route path="/usercreate" element={<FormPageUser />}></Route>

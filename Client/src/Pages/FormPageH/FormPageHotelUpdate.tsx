@@ -1,6 +1,6 @@
 import { Button, FormControl } from '@rewind-ui/core';
 import { Form, Formik, FormikHelpers } from 'formik';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import * as yup from 'yup';
 import BackButton from '../../components/BackButton/BackButton';
 // import { AiOutlineReload } from 'react-icons/ai';
@@ -8,9 +8,10 @@ import { ArrowCounterClockwise } from '@phosphor-icons/react';
 import axios from 'axios';
 import { errorToast, successToast } from '../../components/toast';
 import Hotel from "./Hotel.png"
-import { tokenStore } from '../../Store';
-import { useNavigate } from 'react-router-dom';
+import { hotelStore, roomsStore, tokenStore } from '../../Store';
+import { useNavigate, useParams } from 'react-router-dom';
 const url = import.meta.env.VITE_URL;
+
 
 
 
@@ -44,10 +45,22 @@ const formValidationSchema = yup.object().shape({
 		.max(2, 'Maximo 2 digitos'),
 });
 
-export default function FormPageH() {
+export default function FormPageHotelUpdate() {
+	const { id } = useParams()
 	const navigate = useNavigate()
 	const [isCreated, setIsCreated] = useState(false);
 	const token = tokenStore((state) => state.userState)
+	const { fetchHotels } = hotelStore()
+	const allHotels = hotelStore((state) => state.hotels)
+	const currentHotelData = allHotels.find((hotel) => hotel.id === id);
+
+console.log(currentHotelData);
+console.log(allHotels);
+	
+
+	useEffect(() => {
+		fetchHotels()
+	}, [])
 
 	const CLOUD_NAME = "hotelmatimaxi4342";
 	const UPLOAD_PRESET = "hotel_pf";
@@ -65,10 +78,10 @@ export default function FormPageH() {
 	const handleSubmit = useCallback(
 		async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
 			try {
-				console.log(token[1]);
+				console.log(token[0]);
 
-				const data = await axios.post(
-					`${url}/dashboard/hotel/`,
+				const data = await axios.put(
+					`${url}/dashboard/hotel/${id}`,
 					{
 						name: values.name,
 						description: values.description,
@@ -84,10 +97,10 @@ export default function FormPageH() {
 						},
 					}
 				);
-				
+
 				helpers.resetForm()
 				setIsCreated(true);
-				successToast('Hotel creado correctamente');
+				successToast('Hotel actualizado correctamente');
 				console.log('data', data);
 				navigate(-1)
 			} catch (error) {
@@ -103,7 +116,7 @@ export default function FormPageH() {
 		<div className="flex h-screen">
 			<div className="w-full bg-blue-500 flex flex-col justify-center">
 				<img src={Hotel} alt="Imagen" className="mx-auto max-w-full" />
-				<h2 className="text-3xl text-white font-bold px-8 text-center">Título del área azul</h2>
+				<h2 className="text-3xl text-white font-bold px-8 text-center">Actualiza tu info</h2>
 			</div>
 			<div className="w-full bg-gray-800 shadow-lg p-8 overflow-y-auto">
 				<div className="max-h-full">
@@ -111,7 +124,7 @@ export default function FormPageH() {
 						<BackButton />
 					</div>
 					<h2 className="text-2xl font-bold mb-4 text-blue-500 text-center">
-						✨REGISTRO DE HOTELES✨
+						✨HOTEL UPDATE✨
 					</h2>
 					{isCreated && (
 						<p className="text-green-500">El formulario se creó con éxito.</p>
@@ -148,7 +161,7 @@ export default function FormPageH() {
 										</FormControl.Label>
 										<FormControl.Input
 											type="text"
-											placeholder="Nombre"
+											placeholder={`Current name: ${currentHotelData?.name}`}
 											onChange={async (event) => {
 												await setFieldValue('name', event.target.value);
 											}}
@@ -171,7 +184,7 @@ export default function FormPageH() {
 											Descripcion
 										</FormControl.Label>
 										<FormControl.Textarea
-											placeholder="Descripcion"
+											placeholder={`Current description: ${currentHotelData?.description}`}
 											onChange={async (event) => {
 												await setFieldValue('description', event.target.value);
 											}}
@@ -196,7 +209,7 @@ export default function FormPageH() {
 										</FormControl.Label>
 										<FormControl.Input
 											type="text"
-											placeholder="Pais"
+											placeholder={`Current country: ${currentHotelData?.country}`}
 											onChange={async (event) => {
 												await setFieldValue('country', event.target.value);
 											}}
@@ -221,7 +234,7 @@ export default function FormPageH() {
 										</FormControl.Label>
 										<FormControl.Input
 											type="text"
-											placeholder="Ciudad"
+											placeholder={`Current city: ${currentHotelData?.city}`}
 											onChange={async (event) => {
 												await setFieldValue('city', event.target.value);
 											}}
@@ -304,9 +317,7 @@ export default function FormPageH() {
 											type="number"
 											min="1"
 											max="5"
-											placeholder="category"
-											min="1"
-											max="5"
+											placeholder={`Current category: ${currentHotelData?.hotelCategory}`}
 											onChange={async (event) => {
 												await setFieldValue('category', event.target.value);
 											}}
@@ -331,7 +342,7 @@ export default function FormPageH() {
 										</FormControl.Label>
 										<FormControl.Input
 											type="text"
-											placeholder="services"
+											placeholder={`Current services: ${currentHotelData?.services}`}
 											onChange={async (event) => {
 												await setFieldValue('services', event.target.value);
 											}}
@@ -347,7 +358,7 @@ export default function FormPageH() {
 											type="submit"
 											size="lg"
 										>
-											Registrar
+											Update
 										</Button>
 										<Button
 											className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-md ml-4"
