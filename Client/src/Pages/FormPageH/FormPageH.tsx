@@ -68,7 +68,7 @@ export default function FormPageH() {
 				console.log(token[1]);
 
 				const data = await axios.post(
-					`{url}/dashboard/hotel/`,
+					`${url}/dashboard/hotel/`,
 					{
 						name: values.name,
 						description: values.description,
