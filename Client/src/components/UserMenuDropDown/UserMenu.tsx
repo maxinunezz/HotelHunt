@@ -8,14 +8,14 @@ import { farewellToast } from '../toast';
 const UserMenu = () => {
     const navigate = useNavigate()
     const isAdmin = tokenStore((state) => state.userState)  //análogo a AdminMenu  
-    const { reset } = tokenStore()
+    const { resetToken } = tokenStore()
 
 
 
     const handleClick = (event) => {
         event.preventDefault()
         document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        reset()
+        resetToken()
         farewellToast("Adiós y buena suerte!")
         navigate('/farewell')
     }
