@@ -3,12 +3,14 @@ const { Booking, Room, User, Auth } = require('../db');
 const { Op } = require('sequelize');
 const stripe = new Stripe('sk_test_51NTrfKHJDBCJMNrhc1URooDk9yKEJU0TONg60genqgT77WYcIyNQlhGdEa7Gn7pvado3D6WLIbXwDwKlGBitKNF000mPbEiXwv');
 const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 async function createBooking(req, res) {
+  
   try {
     const { id } = userData
     const { roomsToReserve } = req.body;
-    
+
 
     if (!roomsToReserve || !Array.isArray(roomsToReserve) || roomsToReserve.length === 0) {
       return res.status(400).json({ error: "No rooms to reserve provided" });
@@ -57,14 +59,14 @@ async function createBooking(req, res) {
           checkout,
           paymentStatus: "unpaid",
         });
-  
+
         bookings.push(booking);
-        
-      }else{
+
+      } else {
         return res.status(400).json({ error: `Room with ID ${roomId} is already reserved for the selected dates` });
       }
 
-      
+
     }
 
     const calculateDays = (item) => {
@@ -99,22 +101,21 @@ async function createBooking(req, res) {
 
     const sessionId = session.id;
     const urlpago = session.url;
-    await confirmationEmail(id, urlpago, rooms.name, req.body.checkin, req.body.checkout, user.name);
-    
+    await confirmationEmail(id, urlpago, user.name);
+
 
     res.status(200).json({ sessionId, urlpago, bookings })
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 }
-  
 
-const confirmationEmail = async (id, urlpago, roomName, checkin, checkout, name) => {
+
+const confirmationEmail = async (id, urlpago, name) => {
   try {
     const getUserEmail = async (id) => {
       const authUser = await Auth.findOne({
-        where: { id },
-        attributes: ['email']
+        where: { userId: id }
       });
 
       if (authUser) {
@@ -125,33 +126,31 @@ const confirmationEmail = async (id, urlpago, roomName, checkin, checkout, name)
     };
 
     const userEmail = await getUserEmail(id);
+    const { PASSMAIL, COMPANYMAIL } = process.env;
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
       auth: {
-        user: 'hotelhuntservices@gmail.com',
-        pass: 'jxovkrctxiokhbwj'
+        user: COMPANYMAIL,
+        pass: PASSMAIL,
       }
     });
+    console.log(userEmail)
 
-    const mailOptions = {
-      from: 'hotelhuntservices@gmail.com',
-      to: userEmail,
-      subject: 'Confirmación de la reserva',
-      text: `¡Gracias ${name} por reservar con nosotros!
+    await transporter.sendMail({
+      from: `"Hotel Hunt"  <${COMPANYMAIL}>`, 
+      to: userEmail, 
+      subject: 'Confirmación de la reserva', 
+      html: 
+      `¡Gracias ${name} por reservar con nosotros!
       En tu perfil, de nuestra página, puedes ver los detalles de la/s reserva/s.
-      En caso de no haber realizado el pago haga click en el siguente link: ${urlpago}.
+      En caso de no haber realizado el pago haga click en el siguente link: ${urlpago}
       Recuerda realizar el pago en las proximas 24 horas o la reserva será dada de baja.
-      ¡Gracias por elegir HotelHunt!`,
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Correo electrónico enviado: ' + info.response);
-      }
+      ¡Gracias por elegir HotelHunt!`, 
     });
+
   } catch (error) {
     console.log('Error en el servidor');
   }
@@ -159,39 +158,41 @@ const confirmationEmail = async (id, urlpago, roomName, checkin, checkout, name)
 
 
 const obtenerIdSeccion = async (req, res) => { // para q?
-    try {
-      const sessionId = req.query.sessionId;
-      console.log(sessionId)
-  
-      const session = await stripe.checkout.sessions.retrieve(sessionId);
-  
-      return res.json(session);
-    } catch (error) {
-      return res.status(500).send("Error al obtener información de la sesión de pago");
-    }
+  try {
+    const sessionId = req.query.sessionId;
+    console.log(sessionId)
+
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+    return res.json(session);
+  } catch (error) {
+    return res.status(500).send("Error al obtener información de la sesión de pago");
+  }
 };
 
-const getReserves = async (req,res) => {
+const getReserves = async (req, res) => {
   const { id } = userData;
-  
-  try {
-      const reserves = await Booking.findAll({where:{
-          userId: id
-      }})
-      if(reserves){
-        return res.status(200).json(reserves);
-      }else{
-        return res.status(404).send('No se encontraron reservas')
-      }
 
-  }catch(error){
-      return res.status(500).json(error)
+  try {
+    const reserves = await Booking.findAll({
+      where: {
+        userId: id
+      }
+    })
+    if (reserves) {
+      return res.status(200).json(reserves);
+    } else {
+      return res.status(404).send('No se encontraron reservas')
+    }
+
+  } catch (error) {
+    return res.status(500).json(error)
   }
-} 
+}
 
 module.exports = {
   createBooking,
-    obtenerIdSeccion,
-    confirmationEmail,
-    getReserves
+  obtenerIdSeccion,
+  confirmationEmail,
+  getReserves
 };

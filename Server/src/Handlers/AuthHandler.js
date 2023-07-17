@@ -35,8 +35,7 @@ const AuthHandler = async (req, res) => {
         const token = jwt.sign({id: user.id, admin: user.admin}, JWT_SECRET, { expiresIn: '6h' });
 
         const admin = user.admin;
-        const data = {id: user.id, name: user.name, lastName: user.lastName, birthDate: user.birthDate, phoneNumber: user.phoneNumber, createdAt: user.createdAt }
-        console.log(token)
+        const data = {id: user.id, email: email, name: user.name, lastName: user.lastName, birthDate: user.birthDate, phoneNumber: user.phoneNumber, createdAt: user.createdAt }
 
         return res.status(200).json({token, admin, data});
 

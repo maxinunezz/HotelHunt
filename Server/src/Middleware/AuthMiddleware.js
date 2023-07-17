@@ -12,11 +12,9 @@ const authMiddleware = (req, res, next) => {
     console.log(authorization);
     try {
       const token = authorization.split(" ")[1].replace(/"/g, '');
-      console.log(token);
-  
+      
       const decodedToken = jwt.verify(token, JWT_SECRET ); 
 
-      console.log(decodedToken);
       
 
       if (decodedToken && !isTokenExpired(decodedToken)) {
