@@ -10,6 +10,7 @@ import { errorToast, successToast } from '../../components/toast';
 import Hotel from "./Hotel.png"
 import { tokenStore } from '../../Store';
 import { useNavigate } from 'react-router-dom';
+const url = import.meta.env.VITE_URL;
 
 
 
@@ -64,10 +65,10 @@ export default function FormPageH() {
 	const handleSubmit = useCallback(
 		async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
 			try {
-				console.log(token[0]);
+				console.log(token[1]);
 
 				const data = await axios.post(
-					'http://localhost:3001/dashboard/hotel/',
+					`${url}/dashboard/hotel/`,
 					{
 						name: values.name,
 						description: values.description,
@@ -302,6 +303,8 @@ export default function FormPageH() {
 										<FormControl.Input
 											type="number"
 											placeholder="category"
+											min="1"
+											max="5"
 											onChange={async (event) => {
 												await setFieldValue('category', event.target.value);
 											}}
