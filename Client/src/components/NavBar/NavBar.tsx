@@ -8,6 +8,7 @@ import { UserCircle } from '@phosphor-icons/react';
 import { useEffect, useState } from "react";
 import CartComponent from '../CartComponent/CartComponent';
 
+
 export default function NavBar() {
   const navigate = useNavigate();
   const isLogged = tokenStore((state) => state.userState);
