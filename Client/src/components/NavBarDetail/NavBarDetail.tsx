@@ -22,7 +22,7 @@ export default function NavbarDetail() {
           <ul className="flex ml-8">
             <li className="mr-4 flex items-center">
               <House onClick={() => navigate('/')} size={32} weight="thin" className="mr-4 text-blue-500" />
-              <a href="#" className="text-white">Inicio</a>
+              <a className="text-white">Inicio</a>
             </li>
             <li className="mr-4 flex items-center">
               <Phone size={32} weight="thin" className="mr-4 text-blue-500" />
