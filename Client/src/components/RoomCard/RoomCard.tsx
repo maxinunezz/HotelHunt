@@ -33,23 +33,25 @@ const RoomCard: React.FC<RoomCardProps> = ({
           <img src={mainPhoto} alt="Foto de la habitación" className="w-full h-full object-cover" style={{ objectFit: 'cover' }} />
         </div>
       </div>
-  
+
       <div className="p-[15px]">
-      <div className="text-right">
-            <h2 className="font-bold text-md">Categoría: {hotelCategory}</h2>
-          </div>
-        <h2 className="text-[20px] font-bold h-[40px] overflow-hidden">{name}</h2>
-  
-        <div className="mb-[30px]">
+        
+        <h2 className="text-[20px] font-bold h-[55px] overflow-hidden">{name}</h2>
+
+        <div className="mb-[10px]">
           <p className="mb-[10px]">Servicios: {services}</p>
-          <p className="mb-[10px] text-green-400 font-bold">{disabled ? "No disponible" : "Disponible"}</p>
+          <div className="flex items-center">
+            <p className="mb-0 text-green-400 font-bold">{disabled ? "No disponible" : "Disponible"}</p>
+
+          </div>
+          <h2 className="font-bold text-md">Categoría: {hotelCategory}</h2>
         </div>
-  
+
         <div className="flex justify-end">
           <div className="text-right">
             <h2 className="font-bold text-lg">Precio: $ {price}</h2>
           </div>
-          
+
           <div className="flex items-center ml-[125px]">
             <Person size={20} color="#317ba0" weight="fill" />
             <p className="mb-0">{pax}</p>
@@ -58,7 +60,11 @@ const RoomCard: React.FC<RoomCardProps> = ({
       </div>
     </div>
   );
-  
+
+
+
+
+
 }
 
 export default RoomCard;
