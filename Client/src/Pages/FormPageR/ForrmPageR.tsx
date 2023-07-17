@@ -2,6 +2,7 @@ import React from 'react';
 import create from 'zustand';
 import { AiOutlineReload } from 'react-icons/ai';
 import axios from 'axios';
+const url = import.meta.env.VITE_URL;
 
 type FormState = {
 	hotel: string;
@@ -83,7 +84,7 @@ const FormPageR: React.FC = () => {
 				formData.append('photo', image);
 			}
 
-			const response = await axios.post('http://localhost:3001/room', formData);
+			const response = await axios.post(`{url}/room`, formData);
 			
 			resetForm();
 		} catch (error) {
