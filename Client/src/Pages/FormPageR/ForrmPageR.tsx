@@ -84,7 +84,7 @@ const FormPageR: React.FC = () => {
 				formData.append('photo', image);
 			}
 
-			const response = await axios.post(`{url}/room`, formData);
+			const response = await axios.post(`${url}/room`, formData);
 			
 			resetForm();
 		} catch (error) {
