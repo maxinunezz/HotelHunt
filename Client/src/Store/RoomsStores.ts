@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { create } from 'zustand';
 import calculatePageNumbers from '../utils/calculatePageNamber';
+const url = import.meta.env.VITE_URL;
 
 interface Room {
 	key: string;
@@ -45,7 +46,7 @@ export const roomsStore = create<States & Actions>((set) => ({
 
 	fetchRooms: async () => {
 	
-		const { data } = await axios.get('http://localhost:3001/room');
+		const { data } = await axios.get(`${url}/room`);
 
 
 		if (data.length > 0) {
@@ -60,7 +61,7 @@ export const roomsStore = create<States & Actions>((set) => ({
 		const arrayAux: Room[] = [];
 		
 
-		return await axios.get(`http://localhost:3001/room`).then((response) => {
+		return await axios.get(`${url}/room`).then((response) => {
 			const allroomsAux = response.data;
 			
 
@@ -83,7 +84,7 @@ export const roomsStore = create<States & Actions>((set) => ({
 
 	setRoom: async (roomId) => {
 		const auxArray: Room[] = [];
-		return await axios.get(`http://localhost:3001/room`).then((response) => {
+		return await axios.get(`${url}/room`).then((response) => {
 			const allroomsAux = response.data;
 			for (let i = 0; i < allroomsAux?.length; i++) {
 				if (allroomsAux[i].id === roomId) {

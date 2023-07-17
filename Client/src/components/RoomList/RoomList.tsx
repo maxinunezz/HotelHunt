@@ -34,6 +34,7 @@ const RoomList = () => {
 									photo={room.photo}
 									floorNumber={room.floorNumber}
 									disabled={room.disabled}
+									hotelCategory={room.hotelCategory}
 								/>
 							</Link>
 						);

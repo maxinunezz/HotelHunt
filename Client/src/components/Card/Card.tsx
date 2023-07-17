@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({
 }) => {
 
 	return (
-		<div className="bg-white h-80 max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
+		<div className="bg-white h-[460px] max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
 			<img
 				src={photo}
 				alt={name}

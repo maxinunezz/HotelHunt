@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { create } from 'zustand';
 import { Hotel } from '../models';
+const url = import.meta.env.VITE_URL;
 
 type States = {
 	searchResults: Hotel[];
@@ -27,7 +28,7 @@ export const searchStore = create<States & Actions>((set) => ({
 		
 		
 		return await axios.post(
-			`http://localhost:3001/hotel/search`, data
+			`${url}/hotel/search`, data
 		).then((response) => {
 			if(response.data.length > 0) {
 				const result = response.data;
