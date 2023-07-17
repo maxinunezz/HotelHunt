@@ -1,15 +1,14 @@
-import { ClipboardText, Gear, GridNine, SignOut, User } from '@phosphor-icons/react';
+import { ClipboardText, Gear, GridNine, House, SignOut, User } from '@phosphor-icons/react';
 import { useNavigate } from 'react-router-dom';
 import { tokenStore } from '../../Store';
 import { farewellAdminToast } from '../toast';
 
 export default function ProfileSideBar() {
     const navigate = useNavigate()
-    const isAdmin = tokenStore((state) => state.userState)
     const { reset } = tokenStore()
     const handleClick = (event) => {
         event.preventDefault()
-        console.log(isAdmin[0])
+        document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         reset()
         farewellAdminToast("Gracias y éxito en sus ventas")
         navigate('/farewell')
@@ -28,8 +27,17 @@ export default function ProfileSideBar() {
                           <button onClick={() => navigate(-1)} className="bg-blue-500 font-bold w-[80px] border-black rounded">Back</button>
             </a>
 
+
             <div className="flex flex-col justify-between flex-1 mt-6">
                 <nav className="-mx-3 space-y-6">
+
+                    <div className="space-y-3">
+                        <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
+                            <House size={20} color="#fffafa" />
+                            <span className="mx-2 text-sm font-medium" onClick={() => navigate('/')}>Inicio</span>
+                        </a>
+                    </div>
+
                     <div className="space-y-3">
                         <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
                             cuenta
@@ -48,7 +56,7 @@ export default function ProfileSideBar() {
                         </a>
                     </div>
 
-                    {isAdmin && (
+                    
                         <div className="space-y-3 ">
                             <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
                                 Analisis
@@ -62,7 +70,7 @@ export default function ProfileSideBar() {
                                 </span>
                             </a>
                         </div>
-                    )}
+                    
 
                     <div className="space-y-3 ">
                         <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
@@ -105,6 +113,11 @@ export default function ProfileSideBar() {
                         </button>
                     </div>
                 </nav>
+
+                <div>
+                        <p className=" text-xs text-white ">© 2022 - Todos los derechos reservados</p>
+                    </div>
+
             </div>
         </aside>
     )

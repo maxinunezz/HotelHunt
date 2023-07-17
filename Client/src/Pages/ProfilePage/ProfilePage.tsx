@@ -17,7 +17,7 @@ const ProfilePage = () => {
   <div className="flex">
     <ProfileSideBar />
     <div className="w-3/4 mx-auto p-8">
-      <h3 className="text-2xl font-bold mb-6 ml-4">Cuenta de Administrador</h3>
+      <h3 className="text-2xl font-bold mb-6 ml-4">Cuenta de Usuario</h3>
       <div className="bg-white rounded shadow p-6 grid grid-cols-2 gap-6">
         <div>
           <div className="mb-4">
