@@ -10,5 +10,3 @@ interface ImportMetaEnv {
   interface ImportMeta {
     readonly env: ImportMetaEnv
   }
-
-///CLIENT_GOOGLE_ID="302631688539-a4hemnv3hsck7g1qjk9ti37s2t5mmvnh.apps.googleusercontent.com"

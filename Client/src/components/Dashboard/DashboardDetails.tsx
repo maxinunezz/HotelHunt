@@ -8,14 +8,14 @@ export default function DashboardDetails() {
     const { getHotelByUser } = tokenStore()
     const navigate = useNavigate()
     const token = tokenStore((state) => state.userState)
+    const url = import.meta.env.VITE_URL;
 
     const [hotelByUser, setHotelByUser] = useState()
-    console.log(token[1])
 
     const getHotels = async () => {
         try {
             const response = await axios.get(
-                'http://localhost:3001/dashboard/',
+                `${url}/dashboard`,
                 {
                     headers:
                     {
@@ -24,7 +24,6 @@ export default function DashboardDetails() {
                     },
                 },
             )
-            console.log(token[0])
             if (response.data) {
 
                 setHotelByUser(response.data);

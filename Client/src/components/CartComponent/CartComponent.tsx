@@ -95,13 +95,12 @@ const CartComponent = () => {
     }
 
     const data = {
-      userId: token[0].id,
       roomsToReserve: userReserve
     };
     console.log(data);
-
-    await roomPayment(data);
-
+  
+   await roomPayment(data, token[1]);
+  
     // Redireccionar a la URL externa en una nueva pestaña
     navigate('/paymenttransition')
 
