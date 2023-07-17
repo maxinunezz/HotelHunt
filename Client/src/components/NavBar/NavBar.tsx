@@ -33,15 +33,17 @@ export default function NavBar() {
 
   
   useEffect(() => {
-	  console.log(orderByNameState)
     orderByName(allHotels, orderByNameState);
     orderByNameSearch(searchResults, orderByNameState)
+	setOrderByNameState("")
+	setOrderByCategoryState("")
   }, [orderByNameState]);
 
   useEffect(() => {
-	  console.log(orderByNameState)
     orderByCategory(allHotels, orderByCategoryState);
     orderByCategorySearch(searchResults, orderByCategoryState)
+	setOrderByNameState("")
+	setOrderByCategoryState("")
   }, [orderByCategoryState]);
 
   const handleRoomSearch=()=>{
@@ -106,7 +108,9 @@ export default function NavBar() {
 						</div>
 					)
 			}
-        <CartComponent/>
+        {
+			isLogged.length ? <CartComponent/> : null
+		}
 
 		</nav>
 	);

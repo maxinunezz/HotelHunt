@@ -15,6 +15,8 @@ import {
   reserveErrorToast,
   reserveSuccessToast,
   reserveFullToast,
+  filterResetToast,
+  invalidDatesToast,
 } from "../../components/toast";
 import { toast } from "react-hot-toast";
 
@@ -31,7 +33,7 @@ const RoomPage = () => {
   const { setRoom } = roomsStore();
   const [roomRender, setRoomRender] = useState();
   const [arrivalDate, setArrivalDate] = useState("");
-  const [departureDate, setDepartureDate] = useState(null);
+  const [departureDate, setDepartureDate] = useState("");
   const [date, setDate] = useState({ in: "", out: "" });
   const [reserve, setReserve] = useState<ReserveBooking[] | null>(null);
   const token = tokenStore((state) => state.userState);
@@ -98,6 +100,10 @@ const RoomPage = () => {
 
 
   const handleReserve = () => {
+    if(arrivalDate.length === 0 || departureDate?.length === 0) {
+      invalidDatesToast("Please select valid dates")
+      return
+    }
     if (userReserve.length === 4) {
       reserveFullToast("4 reservas máximas");
       return false;
@@ -105,13 +111,13 @@ const RoomPage = () => {
 
     if(!token.length){
       navigate('/login')
+      return
     }
 
     const newReserve: ReserveBooking = {
       roomId: id,
       checkin: date.in,
-      checkout: date.out,
-     
+      checkout: date.out,     
       price: roomRender.price,
     };
 
@@ -119,10 +125,7 @@ const RoomPage = () => {
   
         reserveErrorToast("Establezca al menos una noche");
        return
-  }
-
-
-   
+  }   
 
     setReserve([newReserve]);
 
@@ -199,6 +202,7 @@ const RoomPage = () => {
 
                 ))}
               </ul>
+              <button onClick={() => navigate(-1)} className="bg-blue-500 font-bold w-[80px] border-black rounded">Back</button>
             </div>
           </div>
         </div>

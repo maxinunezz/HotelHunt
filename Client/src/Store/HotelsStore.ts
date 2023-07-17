@@ -11,9 +11,9 @@ type States = {
 
 type Actions = {
 	fetchHotels: () => Promise<void>;
-	setCurrentPage: (pageNum:number) => void;
-	orderByName: (array:Hotel[], event:string) => void;
-	orderByCategory: (array:Hotel[], event:string) => void;
+	setCurrentPage: (pageNum: number) => void;
+	orderByName: (array: Hotel[], event: string) => void;
+	orderByCategory: (array: Hotel[], event: string) => void;
 	resetHotels: () => void;
 };
 
@@ -41,25 +41,26 @@ export const hotelStore = create<States & Actions>((set) => ({
 		}))
 	},
 	orderByName: (array, event) => {
-		
-     
 
-		if(event==='ASC'){
-		const arrayAux = array.sort(function(a,b) {
-			if (a.name > b.name) {
-				return 1
-			}
-			if (a.name < b.name) {
-				return -1
-			}
-			return 0
-		})
-		set((state) => ({
-			...state,
-			hotels: arrayAux,
-		}));}
 
-		else if(event==='DES'){
+
+		if (event === 'ASC') {
+			const arrayAux = array.sort(function (a, b) {
+				if (a.name > b.name) {
+					return 1
+				}
+				if (a.name < b.name) {
+					return -1
+				}
+				return 0
+			})
+			set((state) => ({
+				...state,
+				hotels: arrayAux,
+			}));
+		}
+
+		else if (event === 'DES') {
 			const arrayAux = array.sort((a, b) => b.name.localeCompare(a.name));
 			set((state) => ({
 				...state,
@@ -69,34 +70,21 @@ export const hotelStore = create<States & Actions>((set) => ({
 		}
 	},
 	orderByCategory: (array, event) => {
-		
-		if(event==='ASC'){
-		const arrayAux = array.sort(function(a,b) {
-			if (a.hotelCategory > b.hotelCategory) {
-				return 1
-			}
-			if (a.hotelCategory < b.hotelCategory) {
-				return -1
-			}
-			return 0
-		})
-		set((state) => ({
-			...state,
-			hotels: arrayAux,
-			
-		}));}
-
-		else if(event==='DES'){
-			const arrayAux = array.sort((a, b) => b.hotelCategory.localeCompare(a.hotelCategory));
+		if (event === 'ASC') {
+			const arrayAux = array.sort((a, b) => parseInt(a.hotelCategory) - parseInt(b.hotelCategory));
 			set((state) => ({
 				...state,
 				hotels: arrayAux,
-				
-				
-			}))
-
+			}));
+		} else if (event === 'DES') {
+			const arrayAux = array.sort((a, b) => parseInt(b.hotelCategory) - parseInt(a.hotelCategory));
+			set((state) => ({
+				...state,
+				hotels: arrayAux,
+			}));
 		}
 	},
+
 
 	resetHotels: () => {
 		set(initialState);
