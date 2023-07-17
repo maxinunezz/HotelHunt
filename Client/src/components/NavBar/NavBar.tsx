@@ -107,7 +107,9 @@ export default function NavBar() {
 						</div>
 					)
 			}
-        <CartComponent/>
+        {
+			isLogged.length ? <CartComponent/> : null
+		}
 
 		</nav>
 	);

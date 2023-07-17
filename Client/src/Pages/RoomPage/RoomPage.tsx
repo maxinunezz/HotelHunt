@@ -202,6 +202,7 @@ const RoomPage = () => {
 
                 ))}
               </ul>
+              <button onClick={() => navigate(-1)} className="bg-blue-500 font-bold w-[80px] border-black rounded">Back</button>
             </div>
           </div>
         </div>

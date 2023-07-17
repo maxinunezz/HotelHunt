@@ -45,6 +45,7 @@ const HotelPage = () => {
 			<div className="flex-grow mt-20 overflow-y-auto">
 				<div className="max-w-screen-lg mx-auto p-8">
 					<div className="mt-2 flex justify-between">
+						<button onClick={() => navigate(-1)} className="bg-blue-500 font-bold w-[80px] border-neutral-950">Back</button>
 						<div className="w-1/3 mr-6">
 							<div className="w-full h-full rounded-lg overflow-hidden">
 								<img

@@ -17,6 +17,7 @@ export default function ProfileSideBar() {
 
     return (
         <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+
             <a>
                 <img
                     onClick={() => navigate('/')}
@@ -24,6 +25,7 @@ export default function ProfileSideBar() {
                     src="https://cdn.discordapp.com/attachments/1125503406371524661/1127923542743334912/image.png"
                     alt=""
                 />
+                          <button onClick={() => navigate(-1)} className="bg-blue-500 font-bold w-[80px] border-black rounded">Back</button>
             </a>
 
             <div className="flex flex-col justify-between flex-1 mt-6">
