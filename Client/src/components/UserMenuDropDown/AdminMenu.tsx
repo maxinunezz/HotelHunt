@@ -12,7 +12,7 @@ const AdminMenu = () => {
     const { reset } = tokenStore()
     const handleClick = (event) => {
         event.preventDefault()
-        console.log(isAdmin[0])
+        document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         reset()
         farewellAdminToast("Gracias y éxito en sus ventas")
         navigate('/farewell')

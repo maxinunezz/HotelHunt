@@ -5,6 +5,8 @@ import RoomList from '../../components/RoomList/RoomList';
 import { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
 import { MapPinLine } from '@phosphor-icons/react'
+import Footer from "../../components/Footer/Footer";
+
 
 
 const HotelPage = () => {
@@ -25,8 +27,8 @@ const HotelPage = () => {
 				return hotel.id === id;
 			}
 		});
-		
-		
+
+
 		setroomsId(hotelOnScreen);
 
 
@@ -38,7 +40,7 @@ const HotelPage = () => {
 	}
 
 	return (
-		<div className="bg-slate-600 h-screen flex flex-col overflow-hidden">
+		<div className="bg-slate-600 min-h-screen flex flex-col overflow-hidden">
 			<NavBar />
 			<div className="flex-grow mt-20 overflow-y-auto">
 				<div className="max-w-screen-lg mx-auto p-8">
@@ -52,7 +54,7 @@ const HotelPage = () => {
 								/>
 							</div>
 						</div>
-						
+
 						<div className="w-2/3">
 							<div className="bg-white p-6 rounded-lg shadow-lg">
 								<h2 className="text-3xl font-bold mb-4">🏨{hotelOnScreen?.name}</h2>
@@ -66,7 +68,7 @@ const HotelPage = () => {
 						</div>
 					</div>
 				</div>
-						<button onClick={()=>handleBackButton()} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Atrás</button>
+
 				<div className="max-w-screen-lg mx-auto p-8 mt-8 overflow-hidden">
 					{hotelOnScreen ? (
 						<div className="room-list transform transition duration-300">
@@ -77,6 +79,9 @@ const HotelPage = () => {
 					)}
 				</div>
 			</div>
+			<div className="mt-auto">
+				<Footer />
+			</div>
 		</div>
 	);
 
@@ -86,3 +91,6 @@ const HotelPage = () => {
 };
 
 export default HotelPage;
+
+
+

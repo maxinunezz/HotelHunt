@@ -3,6 +3,7 @@ import { searchStore, hotelStore } from '../../Store';
 import HotelListSearch from '../../components/HotelsList/HotelListSearch';
 import HotelList from '../../components/HotelsList/HotelsList';
 import NavBar from '../../components/NavBar/NavBar';
+import Footer from "../../components/Footer/Footer";
 import { useCookies } from 'react-cookie';
 import { tokenStore } from '../../Store';
 
@@ -39,15 +40,26 @@ export default function HomePage() {
 
 
 	return (
-		<div className="bg-slate-600 min-h-screen w-screen p-10">
-			<NavBar />
+		<div className="bg-slate-600 min-h-screen">
+			<div className="relative z-10" >
+				<NavBar />
 
-
-			<div className="mt-16">
-				{
-					searchResults?.length ? <HotelListSearch /> : <HotelList />
-				}
 			</div>
+			
+			<div className="p-10">
+				<div className="mt-[70px]">
+				</div>
+
+
+				
+
+
+				<div className="mt-8">
+					{searchResults?.length ? <HotelListSearch /> : <HotelList />}
+				</div>
+			</div>
+
+			<Footer />
 		</div>
 
 	);
