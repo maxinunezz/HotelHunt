@@ -56,6 +56,7 @@ const Card: React.FC<CardProps> = ({
 					</div>
 			</div>
 		</div>
+		</div>
 	);
 };
 export default Card;
