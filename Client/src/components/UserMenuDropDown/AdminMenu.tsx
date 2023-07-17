@@ -9,11 +9,11 @@ const AdminMenu = () => {
     const navigate = useNavigate()
     const isAdmin = tokenStore((state) => state.userState)  //análogo a UserMenu
     const [selectedOption, setSelectedOption] = useState<string | undefined>();
-    const { reset } = tokenStore()
+    const { resetToken } = tokenStore()
     const handleClick = (event) => {
         event.preventDefault()
         document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        reset()
+        resetToken()
         farewellAdminToast("Gracias y éxito en sus ventas")
         navigate('/farewell')
     }

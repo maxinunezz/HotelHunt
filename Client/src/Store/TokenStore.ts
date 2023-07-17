@@ -20,7 +20,7 @@ type States = {
 type Actions = {
     saveInfo: (arrayAux) => Promise<void>
     getHotelByUser: (hotelsArray) => Promise<void>
-    reset: () => void
+    resetToken: () => void
 }
 
 const initialState: States = {
@@ -43,7 +43,7 @@ export const tokenStore = create<States & Actions>((set) => ({
         }))
     },
 
-    reset: () => {
+    resetToken: () => {
 		set(initialState);
 	},
     
