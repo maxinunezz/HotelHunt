@@ -10,7 +10,6 @@ export default function DashboardDetails() {
     const token = tokenStore((state) => state.userState)
 
     const [hotelByUser, setHotelByUser] = useState()
-    console.log(token[1])
 
     const getHotels = async () => {
         try {
@@ -41,7 +40,6 @@ export default function DashboardDetails() {
         getHotels()
     }, [])
 
-    console.log(hotelByUser);
 
     return (
         <div className="flex flex-col h-full mt-2 bg-slate-300 rounded-xl">
@@ -50,17 +48,16 @@ export default function DashboardDetails() {
                 {hotelByUser?.length > 0 ? (
                     hotelByUser?.map((element: { id: string, name: string, country: string, city: string, photo: string }) => (
                         (
-                            <button onClick={() => navigate(`/dashboard/hoteldetail/${element.id}`)}>
+                            <div onClick={() => navigate(`/dashboard/hoteldetail/${element.id}`)}>
                                 <DashboardRow
                                     key={element.id}
+                                    id={element.id}
                                     name={element.name}
                                     country={element.country}
                                     city={element.city}
                                     photo={element.photo}
-
                                 />
-
-                            </button>
+                            </div>
                         )
                     ))
                 ) : (

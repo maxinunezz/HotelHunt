@@ -2,6 +2,7 @@ import axios from "axios";
 import { create } from "zustand";
 import { ReserveBooking } from "../Pages/RoomPage/RoomPage";
 import { array } from "yup";
+const url = import.meta.env.VITE_URL;
 
 type States = {
   reserves: ReserveBooking[];
@@ -11,7 +12,6 @@ type States = {
 type Actions = {
   reserveRoomPayment: (data: []) => Promise<void>;
   roomPayment: (data: {}) => Promise<void>;
-  deleteAccount: (userId: string) => Promise<void>
   reset: () => void;
 };
 
@@ -53,13 +53,4 @@ export const userStore = create<States & Actions>((set) => ({
     }
   },
 
-  deleteAccount: async (userId) => {
-    try {
-      const {data} = await axios.delete(`http://localhost:3001/user/${userId}`)
-      console.log(data);
-      
-    } catch (error) {
-      console.log(error);
-    }
-  },
 }));
