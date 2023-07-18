@@ -11,7 +11,9 @@ type States = {
 
 type Actions = {
   reserveRoomPayment: (data: []) => Promise<void>;
-  roomPayment: (data: {}, token: string) => Promise<void>;
+  roomPayment: (data: {}) => Promise<void>;
+  deleteAccount: (userId: string) => Promise<void>
+
   reset: () => void;
 };
 
@@ -57,5 +59,4 @@ export const userStore = create<States & Actions>((set) => ({
       console.log(error);
     }
   },
-
 }));

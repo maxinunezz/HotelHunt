@@ -26,11 +26,7 @@ const CheckoutTransitionPage = () => {
             className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-slate-600 to-gray-900"
         >
             <h1 className="text-4xl text-white font-bold mb-4">Seras redirigido!</h1>
-            <img
-                src="https://media.tenor.com/hXarrACgFwMAAAAM/pay-me-the-simpsons.gif"
-                alt="Gif de despedida"
-                className="max-w-full"
-            />
+            
             <h1 className="text-4xl text-white font-bold mt-4">Buen viaje!</h1>
             
         </div>

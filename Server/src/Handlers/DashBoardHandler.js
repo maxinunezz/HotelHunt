@@ -247,7 +247,6 @@ const deleteHotelByUser = async (req, res) => {
     if (!hotel) {
       return res.status(404).send("Hotel not found");
     }
-
     await hotel.update({disabled: true})
     await hotel.destroy();
     return res.status(200).send("Hotel successfully removed");

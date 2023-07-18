@@ -71,6 +71,7 @@ const deleteRoom = async (req, res) => {
     const newRoomsId = hotel.roomsId.filter((roomId) => roomId !== room.id);
 
     const poproom = await hotel.update({ roomsId: newRoomsId });
+    await room.update({disabled: true});
     const destroyroom = await room.destroy();
 
     await Promise.all([poproom, destroyroom])
