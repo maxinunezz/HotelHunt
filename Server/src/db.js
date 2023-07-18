@@ -38,13 +38,21 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Room, Hotel, Booking, User, Auth } = sequelize.models;
+const { Room, Hotel, Booking, User, Auth, Rating } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
 /*User.hasMany(Booking, { foreignKey: "userId", targetKey: "id" });*/
 /*Room.hasMany(Booking, { foreignKey: "roomId", targetKey: "id" });*/
+Hotel.hasMany(Rating, {
+	foreignKey: 'hotelId'
+})
+
+Rating.belongsTo(Hotel, {
+	foreignKey: 'hotelId'
+})
+
 Room.hasMany(Booking, {
 	foreignKey: "roomId"
 });
