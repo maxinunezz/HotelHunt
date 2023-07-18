@@ -1,6 +1,5 @@
 import { XCircle ,Bug,CheckCircle , MaskHappy, Cactus, SealWarning, Rocket, BookmarkSimple, StackOverflowLogo, SmileySad, ClockCounterClockwise, UserSwitch } from '@phosphor-icons/react';
 
-
 import { toast } from 'react-hot-toast';
 
 export const errorToast = (text: string) => {
@@ -203,6 +202,24 @@ export const userDeleteToast = (text: string) => {
 		},
 	});
 };
+
+export const userDeleteToast = (text: string) => {
+	return toast(text, {
+		duration: 2000,
+		position: 'top-center',
+		style: {
+			backgroundColor: '#1D5D9B',
+			color: 'black',
+			fontWeight: 'bold',
+		},
+		icon: <SmileySad size={32} />,
+		ariaProps: {
+			role: 'status',
+			'aria-live': 'polite',
+		},
+	});
+};
+
 export const userUpdateToast = (text: string) => {
 	return toast(text, {
 		duration: 2000,

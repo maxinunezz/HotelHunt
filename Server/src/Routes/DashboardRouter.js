@@ -1,4 +1,4 @@
-const {getAllHotelsById, getRoomsByHotel, createRoomByHotel, deleteRoomsByHotel, deleteHotelByUser, createHotelByUser, UpdateRoomsByHotel, UpdateHotelByUser, deleteAccount, updateAccount, restoreRoom, restoreHotel} = require ('../Handlers/DashBoardHandler')
+const {getAllHotelsById, getRoomsByHotel, createRoomByHotel, deleteRoomsByHotel, deleteHotelByUser, createHotelByUser, UpdateRoomsByHotel, UpdateHotelByUser, deleteAccount, updateAccount, restoreRoom, restoreHotel, getUserInfo} = require ('../Handlers/DashBoardHandler')
 const { Router } = require("express");
 const { authMiddleware } = require('../Middleware/AuthMiddleware');
 const { AdminCheck } = require('../Middleware/AdminMiddleware');
@@ -9,6 +9,7 @@ const dashBoardRouter = Router()
 
 dashBoardRouter.get('/', authMiddleware,AdminCheck, getAllHotelsById);
 dashBoardRouter.get('/room/:hotelId',authMiddleware, AdminCheck, getRoomsByHotel);
+dashBoardRouter.get('/user', authMiddleware, getUserInfo);
 dashBoardRouter.post('/room/:hotelId', authMiddleware, AdminCheck, createRoomByHotel);
 dashBoardRouter.post('/hotel',authMiddleware, AdminCheck,createHotelByUser);
 dashBoardRouter.put('/room/:roomId', authMiddleware,AdminCheck, UpdateRoomsByHotel);
@@ -18,7 +19,8 @@ dashBoardRouter.delete('/user',authMiddleware ,BothAccess, deleteAccount);
 dashBoardRouter.delete('/room/:roomId', authMiddleware, AdminCheck,deleteRoomsByHotel);
 dashBoardRouter.delete('/hotel/:id', authMiddleware,AdminCheck, deleteHotelByUser);
 dashBoardRouter.put("/room/:roomId/restore", authMiddleware, AdminCheck, restoreRoom);
-dashBoardRouter.put("/hotel/:hotelId/restore", authMiddleware, AdminCheck, restoreHotel)
+dashBoardRouter.put("/hotel/:hotelId/restore", authMiddleware, AdminCheck, restoreHotel);
+
 
 
 

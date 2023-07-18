@@ -50,7 +50,6 @@ export default function AdminSetting() {
         birthDate: "",
         phoneNumber: "",
         isChecked: false,
-        email: "",
         password: "",
         isCheckedValue: "normal",
 
@@ -65,10 +64,6 @@ export default function AdminSetting() {
       
         if (!input.lastName || !/^(?:[A-Z][a-zA-Z]*)(?:-[A-Z][a-zA-Z]*){0,1}$/.test(input.lastName)) {
           errors.lastName = "Debe tener un apellido válido con la primera letra mayúscula. Permite compuestos separados por un guión (-)";
-        }
-      
-        if (!input.email || !/\S+@\S+\.\S+/.test(input.email)) {
-          errors.email = "Debe tener un email válido.";
         }
       
         if (!input.password || input.password.length < 6) {
@@ -110,7 +105,6 @@ export default function AdminSetting() {
                     birthDate: input.birthDate,
                     phoneNumber: input.phoneNumber,
                     admin: input.isCheckedValue,
-                    email: input.email,
                     password: input.password,
                 },
                 {
