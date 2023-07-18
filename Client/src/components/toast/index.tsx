@@ -186,22 +186,6 @@ export const reserveSuccessToast1 = () => {
 	});
 };
 
-export const userDeleteToast = (text: string) => {
-	return toast(text, {
-		duration: 2000,
-		position: 'top-center',
-		style: {
-			backgroundColor: '#1D5D9B',
-			color: 'black',
-			fontWeight: 'bold',
-		},
-		icon: <SmileySad size={32} />,
-		ariaProps: {
-			role: 'status',
-			'aria-live': 'polite',
-		},
-	});
-};
 
 export const userDeleteToast = (text: string) => {
 	return toast(text, {
