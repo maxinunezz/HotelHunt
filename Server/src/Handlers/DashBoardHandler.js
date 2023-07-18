@@ -96,7 +96,7 @@ const deleteRoomsByHotel = async (req, res) => {
     });
     if (hotel) {
       
-      await hotel.update({disabled:true})
+      await room.update({disabled:true})
       await room.destroy();
 
       return res.status(200).send("Room deleted successfully");
