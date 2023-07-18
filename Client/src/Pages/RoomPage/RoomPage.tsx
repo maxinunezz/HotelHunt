@@ -15,7 +15,8 @@ import {
   reserveErrorToast,
   reserveSuccessToast1,
   reserveFullToast,
-  noDatesToast, // Agregado: Toast de fechas faltantes
+  noDatesToast,
+  mustLoginToast, // Agregado: Toast de fechas faltantes
 } from "../../components/toast";
 import { toast } from "react-hot-toast";
 
@@ -93,6 +94,13 @@ const RoomPage = () => {
   };
 
   const handleReserve = () => {
+    console.log(token);
+    if(token.length === 0) {
+      mustLoginToast("Please login or signup to reserve a room")
+      navigate('/login')
+      return
+    }
+    
     if (userReserve.length === 4) {
       reserveFullToast("4 reservas máximas");
       return false;
