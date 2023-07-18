@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Room, Hotel, conn } = require('../db');
+const { Room, Hotel,User } = require('../db');
 
 const scheduledDeletion = async () => {
 
@@ -22,6 +22,24 @@ const scheduledDeletion = async () => {
     }      
 }
 
+const delInactiveAcc = async () => {
+  const oneHourAgo = new Date();
+  oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+ 
+  const accToDelete = await User.findAll({where:
+    {
+      createdAt:{ 
+        [Op.lt]: oneHourAgo 
+      },
+      disabled: true,
+    }  
+  })
+  for(const user of accToDelete){
+    user.destroy({foce:true})
+  }
+}
+
 module.exports = {
     scheduledDeletion,
+    delInactiveAcc,
 }

@@ -4,6 +4,9 @@ const {
     createUserForEmail,
     deleteUser,
     updateUser,
+    askForPass,
+    validateToken,
+    recoveryPass,
     } = require("../Handlers/UsersHandler.js");
 const { authMiddleware } = require("../Middleware/AuthMiddleware");
 const { SuperAdminCheck } = require("../Middleware/SuperAdminMiddleware");
@@ -20,6 +23,10 @@ userRouter.post("/signup", createUserForEmail);
 userRouter.post("/auth", AuthHandler);
 userRouter.delete("/:id",authMiddleware, SuperAdminCheck, deleteUser);
 userRouter.put("/:id",authMiddleware, SuperAdminCheck, updateUser);
+userRouter.get("/askpass/:email", askForPass);
+userRouter.get("/validateAsk/:token", validateToken);
+userRouter.put("/updatePass", authMiddleware,recoveryPass);
+
 
 
 module.exports = userRouter;
