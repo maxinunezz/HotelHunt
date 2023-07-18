@@ -37,8 +37,8 @@ const authGoogle = async (req, res) => {
           }
           if(findUserData){
             const admin = findUserData.admin
-            const token = jwt.sign({ id: findUserData.id }, JWT_SECRET, { expiresIn: '6h' });
-            const userData = { id: findUserData.id, email: email, name: name, lastName: lastName };
+            const token = jwt.sign({ id: findUserData.id, admin: findUserData.admin }, JWT_SECRET, { expiresIn: '6h' });
+            const userData = { id: findUserData.id, email: email, name: name, lastName: lastName, admin: findUserData.admin };
             const allInfo = {admin: admin, token: token, data: userData}
             res.cookie('json', allInfo);
             return res.status(201).redirect('http://localhost:5173/');
@@ -57,8 +57,8 @@ const authGoogle = async (req, res) => {
                 password: hashedpass,
             });
             const admin = newUser.admin
-            const token = jwt.sign({ id: newUser.id }, JWT_SECRET, { expiresIn: '6h' });
-            const userData = { id: newUser.id, email: email, name: name, lastName: lastName };
+            const token = jwt.sign({ id: newUser.id, admin: newUser.admin }, JWT_SECRET, { expiresIn: '6h' });
+            const userData = { id: newUser.id, email: email, name: name, lastName: lastName, admin: admin };
             
             const allInfo = {admin: admin, token: token, data: userData}
     

@@ -3,7 +3,7 @@ const { Hotel, conn } = require("../db");
 const getAllhotels = async (req, res) => {
   let hotels_array = [];
   try {
-    const data = await Hotel.findAll();
+    const data = await Hotel.findAll({where: {disabled: false}});
     if (data.length === 0) {
       throw Error("No hotels found");
     }

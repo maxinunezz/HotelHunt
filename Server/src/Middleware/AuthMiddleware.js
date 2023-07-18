@@ -9,7 +9,6 @@ const authMiddleware = (req, res, next) => {
 
 
   if (authorization) {
-    console.log(authorization);
     try {
       const token = authorization.split(" ")[1].replace(/"/g, '');
       

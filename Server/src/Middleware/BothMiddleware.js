@@ -1,4 +1,5 @@
 const BothAccess = async (req, res, next) => {
+    console.log(userData);
 
     try {
         const { admin } = userData;

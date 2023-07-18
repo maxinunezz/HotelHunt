@@ -9,6 +9,7 @@ const getAllHotelsById = async (req, res) => {
     const hotels = await Hotel.findAll({
       where: {
         userId: id,
+        disabled: false,
       },
     })
 
@@ -94,7 +95,8 @@ const deleteRoomsByHotel = async (req, res) => {
       }
     });
     if (hotel) {
-
+      
+      await hotel.update({disabled:true})
       await room.destroy();
 
       return res.status(200).send("Room deleted successfully");
@@ -246,6 +248,7 @@ const deleteHotelByUser = async (req, res) => {
       return res.status(404).send("Hotel not found");
     }
 
+    await hotel.update({disabled: true})
     await hotel.destroy();
     return res.status(200).send("Hotel successfully removed");
   } catch (error) {
@@ -303,6 +306,29 @@ const updateAccount = async (req, res) => {
   }
 };
 
+const getUserInfo = async(req,res) =>{
+  const { id } = userData;
+
+  try {
+    const userInfo = await findByPk({id: id})
+    const mailinfo = await findOne({where: { userId: id }})
+
+    const allInfo = {
+      name: userInfo.name ,
+      lastName: userInfo.lastName,
+      birthDate: userInfo.birthDate,
+      phoneNumber: userInfo.phoneNumber, 
+      admin: userInfo.admin,
+      email: mailinfo.email
+    }
+
+    return res.status(200).json(allInfo);
+    
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}
+
 
 
 module.exports = {
@@ -314,6 +340,7 @@ module.exports = {
   UpdateHotelByUser,
   deleteHotelByUser,
   createHotelByUser,
+  getUserInfo,
   deleteAccount,
   updateAccount,
   restoreRoom,
