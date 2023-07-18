@@ -217,4 +217,6 @@ module.exports = {
   updateUser,
   askForPass,
   recoveryPass,
+  validateToken,
 };
+
