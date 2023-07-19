@@ -4,23 +4,13 @@ import { userStore } from '../../Store/UserStore';
 
 const CheckoutTransitionPage = () => {
     const navigate = useNavigate();
-    const urlPayment= userStore((state)=>state.urlPayment)
+    const session = JSON.parse(window.localStorage.getItem("session"))
+    const token = JSON.parse(window.localStorage.getItem("token"))
+    console.log(session, token);
 
-    useEffect(() => {
-        const redirectPay = () => {
-            window.open(urlPayment, '_blank'); // Ruta de la página de pago
-        };
-
-        // Duración del gif en milisegundos
-        const gifDuration = 3000; // Cambia este valor según la duración de tu gif en milisegundos
-
-        // Redirigir a la página Home después de la duración del gif
-        const timeoutId = setTimeout(redirectPay, gifDuration);
-
-        // Limpiar el timeout al desmontar el componente
-        return () => clearTimeout(timeoutId);
-    }, [navigate]);
-
+    
+    
+    window.localStorage.getItem("token")
     return (
         <div
             className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-slate-600 to-gray-900"

@@ -97,18 +97,18 @@ const CartComponent = () => {
     console.log(reserveLocal, "El estado de reservas ha cambiado");
   }, [reserveLocal]);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (userReserve.length === 0) {
       return alert('Agregar habitación');
     }
 
-    const data = {  
+    const data = {
       roomsToReserve: reserveLocal
     }
+
+
+    await roomPayment(data, token[1]);
     
-  
-   roomPayment(data, token[1]);
-  
     // Redireccionar a la URL externa en una nueva pestaña
     navigate('/shoppingcart')
 

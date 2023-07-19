@@ -8,20 +8,20 @@ type States = {
   reserves: ReserveBooking[];
   urlPayment: string | null;
   sessionIdUser: string;
+  allSessionData: object;
 };
 
 type Actions = {
   reserveRoomPayment: (data: []) => Promise<void>;
-  roomPayment: (data: object) => Promise<void>;
-  deleteAccount: (userId: string) => Promise<void>
-
+  roomPayment: (data: object, token:string) => Promise<void>;
   reset: () => void;
 };
 
 const initialState: States = {
   reserves: [],
   urlPayment: null,
-  sessionIdUser: ""
+  sessionIdUser: "",
+  allSessionData:{}
 };
 
 export const userStore = create<States & Actions>((set) => ({
@@ -39,7 +39,7 @@ export const userStore = create<States & Actions>((set) => ({
     set(initialState);
   },
 
-  roomPayment: async (info:[], token:string) => {
+  roomPayment: async (info:object, token:string) => {
     try {
       const { data } = await axios.post(
         `${url}/booking/reserva`,
@@ -56,6 +56,7 @@ export const userStore = create<States & Actions>((set) => ({
        
       set((state) => ({
 		...state,
+    allSessionData: data,
 		urlPayment: urlPago,
     sessionIdUser: data.sessionId
 	}));
