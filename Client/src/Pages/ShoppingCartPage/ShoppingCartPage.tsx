@@ -5,6 +5,11 @@ import { userStore } from '../../Store/UserStore';
 
 const ShoppingCartPage = () => {
     const navigate = useNavigate()
+    const urlPayment= userStore((state)=>state.urlPayment)
+    const sessionId= userStore((state)=>state.sessionIdUser)
+  console.log(urlPayment);
+  console.log(sessionId);
+  
     
     const userReserve = userStore((state)=>state.reserves)
     const {reserveRoomPayment} = userStore()
