@@ -198,11 +198,11 @@ const FormPageUser = () => {
                   <div className="w-1/2">
                     <FormControl>
                       <FormControl.Label className="text-white">
-                        Fono de contacto
+                        Telefono de contacto
                       </FormControl.Label>
                       <FormControl.Input
                         type="text"
-                        placeholder="Fono de contacto"
+                        placeholder="Telefono de contacto"
                         onChange={(event) => {
                           setFieldValue('phoneNumber', event.target.value);
                         }}
