@@ -19,7 +19,7 @@ const getRating = async (req,res) => {
 const crearValoracion = async (req, res) => {
   try {
     const { id } = userData;
-    const {userId, score, comment, hotelId } = req.body;
+    const { score, comment, hotelId } = req.body;
     const rating = await Rating.create({ userId: id, score, comment, hotelId });
     res.status(201).json(rating);
   } catch (err) {

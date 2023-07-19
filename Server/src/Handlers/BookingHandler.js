@@ -1,16 +1,13 @@
-const Stripe = require('stripe');
+require('dotenv').config();
 const { Booking, Room, User, Auth } = require('../db');
 const { Op } = require('sequelize');
-const stripe = new Stripe('sk_test_51NTrfKHJDBCJMNrhc1URooDk9yKEJU0TONg60genqgT77WYcIyNQlhGdEa7Gn7pvado3D6WLIbXwDwKlGBitKNF000mPbEiXwv');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const nodemailer = require('nodemailer');
-require('dotenv').config();
 
 async function createBooking(req, res) {
-  
   try {
-    const { id } = userData
-    const { roomsToReserve } = req.body;
-
+    //const { id } = userData;
+    const {userId, roomsToReserve } = req.body;
 
     if (!roomsToReserve || !Array.isArray(roomsToReserve) || roomsToReserve.length === 0) {
       return res.status(400).json({ error: "No rooms to reserve provided" });
@@ -18,16 +15,18 @@ async function createBooking(req, res) {
 
     const bookings = [];
 
-    const rooms = await Promise.all(
-      roomsToReserve.map(async (room) => {
-        const roomDetails = await Room.findByPk(room.roomId);
+    const getRoomDetails = async (roomId) => {
+      const roomDetails = await Room.findByPk(roomId);
+      if (roomDetails) {
         return {
-          ...room,
           name: roomDetails.name,
           price: roomDetails.price,
         };
-      })
-    );
+      } else {
+        throw new Error(`Room with ID ${roomId} not found`);
+      }
+    };
+    
 
     const isRoomAlreadyReserved = async (roomId, checkin, checkout) => {
       const existingBooking = await Booking.findOne({
@@ -45,7 +44,25 @@ async function createBooking(req, res) {
       return existingBooking !== null;
     };
 
+    const calculateStayDuration = (checkin, checkout) => {
+      const checkinDate = new Date(checkin);
+      const checkoutDate = new Date(checkout);
 
+      const differenceInMs = checkoutDate.getTime() - checkinDate.getTime();
+      const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
+
+      return differenceInDays;
+    };
+
+    const rooms = await Promise.all(
+      roomsToReserve.map(async (room) => {
+        const roomDetails = await getRoomDetails(room.roomId);
+        return {
+          ...room,
+          ...roomDetails,
+        };
+      })
+    );
 
     for (const room of rooms) {
       const { roomId, checkin, checkout, amount, name, price } = room;
@@ -54,40 +71,26 @@ async function createBooking(req, res) {
       if (!isReserved) {
         const booking = await Booking.create({
           roomId,
-          userId: id,
+          userId,
           checkin,
           checkout,
           paymentStatus: "unpaid",
         });
 
         bookings.push(booking);
-
       } else {
-        return res.status(400).json({ error: `Room with ID ${roomId} is already reserved for the selected dates` });
+        return res
+          .status(400)
+          .json({ error: `Room with ID ${roomId} is already reserved for the selected dates` });
       }
-
-
     }
-
-    const calculateDays = (item) => {
-
-      const checkinDate = new Date(item.checkin);
-      const checkoutDate = new Date(item.checkout);
-
-      const differenceInMs = checkoutDate.getTime() - checkinDate.getTime();
-      const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
-
-      return differenceInDays;
-    };
-
-    const user = await User.findByPk(id);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: rooms.map((room) => ({
         price_data: {
           currency: 'usd',
-          unit_amount: room.price * calculateDays(room) * 100,
+          unit_amount: room.price * calculateStayDuration(room.checkin, room.checkout) * 100,
           product_data: {
             name: room.name,
           },
@@ -99,16 +102,41 @@ async function createBooking(req, res) {
       cancel_url: `http://localhost:5173/`,
     });
 
+    //const user = await User.findByPk(id);
     const sessionId = session.id;
     const urlpago = session.url;
-    await confirmationEmail(id, urlpago, user.name);
+    //await confirmationEmail(id, urlpago, user.name);
+    updateBookingPaymentStatus(sessionId, bookings);
 
-
-    res.status(200).json({ sessionId, urlpago, bookings })
+    res.status(200).json({ sessionId, urlpago, bookings });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};
+
+const updateBookingPaymentStatus = async (sessionId, bookings) => {
+  // Obtener la sesión de pago desde Stripe
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+  if (session.payment_status === 'paid') {
+    // Actualizar el estado de pago en tu base de datos
+    for (const booking of bookings) {
+      await Booking.update(
+        { paymentStatus: 'paid' },
+        { where: { id: booking.id } }
+      );
+    }
+
+
+    // Opcionalmente, enviar un correo electrónico de confirmación o realizar otras acciones
+    // ...
+
+    console.log('Pago actualizado correctamente');
+  } else {
+    console.log('La sesión de pago no ha sido pagada todavía');
+  }
+};
+
 
 
 const confirmationEmail = async (id, urlpago, name) => {
