@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import { hotelStore } from "../../Store";
-import { Pagination } from "../Pagination/Pagination";
 import PaginadoGlobal from "../Pagination/PaginadoGlobal";
-import { Hotel } from "../../models";
 
 const HotelList = () => {
   const hotelsPerPage = 3; //Primer parametro del paginado global
@@ -18,13 +16,13 @@ const HotelList = () => {
   const lastIndex = currentPage * hotelsPerPage;
   const currentHotels = hotels?.slice(firstIndex, lastIndex);
 
-  const handlePaginadoHome = (pageNumbers) => {
+  const handlePaginadoHome = (pageNumbers:any) => {
     //tercer componente del paginado
     setCurrentPage(pageNumbers);
     PaginadoGlobal(pageNumbers);
   };
 
-  const handleFavorite = () => {};
+
 
   return (
     <div>
@@ -33,6 +31,7 @@ const HotelList = () => {
           currentHotels.map((hotel) => (
             <Link to={`/hotelpage/${hotel.id}`} key={hotel.id}>
               <Card
+              key={hotel.id}
                 id={hotel.id}
                 name={hotel.name}
                 description={hotel.description}
@@ -41,6 +40,7 @@ const HotelList = () => {
                 photo={hotel.photo}
                 hotelCategory={hotel.hotelCategory}
                 services={hotel.services}
+                score={hotel.score}
               />
             </Link>
           ))
