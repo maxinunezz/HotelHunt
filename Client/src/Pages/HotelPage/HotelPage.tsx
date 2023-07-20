@@ -1,11 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { hotelStore, roomsStore } from '../../Store';
-import { useFetchHotels, useHotelIdSetter } from '../../hooks';
 import RoomList from '../../components/RoomList/RoomList';
 import { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
 import { MapPinLine } from '@phosphor-icons/react'
 import Footer from "../../components/Footer/Footer";
+import axios from 'axios';
+const url = import.meta.env.VITE_URL;
 
 
 
@@ -13,30 +14,52 @@ const HotelPage = () => {
 	const navigate = useNavigate()
 	const { id } = useParams();
 	const [hotelOnScreen, setroomsId] = useState([]);
-
+	const [hotelRatings, setHotelRatings] = useState([])
 	const { hotelIdSetter } = roomsStore();
+	const { fetchHotels } = hotelStore();
+	const [hotelsLoaded, setHotelsLoaded] = useState(false);
 
-	useFetchHotels();
 	const allHotels = hotelStore((state) => state.hotels);
+	console.log(allHotels);
 
 	useEffect(() => {
-		const hotelOnScreen = allHotels.find((hotel) => {
-			if (typeof hotel.id === 'number') {
-				return hotel.id === Number(id);
-			} else {
-				return hotel.id === id;
+		const fetchAllHotels = async () => {
+			await fetchHotels();
+			setHotelsLoaded(true);
+		};
+		fetchAllHotels();
+	}, [fetchHotels]);
+
+	useEffect(() => {
+		if (hotelsLoaded) {
+			const hotelOnScreen = allHotels.find((hotel) => hotel.id === id);
+			console.log(hotelOnScreen);
+			setroomsId(hotelOnScreen);
+			hotelIdSetter(hotelOnScreen?.roomsId);
+		}
+	}, [hotelsLoaded, allHotels, hotelIdSetter, id]);
+
+	useEffect(() => {
+		const fetchRating = async () => {
+			try {
+				const response = await axios.get(`${url}/rating/${id}`);
+				setHotelRatings(response.data);
+				console.log(response.data);
+			} catch (error) {
+				console.error(error);
 			}
-		});
+		};
 
+		fetchRating();
+	}, [id]);
+	console.log(hotelRatings);
 
-		setroomsId(hotelOnScreen);
-
-
-		hotelIdSetter(hotelOnScreen?.roomsId);
-	}, [allHotels, hotelIdSetter, id]);
-
-	const handleBackButton = () => {
-		navigate(-1)
+	const overallScoreHandler = () => {
+		let sum = 0;
+		for (let i = 0; i < hotelRatings.length; i++) {
+			sum += hotelRatings[i].score
+		}
+		return sum/hotelRatings.length
 	}
 
 	return (
@@ -63,13 +86,16 @@ const HotelPage = () => {
 									<MapPinLine size={20} className="mr-2" />
 									<h3>{hotelOnScreen?.country}, {hotelOnScreen?.city}</h3>
 								</div>
+								<div>
+									overallScore: {overallScoreHandler()}
+								</div>
 								<h3 className="text-lg font-bold mb-4">Descripción</h3>
 								<p>{hotelOnScreen?.description}</p>
 							</div>
 						</div>
 					</div>
 				</div>
-
+	
 				<div className="max-w-screen-lg mx-auto p-8 mt-8 overflow-hidden">
 					{hotelOnScreen ? (
 						<div className="room-list transform transition duration-300">
@@ -78,6 +104,17 @@ const HotelPage = () => {
 					) : (
 						<p className="text-white">No hay habitaciones disponibles.</p>
 					)}
+				</div>
+			</div>
+			<div className="h-96 overflow-y-scroll border border-gray-300 rounded-lg p-4 shadow-lg">
+				<h2 className="text-2xl font-semibold mb-4">Comentarios</h2>
+				<div className="space-y-4">
+					{hotelRatings.map((rating, index) => (
+						<div key={index} className="border-b border-gray-300 pb-2">
+							<p className="text-lg font-semibold">Score: {rating.score}</p>
+							<p className="text-gray-950">{rating.comment}</p>
+						</div>
+					))}
 				</div>
 			</div>
 			<div className="mt-auto">

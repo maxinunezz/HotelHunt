@@ -14,9 +14,10 @@ module.exports = (sequelize) => {
       score: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 1
       },
       comment: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       userId: {

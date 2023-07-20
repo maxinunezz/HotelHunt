@@ -48,7 +48,6 @@ export default function FormPageH() {
 	const navigate = useNavigate()
 	const [isCreated, setIsCreated] = useState(false);
 	const token = tokenStore((state) => state.userState)
-
 	const CLOUD_NAME = "hotelmatimaxi4342";
 	const UPLOAD_PRESET = "hotel_pf";
 
@@ -84,12 +83,13 @@ export default function FormPageH() {
 						},
 					}
 				);
-				
+
+
 				helpers.resetForm()
 				setIsCreated(true);
 				successToast('Hotel creado correctamente');
 				console.log('data', data);
-				navigate(-1)
+				navigate(-1);
 			} catch (error) {
 
 				errorToast('Hubo un error, intenta de nuevo');
@@ -302,8 +302,6 @@ export default function FormPageH() {
 										</FormControl.Label>
 										<FormControl.Input
 											type="number"
-											min="1"
-											max="5"
 											placeholder="category"
 											min="1"
 											max="5"

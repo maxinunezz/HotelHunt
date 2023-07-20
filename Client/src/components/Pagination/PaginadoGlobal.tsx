@@ -1,7 +1,20 @@
+import React from 'react';
+import { Hotel } from '../../models';
 
+interface PaginadoGlobalProps {
+  elementsPerPage: number;
+  elementToShow: Hotel[]; 
+  pageSet: (pageNumber: number) => void; 
+  currentPage: number;
+}
 
-export const PaginadoGlobal = ({ elementsPerPage, elementToShow, pageSet, currentPage }) => {
-  const totalPages = Math.ceil(elementToShow.length / elementsPerPage);
+const PaginadoGlobal: React.FC<PaginadoGlobalProps> = ({
+  elementsPerPage,
+  elementToShow,
+  pageSet,
+  currentPage,
+}) => {
+  const totalPages = Math.ceil(elementToShow?.length / elementsPerPage);
 
   //Obtener rango de paginas para mostrar en paginado
   const getPageRange = () => {
@@ -20,7 +33,6 @@ export const PaginadoGlobal = ({ elementsPerPage, elementToShow, pageSet, curren
 
     return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }
-
 
   const pageNumbers = getPageRange();     //Setea pagenumbers con los datos que recibe por parámetro en la funcion anterior
 
@@ -60,8 +72,6 @@ export const PaginadoGlobal = ({ elementsPerPage, elementToShow, pageSet, curren
       </div>
     </nav>
   );
-  
-  
-  
-
 }
+
+export default PaginadoGlobal;

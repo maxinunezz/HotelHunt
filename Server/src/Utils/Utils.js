@@ -48,7 +48,6 @@ async function firstload() {
     const hotels = await fetchHotelsData();
     const rooms = await fetchRoomsData();
     const users = await loadusers();
-    const ratings = await getAllRating();
 
     for (const user of users) {
       const {
@@ -85,6 +84,17 @@ async function firstload() {
         userId: createdUser.id,
       });
       await Promise.all([createdUser, createdAuth]);
+    }
+
+    for (const rating of ratings) {
+      const {userId, score, comment, hotelId} = rating;
+      const ratingcreated = await Rating.create({
+        userId,
+        score,
+        comment,
+        hotelId
+      });
+      await Promise.all([ratingcreated])
     }
 
     for (const hotel of hotels) {

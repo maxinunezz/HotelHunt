@@ -21,33 +21,34 @@ import CheckoutTransitionPage from './Pages/CheckoutTransitionPage/CheckoutTrans
 import RoomFilter from './Pages/RoomFilter/RoomFilter';
 import FormPageHotelUpdate from './Pages/FormPageH/FormPageHotelUpdate';
 
+
 function App() {
-	return (
-		<div id="app">
-			<Routes>
-				<Route path="/" element={<HomePage />}></Route>
-				<Route path="/login" element={<LogingPage />}></Route>
-				<Route path="/userprofile/:name" element={<ProfilePage />}></Route>
-				<Route path='/userprofile/reservas' element={<UserReservasPage />}></Route>
-				<Route path='/userprofile/configuracion' element={<UserSettings />}></Route>
-				<Route path="/adminprofile/:name" element={<AdminProfilePage />}></Route>
-				<Route path="/adminprofile/reservas" element={<AdminReservasPage />}></Route>
-				<Route path='/adminprofile/configuracion' element={<AdminSettings />}></Route>
-				<Route path="/dashboard" element={<DashBoardPage />}></Route>
-				<Route path="/dashboard/hoteldetail/:id" element={<DashboardPageHotelDetail />}></Route>
-				<Route path="/dashboard/hotelupdate/:id" element={<FormPageHotelUpdate />}></Route>
-				<Route path="/formHotel" element={<FormPageH />}></Route>
-				<Route path="/formRoom" element={<FormPageR />}></Route>
-				<Route path="/usercreate" element={<FormPageUser />}></Route>
-				<Route path="/hotelpage/:id" element={<HotelPage />}></Route>
-				<Route path="/roompage/:id" element={<RoomPage />}></Route>
-				<Route path="/farewell" element={<FarewellPage />}></Route>
-				<Route path="/shoppingcart" element={<ShoppingCartPage />}></Route>
-				<Route path="/paymenttransition" element={<CheckoutTransitionPage />}></Route>
-				<Route path="/roomSearch" element={<RoomFilter />}></Route>
-			</Routes>
-		</div>
-	);
+  return (
+    <div id="app">
+      <Routes>
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/login" element={<LogingPage />}></Route>
+        <Route path="/userprofile/:name" element={<ProfilePage />}></Route>
+        <Route path='/userprofile/reservas' element={<UserReservasPage />}></Route>
+        <Route path='/userprofile/configuracion' element={<UserSettings />}></Route>
+        <Route path="/adminprofile/:name" element={<AdminProfilePage />}></Route>
+        <Route path="/adminprofile/reservas" element={<AdminReservasPage />}></Route>
+        <Route path='/adminprofile/configuracion' element={<AdminSettings />}></Route>
+        <Route path="/dashboard" element={<DashBoardPage />}></Route>
+        <Route path="/dashboard/hoteldetail/:id" element={<DashboardPageHotelDetail />}></Route>
+        <Route path="/dashboard/hotelupdate/:id" element={<FormPageHotelUpdate />}></Route>
+        <Route path="/formHotel" element={<FormPageH />}></Route>
+        <Route path="/formRoom" element={<FormPageR />}></Route>
+        <Route path="/usercreate" element={<FormPageUser />}></Route>
+        <Route path="/hotelpage/:id" element={<HotelPage />}></Route>
+        <Route path="/roompage/:id" element={<RoomPage />}></Route>
+        <Route path="/farewell" element={<FarewellPage />}></Route>
+        <Route path="/shoppingcart" element={<ShoppingCartPage />}></Route>
+        <Route path="/paymenttransition" element={<CheckoutTransitionPage />}></Route>
+        <Route path="/roomSearch" element={<RoomFilter />}></Route>
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
