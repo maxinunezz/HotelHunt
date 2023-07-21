@@ -1,8 +1,8 @@
-import { Dropdown, Button, Input } from '@rewind-ui/core';
-import { useState, useEffect } from 'react';
+import { Dropdown, Button} from '@rewind-ui/core';
 import { tokenStore } from '../../Store';
 import { useNavigate } from 'react-router-dom';
 import { farewellToast } from '../toast';
+import { MouseEvent } from 'react';
 
 
 const UserMenu = () => {
@@ -12,7 +12,7 @@ const UserMenu = () => {
 
 
 
-    const handleClick = (event) => {
+    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         resetToken()
@@ -26,7 +26,7 @@ const UserMenu = () => {
                     <Button className="w-500">{`${isAdmin[0].name} ${isAdmin[0].lastName[0]}.`}</Button>
                 </Dropdown.Trigger>
                 <Dropdown.Content>
-                    <Dropdown.Item onClick={() => navigate(`/userprofile/${isAdmin[0].name}+${isAdmin[0].lastName}`)}>
+                    <Dropdown.Item onClick={() => navigate(`/profile/${isAdmin[0].name}+${isAdmin[0].lastName}`)}>
                         Perfil
                     </Dropdown.Item>
 

@@ -1,4 +1,4 @@
-import ProfileSideBar from "../../components/ProfileSideBar/U-ProfileSideBar";
+import ProfileSideBar from "../../components/ProfileSideBar/ProfileSideBar";
 
 const reservations = [
     {

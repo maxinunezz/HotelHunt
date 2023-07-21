@@ -1,7 +1,7 @@
-import { Dropdown, Button, Input } from '@rewind-ui/core';
-import { useState } from 'react';
+import { Dropdown, Button} from '@rewind-ui/core';
+import { MouseEvent, useState } from 'react';
 import { tokenStore } from '../../Store';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { farewellAdminToast } from '../toast';
 
 
@@ -10,7 +10,7 @@ const AdminMenu = () => {
     const isAdmin = tokenStore((state) => state.userState)  //análogo a UserMenu
     const [selectedOption, setSelectedOption] = useState<string | undefined>();
     const { resetToken } = tokenStore()
-    const handleClick = (event) => {
+    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         resetToken()
@@ -25,7 +25,7 @@ const AdminMenu = () => {
                     
                 </Dropdown.Trigger>
                 <Dropdown.Content>
-                    <Dropdown.Item onClick={() => navigate(`/adminprofile/${isAdmin[0].name}+${isAdmin[0].lastName}`)}>
+                    <Dropdown.Item onClick={() => navigate(`/profile/${isAdmin[0].name}+${isAdmin[0].lastName}`)}>
                         Perfil
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => navigate('/dashboard')}>
