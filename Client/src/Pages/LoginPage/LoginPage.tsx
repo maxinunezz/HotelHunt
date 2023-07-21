@@ -8,6 +8,8 @@ import { tokenStore } from '../../Store';
 import { errorToast, successToast } from '../../components/toast';
 import axios from 'axios';
 import GoogleSignInButton from '../../components/Google/GoogleSignIn';
+import { Eye, EyeClosed } from '@phosphor-icons/react';
+import { useState } from 'react';
 
 interface LoginValues {
 	email: string;
@@ -24,6 +26,7 @@ const loginValidationSchema = yup.object().shape({
 });
 
 const LogingPage = () => {
+	const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar contraseña
 	const navigate = useNavigate()
 	const userInfoState = tokenStore((state) => state.userState)
 	const CLIENT_GOOGLE_ID = import.meta.env.VITE_CLIENT_GOOGLE_ID;
@@ -58,7 +61,7 @@ const LogingPage = () => {
 				)
 
 			} catch (error) {
-				errorToast(error.response.data 	);
+				errorToast(error.response.data);
 				console.log(error);
 
 			}
@@ -136,15 +139,28 @@ const LogingPage = () => {
 													: 'valid'
 										}
 									>
-										<FormControl.Label>Contrasena</FormControl.Label>
-										<FormControl.Input
-											type="password"
-											placeholder="Contraseña"
-											onChange={async (event) => {
-												await setFieldValue('password', event.target.value);
-											}}
-											value={values.password}
-										/>
+										<FormControl.Label>Contraseña</FormControl.Label>
+										<div className="relative">
+											<FormControl.Input
+												type={showPassword ? 'text' : 'password'} // Mostrar contraseña o no según el estado
+												placeholder="Contraseña"
+												onChange={async (event) => {
+													await setFieldValue('password', event.target.value);
+												}}
+												value={values.password}
+											/>
+											<div
+												className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+												onClick={() => setShowPassword((prevState) => !prevState)} // Alternar el estado para mostrar/ocultar contraseña
+											>
+												
+												{showPassword ? (
+													<Eye size={24} color="#1d6bb4" />
+												) : (
+													<EyeClosed size={24} color="#1d6bb4" />
+												)}
+											</div>
+										</div>
 										<FormControl.Text className="text-red-500">
 											{errors.password}
 										</FormControl.Text>
@@ -161,6 +177,12 @@ const LogingPage = () => {
 								</Form>
 							)}
 						</Formik>
+					</div>
+					<div className="flex m-2 p-5 space-x-1 rounded-md ">
+						<h1 className="text-blue-500 ">Recuperar contraseña</h1>
+
+						<button onClick={() => navigate('/RecuPassword')} className="mr-2 text-teal-50">aquí</button>
+
 					</div>
 					<GoogleSignInButton clientID={CLIENT_GOOGLE_ID} endpoint={endpoint} />
 
