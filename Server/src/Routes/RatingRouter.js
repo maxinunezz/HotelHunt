@@ -5,7 +5,7 @@ const { crearValoracion, getRating} = require("../Handlers/RatingHandler")
 const ratingRouter = Router();
 
 ratingRouter.get("/:hotelId", getRating);
-ratingRouter.post("/", crearValoracion);
+ratingRouter.post("/", authMiddleware, crearValoracion);
 
 
 
