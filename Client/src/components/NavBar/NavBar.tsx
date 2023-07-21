@@ -17,6 +17,7 @@ export default function NavBar() {
   const { reset, orderByCategorySearch, orderByNameSearch } = searchStore();
   const { orderByName, resetHotels, fetchHotels , orderByCategory} = hotelStore();
   const [filterByNameState, setfilterByNameState] = useState();
+  
 
   const [orderByNameState, setOrderByNameState] = useState("");
   const [orderByCategoryState, setOrderByCategoryState] = useState("");

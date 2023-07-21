@@ -62,6 +62,14 @@ const RoomPage = () => {
   }));
 
   const handleArrivalDateChange = (date) => {
+
+    const currentDate = new Date();
+
+    if (date.getTime() < currentDate.getTime()) {
+      reserveErrorToast("No se puede reservar con una fecha anterior a la actual");
+      return;
+    }
+
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const day = date.getDate().toString().padStart(2, "0");
@@ -73,6 +81,14 @@ const RoomPage = () => {
   };
 
   const handleDepartureDateChange = (date) => {
+
+    const currentDate = new Date();
+
+    if (date.getTime() < currentDate.getTime()) {
+      reserveErrorToast("No se puede reservar con una fecha anterior a la actual");
+      return;
+    }
+
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const day = date.getDate().toString().padStart(2, "0");
