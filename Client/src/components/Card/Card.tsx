@@ -62,7 +62,7 @@ const Card: React.FC<CardProps> = ({
     const icons = [];
 
     for (let i = 0; i < score; i++) {
-      icons.push(<Buildings key={`building-${i}`} size={32} />);
+      icons.push(<Buildings key={`building-${i}`} size={32} color='darkblue' />);
     }
 
     return icons;
@@ -72,10 +72,10 @@ const Card: React.FC<CardProps> = ({
     const fetchRating = async () => {
       try {
         const response = await axios.get(`${url}/rating/${id}`);
-        const score = response.data[0].score;
-        console.log(response);
-        
-        setRatingValue(score);
+        const scores = response.data.map((element) => element.score);
+        const sum = scores.reduce((acc, score) => acc + score, 0);
+        const average = Math.round(sum / scores.length);
+        setRatingValue(average);
       } catch (error) {
         console.log(error);
       }

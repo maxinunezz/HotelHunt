@@ -1,26 +1,26 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { hotelStore, roomsStore } from '../../Store';
+import { Form, useNavigate, useParams } from 'react-router-dom';
+import { hotelStore, roomsStore, tokenStore } from '../../Store';
 import RoomList from '../../components/RoomList/RoomList';
 import { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
 import { MapPinLine } from '@phosphor-icons/react'
 import Footer from "../../components/Footer/Footer";
 import axios from 'axios';
+
 const url = import.meta.env.VITE_URL;
 
-
-
 const HotelPage = () => {
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const { id } = useParams();
 	const [hotelOnScreen, setroomsId] = useState([]);
-	const [hotelRatings, setHotelRatings] = useState([])
+	const [hotelRatings, setHotelRatings] = useState([]);
 	const { hotelIdSetter } = roomsStore();
 	const { fetchHotels } = hotelStore();
 	const [hotelsLoaded, setHotelsLoaded] = useState(false);
+	const [showCommentForm, setShowCommentForm] = useState(false);
 
 	const allHotels = hotelStore((state) => state.hotels);
-	console.log(allHotels);
+	const token = tokenStore((state) => state.userState);
 
 	useEffect(() => {
 		const fetchAllHotels = async () => {
@@ -33,7 +33,6 @@ const HotelPage = () => {
 	useEffect(() => {
 		if (hotelsLoaded) {
 			const hotelOnScreen = allHotels.find((hotel) => hotel.id === id);
-			console.log(hotelOnScreen);
 			setroomsId(hotelOnScreen);
 			hotelIdSetter(hotelOnScreen?.roomsId);
 		}
@@ -44,7 +43,6 @@ const HotelPage = () => {
 			try {
 				const response = await axios.get(`${url}/rating/${id}`);
 				setHotelRatings(response.data);
-				console.log(response.data);
 			} catch (error) {
 				console.error(error);
 			}
@@ -53,14 +51,25 @@ const HotelPage = () => {
 		fetchRating();
 	}, [id]);
 	console.log(hotelRatings);
+	
 
 	const overallScoreHandler = () => {
 		let sum = 0;
 		for (let i = 0; i < hotelRatings.length; i++) {
-			sum += hotelRatings[i].score
+			sum += hotelRatings[i].score;
 		}
-		return sum/hotelRatings.length
-	}
+		const average = sum / hotelRatings.length;
+		return Math.round(average);
+	};
+
+
+	const handleOpenNewWindow = () => {
+		const newWindowRoute = `/addcomment/${id}`;
+		const windowFeatures = 'height=500,width=800,resizable=yes,scrollbars=yes';
+		window.localStorage.setItem("tokenInfo", JSON.stringify(token))
+		window.localStorage.setItem("hotelId", id)
+		window.open(newWindowRoute, '_blank', windowFeatures);
+	};
 
 	return (
 		<div className="bg-slate-600 min-h-screen flex flex-col overflow-hidden">
@@ -91,11 +100,12 @@ const HotelPage = () => {
 								</div>
 								<h3 className="text-lg font-bold mb-4">Descripción</h3>
 								<p>{hotelOnScreen?.description}</p>
+
 							</div>
 						</div>
 					</div>
 				</div>
-	
+
 				<div className="max-w-screen-lg mx-auto p-8 mt-8 overflow-hidden">
 					{hotelOnScreen ? (
 						<div className="room-list transform transition duration-300">
@@ -105,6 +115,9 @@ const HotelPage = () => {
 						<p className="text-white">No hay habitaciones disponibles.</p>
 					)}
 				</div>
+				<button onClick={handleOpenNewWindow} className="bg-yellow-300 mt-4">
+					Agregar comentario
+				</button>
 			</div>
 			<div className="h-96 overflow-y-scroll border border-gray-300 rounded-lg p-4 shadow-lg">
 				<h2 className="text-2xl font-semibold mb-4">Comentarios</h2>
@@ -116,19 +129,13 @@ const HotelPage = () => {
 						</div>
 					))}
 				</div>
+
 			</div>
 			<div className="mt-auto">
 				<Footer />
 			</div>
 		</div>
 	);
-
-
-
-
 };
 
 export default HotelPage;
-
-
-
