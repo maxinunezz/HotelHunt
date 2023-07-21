@@ -1,11 +1,9 @@
-import { Buildings } from '@phosphor-icons/react';
-import { Button } from '@rewind-ui/core';
-import axios from 'axios';
-import { tokenStore } from '../../Store';
-import { log } from 'console';
-import { useEffect, useState } from 'react';
+import { Buildings } from "@phosphor-icons/react";
+import axios from "axios";
+import { hotelStore } from "../../Store";
+import { useEffect, useState } from "react";
+import { Hotel } from "../../models";
 const url = import.meta.env.VITE_URL;
-
 
 interface CardProps {
   id: string;
@@ -19,18 +17,21 @@ interface CardProps {
   score: number;
 }
 
-const Card: React.FC<CardProps> = ({
+const Card: React.FC<Hotel> = ({
   id,
   name,
   description,
   country,
   city,
   photo,
-  services,
   hotelCategory,
-  score
 }) => {
-  
+
+  const hotelFavorite = hotelStore((state)=>state.favoriteHotel)
+  const { addFavorite, deleteFavorite } = hotelStore();
+  const [isFav, setIsFav]=useState(false)
+
+
   const renderStars = (rating: number) => {
     const filledStars = rating;
     const emptyStars = 5 - rating;
@@ -58,6 +59,7 @@ const Card: React.FC<CardProps> = ({
     return stars;
   };
 
+
   const renderIcon = (score: number) => {
     const icons = [];
 
@@ -67,14 +69,42 @@ const Card: React.FC<CardProps> = ({
 
     return icons;
   };
+  
+
+  const handleFavorite = () => {
+    const isFav = hotelFavorite.some((favHotel) => favHotel.id === id);
+  
+    if (!isFav) {
+      addFavorite({
+        id,
+        name,
+        description,
+        country,
+        city,
+        photo,
+        hotelCategory,
+        score: ratingValue || 0, // Supongo que deseas guardar el rating actual en el estado
+      });
+    } else {
+      deleteFavorite(id);
+    }
+  
+    setIsFav(!isFav); // Cambiar el estado local a su valor opuesto (true -> false, false -> true)
+  };
+
+  console.log(hotelFavorite);
+  
+  
+
+
   const [ratingValue, setRatingValue] = useState<number | null>(null);
   useEffect(() => {
     const fetchRating = async () => {
       try {
         const response = await axios.get(`${url}/rating/${id}`);
         const score = response.data[0].score;
-        console.log(response);
-        
+     
+
         setRatingValue(score);
       } catch (error) {
         console.log(error);
@@ -91,7 +121,7 @@ const Card: React.FC<CardProps> = ({
         onError={({ currentTarget }) => {
           currentTarget.onerror = null;
           currentTarget.src =
-            'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg';
+            "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
         }}
         className="w-1/3 h-full object-cover rounded-l-md"
       />
@@ -107,20 +137,19 @@ const Card: React.FC<CardProps> = ({
             </p>
           </div>
           <div>
-            <div className='flex'>
-            <p>Hotel category: </p>
+            <div className="flex">
+              <p>Hotel category: </p>
               {renderStars(Number(hotelCategory))}
             </div>
-            <div className='flex'>
+            <div className="flex">
               <p>Popular rating:</p>
               {/* Renderizar el icono de Phosphor repetidamente */}
               {ratingValue !== null && renderIcon(ratingValue)}
             </div>
           </div>
           <div className="flex justify-end">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              Ver habitaciones
-            </button>
+          <button onClick={handleFavorite}>{isFav ? "💚" : "🤍"}</button>
+           
           </div>
         </div>
       </div>
