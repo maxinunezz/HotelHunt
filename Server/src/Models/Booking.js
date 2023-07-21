@@ -38,6 +38,10 @@ module.exports = (sequelize) => {
       paymentStatus: {
         type: DataTypes.ENUM("paid", "unpaid", "outstanding"),
         allowNull: false,
+      },
+      sessionId: {
+        type: DataTypes.STRING,
+        allowNull: false,
       }
     },
     { timestamps: false }

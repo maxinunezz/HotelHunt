@@ -1,8 +1,9 @@
 const Stripe = require('stripe');
 const { Booking, Room, User, Auth } = require('../db');
 const { Op } = require('sequelize');
-const stripe = new Stripe('sk_test_51NTrfKHJDBCJMNrhc1URooDk9yKEJU0TONg60genqgT77WYcIyNQlhGdEa7Gn7pvado3D6WLIbXwDwKlGBitKNF000mPbEiXwv');
+const stripe = new Stripe('sk_test_51NVdmjB3jfe4i46dYiBgwgb9jcft9tZ8mmSQC2YJf4w5xVew4tCtdiZ1frDkUvpagyM0FskqPMISAe3oRPRoClRf00aif6TnEF');
 const nodemailer = require('nodemailer');
+const endpointSecret = "whsec_ed391f08ba83c4f8e82d04709ee19174dcbd2b36cdbaaadcbc3cc7817a778a45";
 require('dotenv').config();
 
 async function createBooking(req, res) {
@@ -29,6 +30,7 @@ async function createBooking(req, res) {
       })
     );
 
+
     const isRoomAlreadyReserved = async (roomId, checkin, checkout) => {
       const existingBooking = await Booking.findOne({
         where: {
@@ -44,30 +46,6 @@ async function createBooking(req, res) {
 
       return existingBooking !== null;
     };
-
-
-
-    for (const room of rooms) {
-      const { roomId, checkin, checkout, amount, name, price } = room;
-
-      const isReserved = await isRoomAlreadyReserved(roomId, checkin, checkout);
-      if (!isReserved) {
-        const booking = await Booking.create({
-          roomId,
-          userId: id,
-          checkin,
-          checkout,
-          paymentStatus: "unpaid",
-        });
-
-        bookings.push(booking);
-
-      } else {
-        return res.status(400).json({ error: `Room with ID ${roomId} is already reserved for the selected dates` });
-      }
-
-
-    }
 
     const calculateDays = (item) => {
 
@@ -98,11 +76,35 @@ async function createBooking(req, res) {
       success_url: `http://localhost:5173/`,
       cancel_url: `http://localhost:5173/`,
     });
-
+    
+    const name = user.name
     const sessionId = session.id;
     const urlpago = session.url;
-    await confirmationEmail(id, urlpago, user.name);
 
+    for (const room of rooms) {
+      const { roomId, checkin, checkout } = room;
+
+      const isReserved = await isRoomAlreadyReserved(roomId, checkin, checkout);
+      if (!isReserved) {
+        const booking = await Booking.create({
+          roomId,
+          userId: id,
+          checkin,
+          checkout,
+          paymentStatus: "unpaid",
+          sessionId: sessionId,
+        });
+
+        bookings.push(booking);
+
+      } else {
+        return res.status(400).json({ error: `Room with ID ${roomId} is already reserved for the selected dates` });
+      }
+
+
+    }
+    
+    await confirmationEmail(id, urlpago, name);
 
     res.status(200).json({ sessionId, urlpago, bookings })
   } catch (error) {
@@ -137,7 +139,7 @@ const confirmationEmail = async (id, urlpago, name) => {
         pass: PASSMAIL,
       }
     });
-    console.log(userEmail)
+    
 
     await transporter.sendMail({
       from: `"Hotel Hunt"  <${COMPANYMAIL}>`, 
@@ -156,19 +158,6 @@ const confirmationEmail = async (id, urlpago, name) => {
   }
 };
 
-
-const obtenerIdSeccion = async (req, res) => { // para q?
-  try {
-    const sessionId = req.query.sessionId;
-    console.log(sessionId)
-
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
-
-    return res.json(session);
-  } catch (error) {
-    return res.status(500).send("Error al obtener información de la sesión de pago");
-  }
-};
 
 const getReserves = async (req, res) => {
   const { id } = userData;
@@ -190,9 +179,46 @@ const getReserves = async (req, res) => {
   }
 }
 
+
+
+const stripehook = async (req, res) => {
+  /*const sig = req.headers['stripe-signature'];
+  const payload = req.body;
+
+  console.log(payload)
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+    console.log('Event:', event);
+    console.log('Event type:', event.type);
+  } catch (error) {
+    res.status(400).send(`Webhook Error: ${error.message}`);    
+  }*/
+  const sessionId = req.body.data.object.id;
+  const status = req.body.data.object.payment_status;
+  
+
+  try {
+    const updateBooking = await Booking.findAll({where: {
+      sessionId: sessionId,
+    }})
+
+    for(const booking of updateBooking){
+      await booking.update({paymentStatus: status})
+    }
+
+    res.status(200).send('booking updated')
+    
+  } catch (error) {
+    res.status(500).json(error);
+  }
+    
+};
+
 module.exports = {
   createBooking,
-  obtenerIdSeccion,
   confirmationEmail,
-  getReserves
+  getReserves,
+  stripehook
 };
