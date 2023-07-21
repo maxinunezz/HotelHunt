@@ -127,7 +127,7 @@ const askForPass = async (req, res) => {
     });
     if (authForgot) {
       const token = jwt.sign({ id: authForgot.id, email: authForgot.email }, JWT_SECRET, { expiresIn: '15m' });
-      const verificationLink = `http://localhost:3001/user/recoveryPass/${token}`//ruta
+      const verificationLink = `http://localhost:3001/user/validateAsk/${token}`
 
     await transporter.sendMail({
       from: `"Hotel Hunt"  <${COMPANYMAIL}>`,
@@ -173,10 +173,10 @@ const validateToken = async ( req, res) => {
 
 const recoveryPass = async (req,res) => {
   const { id } = userData;
-  const { newPass } = req.body
+  const { password } = req.body
   try {
     const auth = await Auth.findOne({where: { id: id}})
-    const hashedpass = await bcrypt.hash(newPass, 5);
+    const hashedpass = await bcrypt.hash(password, 5);
     await auth.update({password: hashedpass})
     const userFound = await User.findOne({where: { id: auth.userId }})
 

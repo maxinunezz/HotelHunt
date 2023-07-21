@@ -4,6 +4,7 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { errorToast, successToast } from '../../components/toast';
+import axios from 'axios';
 
 
 interface PasswordRecoveryValues {
@@ -19,20 +20,19 @@ const passwordRecoveryValidationSchema = yup.object().shape({
 });
 
 const RecuPassword = () => {
+  const url = import.meta.env.VITE_URL
   const navigate = useNavigate();
 
   const handleSubmit = useCallback(
     async (values: PasswordRecoveryValues, helpers: FormikHelpers<PasswordRecoveryValues>) => {
       try {
-        console.log('values', values);
-        //  enviar la solicitud para recuperar la contraseña uwu
+        const response = await axios.get(`${url}/user/askpass/${values.email}`)
        
 
-        successToast('Se ha enviado un correo de recuperación a tu dirección de email');
+        successToast(response.data);
         navigate('/login'); // redirigir a la página de inicio de sesión después de enviar el correo.
       } catch (error) {
-        errorToast('Error al enviar el correo de recuperación');
-        console.log(error);
+        errorToast(error.response.data);
       }
 
       helpers.setSubmitting(false);

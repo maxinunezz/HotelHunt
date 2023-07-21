@@ -21,6 +21,7 @@ import CheckoutTransitionPage from './Pages/CheckoutTransitionPage/CheckoutTrans
 import RoomFilter from './Pages/RoomFilter/RoomFilter';
 import FormPageHotelUpdate from './Pages/FormPageH/FormPageHotelUpdate';
 import RecuPassword from './Pages/RecuperacionPassword/RecuPassword'
+import FormPagePass from './Pages/RecuperacionPassword/FormPass';
 
 function App() {
 	return (
@@ -47,6 +48,7 @@ function App() {
 				<Route path="/paymenttransition" element={<CheckoutTransitionPage />}></Route>
 				<Route path="/roomSearch" element={<RoomFilter />}></Route>
 				<Route path="/RecuPassword" element={<RecuPassword/>}></Route>
+				<Route path='/SetNewPass' element={<FormPagePass/>}></Route>
 			</Routes>
 		</div>
 	);
