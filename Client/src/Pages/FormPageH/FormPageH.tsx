@@ -20,7 +20,7 @@ interface FormValues {
 	country: string;
 	city: string;
 	photo: string;
-	category: string;
+	hotelCategory: string;
 	services: string;
 }
 
@@ -75,7 +75,7 @@ export default function FormPageH() {
 						country: values.country,
 						city: values.city,
 						photo: values.photo,
-						hotelCategory: values.category,
+						hotelCategory: values.hotelCategory,
 						services: values.services,
 					},
 					{
@@ -124,7 +124,7 @@ export default function FormPageH() {
 							country: '',
 							city: '',
 							photo: '',
-							category: '',
+							hotelCategory: '',
 							services: ""
 						}}
 						onSubmit={handleSubmit}
@@ -289,9 +289,9 @@ export default function FormPageH() {
 									)}
 									<FormControl
 										validation={
-											values.category.length === 0
+											values.hotelCategory.length === 0
 												? 'none'
-												: errors.category
+												: errors.hotelCategory
 													? 'invalid'
 													: 'valid'
 										}
@@ -305,15 +305,13 @@ export default function FormPageH() {
 											min="1"
 											max="5"
 											placeholder="category"
-											min="1"
-											max="5"
 											onChange={async (event) => {
 												await setFieldValue('category', event.target.value);
 											}}
-											value={values.category}
+											value={values.hotelCategory}
 											required
 										/>
-										<FormControl.Text>{errors.category}</FormControl.Text>
+										<FormControl.Text>{errors.hotelCategory}</FormControl.Text>
 									</FormControl>
 
 									<FormControl
