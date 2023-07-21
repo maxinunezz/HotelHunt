@@ -19,6 +19,8 @@ import RoomFilter from './Pages/RoomFilter/RoomFilter';
 import FormPageHotelUpdate from './Pages/FormPageH/FormPageHotelUpdate';
 import RecuPassword from './Pages/RecuperacionPassword/RecuPassword'
 import FormPagePass from './Pages/RecuperacionPassword/FormPass';
+import AddRatingPage from './Pages/AddRatingPage/AddRatingPage';
+
 
 function App() {
 	return (
@@ -43,6 +45,7 @@ function App() {
 				<Route path="/roomSearch" element={<RoomFilter />}></Route>
 				<Route path="/RecuPassword" element={<RecuPassword/>}></Route>
 				<Route path='/SetNewPass' element={<FormPagePass/>}></Route>
+				<Route path="/addcomment/:hotelId" element={<AddRatingPage />}></Route>
 			</Routes>
 		</div>
 	);

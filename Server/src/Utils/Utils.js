@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Hotel, Room, User, Auth, conn } = require("../db");
+const { Hotel, Room, User, Auth, Rating, conn } = require("../db");
 
 async function fetchHotelsData() {
   try {
@@ -9,6 +9,16 @@ async function fetchHotelsData() {
   } catch (error) {
     console.error("Failed to get data from API:", error);
     return [];
+  }
+}
+
+async function getAllRating () {
+  try {
+    const response = await axios.get("http://localhost:5000/ratings");
+    const ratings = response.data;
+    return ratings;
+  } catch (error) {
+    
   }
 }
 
@@ -76,6 +86,17 @@ async function firstload() {
       await Promise.all([createdUser, createdAuth]);
     }
 
+    for (const rating of ratings) {
+      const {userId, score, comment, hotelId} = rating;
+      const ratingcreated = await Rating.create({
+        userId,
+        score,
+        comment,
+        hotelId
+      });
+      await Promise.all([ratingcreated])
+    }
+
     for (const hotel of hotels) {
       const { id, name, description, photo, city, country, userId, hotelCategory, services } = hotel;
       const hotelcreated = await Hotel.create({
@@ -91,6 +112,17 @@ async function firstload() {
         roomsId: [],
       });
       await Promise.all([hotelcreated]);
+    }
+
+    for (const rating of ratings) {
+      const { userId, score, comment, hotelId} = rating;
+      const ratingcreated = await Rating.create({
+        userId,
+        score, 
+        comment, 
+        hotelId,
+      });
+      await Promise.all([ratingcreated]);
     }
 
     for (const room of rooms) {

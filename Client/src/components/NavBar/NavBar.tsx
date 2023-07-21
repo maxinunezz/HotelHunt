@@ -21,7 +21,7 @@ export default function NavBar() {
 
   const [orderByNameState, setOrderByNameState] = useState("");
   const [orderByCategoryState, setOrderByCategoryState] = useState("");
-
+	
   const handleAllHotels = (element: Event) => {
     element.preventDefault();
     resetHotels();
