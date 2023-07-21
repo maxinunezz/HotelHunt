@@ -62,6 +62,7 @@ const RoomFilter = () => {
 
   };
 
+
   const handleSortBy = async (event) => {
     const sortByValue = event.target.value;
     roomsFiltered.length ? sortByPrice(roomsFiltered, sortByValue) : sortByPrice(allRooms, sortByValue)
@@ -74,6 +75,8 @@ const RoomFilter = () => {
     filterResetToast("Filtros reseteados")
     reset()
   }
+  
+  const filteredRooms = filters.minPrice === "62" && filters.maxPrice === "62" ? [] : roomsFiltered;
 
   return (
     <div className="flex-col bg-slate-600">
@@ -83,7 +86,7 @@ const RoomFilter = () => {
       {/* Espacio para los filtros y la lista de habitaciones */}
       <div className="flex">
         {/* Filtros */}
-        <div className="dark:bg-gray-900 dark:border-gray-700 w-[500px] h-[700px] p-10 text-white mt-[20px] ml-[20px] rounded ">
+        <div className="dark:bg-gray-900 dark:border-gray-700 w-[500px] h-[700px] p-10 text-white mt-[20px] ml-[20px] rounded h-screen ">
           <div className="flex">
             <div className="mx-2 text-black">
               <div className="text-blue-500 font-bold">
@@ -103,8 +106,8 @@ const RoomFilter = () => {
                 <input
                   name="rangeOne"
                   value={filters.minPrice}
-                  min="62"
-                  max="1000"
+                  min="41"
+                  max="500"
                   step="10"
                   type="range"
                   onChange={handleMinPriceChange}
@@ -130,8 +133,8 @@ const RoomFilter = () => {
                 <input
                   name="rangeTwo"
                   value={filters.maxPrice}
-                  min="62"
-                  max="1000"
+                  min="42"
+                  max="500"
                   step="10"
                   type="range"
                   onChange={handleMaxPriceChange}
@@ -264,23 +267,8 @@ const RoomFilter = () => {
             <h3 className="text-blue-500 font-bold">Capacity</h3>
             {/* Componente de checkboxes */}
             <div className="flex mt-2">
-              <input
-                type="checkbox"
-                id="checkbox5"
-                checked={checkboxValuesCapacity.checkbox5}
-                onChange={() =>
-                  setCheckboxCapacity({
-                    ...checkboxValuesCapacity,
-                    checkbox5: !checkboxValuesCapacity.checkbox5
-                  })
-                }
-              />
-              <label htmlFor="checkbox1" className="flex ml-2 text-white">
-                5 people{" "}
-                &nbsp;
-                {<UsersFour size={26} color="white" weight="fill" />}
-                {<User size={26} color="white" weight="fill" />}
-              </label>
+
+
             </div>
             <div className="flex mt-2">
               <input
@@ -374,10 +362,9 @@ const RoomFilter = () => {
 
         {/* Lista de habitaciones */}
         <div className="flex-col ml-[100px] mt-[20px]">
-
-          {roomsFiltered.length ? (
+          {filteredRooms.length ? (
             <div className="grid grid-cols-3 justify-center mb-4 gap-5">
-              {roomsFiltered.map((room) => (
+              {filteredRooms.map((room) => (
                 <Link to={`/roompage/${room.id}`} key={room.id}>
                   <RoomCard
                     id={room.id}
@@ -396,24 +383,7 @@ const RoomFilter = () => {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-3 justify-center mb-4 gap-5">
-              {allRooms.map((room) => (
-                <Link to={`/roompage/${room.id}`} key={room.id}>
-                  <RoomCard
-                    id={room.id}
-                    name={room.name}
-                    description={room.description}
-                    price={room.price}
-                    pax={room.pax}
-                    services={room.services}
-                    photo={room.photo}
-                    floorNumber={room.floorNumber}
-                    disabled={room.disabled}
-                    hotelCategory={room.hotelCategory}
-                  />
-                </Link>
-              ))}
-            </div>
+            <p className="text-white text-center mt-8">No se encontraron habitaciones con los filtros seleccionados.</p>
           )}
         </div>
       </div>

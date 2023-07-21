@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Card from '../Card/Card';
 import { hotelStore } from '../../Store';
 import { Pagination } from '../Pagination/Pagination';
-import { PaginadoGlobal } from '../Pagination/PaginadoGlobal';
+import PaginadoGlobal from '../Pagination/PaginadoGlobal';
 
 
 const HotelList = () => {
@@ -36,7 +36,7 @@ const HotelList = () => {
 								city={hotel.city}
 								photo={hotel.photo}
 								hotelCategory={hotel.hotelCategory}
-								services={hotel.services}
+								services={hotel.services}								
 							/>
 						</Link>
 					))

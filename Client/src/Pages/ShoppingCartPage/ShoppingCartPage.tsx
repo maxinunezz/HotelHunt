@@ -2,31 +2,43 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CurrencyDollar, ShoppingCart, Trash } from '@phosphor-icons/react';
 import { userStore } from '../../Store/UserStore';
+import { tokenStore } from '../../Store';
 
 const ShoppingCartPage = () => {
-    const navigate = useNavigate()
-    
-    const userReserve = userStore((state)=>state.reserves)
-    const {reserveRoomPayment} = userStore()
-    
-    const [cartItems, setCartItems] = useState(userReserve); // Aquí se almacenarán los elementos del carrito
+  const navigate = useNavigate()
+  const urlPayment = userStore((state) => state.urlPayment)
+  const sessionId = userStore((state) => state.sessionIdUser)
+  const allSessionData = userStore((state) => state.allSessionData)
+  const token = tokenStore((state) => state.userState)
+  console.log(allSessionData);
 
 
-   const handleDeleteItem = (roomId:string) => {
+  const userReserve = userStore((state) => state.reserves)
+  const { reserveRoomPayment } = userStore()
+
+  const [cartItems, setCartItems] = useState(userReserve); // Aquí se almacenarán los elementos del carrito
+
+
+  const handleDeleteItem = (roomId: string) => {
     console.log(roomId);
 
-  const newArray = cartItems.filter(element=> element.roomId !== roomId )
+    const newArray = cartItems.filter(element => element.roomId !== roomId)
 
-  console.log(userReserve);
+    console.log(userReserve);
 
     reserveRoomPayment(newArray)
     setCartItems(newArray)
 
   };
-  
+
 
   const handleCheckout = () => {
     // Lógica para procesar el pago y completar la compra
+
+    window.localStorage.setItem('session', JSON.stringify(allSessionData.session));
+    window.localStorage.setItem('token', JSON.stringify(token));
+    console.log("Handler");
+
   };
 
   return (
@@ -61,20 +73,21 @@ const ShoppingCartPage = () => {
             <h3 className="text-lg font-medium">Total:</h3>
             <span className="text-2xl font-bold">
               <CurrencyDollar size={24} className="inline-block align-middle" />
-             
+
             </span>
           </div>
-
-          <button
-            onClick={handleCheckout}
-            className="mt-4 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
-          >
-            Proceed to Checkout
-          </button>
+          <Link to={urlPayment}>
+            <button
+              onClick={handleCheckout}
+              className="mt-4 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
+            >
+              Proceed to Checkout
+            </button>
+          </Link>
         </div>
       )}
 
-      <button onClick={()=>navigate(-1)} className="mt-4 inline-block underline">
+      <button onClick={() => navigate(-1)} className="mt-4 inline-block underline">
         Continue Shopping
       </button>
     </div>

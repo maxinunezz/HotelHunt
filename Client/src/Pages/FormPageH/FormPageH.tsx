@@ -305,8 +305,6 @@ export default function FormPageH() {
 											min="1"
 											max="5"
 											placeholder="category"
-											min="1"
-											max="5"
 											onChange={async (event) => {
 												await setFieldValue('category', event.target.value);
 											}}

@@ -127,7 +127,7 @@ const askForPass = async (req, res) => {
     });
     if (authForgot) {
       const token = jwt.sign({ id: authForgot.id, email: authForgot.email }, JWT_SECRET, { expiresIn: '15m' });
-      const verificationLink = `http://localhost:3001/user/recoveryPass/${token}`//ruta
+      const verificationLink = `http://localhost:3001/user/validateAsk/${token}`
 
     await transporter.sendMail({
       from: `"Hotel Hunt"  <${COMPANYMAIL}>`,
@@ -155,13 +155,14 @@ const validateToken = async ( req, res) => {
   const { token } = req.params;
   try {
     const decodedToken = jwt.verify(token, JWT_SECRET );
-    const newToken = jwt.sign({decodedToken}, JWT_SECRET, { expiresIn: '15m' });
+    const emailToken = jwt.sign({decodedToken}, JWT_SECRET, { expiresIn: '15m' });
+    const Token = { token : emailToken}
     if (decodedToken && !isTokenExpired(decodedToken)){
-      res.cookie('token', newToken, {
+      res.cookie('token', Token, {
         secure: true,
         httpOnly: true,
       })
-      return res.status(200).redirect('http://localhost:5173/')//pagina de recovery
+      return res.status(200).redirect('http://localhost:5173/SetNewPass')
     }else{
       throw Error(message, '')
     }
@@ -173,10 +174,10 @@ const validateToken = async ( req, res) => {
 
 const recoveryPass = async (req,res) => {
   const { id } = userData;
-  const { newPass } = req.body
+  const { password } = req.body
   try {
     const auth = await Auth.findOne({where: { id: id}})
-    const hashedpass = await bcrypt.hash(newPass, 5);
+    const hashedpass = await bcrypt.hash(password, 5);
     await auth.update({password: hashedpass})
     const userFound = await User.findOne({where: { id: auth.userId }})
 
@@ -219,4 +220,3 @@ module.exports = {
   recoveryPass,
   validateToken,
 };
-

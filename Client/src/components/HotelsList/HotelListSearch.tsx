@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import Card from '../Card/Card';
 import { hotelStore, searchStore } from '../../Store';
 import { Pagination } from '../Pagination/Pagination';
-import { PaginadoGlobal } from '../Pagination/PaginadoGlobal';
-
+import PaginadoGlobal from '../Pagination/PaginadoGlobal'
 
 const HotelListSearch = () => {
     const hotelsPerPage = 3; //primer parametro del paginado
@@ -20,7 +19,6 @@ const HotelListSearch = () => {
 
     const handlePaginado = (pageNumber) => {       //tercer parametro del paginado
         setCurrentPageSearch(pageNumber)
-        paginado(pageNumber);
 
     }
 
