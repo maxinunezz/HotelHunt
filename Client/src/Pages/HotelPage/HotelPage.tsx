@@ -20,7 +20,7 @@ const HotelPage = () => {
 	const [hotelsLoaded, setHotelsLoaded] = useState(false);
 
 	const allHotels = hotelStore((state) => state.hotels);
-	console.log(allHotels);
+
 
 	useEffect(() => {
 		const fetchAllHotels = async () => {
@@ -33,7 +33,7 @@ const HotelPage = () => {
 	useEffect(() => {
 		if (hotelsLoaded) {
 			const hotelOnScreen = allHotels.find((hotel) => hotel.id === id);
-			console.log(hotelOnScreen);
+		
 			setroomsId(hotelOnScreen);
 			hotelIdSetter(hotelOnScreen?.roomsId);
 		}
@@ -44,7 +44,7 @@ const HotelPage = () => {
 			try {
 				const response = await axios.get(`${url}/rating/${id}`);
 				setHotelRatings(response.data);
-				console.log(response.data);
+			
 			} catch (error) {
 				console.error(error);
 			}
@@ -52,7 +52,7 @@ const HotelPage = () => {
 
 		fetchRating();
 	}, [id]);
-	console.log(hotelRatings);
+
 
 	const overallScoreHandler = () => {
 		let sum = 0;

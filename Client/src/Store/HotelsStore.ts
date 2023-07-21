@@ -16,8 +16,8 @@ type Actions = {
   orderByName: (array: Hotel[], event: string) => void;
   orderByCategory: (array: Hotel[], event: string) => void;
   resetHotels: () => void;
-  addFavorite: () => void;
-  deleteFavorite: () => void;
+  addFavorite: (hotel:any) => void;
+  deleteFavorite: (hotel:any) => void;
 };
 
 const initialState: States = {
@@ -29,6 +29,16 @@ const initialState: States = {
 
 export const hotelStore = create<States & Actions>((set) => ({
   ...initialState,
+
+  addFavorite: (hotel)=>{
+set((state)=>({...state,
+  favoriteHotel:[...state.favoriteHotel, hotel]
+}))
+  },
+
+  deleteFavorite: (hotel)=>{
+
+  },
 
   fetchHotels: async () => {
     const { data } = await axios.get<Hotel[]>(`${url}/hotel`);
