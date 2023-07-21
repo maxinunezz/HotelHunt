@@ -20,7 +20,7 @@ interface FormValues {
 	country: string;
 	city: string;
 	photo: string;
-	hotelCategory: string;
+	category: string;
 	services: string;
 }
 
@@ -48,6 +48,7 @@ export default function FormPageH() {
 	const navigate = useNavigate()
 	const [isCreated, setIsCreated] = useState(false);
 	const token = tokenStore((state) => state.userState)
+
 	const CLOUD_NAME = "hotelmatimaxi4342";
 	const UPLOAD_PRESET = "hotel_pf";
 
@@ -74,7 +75,7 @@ export default function FormPageH() {
 						country: values.country,
 						city: values.city,
 						photo: values.photo,
-						hotelCategory: values.hotelCategory,
+						hotelCategory: values.category,
 						services: values.services,
 					},
 					{
@@ -83,13 +84,12 @@ export default function FormPageH() {
 						},
 					}
 				);
-
-
+				
 				helpers.resetForm()
 				setIsCreated(true);
 				successToast('Hotel creado correctamente');
 				console.log('data', data);
-				navigate(-1);
+				navigate(-1)
 			} catch (error) {
 
 				errorToast('Hubo un error, intenta de nuevo');
@@ -124,7 +124,7 @@ export default function FormPageH() {
 							country: '',
 							city: '',
 							photo: '',
-							hotelCategory: '',
+							category: '',
 							services: ""
 						}}
 						onSubmit={handleSubmit}
@@ -289,9 +289,9 @@ export default function FormPageH() {
 									)}
 									<FormControl
 										validation={
-											values.hotelCategory.length === 0
+											values.category.length === 0
 												? 'none'
-												: errors.hotelCategory
+												: errors.category
 													? 'invalid'
 													: 'valid'
 										}
@@ -302,14 +302,16 @@ export default function FormPageH() {
 										</FormControl.Label>
 										<FormControl.Input
 											type="number"
+											min="1"
+											max="5"
 											placeholder="category"
 											onChange={async (event) => {
 												await setFieldValue('category', event.target.value);
 											}}
-											value={values.hotelCategory}
+											value={values.category}
 											required
 										/>
-										<FormControl.Text>{errors.hotelCategory}</FormControl.Text>
+										<FormControl.Text>{errors.category}</FormControl.Text>
 									</FormControl>
 
 									<FormControl
