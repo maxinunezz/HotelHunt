@@ -11,7 +11,7 @@ import { tokenStore } from '../../Store';
 export default function HomePage() {
 	const searchResults = searchStore((state) => state.searchResults)
 	const { fetchHotels } = hotelStore()
-	const [cookies, setCookie] = useCookies(["json"]);
+	const [cookies] = useCookies(["json"]);
 	const { saveInfo } = tokenStore();
 
 

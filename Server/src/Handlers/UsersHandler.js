@@ -155,13 +155,14 @@ const validateToken = async ( req, res) => {
   const { token } = req.params;
   try {
     const decodedToken = jwt.verify(token, JWT_SECRET );
-    const newToken = jwt.sign({decodedToken}, JWT_SECRET, { expiresIn: '15m' });
+    const emailToken = jwt.sign({decodedToken}, JWT_SECRET, { expiresIn: '15m' });
+    const Token = { token : emailToken}
     if (decodedToken && !isTokenExpired(decodedToken)){
-      res.cookie('token', newToken, {
+      res.cookie('token', Token, {
         secure: true,
         httpOnly: true,
       })
-      return res.status(200).redirect('http://localhost:5173/')//pagina de recovery
+      return res.status(200).redirect('http://localhost:5173/SetNewPass')
     }else{
       throw Error(message, '')
     }
@@ -219,4 +220,3 @@ module.exports = {
   recoveryPass,
   validateToken,
 };
-

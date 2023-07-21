@@ -5,7 +5,7 @@ import axios from 'axios';
 import { errorToast, successToast } from '../../components/toast';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { tokenStore } from '../../Store';
+import { useCookies } from 'react-cookie';
 
 
 
@@ -32,8 +32,9 @@ const loginValidationSchema = yup.object().shape({
 const FormPagePass = () => {
     const navigate = useNavigate()
     const url = import.meta.env.VITE_URL;
-    const token = tokenStore((state) => state.userState)
-    
+    const [cookies] = useCookies(["token"]);
+    const Token = cookies.token && cookies.token.Token;
+    console.log(Token);
 
 
 
@@ -41,14 +42,14 @@ const FormPagePass = () => {
         async (values: passCreateValues, helpers: FormikHelpers<passCreateValues>) => {
             try {
 
-                const data = await axios.post(
-                    `${url}/user/signup`,
+                const data = await axios.put(
+                    `${url}/user/updatePass`,
                     {
                         password: values.password,
                     },
                     {
                         headers: {
-                            authorization: `Bearer ${token[1]}`,
+                            authorization: `Bearer ${Token}`,
                         },
                     }
                 );

@@ -267,7 +267,7 @@
         "city": "Lima",
         "photo": [
             "https://cf.bstatic.com/xdata/images/hotel/max1024x768/172550030.jpg?k=926a97cba96ba42af2becee00581caaa9db683e0d5e4ea196e5f710823311581&o=&hp=1",
-            "https://ak-d.tripcdn.com/images/220w1700000116ay63A34_R_960_660_R5_D.jpg"
+            "https:k-d.tripcdn.com/images/220w1700000116ay63A34_R_960_660_R5_D.jpg"
         ],
         "services": [
             "Restaurante",
@@ -808,7 +808,7 @@
   "ratings": [
     {
       "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
-      "score": 1,
+      "score": 2,
       "comment": "La comida tardo en llegar y no tenia servicio a la habitacion, no vuelvo mas!!!!",
       "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
     },
@@ -816,7 +816,97 @@
       "userId": "8ab241e4-3067-4779-9c60-536eed689157" ,
       "score": 5,
       "comment": "volveria una y otra vez a este hotel, el personal muy amable y los servicios son de lujo. Igual por el precio que estoy pagando no esperaba menos.... pero lo vale :)",
+      "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
+    },
+    {
+      "userId": "9257d1e8-e384-42aa-9432-865db79c2410" ,
+      "score": 1,
+      "comment": "Me sacaron hasta las ganas de volver a la ciudad, lo unico que rescato es la hermosa pileta que tiene pero todo lo demas... sin palabras.",
+      "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
+    },
+    {
+      "userId": "91044992-69fb-4067-89af-88e65f0a3d82" ,
+      "score": 5,
+      "comment": "Me gusto mas la app que el hotel, me la vendieron muy bien jajaja",
+      "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
+    },
+    {
+      "userId": "9526dc0d-2d81-4450-b768-1eba5fcf5f51" ,
+      "score": 2,
+      "comment": "Caaaasi puntuacion perfecta, por lo unico que no doy 5 estrellas es por el olor raro que tenian las sabanas..",
+      "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
+    },
+    {
+      "userId": "98e23a78-a1ca-4e01-9953-421977244ac8" ,
+      "score": 1,
+      "comment": "mediocre todo",
+      "hotelId": "d675988c-9d0d-4d2f-82de-9b49911d4e7f"
+    },
+    {
+      "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
+      "score": 1,
+      "comment": "La comida tardo en llegar y no tenia servicio a la habitacion, no vuelvo mas!!!!",
       "hotelId": "12193d17-8c82-4397-a6b9-2922401b858b"
+    },
+    {
+      "userId": "8ab241e4-3067-4779-9c60-536eed689157" ,
+      "score": 4,
+      "comment": "volveria una y otra vez a este hotel, el personal muy amable y los servicios son de lujo. Igual por el precio que estoy pagando no esperaba menos.... pero lo vale :)",
+      "hotelId": "12193d17-8c82-4397-a6b9-2922401b858b"
+    },
+    {
+      "userId": "9257d1e8-e384-42aa-9432-865db79c2410" ,
+      "score": 2,
+      "comment": "Me sacaron hasta las ganas de volver a la ciudad, lo unico que rescato es la hermosa pileta que tiene pero todo lo demas... sin palabras.",
+      "hotelId": "12193d17-8c82-4397-a6b9-2922401b858b"
+    },
+    {
+      "userId": "91044992-69fb-4067-89af-88e65f0a3d82" ,
+      "score": 4,
+      "comment": "Me gusto mas la app que el hotel, me la vendieron muy bien jajaja",
+      "hotelId": "12193d17-8c82-4397-a6b9-2922401b858b"
+    },
+    {
+      "userId": "9526dc0d-2d81-4450-b768-1eba5fcf5f51" ,
+      "score": 4,
+      "comment": "Caaaasi puntuacion perfecta, por lo unico que no doy 5 estrellas es por el olor raro que tenian las sabanas..",
+      "hotelId": "12193d17-8c82-4397-a6b9-2922401b858b"
+    },
+    {
+      "userId": "98e23a78-a1ca-4e01-9953-421977244ac8" ,
+      "score": 3,
+      "comment": "mediocre todo",
+      "hotelId": "12193d17-8c82-4397-a6b9-2922401b858b"
+    },
+    {
+      "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
+      "score": 2,
+      "comment": "La comida tardo en llegar y no tenia servicio a la habitacion, no vuelvo mas!!!!",
+      "hotelId": "13a9d6e0-22a1-4dae-8198-c81e9176eb40"
+    },
+    {
+      "userId": "8ab241e4-3067-4779-9c60-536eed689157" ,
+      "score": 4,
+      "comment": "volveria una y otra vez a este hotel, el personal muy amable y los servicios son de lujo. Igual por el precio que estoy pagando no esperaba menos.... pero lo vale :)",
+      "hotelId": "13a9d6e0-22a1-4dae-8198-c81e9176eb40"
+    },
+    {
+      "userId": "91044992-69fb-4067-89af-88e65f0a3d82" ,
+      "score": 2,
+      "comment": "Me gusto mas la app que el hotel, me la vendieron muy bien jajaja",
+      "hotelId": "13a9d6e0-22a1-4dae-8198-c81e9176eb40"
+    },
+    {
+      "userId": "9526dc0d-2d81-4450-b768-1eba5fcf5f51" ,
+      "score": 3,
+      "comment": "Caaaasi puntuacion perfecta, por lo unico que no doy 5 estrellas es por el olor raro que tenian las sabanas..",
+      "hotelId": "13a9d6e0-22a1-4dae-8198-c81e9176eb40"
+    },
+    {
+      "userId": "98e23a78-a1ca-4e01-9953-421977244ac8" ,
+      "score": 4,
+      "comment": "mediocre todo",
+      "hotelId": "13a9d6e0-22a1-4dae-8198-c81e9176eb40"
     },
     {
       "userId": "9257d1e8-e384-42aa-9432-865db79c2410" ,
@@ -825,48 +915,256 @@
       "hotelId": "13a9d6e0-22a1-4dae-8198-c81e9176eb40"
     },
     {
-      "userId": "91044992-69fb-4067-89af-88e65f0a3d82" ,
-      "score": 3,
-      "comment": "Me gusto mas la app que el hotel, me la vendieron muy bien jajaja",
+      "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
+      "score": 1,
+      "comment": "La comida tardo en llegar y no tenia servicio a la habitacion, no vuelvo mas!!!!",
+      "hotelId": "17e2c78a-3666-436e-b707-a53a553c3562"
+    },
+    {
+      "userId": "8ab241e4-3067-4779-9c60-536eed689157" ,
+      "score": 4,
+      "comment": "volveria una y otra vez a este hotel, el personal muy amable y los servicios son de lujo. Igual por el precio que estoy pagando no esperaba menos.... pero lo vale :)",
       "hotelId": "17e2c78a-3666-436e-b707-a53a553c3562"
     },
     {
       "userId": "9526dc0d-2d81-4450-b768-1eba5fcf5f51" ,
-      "score": 4,
-      "comment": "Caaaasi puntuacion perfecta, por lo unico que no doy 5 estrellas es por el olor raro que tenian las sabanas..",
-      "hotelId": "19cf4e0d-225c-4026-9dc6-d1bd77688df4"
-    },
-    {
-      "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
       "score": 5,
-      "comment": "Gracias a la app pude encontrar este hermoso hotel y pasar unas vacaciones hermosas",
-      "hotelId": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6"
+      "comment": "Caaaasi puntuacion perfecta, por lo unico que no doy 5 estrellas es por el olor raro que tenian las sabanas..",
+      "hotelId": "17e2c78a-3666-436e-b707-a53a553c3562"
     },
     {
       "userId": "98e23a78-a1ca-4e01-9953-421977244ac8" ,
       "score": 3,
       "comment": "mediocre todo",
-      "hotelId": "330901b9-c997-42b5-8fe1-40348d8d6ee5"
+      "hotelId": "17e2c78a-3666-436e-b707-a53a553c3562"
     },
     {
-      "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
-      "score": 2,
-      "comment": "la bronca que tengo. me cambiaron la habitacion, me mandaron al ultimo piso y el ascensor no andaba!!!. parecia una joda del peor dia de tu vida",
-      "hotelId": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4"
+      "userId": "9257d1e8-e384-42aa-9432-865db79c2410" ,
+      "score": 1,
+      "comment": "Me sacaron hasta las ganas de volver a la ciudad, lo unico que rescato es la hermosa pileta que tiene pero todo lo demas... sin palabras.",
+      "hotelId": "17e2c78a-3666-436e-b707-a53a553c3562"
     },
     {
-      "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
+      "userId": "91044992-69fb-4067-89af-88e65f0a3d82" ,
       "score": 4,
-      "comment": "ame todo. lo malo era lo lejos que estaba del centro",
-      "hotelId": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1"
+      "comment": "Me gusto mas la app que el hotel, me la vendieron muy bien jajaja",
+      "hotelId": "17e2c78a-3666-436e-b707-a53a553c3562"
+    },
+    {
+      "userId": "9526dc0d-2d81-4450-b768-1eba5fcf5f51" ,
+      "score": 2,
+      "comment": "Caaaasi puntuacion perfecta, por lo unico que no doy 5 estrellas es por el olor raro que tenian las sabanas..",
+      "hotelId": "19cf4e0d-225c-4026-9dc6-d1bd77688df4"
     },
     {
       "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
       "score": 1,
+      "comment": "La comida tardo en llegar y no tenia servicio a la habitacion, no vuelvo mas!!!!",
+      "hotelId": "19cf4e0d-225c-4026-9dc6-d1bd77688df4"
+    },
+    {
+      "userId": "8ab241e4-3067-4779-9c60-536eed689157" ,
+      "score": 3,
+      "comment": "volveria una y otra vez a este hotel, el personal muy amable y los servicios son de lujo. Igual por el precio que estoy pagando no esperaba menos.... pero lo vale :)",
+      "hotelId": "19cf4e0d-225c-4026-9dc6-d1bd77688df4"
+    },
+    {
+      "userId": "9257d1e8-e384-42aa-9432-865db79c2410" ,
+      "score": 1,
+      "comment": "Me sacaron hasta las ganas de volver a la ciudad, lo unico que rescato es la hermosa pileta que tiene pero todo lo demas... sin palabras.",
+      "hotelId": "19cf4e0d-225c-4026-9dc6-d1bd77688df4"
+    },
+    {
+      "userId": "91044992-69fb-4067-89af-88e65f0a3d82" ,
+      "score": 3,
+      "comment": "Me gusto mas la app que el hotel, me la vendieron muy bien jajaja",
+      "hotelId": "19cf4e0d-225c-4026-9dc6-d1bd77688df4"
+    },
+    {
+      "userId": "98e23a78-a1ca-4e01-9953-421977244ac8" ,
+      "score": 3,
+      "comment": "mediocre todo",
+      "hotelId": "19cf4e0d-225c-4026-9dc6-d1bd77688df4"
+    },
+    {
+      "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
+      "score": 4,
+      "comment": "Gracias a la app pude encontrar este hermoso hotel y pasar unas vacaciones hermosas",
+      "hotelId": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6"
+    },
+    {
+      "userId": "8ab241e4-3067-4779-9c60-536eed689157" ,
+      "score": 4,
+      "comment": "volveria una y otra vez a este hotel, el personal muy amable y los servicios son de lujo. Igual por el precio que estoy pagando no esperaba menos.... pero lo vale :)",
+      "hotelId": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6"
+    },
+    {
+      "userId": "9257d1e8-e384-42aa-9432-865db79c2410" ,
+      "score": 1,
+      "comment": "Me sacaron hasta las ganas de volver a la ciudad, lo unico que rescato es la hermosa pileta que tiene pero todo lo demas... sin palabras.",
+      "hotelId": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6"
+    },
+    {
+      "userId": "91044992-69fb-4067-89af-88e65f0a3d82" ,
+      "score": 4,
+      "comment": "Me gusto mas la app que el hotel, me la vendieron muy bien jajaja",
+      "hotelId": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6"
+    },
+    {
+      "userId": "9526dc0d-2d81-4450-b768-1eba5fcf5f51" ,
+      "score": 3,
+      "comment": "Caaaasi puntuacion perfecta, por lo unico que no doy 5 estrellas es por el olor raro que tenian las sabanas..",
+      "hotelId": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6"
+    },
+    {
+      "userId": "98e23a78-a1ca-4e01-9953-421977244ac8" ,
+      "score": 2,
+      "comment": "mediocre todo",
+      "hotelId": "2a5e2c4d-7a2d-4d4c-bb0f-3c543b24c7a6"
+    },
+    {
+      "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
+      "score": 5,
+      "comment": "Gracias a la app pude encontrar este hermoso hotel y pasar unas vacaciones hermosas",
+      "hotelId": "330901b9-c997-42b5-8fe1-40348d8d6ee5"
+    },
+    {
+      "userId": "8ab241e4-3067-4779-9c60-536eed689157" ,
+      "score": 5,
+      "comment": "volveria una y otra vez a este hotel, el personal muy amable y los servicios son de lujo. Igual por el precio que estoy pagando no esperaba menos.... pero lo vale :)",
+      "hotelId": "330901b9-c997-42b5-8fe1-40348d8d6ee5"
+    },
+    {
+      "userId": "9257d1e8-e384-42aa-9432-865db79c2410" ,
+      "score": 2,
+      "comment": "Me sacaron hasta las ganas de volver a la ciudad, lo unico que rescato es la hermosa pileta que tiene pero todo lo demas... sin palabras.",
+      "hotelId": "330901b9-c997-42b5-8fe1-40348d8d6ee5"
+    },
+    {
+      "userId": "91044992-69fb-4067-89af-88e65f0a3d82" ,
+      "score": 2,
+      "comment": "Me gusto mas la app que el hotel, me la vendieron muy bien jajaja",
+      "hotelId": "330901b9-c997-42b5-8fe1-40348d8d6ee5"
+    },
+    {
+      "userId": "9526dc0d-2d81-4450-b768-1eba5fcf5f51" ,
+      "score": 5,
+      "comment": "Caaaasi puntuacion perfecta, por lo unico que no doy 5 estrellas es por el olor raro que tenian las sabanas..",
+      "hotelId": "330901b9-c997-42b5-8fe1-40348d8d6ee5"
+    },
+    {
+      "userId": "98e23a78-a1ca-4e01-9953-421977244ac8" ,
+      "score": 1,
+      "comment": "mediocre todo",
+      "hotelId": "330901b9-c997-42b5-8fe1-40348d8d6ee5"
+    },
+    {
+      "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
+      "score": 4,
+      "comment": "la bronca que tengo. me cambiaron la habitacion, me mandaron al ultimo piso y el ascensor no andaba!!!. parecia una joda del peor dia de tu vida",
+      "hotelId": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4"
+    },
+    {
+      "userId": "8ab241e4-3067-4779-9c60-536eed689157" ,
+      "score": 4,
+      "comment": "volveria una y otra vez a este hotel, el personal muy amable y los servicios son de lujo. Igual por el precio que estoy pagando no esperaba menos.... pero lo vale :)",
+      "hotelId": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4"
+    },
+    {
+      "userId": "9257d1e8-e384-42aa-9432-865db79c2410" ,
+      "score": 3,
+      "comment": "Me sacaron hasta las ganas de volver a la ciudad, lo unico que rescato es la hermosa pileta que tiene pero todo lo demas... sin palabras.",
+      "hotelId": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4"
+    },
+    {
+      "userId": "91044992-69fb-4067-89af-88e65f0a3d82" ,
+      "score": 1,
+      "comment": "Me gusto mas la app que el hotel, me la vendieron muy bien jajaja",
+      "hotelId": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4"
+    },
+    {
+      "userId": "9526dc0d-2d81-4450-b768-1eba5fcf5f51" ,
+      "score": 5,
+      "comment": "Caaaasi puntuacion perfecta, por lo unico que no doy 5 estrellas es por el olor raro que tenian las sabanas..",
+      "hotelId": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4"
+    },
+    {
+      "userId": "98e23a78-a1ca-4e01-9953-421977244ac8" ,
+      "score": 2,
+      "comment": "mediocre todo",
+      "hotelId": "3f5625c5-17ff-40b4-96f0-1e3f7e8abfa4"
+    },
+    {
+      "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
+      "score": 3,
+      "comment": "ame todo. lo malo era lo lejos que estaba del centro",
+      "hotelId": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1"
+    },
+    {
+      "userId": "8ab241e4-3067-4779-9c60-536eed689157" ,
+      "score": 4,
+      "comment": "volveria una y otra vez a este hotel, el personal muy amable y los servicios son de lujo. Igual por el precio que estoy pagando no esperaba menos.... pero lo vale :)",
+      "hotelId": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1"
+    },
+    {
+      "userId": "9257d1e8-e384-42aa-9432-865db79c2410" ,
+      "score": 3,
+      "comment": "Me sacaron hasta las ganas de volver a la ciudad, lo unico que rescato es la hermosa pileta que tiene pero todo lo demas... sin palabras.",
+      "hotelId": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1"
+    },
+    {
+      "userId": "91044992-69fb-4067-89af-88e65f0a3d82" ,
+      "score": 4,
+      "comment": "Me gusto mas la app que el hotel, me la vendieron muy bien jajaja",
+      "hotelId": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1"
+    },
+    {
+      "userId": "9526dc0d-2d81-4450-b768-1eba5fcf5f51" ,
+      "score": 3,
+      "comment": "Caaaasi puntuacion perfecta, por lo unico que no doy 5 estrellas es por el olor raro que tenian las sabanas..",
+      "hotelId": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1"
+    },
+    {
+      "userId": "98e23a78-a1ca-4e01-9953-421977244ac8" ,
+      "score": 2,
+      "comment": "mediocre todo",
+      "hotelId": "46ddc569-42f2-49e3-bfec-cc9b3e35f1d1"
+    },
+    {
+      "userId": "ab5bae0c-fd27-43cf-bb52-5dff0754fac9" ,
+      "score": 2,
       "comment": "NO VENGO MAS!!! SI ALGUIEN LLEGA A LEER ESTA REVIEW DIRECTAMENTE CIERRE LA VENTANA DEL NAVEGADOR. el peor hotel al que fui lejos, y eso que me la paso viajando.",
+      "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
+    },
+    {
+      "userId": "8ab241e4-3067-4779-9c60-536eed689157" ,
+      "score": 4,
+      "comment": "volveria una y otra vez a este hotel, el personal muy amable y los servicios son de lujo. Igual por el precio que estoy pagando no esperaba menos.... pero lo vale :)",
+      "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
+    },
+    {
+      "userId": "9257d1e8-e384-42aa-9432-865db79c2410" ,
+      "score": 1,
+      "comment": "Me sacaron hasta las ganas de volver a la ciudad, lo unico que rescato es la hermosa pileta que tiene pero todo lo demas... sin palabras.",
+      "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
+    },
+    {
+      "userId": "91044992-69fb-4067-89af-88e65f0a3d82" ,
+      "score": 4,
+      "comment": "Me gusto mas la app que el hotel, me la vendieron muy bien jajaja",
+      "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
+    },
+    {
+      "userId": "9526dc0d-2d81-4450-b768-1eba5fcf5f51" ,
+      "score": 5,
+      "comment": "Caaaasi puntuacion perfecta, por lo unico que no doy 5 estrellas es por el olor raro que tenian las sabanas..",
+      "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
+    },
+    {
+      "userId": "98e23a78-a1ca-4e01-9953-421977244ac8" ,
+      "score": 2,
+      "comment": "mediocre todo",
       "hotelId": "7f10cb2e-62b6-4e3b-9d81-5078e0d1a6f9"
     }
   ]
 }
-  
-  
