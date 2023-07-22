@@ -84,7 +84,7 @@ export default function FormPageH() {
 						},
 					}
 				);
-				
+
 				helpers.resetForm()
 				setIsCreated(true);
 				successToast('Hotel creado correctamente');
@@ -307,6 +307,10 @@ export default function FormPageH() {
 											placeholder="category"
 											onChange={async (event) => {
 												await setFieldValue('category', event.target.value);
+											}}
+											onKeyDown={(event) => {
+												// Evitar que el usuario pueda escribir manualmente en el campo
+												event.preventDefault();
 											}}
 											value={values.category}
 											required

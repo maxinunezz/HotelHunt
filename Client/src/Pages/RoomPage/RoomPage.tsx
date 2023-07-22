@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { roomsStore } from "../../Store";
+import { hotelStore, roomsStore } from "../../Store";
 import { useEffect, useState } from "react";
 import { setRoomDetail, useFetchRooms } from "../../hooks";
 import ImageGallery from "react-image-gallery";
@@ -16,7 +16,7 @@ import {
   reserveSuccessToast1,
   reserveFullToast,
   noDatesToast,
-  mustLoginToast, // Agregado: Toast de fechas faltantes
+  mustLoginToast,
 } from "../../components/toast";
 import { toast } from "react-hot-toast";
 
@@ -40,9 +40,9 @@ const RoomPage = () => {
   const { reserveRoomPayment } = userStore();
   const userReserve = userStore((state) => state.reserves);
   const navigate = useNavigate();
-
   useFetchRooms();
   const allRooms = roomsStore((state) => state.rooms);
+  const allHotels = hotelStore((state) => state.hotels);
 
   useEffect(() => {
     const roomOnScreen = allRooms.find((roomRender) => {
@@ -62,7 +62,6 @@ const RoomPage = () => {
   }));
 
   const handleArrivalDateChange = (date) => {
-
     const currentDate = new Date();
 
     if (date.getTime() < currentDate.getTime()) {
@@ -81,7 +80,6 @@ const RoomPage = () => {
   };
 
   const handleDepartureDateChange = (date) => {
-
     const currentDate = new Date();
 
     if (date.getTime() < currentDate.getTime()) {
@@ -111,19 +109,19 @@ const RoomPage = () => {
 
   const handleReserve = () => {
     console.log(token);
-    if(token.length === 0) {
-      mustLoginToast("Please login or signup to reserve a room")
-      navigate('/login')
-      return
+    if (token.length === 0) {
+      mustLoginToast("Please login or signup to reserve a room");
+      navigate("/login");
+      return;
     }
-    
+
     if (userReserve.length === 4) {
       reserveFullToast("4 reservas máximas");
       return false;
     }
 
     if (!date.in || !date.out) {
-      noDatesToast(); // Agregado: Mostrar toast de fechas faltantes
+      noDatesToast();
       return;
     }
 
@@ -152,69 +150,89 @@ const RoomPage = () => {
     reserveRoomPayment([...userReserve, newReserve]);
     reserveSuccessToast1();
   };
-  console.log(userReserve);
+  console.log(roomRender);
+  
+  const hotelOfThisRoom = (hotelId) => {
+    console.log(allHotels);
+    const hotelBelong = allHotels.find((hotel) => {
+      return hotel.id.toString() === hotelId;
+    });
+    return hotelBelong?.name;
+  };
+
 
   return (
     <div>
       <NavbarDetail />
-      <div className="border-4 border-blue-500 bg-white p-20 min-h-screen flex justify-end items-center">
-        <div className="flex flex-col items-center">
-          <div className="flex flex-col md:flex-row">
-            <div className="md:w-1/4 md:ml-auto"></div>
-            <div className="md:w-1/2 mb-2 md:justify-center md:items-center">
-              {roomRender?.photo && (
-                <div className="w-full h-auto">
-                  <h1 className="text-2xl font-bold mb-4">Habitación: {roomRender?.name}</h1>
-                  <div className="w-full h-90 overflow-hidden shadow-lg">
-                    <ImageGallery items={images} className="w-full h-full object-cover" />
-                  </div>
-                  <div className="flex justify-start mt-2">
-                    <div className="flex items-center">
-                      <DatePicker
-                        selected={arrivalDate}
-                        onChange={handleArrivalDateChange}
-                        placeholderText="Fecha de llegada"
-                        className="border-2 rounded-lg px-4 py-2 mr-2 focus:outline-none focus:border-blue-500 border-blue-500"
-                        popperClassName="text-black"
-                      />
-                      <DatePicker
-                        selected={departureDate}
-                        onChange={handleDepartureDateChange}
-                        placeholderText="Fecha de salida"
-                        className="border-2 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 border-blue-500"
-                        popperClassName="text-black"
-                      />
+      {roomRender ? (
+        <div className="border-4 border-blue-500 bg-white p-20 min-h-screen flex justify-end items-center">
+          <div className="flex flex-col items-center">
+            <div className="flex flex-col md:flex-row">
+              <div className="md:w-1/4 md:ml-auto"></div>
+              <div className="md:w-1/2 mb-2 md:justify-center md:items-center">
+                {roomRender?.photo && (
+                  <div className="w-full h-auto">
+                    <h1 className="text-2xl font-bold mb-4">Habitación: {roomRender?.name}</h1>
+                    <div className="w-full h-90 overflow-hidden shadow-lg">
+                      <ImageGallery items={images} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="flex justify-start mt-2">
+                      <div className="flex items-center">
+                        <DatePicker
+                          selected={arrivalDate}
+                          onChange={handleArrivalDateChange}
+                          placeholderText="Fecha de llegada"
+                          className="border-2 rounded-lg px-4 py-2 mr-2 focus:outline-none focus:border-blue-500 border-blue-500"
+                          popperClassName="text-black"
+                        />
+                        <DatePicker
+                          selected={departureDate}
+                          onChange={handleDepartureDateChange}
+                          placeholderText="Fecha de salida"
+                          className="border-2 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 border-blue-500"
+                          popperClassName="text-black"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-start mt-4">
+                      <h2 className="text-lg font-bold">Precio: $ {roomRender?.price}</h2>
+                      <button
+                        onClick={handleReserve}
+                        className="ml-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full shadow-lg"
+                      >
+                        Reservar
+                      </button>
+                    </div>
+                    <div className="bg-gray-200 p-4 rounded mt-5 shadow-lg border border-black">
+                      <div className="flex ">
+                      <p className="font-bold pe-1">{`Belongs to hotel: `}</p>
+                      <button onClick={()=> navigate(`/hotelpage/${roomRender?.hotelId}`)} className="font-bold hover:text-blue-600">{`${hotelOfThisRoom(roomRender?.hotelId)}`}</button>
+                      </div>
+
+                      <p className="text-gray-800">{roomRender?.description}</p>
                     </div>
                   </div>
-                  <div className="flex justify-start mt-4">
-                    <h2 className="text-lg font-bold">Precio: $ {roomRender?.price}</h2>
-                    <button
-                      onClick={handleReserve}
-                      className="ml-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full shadow-lg"
-                    >
-                      Reservar
-                    </button>
-                  </div>
-                  <div className="bg-gray-200 p-4 rounded mt-5 shadow-lg border border-black">
-                    <p className="text-gray-800">{roomRender?.description}</p>
-                  </div>
-                </div>
-              )}
-            </div>
-            <div className="md:w-[500px] md:ml-[30px] inline-block">
-              <h2 className="text-2xl font-bold mt-4 mb-2">Servicios:</h2>
-              <ul className="list-disc list-inside border-2 rounded shadow-lg">
-                {roomRender?.services.map((service) => (
-                  <li key={service} className="text-lg text-gray-800">
-                    {service}
-                  </li>
-                ))}
-              </ul>
-              <button onClick={() => navigate(-1)} className="bg-blue-500 font-bold w-[80px] border-black rounded">Back</button>
+                )}
+              </div>
+              <div className="md:w-[500px] md:ml-[30px] inline-block">
+                <h2 className="text-2xl font-bold mt-4 mb-2">Servicios:</h2>
+                <ul className="list-disc list-inside border-2 rounded shadow-lg">
+                  {roomRender?.services.map((service) => (
+                    <li key={service} className="text-lg text-gray-800">
+                      {service}
+                    </li>
+                  ))}
+                </ul>
+                <button onClick={() => navigate(-1)} className="bg-blue-500 font-bold w-[80px] border-black rounded">
+                  Back
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <p>Loading...</p>
+      )}
       <Footer />
     </div>
   );

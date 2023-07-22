@@ -51,7 +51,7 @@ const HotelPage = () => {
 		fetchRating();
 	}, [id]);
 	console.log(hotelRatings);
-	
+
 
 	const overallScoreHandler = () => {
 		let sum = 0;
@@ -77,7 +77,7 @@ const HotelPage = () => {
 			<div className="flex-grow mt-20 overflow-y-auto">
 				<div className="max-w-screen-lg mx-auto p-8">
 					<div className="mt-2 flex justify-between">
-						<button onClick={() => navigate(-1)} className="bg-blue-500 font-bold w-[80px] border-neutral-950">Back</button>
+						<button onClick={() => navigate('/')} className="bg-blue-500 font-bold w-[80px] border-neutral-950">Back</button>
 						<div className="w-1/3 mr-6">
 							<div className="w-full h-full rounded-lg overflow-hidden">
 								<img
@@ -115,9 +115,11 @@ const HotelPage = () => {
 						<p className="text-white">No hay habitaciones disponibles.</p>
 					)}
 				</div>
-				<button onClick={handleOpenNewWindow} className="bg-yellow-300 mt-4">
-					Agregar comentario
-				</button>
+				{
+					token.length && <button onClick={handleOpenNewWindow} className="bg-yellow-300 mt-4">
+						Agregar comentario
+					</button>
+				}
 			</div>
 			<div className="h-96 overflow-y-scroll border border-gray-300 rounded-lg p-4 shadow-lg">
 				<h2 className="text-2xl font-semibold mb-4">Comentarios</h2>
