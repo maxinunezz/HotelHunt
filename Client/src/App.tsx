@@ -14,15 +14,18 @@ import ProfilePage from './Pages/ProfilePage/ProfilePage';
 import ReservasPage from './Pages/ReservasPage/ReservasPage';
 import UserSettings from './Pages/UserSettings/UserSettings';
 import ShoppingCartPage from './Pages/ShoppingCartPage/ShoppingCartPage';
-import CheckoutTransitionPage from './Pages/CheckoutTransitionPage/CheckoutTransitionPage';
 import RoomFilter from './Pages/RoomFilter/RoomFilter';
 import FormPageHotelUpdate from './Pages/FormPageH/FormPageHotelUpdate';
 import RecuPassword from './Pages/RecuperacionPassword/RecuPassword'
 import FormPagePass from './Pages/RecuperacionPassword/FormPass';
 import AddRatingPage from './Pages/AddRatingPage/AddRatingPage';
+import { useEffect } from 'react';
 
 
 function App() {
+	useEffect(() => {
+		document.title = 'Hotel Hunt';
+	  }, []);
 	return (
 		<div id="app">
 			<Routes>
@@ -41,7 +44,6 @@ function App() {
 				<Route path="/roompage/:id" element={<RoomPage />}></Route>
 				<Route path="/farewell" element={<FarewellPage />}></Route>
 				<Route path="/shoppingcart" element={<ShoppingCartPage />}></Route>
-				<Route path="/paymenttransition" element={<CheckoutTransitionPage />}></Route>
 				<Route path="/roomSearch" element={<RoomFilter />}></Route>
 				<Route path="/RecuPassword" element={<RecuPassword/>}></Route>
 				<Route path='/SetNewPass' element={<FormPagePass/>}></Route>

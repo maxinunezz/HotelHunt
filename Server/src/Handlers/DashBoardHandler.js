@@ -14,7 +14,7 @@ const getAllHotelsById = async (req, res) => {
     })
 
     if (!hotels) {
-      res.status(404).send('There are no associated hotels')
+      res.status(404).send('No hay hoteles asociados')
     }
 
     res.status(200).json(hotels)
@@ -31,7 +31,7 @@ const getRoomsByHotel = async (req, res) => {
   try {
     const RoomsByHotel = await Room.findAll({ where: { hotelId: hotelId } })
     if (!RoomsByHotel) {
-      throw Error('This Hotel dont have rooms yet.')
+      throw Error('Este Hotel aún no tiene habitaciones')
     }
     return res.status(200).json(RoomsByHotel);
   } catch (error) {
@@ -50,7 +50,7 @@ const UpdateRoomsByHotel = async (req, res) => {
     });
 
     if (!room) {
-      return res.status(404).send("Room not found");
+      return res.status(404).send("Habitación no encontrada");
     }
     
 
@@ -66,11 +66,11 @@ const UpdateRoomsByHotel = async (req, res) => {
     }
 
     if (!tuhotel) {
-      return res.status(403).send("You don't have permission to edit this room")
+      return res.status(403).send("No tienes permiso para editar esta sala")
     }
 
     await room.update(req.body);
-    return res.status(200).send("Room updated");
+    return res.status(200).send("Habitación actualizada");
 
   } catch (error) {
     return res.status(500).json(error.message)
@@ -86,7 +86,7 @@ const deleteRoomsByHotel = async (req, res) => {
       },
     });
     if (!room) {
-      return res.status(404).send("Room not found");
+      return res.status(404).send("Habitación no encontrada");
     }
     const hotel = await Hotel.findOne({
       where: {
@@ -99,9 +99,9 @@ const deleteRoomsByHotel = async (req, res) => {
       await room.update({disabled:true})
       await room.destroy();
 
-      return res.status(200).send("Room deleted successfully");
+      return res.status(200).send("Sala eliminada con éxito");
     } else {
-      return res.status(403).send("Is not your room");
+      return res.status(403).send("no es tu habitacion");
     }
 
   } catch (error) {
@@ -114,14 +114,14 @@ const restoreRoom = async (req, res) => {
   try {
     const room = await Room.findByPk(roomId, { paranoid: false });
     if (!room) {
-      return res.status(404).send("Room not found");
+      return res.status(404).send("Habitación no encontrada");
     }
     if (!room.destroyTime) {
-      return res.status(400).send("Room is not deleted");
+      return res.status(400).send("La habitación no se elimina");
     }
     await room.restore();
 
-    return res.status(200).send("Room restored successfully");
+    return res.status(200).send("Habitación restaurada con éxito");
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -137,7 +137,7 @@ const UpdateHotelByUser = async (req, res) => {
       }
     });
     if (!hotel) {
-      return res.status(404).send("Hotel not found");
+      return res.status(404).send("Hotel no encontrado");
     }
 
     await hotel.update(req.body);
@@ -159,7 +159,7 @@ const createHotelByUser = async (req, res) => {
       }
     });
     if (hotel) {
-      return res.status(404).send("Hotel already exist");
+      return res.status(404).send("El hotel ya existe");
     }
 
     const photosArray = []
@@ -178,7 +178,7 @@ const createHotelByUser = async (req, res) => {
         roomsId: [],
       });
 
-      return res.status(201).send("Hotel create successfull");
+      return res.status(201).send("Hotel creado exitosamente");
     }
   } catch (error) {
     return res.status(500).json(error.message);
@@ -224,9 +224,9 @@ const createRoomByHotel = async (req, res) => {
         }
       );
 
-      return res.status(201).send("Room created successfully");
+      return res.status(201).send("Habitacion creada con éxito");
     } else {
-      return res.status(403).send("Only owner can create rooms")
+      return res.status(403).send("Solo el dueño puede crear habitaciones")
     }
   } catch (error) {
     return res.status(500).json(error.message);
@@ -245,11 +245,11 @@ const deleteHotelByUser = async (req, res) => {
       }
     });
     if (!hotel) {
-      return res.status(404).send("Hotel not found");
+      return res.status(404).send("Hotel no encontrado");
     }
     await hotel.update({disabled: true})
     await hotel.destroy();
-    return res.status(200).send("Hotel successfully removed");
+    return res.status(200).send("Hotel eliminado con éxito");
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -260,14 +260,14 @@ const restoreHotel = async (req, res) => {
   try {
     const hotel = await Hotel.findByPk(hotelId, { paranoid: false });
     if (!hotel) {
-      return res.status(404).send("Hotel not found");
+      return res.status(404).send("Hotel no encontrado");
     }
     if (!hotel.destroyTime) {
-      return res.status(400).send("Hotel is not deleted");
+      return res.status(400).send("El hotel no se elimina");
     }
     await hotel.restore();
 
-    return res.status(200).send("Hotel restored successfully");
+    return res.status(200).send("Hotel restaurado con éxito");
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -278,11 +278,11 @@ const deleteAccount = async (req, res) => {
     const { id } = userData;
     const user = await User.findByPk(id);
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
     const destroyUser = await user.destroy();
     await Promise.all([destroyUser]);
-    return res.status(200).json({ message: "You have 30 days after your account would delete" });
+    return res.status(200).json({ message: "Tienes 30 días después de que se elimine tu cuenta" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -294,12 +294,12 @@ const updateAccount = async (req, res) => {
     const user = await User.findByPk(id);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
     await user.update(req.body);
 
-    return res.status(200).json({ message: "User updated successfully" });
+    return res.status(200).json({ message: "Usuario actualizado con éxito" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

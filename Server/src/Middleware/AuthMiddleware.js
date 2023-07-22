@@ -7,23 +7,21 @@ const authMiddleware = (req, res, next) => {
   
   const { authorization } = req.headers;
 
-
   if (authorization) {
     try {
       const token = authorization.split(" ")[1].replace(/"/g, '');
-      const decodedToken = jwt.verify(token, JWT_SECRET );      
+      const decodedToken = jwt.verify(token, JWT_SECRET );
+            
 
       if (decodedToken && !isTokenExpired(decodedToken)) {
         userData = decodedToken;
         next();
-      } else {
-        res.status(401).json({ error: 'Token inválido o expirado' });
-      }
+      } 
     } catch (error) {
-      res.status(401).json({ error: 'Token inválido' });
+      return res.status(401).json({ error: 'Token inválido o expirando' });
     }
   } else {
-    res.status(401).json({ error: 'Acceso no autorizado' });
+    return res.status(401).json({ error: 'Acceso no autorizado' });
   }
 };
 

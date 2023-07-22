@@ -6,7 +6,7 @@ const SuperAdminCheck = async (req, res, next) => {
             next();
         }
         else {
-            res.status(401).send('Access denied');
+            res.status(401).send('Acceso denegado');
         }
 
     } catch (error) {

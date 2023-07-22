@@ -83,6 +83,11 @@ const Card: React.FC<CardProps> = ({
     fetchRating();
   }, [id]);
 
+  const orderedServices = () => {
+    const stringRaw = services.join(', ');
+    return stringRaw    
+  }
+
   return (
     <div className="bg-white h-[460px] max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
       <img
@@ -102,22 +107,25 @@ const Card: React.FC<CardProps> = ({
             <p className="text-gray-600 text-sm overflow-hidden overflow-ellipsis">
               {description}
             </p>
-            <p className="text-gray-500 mt-1 text-sm">
-              Ubicación: {city}, {country}
-            </p>
+          </div>
+          <div>
+            Servicios: {orderedServices()}
           </div>
           <div>
             <div className='flex'>
-            <p>Hotel category: </p>
+            <p>Categoria: </p>
               {renderStars(Number(hotelCategory))}
             </div>
             <div className='flex'>
-              <p>Popular rating:</p>
+              <p>Calificación popular:</p>
               {/* Renderizar el icono de Phosphor repetidamente */}
               {ratingValue !== null && renderIcon(ratingValue)}
             </div>
           </div>
           <div className="flex justify-end">
+            <p className="text-gray-500 mt-1 text-sm">
+              Ubicación: {city}, {country}
+            </p>
             <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
               Ver habitaciones
             </button>

@@ -37,7 +37,7 @@ const AdminMenu = () => {
 
 
                     <Dropdown.Item onClick={(event) => handleClick(event)}>
-                        LogOut
+                        Cerrar sesión
                     </Dropdown.Item>
                 </Dropdown.Content>
             </Dropdown>
