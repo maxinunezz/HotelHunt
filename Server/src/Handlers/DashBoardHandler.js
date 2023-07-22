@@ -1,4 +1,4 @@
-const { Hotel, Room, User } = require("../db");
+const { Hotel, Room, User, Booking, Auth } = require("../db");
 
 const getAllHotelsById = async (req, res) => {
 
@@ -107,7 +107,7 @@ const deleteRoomsByHotel = async (req, res) => {
   } catch (error) {
     return res.status(500).send(error.message);
   }
-}
+};
 
 const restoreRoom = async (req, res) => {
   const { roomId } = req.params;
@@ -145,7 +145,7 @@ const UpdateHotelByUser = async (req, res) => {
   } catch (error) {
     return res.status(500).send(error.message);
   }
-}
+};
 
 const createHotelByUser = async (req, res) => {
   try {
@@ -184,7 +184,7 @@ const createHotelByUser = async (req, res) => {
     return res.status(500).json(error.message);
   }
 
-}
+};
 
 const createRoomByHotel = async (req, res) => {
 
@@ -232,7 +232,7 @@ const createRoomByHotel = async (req, res) => {
     return res.status(500).json(error.message);
   }
 
-}
+};
 
 const deleteHotelByUser = async (req, res) => {
   const { id } = req.params;
@@ -326,7 +326,46 @@ const getUserInfo = async(req,res) =>{
   } catch (error) {
     return res.status(500).json(error);
   }
-}
+};
+
+const getAllBooking = async(req,res) => {
+  const { id } = userData;
+  let reservas = [];
+
+  try {
+    const hotels = await Hotel.findAll({
+      where: {
+        userId: id,
+      }
+    })
+
+    for (const hotel of hotels) {
+      const booking = await Booking.findAll({
+        where: {
+          hotelId: hotel.id,
+        }
+      });
+      for(const reserve of booking) {
+        const room = await Room.findByPk(reserve.roomId)
+        const user = await Auth.findOne({where: {userId: id}})
+        const one_reserve = {
+          checkin: reserve.checkin,
+          checkout: reserve.checkout,
+          price: reserve.price,
+          roomName: room.name,
+          hotelName: hotel.name,
+          paymentStatus: reserve.paymentStatus,
+          userEmail: user.email,
+        }
+        reservas.push(one_reserve)
+      }
+    }
+    
+    res.status(200).json(reservas)
+  } catch (error) {
+    return res.status(500).json(error)
+  }
+};
 
 
 
@@ -343,6 +382,7 @@ module.exports = {
   deleteAccount,
   updateAccount,
   restoreRoom,
-  restoreHotel
+  restoreHotel,
+  getAllBooking
 };
 
