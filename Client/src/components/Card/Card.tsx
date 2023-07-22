@@ -1,9 +1,10 @@
 import { Buildings } from "@phosphor-icons/react";
 import axios from "axios";
-import { hotelStore } from "../../Store";
+import { hotelStore, tokenStore } from "../../Store";
 import { useEffect, useState } from "react";
 import { Hotel } from "../../models";
 import { Link } from "react-router-dom";
+import { userStore } from "../../Store/UserStore";
 const url = import.meta.env.VITE_URL;
 
 interface CardProps {
@@ -28,8 +29,9 @@ const Card: React.FC<Hotel> = ({
   hotelCategory,
 }) => {
 
-  const hotelFavorite = hotelStore((state)=>state.favoriteHotel)
-  const { addFavorite, getFavorite } = hotelStore();
+  const hotelFavorite = userStore((state)=>state.favoriteHotel)
+  const {  addFavorite, getFavorite } = userStore();
+  const token = tokenStore((state)=>state.userState)
 
 
   const renderStars = (rating: number) => {
@@ -71,32 +73,23 @@ const Card: React.FC<Hotel> = ({
   };
   
  const isFav = hotelFavorite.some((favHotel:any) => favHotel.id === id);
+
+ 
   const handleFavorite = () => {
    
-    const hotel ={
-      id,
-      name,
-      description,
-      country,
-      city,
-      photo,
-      hotelCategory,
-      score: ratingValue || 0, // Supongo que deseas guardar el rating actual en el estado
-
+    const info ={
+      hotelId: id
     }
-  
-    if (!isFav) {
-      addFavorite(hotel);
 
-    } else {
-      getFavorite(id);
+    console.log(info);
+    
 
+      addFavorite(info, token[1]);
 
-
-    }
-  
-     // Cambiar el estado local a su valor opuesto (true -> false, false -> true)
   };
+
+
+  
 
   
   

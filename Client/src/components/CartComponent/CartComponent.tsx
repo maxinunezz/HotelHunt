@@ -100,6 +100,8 @@ const CartComponent = () => {
     console.log(data);
   
    await roomPayment(data, token[1]);
+
+  
   
     // Redireccionar a la URL externa en una nueva pestaña
     navigate('/paymenttransition')
