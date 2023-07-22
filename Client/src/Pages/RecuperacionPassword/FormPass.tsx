@@ -71,7 +71,7 @@ const FormPagePass = () => {
             <div className="flex w-full justify-center">
                 <div className="bg-white w-[600px] rounded-md p-8">
                     <h1 className="text-5xl text-center text-gray-800 font-bold mt-10">
-                        Recupera tu password de
+                        Recupera tu contraseña de
                         <br />
                         <span className="text-5xl text-blue-500 font-extrabold tracking-wider">
                             HOTELHUNT
@@ -132,7 +132,7 @@ const FormPagePass = () => {
                                         disabled={Object.keys(errors).length > 0}
                                         className="py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                                     >
-                                        Establecer nueva password.
+                                        Establecer nueva contraseña.
                                     </Button>
                                 </div>
                             </Form>

@@ -93,9 +93,7 @@ const CartComponent = () => {
   useEffect(() => {
     setReserveLocal(userReserve);
   }, [userReserve]);
-  useEffect(() => {
-    console.log(reserveLocal, "El estado de reservas ha cambiado");
-  }, [reserveLocal]);
+  
 
   const handleCheckout = async () => {
     if (userReserve.length === 0) {
@@ -190,7 +188,7 @@ const CartComponent = () => {
             className="flex justify-center items-center"
           >
             <Money size={20} weight="duotone" className="mr-1.5" />
-            Checkout
+            Verificar
           </Dropdown.Item>
           <Dropdown.Divider />
 
@@ -199,7 +197,7 @@ const CartComponent = () => {
             className="flex justify-center items-center"
           >
             <ShoppingCart size={20} weight="duotone" className="mr-1.5" />
-            View cart
+            Ver carrito
           </Dropdown.Item>
         </Dropdown.Content>
       </Dropdown>

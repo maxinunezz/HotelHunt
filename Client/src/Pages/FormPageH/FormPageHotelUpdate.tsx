@@ -330,7 +330,7 @@ export default function FormPageHotelUpdate() {
 										className="mb-4"
 									>
 										<FormControl.Label className="text-white">
-											Category
+											Categoria
 										</FormControl.Label>
 										<FormControl.Input
 											type="number"
@@ -377,7 +377,7 @@ export default function FormPageHotelUpdate() {
 											type="submit"
 											size="lg"
 										>
-											Update
+											Actualizar
 										</Button>
 										<Button
 											className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-md ml-4"

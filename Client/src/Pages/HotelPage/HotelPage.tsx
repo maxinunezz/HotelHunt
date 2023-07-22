@@ -50,7 +50,6 @@ const HotelPage = () => {
 
 		fetchRating();
 	}, [id]);
-	console.log(hotelRatings);
 
 
 	const overallScoreHandler = () => {
@@ -96,7 +95,7 @@ const HotelPage = () => {
 									<h3>{hotelOnScreen?.country}, {hotelOnScreen?.city}</h3>
 								</div>
 								<div>
-									overallScore: {overallScoreHandler()}
+									puntuación general: {overallScoreHandler()}
 								</div>
 								<h3 className="text-lg font-bold mb-4">Descripción</h3>
 								<p>{hotelOnScreen?.description}</p>
@@ -126,7 +125,7 @@ const HotelPage = () => {
 				<div className="space-y-4">
 					{hotelRatings.map((rating, index) => (
 						<div key={index} className="border-b border-gray-300 pb-2">
-							<p className="text-lg font-semibold">Score: {rating.score}</p>
+							<p className="text-lg font-semibold">Puntaje: {rating.score}</p>
 							<p className="text-gray-950">{rating.comment}</p>
 						</div>
 					))}

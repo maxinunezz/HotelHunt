@@ -31,7 +31,7 @@ const DashboardPageHotelDetail = () => {
                     )
                 }) :
                 <div className="text-red-600">
-                    No hay rooms!!!
+                    No hay habitaciones!!!
                 </div>
             }
         </div>

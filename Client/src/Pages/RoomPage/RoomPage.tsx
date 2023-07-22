@@ -108,7 +108,6 @@ const RoomPage = () => {
   };
 
   const handleReserve = () => {
-    console.log(token);
     if (token.length === 0) {
       mustLoginToast("Please login or signup to reserve a room");
       navigate("/login");
@@ -150,10 +149,9 @@ const RoomPage = () => {
     reserveRoomPayment([...userReserve, newReserve]);
     reserveSuccessToast1();
   };
-  console.log(roomRender);
   
   const hotelOfThisRoom = (hotelId) => {
-    console.log(allHotels);
+    
     const hotelBelong = allHotels.find((hotel) => {
       return hotel.id.toString() === hotelId;
     });

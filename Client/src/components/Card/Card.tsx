@@ -87,7 +87,6 @@ const Card: React.FC<CardProps> = ({
     const stringRaw = services.join(', ');
     return stringRaw    
   }
-console.log(services);
 
   return (
     <div className="bg-white h-[460px] max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
@@ -114,11 +113,11 @@ console.log(services);
           </div>
           <div>
             <div className='flex'>
-            <p>Hotel category: </p>
+            <p>Categoria: </p>
               {renderStars(Number(hotelCategory))}
             </div>
             <div className='flex'>
-              <p>Popular rating:</p>
+              <p>Calificación popular:</p>
               {/* Renderizar el icono de Phosphor repetidamente */}
               {ratingValue !== null && renderIcon(ratingValue)}
             </div>

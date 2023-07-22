@@ -298,7 +298,7 @@ export default function FormPageH() {
 										className="mb-4"
 									>
 										<FormControl.Label className="text-white">
-											Category
+											Categoria
 										</FormControl.Label>
 										<FormControl.Input
 											type="number"
