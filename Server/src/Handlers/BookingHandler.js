@@ -14,7 +14,7 @@ async function createBooking(req, res) {
 
 
     if (!roomsToReserve || !Array.isArray(roomsToReserve) || roomsToReserve.length === 0) {
-      return res.status(400).json({ error: "No rooms to reserve provided" });
+      return res.status(400).send( "No se proporcionan habitaciones para reservar" );
     }
 
     const bookings = [];
@@ -99,7 +99,7 @@ async function createBooking(req, res) {
         bookings.push(booking);
 
       } else {
-        return res.status(400).json({ error: `Room with ID ${roomId} is already reserved for the selected dates` });
+        return res.status(400).json(`Room with ID ${roomId} is already reserved for the selected dates`);
       }
 
 
@@ -155,7 +155,7 @@ const confirmationEmail = async (id, urlpago, name) => {
     });
 
   } catch (error) {
-    console.log('Error en el servidor');
+      res.status(500).send('Error en el servidor');
   }
 };
 
@@ -229,7 +229,7 @@ const stripehook = async (req, res) => {
       await booking.update({paymentStatus: status})
     }
 
-    res.status(200).send('booking updated')
+    res.status(200).send('reserva actualizada')
     
   } catch (error) {
     res.status(500).json(error);

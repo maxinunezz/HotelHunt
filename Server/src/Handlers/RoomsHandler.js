@@ -11,7 +11,7 @@ const getAllRooms = async (req, res) => {
   });
 
     if (data.length === 0) {
-      throw Error("Not rooms found");
+      throw Error("No se encontraron habitaciones");
     }
 
     let rooms_array = [];
@@ -44,11 +44,11 @@ const updateRoom = async (req, res) => {
   try {
     const room = await Room.findByPk(id);
     if (!room) {
-      return res.status(404).send("Room not found");
+      return res.status(404).send("Habitación no encontrada");
     }
 
     await room.update(req.body);
-    return res.status(200).send("Update successfully");
+    return res.status(200).send("Habitacion actualizada correctamente");
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -63,7 +63,7 @@ const deleteRoom = async (req, res) => {
       },
     });
     if (!room) {
-      return res.status(404).send("Room not found");
+      return res.status(404).send("Habitacion no encontrada");
     }
 
 
@@ -76,7 +76,7 @@ const deleteRoom = async (req, res) => {
 
     await Promise.all([poproom, destroyroom])
 
-    return res.status(200).send("Room deleted successfully");
+    return res.status(200).send("Habitacion eliminada con éxito");
   } catch (error) {
     return res.status(500).send(error.message);
   }

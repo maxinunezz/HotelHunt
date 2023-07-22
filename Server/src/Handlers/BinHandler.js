@@ -11,7 +11,7 @@ const getHotelBin = async (req, res) => {
             }
         })
         if (!hotelsForDelete) {
-            return res.status(400).send('There are no hotels to restore')
+            return res.status(400).send('No hay hoteles para restaurar')
         } else {
             return res.status(200).json(hotelsForDelete);
         }
@@ -32,7 +32,7 @@ const getRoomsBin = async (req, res) => {
             }
         })
         if(!roomsForDelete){
-            return res.status(404).json('There are no hotels to restore')
+            return res.status(404).json('No hay hoteles para restaurar')
         }else{
             return res.status(200).json(roomsForDelete)
         }
