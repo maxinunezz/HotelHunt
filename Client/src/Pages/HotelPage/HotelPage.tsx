@@ -51,7 +51,7 @@ const HotelPage = () => {
 		fetchRating();
 	}, [id]);
 	console.log(hotelRatings);
-	
+
 
 	const overallScoreHandler = () => {
 		let sum = 0;
@@ -73,8 +73,8 @@ const HotelPage = () => {
 
 	return (
 		<div className="bg-slate-600 min-h-screen flex flex-col overflow-hidden">
-			<NavBar />
-			<div className="flex-grow mt-20 overflow-y-auto">
+			
+			<div className="flex-grow mt-20 overflow-y-auto ">
 				<div className="max-w-screen-lg mx-auto p-8">
 					<div className="mt-2 flex justify-between">
 						<button onClick={() => navigate(-1)} className="bg-blue-500 font-bold w-[80px] border-neutral-950">Back</button>
@@ -100,7 +100,6 @@ const HotelPage = () => {
 								</div>
 								<h3 className="text-lg font-bold mb-4">Descripción</h3>
 								<p>{hotelOnScreen?.description}</p>
-
 							</div>
 						</div>
 					</div>
@@ -108,29 +107,34 @@ const HotelPage = () => {
 
 				<div className="max-w-screen-lg mx-auto p-8 mt-8 overflow-hidden">
 					{hotelOnScreen ? (
-						<div className="room-list transform transition duration-300">
+						<div className="room-list transform transition duration-300 mt-8">
 							<RoomList />
 						</div>
 					) : (
 						<p className="text-white">No hay habitaciones disponibles.</p>
 					)}
 				</div>
+				
 				<button onClick={handleOpenNewWindow} className="bg-yellow-300 mt-4">
 					Agregar comentario
 				</button>
-			</div>
-			<div className="h-96 overflow-y-scroll border border-gray-300 rounded-lg p-4 shadow-lg">
-				<h2 className="text-2xl font-semibold mb-4">Comentarios</h2>
-				<div className="space-y-4">
-					{hotelRatings.map((rating, index) => (
-						<div key={index} className="border-b border-gray-300 pb-2">
-							<p className="text-lg font-semibold">Score: {rating.score}</p>
-							<p className="text-gray-950">{rating.comment}</p>
-						</div>
-					))}
-				</div>
 
+				<div className="max-w-screen-lg mx-auto p-8 mt-8 overflow-hidden">
+					<div className="h-96 overflow-y-scroll border border-gray-300 rounded-lg p-4 shadow-lg">
+						<h2 className="text-2xl font-semibold mb-4">Comentarios</h2>
+						<div className="space-y-4">
+							{hotelRatings.map((rating, index) => (
+								<div key={index} className="border-b border-gray-300 pb-2">
+									<p className="text-lg font-semibold">Score: {rating.score}</p>
+									<p className="text-gray-950">{rating.comment}</p>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+				
 			</div>
+			<NavBar/>
 			<div className="mt-auto">
 				<Footer />
 			</div>
