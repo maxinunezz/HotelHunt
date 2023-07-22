@@ -29,7 +29,7 @@ const HotelList = () => {
       <div className="flex flex-col gap-4">
         {totalHotels ? (
           currentHotels.map((hotel) => (
-            // <Link to={`/hotelpage/${hotel.id}`} key={hotel.id}>
+            <Link to={`/hotelpage/${hotel.id}`} key={hotel.id}>
               <Card
               key={hotel.id}
                 id={hotel.id}
