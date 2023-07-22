@@ -13,8 +13,6 @@ export default function AdminSetting() {
     const { deleteAccount, reset } = userStore()
     const { resetToken } = tokenStore()
 
-
-
     const user = {
         name: `${userData[0].name}`,
         lastName: `${userData[0].lastName}`,
@@ -22,6 +20,7 @@ export default function AdminSetting() {
         phoneNumber: `${userData[0].phoneNumber}`,
         email: `${userData[0].email}`
     };
+
     const handleDelete = async () => {
         try {
             const data = await axios.delete(
@@ -92,10 +91,6 @@ export default function AdminSetting() {
     };
 
     const handleUpdate = async () => {
-        if (Object.keys(errors).length > 0) {
-            userUpdateToast("Must complete all fields!")
-            return
-        }
 
         const data = await axios.put(
             `${url}/dashboard/user`,
@@ -210,11 +205,8 @@ export default function AdminSetting() {
                         <div className="flex justify-between">
                             <button
                                 onClick={handleUpdate}
-                                className={`${Object.keys(errors).length > 0 || input.firstName === ""
-                                        ? "bg-blue-500 text-white px-4 py-2 rounded cursor-not-allowed opacity-50"
-                                        : "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                                    }`}
-                                disabled={Object.keys(errors).length > 0}
+                                className= "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                
                             >
                                 Actualizar datos
                             </button>

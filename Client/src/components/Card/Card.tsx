@@ -1,8 +1,4 @@
-import { Buildings } from '@phosphor-icons/react';
-import { Button } from '@rewind-ui/core';
 import axios from 'axios';
-import { tokenStore } from '../../Store';
-import { log } from 'console';
 import { useEffect, useState } from 'react';
 const url = import.meta.env.VITE_URL;
 
@@ -37,7 +33,6 @@ const Card: React.FC<CardProps> = ({
 
     const stars = [];
 
-    // Renderizar estrellas llenas
     for (let i = 0; i < filledStars; i++) {
       stars.push(
         <span key={`filled-star-${i}`} className="text-yellow-500">
@@ -46,7 +41,6 @@ const Card: React.FC<CardProps> = ({
       );
     }
 
-    // Renderizar estrellas vacías
     for (let i = 0; i < emptyStars; i++) {
       stars.push(
         <span key={`empty-star-${i}`} className="text-gray-300">
@@ -58,30 +52,27 @@ const Card: React.FC<CardProps> = ({
     return stars;
   };
 
-  const renderIcon = (score: number) => {
-    const icons = [];
-
-    for (let i = 0; i < score; i++) {
-      icons.push(<Buildings key={`building-${i}`} size={32} color='darkblue' />);
-    }
-
-    return icons;
-  };
   const [ratingValue, setRatingValue] = useState<number | null>(null);
-  useEffect(() => {
-    const fetchRating = async () => {
-      try {
-        const response = await axios.get(`${url}/rating/${id}`);
-        const scores = response.data.map((element) => element.score);
+useEffect(() => {
+  const fetchRating = async () => {
+    try {
+      const response = await axios.get(`${url}/rating/${id}`);
+      const scores = response.data.map((element) => element.score);
+
+      if (Array.isArray(scores) && scores.length > 0) {
         const sum = scores.reduce((acc, score) => acc + score, 0);
         const average = Math.round(sum / scores.length);
         setRatingValue(average);
-      } catch (error) {
-        console.log(error);
+      } else {
+        setRatingValue(null);
       }
-    };
-    fetchRating();
-  }, [id]);
+    } catch (error) {
+      console.log(error);
+      setRatingValue(null);
+    }
+  };
+  fetchRating();
+}, [id]);
 
   return (
     <div className="bg-white h-[460px] max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
@@ -108,14 +99,16 @@ const Card: React.FC<CardProps> = ({
           </div>
           <div>
             <div className='flex'>
-            <p>Hotel category: </p>
+            <p className='mr-2'>Categoría de hotel:</p>
               {renderStars(Number(hotelCategory))}
             </div>
             <div className='flex'>
-              <p>Popular rating:</p>
-              {/* Renderizar el icono de Phosphor repetidamente */}
-              {ratingValue !== null && renderIcon(ratingValue)}
-            </div>
+            {ratingValue !== null ? (
+                <p>Calificación Popular: {ratingValue}</p>
+              ) : (
+                <p>Calificación Popular: Sin calificación aún</p>
+              )}
+          </div>
           </div>
           <div className="flex justify-end">
             <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">

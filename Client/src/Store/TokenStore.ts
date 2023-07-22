@@ -2,6 +2,7 @@ import axios from 'axios';
 import { create } from 'zustand';
 
 interface User {
+    email: any;
     admin: 'admin' | 'normal'
     phoneNumber: any;
     lastName: any;
