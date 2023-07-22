@@ -3,6 +3,7 @@ import axios from "axios";
 import { hotelStore } from "../../Store";
 import { useEffect, useState } from "react";
 import { Hotel } from "../../models";
+import { Link } from "react-router-dom";
 const url = import.meta.env.VITE_URL;
 
 interface CardProps {
@@ -29,7 +30,6 @@ const Card: React.FC<Hotel> = ({
 
   const hotelFavorite = hotelStore((state)=>state.favoriteHotel)
   const { addFavorite, deleteFavorite } = hotelStore();
-  const [isFav, setIsFav]=useState(false)
 
 
   const renderStars = (rating: number) => {
@@ -70,26 +70,32 @@ const Card: React.FC<Hotel> = ({
     return icons;
   };
   
-
+ const isFav = hotelFavorite.some((favHotel) => favHotel.id === id);
   const handleFavorite = () => {
-    const isFav = hotelFavorite.some((favHotel) => favHotel.id === id);
-  
-    if (!isFav) {
-      addFavorite({
-        id,
-        name,
-        description,
-        country,
-        city,
-        photo,
-        hotelCategory,
-        score: ratingValue || 0, // Supongo que deseas guardar el rating actual en el estado
-      });
-    } else {
-      deleteFavorite(id);
+   
+    const hotel ={
+      id,
+      name,
+      description,
+      country,
+      city,
+      photo,
+      hotelCategory,
+      score: ratingValue || 0, // Supongo que deseas guardar el rating actual en el estado
+
     }
   
-    setIsFav(!isFav); // Cambiar el estado local a su valor opuesto (true -> false, false -> true)
+    if (!isFav) {
+      addFavorite(hotel);
+
+    } else {
+      deleteFavorite(id);
+
+
+
+    }
+  
+     // Cambiar el estado local a su valor opuesto (true -> false, false -> true)
   };
 
   console.log(hotelFavorite);
@@ -114,8 +120,10 @@ const Card: React.FC<Hotel> = ({
   }, [id]);
 
   return (
+  
     <div className="bg-white h-[460px] max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
-      <img
+  
+        <img
         src={photo}
         alt={name}
         onError={({ currentTarget }) => {
@@ -125,6 +133,7 @@ const Card: React.FC<Hotel> = ({
         }}
         className="w-1/3 h-full object-cover rounded-l-md"
       />
+     
       <div className="w-2/3 p-4 flex flex-col justify-between">
         <div className="h-full flex flex-col justify-between">
           <div>
@@ -136,7 +145,7 @@ const Card: React.FC<Hotel> = ({
               Ubicación: {city}, {country}
             </p>
           </div>
-          <div>
+          <div> 
             <div className="flex">
               <p>Hotel category: </p>
               {renderStars(Number(hotelCategory))}
@@ -148,12 +157,13 @@ const Card: React.FC<Hotel> = ({
             </div>
           </div>
           <div className="flex justify-end">
+       
           <button onClick={handleFavorite}>{isFav ? "💚" : "🤍"}</button>
            
+        </div> 
           </div>
-        </div>
       </div>
-    </div>
+    </div>  
   );
 };
 
