@@ -219,36 +219,40 @@ const isTokenExpired = (decodedToken) => {
 
 const handleFavorite = async (req, res) => {
   const { id } = userData;
-
   const { hotelId } = req.body;
-
   try {
-
     const user = await User.findByPk(id);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
-
-  
     const currentFavorites = user.favoriteHotel || [];
-
-
     const hotelIndex = currentFavorites.indexOf(hotelId);
-
     if (hotelIndex === -1) {
-
       const updatedFavorites = [...currentFavorites, hotelId];
       await user.update({ favoriteHotel: updatedFavorites });
       return res.status(200).json(updatedFavorites);
     } else {
-
       const deletedFavorite = currentFavorites.filter(
         (hotel) => hotel !== hotelId
       );
       await user.update({ favoriteHotel: deletedFavorite });
       return res.status(200).json(deletedFavorite);
     }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+const getUserFavorites = async (req, res) => {
+  const { id } = userData;
+  try {
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+    const userFavorites = user.favoriteHotel || [];
+    return res.status(200).json(userFavorites);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -262,4 +266,5 @@ module.exports = {
   recoveryPass,
   validateToken,
   handleFavorite,
+  getUserFavorites,
 };
