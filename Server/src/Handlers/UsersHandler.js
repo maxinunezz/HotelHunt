@@ -155,13 +155,10 @@ const validateToken = async ( req, res) => {
   const { token } = req.params;
   try {
     const decodedToken = jwt.verify(token, JWT_SECRET );
-    const emailToken = jwt.sign({decodedToken}, JWT_SECRET, { expiresIn: '15m' });
+    const emailToken = jwt.sign({id: decodedToken.id}, JWT_SECRET, { expiresIn: '30m' });
     const Token = { token : emailToken}
     if (decodedToken && !isTokenExpired(decodedToken)){
-      res.cookie('token', Token, {
-        secure: true,
-        httpOnly: true,
-      })
+      res.cookie('token', Token)
       return res.status(200).redirect('http://localhost:5173/SetNewPass')
     }else{
       throw Error(message, '')
@@ -173,8 +170,10 @@ const validateToken = async ( req, res) => {
 }
 
 const recoveryPass = async (req,res) => {
+  console.log('estoy en recovery')
   const { id } = userData;
   const { password } = req.body
+  
   try {
     const auth = await Auth.findOne({where: { id: id}})
     const hashedpass = await bcrypt.hash(password, 5);
@@ -197,7 +196,7 @@ const recoveryPass = async (req,res) => {
 
     res.cookie('json', allinfo,{
       secure:true,
-    }).send('Password Updated')
+    });
 
 
     return res.status(200).redirect('http://localhost:5173/')

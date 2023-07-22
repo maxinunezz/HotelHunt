@@ -33,7 +33,7 @@ const FormPagePass = () => {
     const navigate = useNavigate()
     const url = import.meta.env.VITE_URL;
     const [cookies] = useCookies(["token"]);
-    const Token = cookies.token && cookies.token.Token;
+    const Token = cookies.token && cookies.token.token;
     console.log(Token);
 
 
@@ -42,7 +42,7 @@ const FormPagePass = () => {
         async (values: passCreateValues, helpers: FormikHelpers<passCreateValues>) => {
             try {
 
-                const data = await axios.put(
+                const response = await axios.post(
                     `${url}/user/updatePass`,
                     {
                         password: values.password,
@@ -53,8 +53,7 @@ const FormPagePass = () => {
                         },
                     }
                 );
-                successToast('Correo de confirmación enviado. Revisa tu email para continuar.');
-                console.log('data', data);
+                successToast(response.data);
                 navigate(-1)
             } catch (error) {
 

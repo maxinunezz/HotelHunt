@@ -42,6 +42,10 @@ module.exports = (sequelize) => {
       sessionId: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      price: {
+        type: DataTypes.STRING,
+        allowNull: false,
       }
     },
     { timestamps: false }

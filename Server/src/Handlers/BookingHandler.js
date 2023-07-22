@@ -1,5 +1,5 @@
 const Stripe = require('stripe');
-const { Booking, Room, User, Auth } = require('../db');
+const { Booking, Room, User, Hotel, Auth } = require('../db');
 const { Op } = require('sequelize');
 const stripe = new Stripe('sk_test_51NVdmjB3jfe4i46dYiBgwgb9jcft9tZ8mmSQC2YJf4w5xVew4tCtdiZ1frDkUvpagyM0FskqPMISAe3oRPRoClRf00aif6TnEF');
 const nodemailer = require('nodemailer');
@@ -76,7 +76,7 @@ async function createBooking(req, res) {
       success_url: `http://localhost:5173/`,
       cancel_url: `http://localhost:5173/`,
     });
-    
+    const price = session.amount_total;
     const name = user.name
     const sessionId = session.id;
     const urlpago = session.url;
@@ -93,6 +93,7 @@ async function createBooking(req, res) {
           checkout,
           paymentStatus: "unpaid",
           sessionId: sessionId,
+          price,
         });
 
         bookings.push(booking);
@@ -161,6 +162,7 @@ const confirmationEmail = async (id, urlpago, name) => {
 
 const getReserves = async (req, res) => {
   const { id } = userData;
+  let reservas = [];
 
   try {
     const reserves = await Booking.findAll({
@@ -168,8 +170,27 @@ const getReserves = async (req, res) => {
         userId: id
       }
     })
-    if (reserves) {
-      return res.status(200).json(reserves);
+
+    
+
+    for(const reserve of reserves){
+      const room = await Room.findByPk(reserve.roomId);
+      const hotel = await Hotel.findByPk(room.hotelId);
+      const one_reserve = {
+        room: room.name,
+        hotel: hotel.name,
+        checkin: reserve.checkin,
+        checkout: reserve.checkout,
+        paymentStatus: reserve.paymentStatus,
+        price: reserve.price / 100,
+      }
+      reservas.push(one_reserve);
+
+    }
+
+
+    if (reservas) {
+      return res.status(200).json(reservas);
     } else {
       return res.status(404).send('No se encontraron reservas')
     }

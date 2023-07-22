@@ -65,7 +65,6 @@ export default function FormPageH() {
 	const handleSubmit = useCallback(
 		async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
 			try {
-				console.log(token[1]);
 
 				const data = await axios.post(
 					`${url}/dashboard/hotel/`,
