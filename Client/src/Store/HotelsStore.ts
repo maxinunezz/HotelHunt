@@ -38,6 +38,9 @@ set((state)=>({...state,
 
   deleteFavorite: (hotel)=>{
 
+    set((state)=>({...state,
+      favoriteHotel:[...state.favoriteHotel.filter(hotels=> hotels.id !== hotel)]
+    }))
   },
 
   fetchHotels: async () => {

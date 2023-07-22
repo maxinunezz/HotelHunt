@@ -42,7 +42,7 @@ const HotelList = () => {
                 services={hotel.services}
                 score={hotel.score}
               />
-            </Link>
+            // </Link>
           ))
         ) : (
           <p className="bg-neutral-800">No hay hoteles</p>
