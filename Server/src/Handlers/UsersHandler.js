@@ -75,9 +75,9 @@ const createUserForEmail = async (req, res) => {
       });
 
 
-      return res.status(201).send("Successfull");
+      return res.status(201).send("Exitoso");
     } else {
-      return res.status(400).send("Users already exist");
+      return res.status(400).send("El usuario ya existe")
     }
   } catch (error) {
     return res.status(500).send(error.message);
@@ -89,11 +89,11 @@ const deleteUser = async (req, res) => {
     const { id } = req.params;
     const user = await User.findByPk(id);
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
     const destroyUser = await user.destroy();
     await Promise.all([destroyUser]);
-    return res.status(200).json({ message: "User deleted successfully" });
+    return res.status(200).json({ message: "Usuario eliminado exitosamente" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -105,12 +105,12 @@ const updateUser = async (req, res) => {
     const user = await User.findByPk(id);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
     await user.update(req.body);
 
-    return res.status(200).json({ message: "User updated successfully" });
+    return res.status(200).json({ message: "Usuario actualizado con éxito" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -140,10 +140,10 @@ const askForPass = async (req, res) => {
       `,
     });
 
-    return res.status(200).send('Please check your email');
+    return res.status(200).send('Por favor revise su correo electrónico');
   }
   else{
-    return res.status(404).send("User doesn't exist")
+    return res.status(404).send("El usuario no existe")
   }
 
   } catch (error) {
@@ -155,13 +155,10 @@ const validateToken = async ( req, res) => {
   const { token } = req.params;
   try {
     const decodedToken = jwt.verify(token, JWT_SECRET );
-    const emailToken = jwt.sign({decodedToken}, JWT_SECRET, { expiresIn: '15m' });
+    const emailToken = jwt.sign({id: decodedToken.id}, JWT_SECRET, { expiresIn: '30m' });
     const Token = { token : emailToken}
     if (decodedToken && !isTokenExpired(decodedToken)){
-      res.cookie('token', Token, {
-        secure: true,
-        httpOnly: true,
-      })
+      res.cookie('token', Token)
       return res.status(200).redirect('http://localhost:5173/SetNewPass')
     }else{
       throw Error(message, '')
@@ -173,8 +170,10 @@ const validateToken = async ( req, res) => {
 }
 
 const recoveryPass = async (req,res) => {
+  console.log('estoy en recovery')
   const { id } = userData;
   const { password } = req.body
+  
   try {
     const auth = await Auth.findOne({where: { id: id}})
     const hashedpass = await bcrypt.hash(password, 5);
@@ -197,7 +196,7 @@ const recoveryPass = async (req,res) => {
 
     res.cookie('json', allinfo,{
       secure:true,
-    }).send('Password Updated')
+    }).send('Contraseña actualiza')
 
 
     return res.status(200).redirect('http://localhost:5173/')

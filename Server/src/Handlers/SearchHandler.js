@@ -16,7 +16,7 @@ const getForSearch = async (req, res) => {
 	try {
 		const data = await Hotel.findAll(query);
 		if (data.length === 0) {
-			throw Error("Don't match found");
+			throw Error("No coincide");
 		}
 
     const hotels_results = data.map((hotel) => ({

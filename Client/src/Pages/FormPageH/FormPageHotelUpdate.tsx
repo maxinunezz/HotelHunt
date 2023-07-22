@@ -20,7 +20,7 @@ interface FormValues {
 	description: string;
 	country: string;
 	city: string;
-	photo: string;
+	photo: string[];
 	category: string;
 	services: string;
 }
@@ -29,16 +29,19 @@ const formValidationSchema = yup.object().shape({
 	name: yup
 		.string()
 		.trim()
-		.min(2, 'Minimo 2 caracteres')
-		.required('El nombre es requerido'),
+		.min(2, 'Minimo 2 caracteres'),
+
 	description: yup
 		.string()
 		.trim()
-		.min(10, 'Minimo 10 caracteres')
-		.required('La descripcion es requerida'),
-	country: yup.string().trim().required('El pais es requerido'),
-	city: yup.string().trim().required('La ciudad es requerida'),
-	photo: yup.string().trim().required('La foto es requerida'),
+		.min(10, 'Minimo 10 caracteres'),
+
+	country: yup.string().trim(),
+	city: yup.string().trim(),
+	photo: yup
+		.array()
+		.of(yup.string().trim()) // Aquí validamos que cada elemento sea una cadena y se aplique trim.
+		.test('maxPhotos', 'Se permiten máximo 3 fotos', (value) => !value || value.length <= 3),
 	floorNumber: yup
 		.string()
 		.matches(/^[0-9]+$/, 'Solo se admiten numeros')
@@ -54,9 +57,9 @@ export default function FormPageHotelUpdate() {
 	const allHotels = hotelStore((state) => state.hotels)
 	const currentHotelData = allHotels.find((hotel) => hotel.id === id);
 
-console.log(currentHotelData);
-console.log(allHotels);
-	
+	console.log(currentHotelData);
+	console.log(allHotels);
+
 
 	useEffect(() => {
 		fetchHotels()
@@ -79,17 +82,24 @@ console.log(allHotels);
 		async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
 			try {
 				console.log(token[0]);
+				const nameToBack = values.name ? values.name : currentHotelData?.name
+				const descriptionToBack = values.description ? values.description : currentHotelData?.description
+				const countryToBack = values.country ? values.country : currentHotelData?.country
+				const cityToBack = values.city ? values.city : currentHotelData?.city
+				const photoToBack = values.photo ? values.photo : currentHotelData?.photo
+				const hotelCategoryToBack = values.category ? values.category : currentHotelData?.hotelCategory
+				const servicesToBack = values.services ? values.services : currentHotelData?.services
 
 				const data = await axios.put(
 					`${url}/dashboard/hotel/${id}`,
 					{
-						name: values.name,
-						description: values.description,
-						country: values.country,
-						city: values.city,
-						photo: values.photo,
-						hotelCategory: values.category,
-						services: values.services,
+						name: nameToBack,
+						description: descriptionToBack,
+						country: countryToBack,
+						city: cityToBack,
+						photo: photoToBack,
+						hotelCategory: hotelCategoryToBack,
+						services: servicesToBack,
 					},
 					{
 						headers: {
@@ -136,7 +146,7 @@ console.log(allHotels);
 							description: '',
 							country: '',
 							city: '',
-							photo: '',
+							photo: currentHotelData?.photo || [],
 							category: '',
 							services: ""
 						}}
@@ -166,7 +176,7 @@ console.log(allHotels);
 												await setFieldValue('name', event.target.value);
 											}}
 											value={values.name}
-											required
+
 										/>
 										<FormControl.Text>{errors.name}</FormControl.Text>
 									</FormControl>
@@ -190,7 +200,7 @@ console.log(allHotels);
 											}}
 											value={values.description}
 											className="h-40"
-											required
+
 										/>
 										<FormControl.Text>{errors.description}</FormControl.Text>
 									</FormControl>
@@ -214,7 +224,7 @@ console.log(allHotels);
 												await setFieldValue('country', event.target.value);
 											}}
 											value={values.country}
-											required
+
 										/>
 										<FormControl.Text>{errors.country}</FormControl.Text>
 									</FormControl>
@@ -239,67 +249,76 @@ console.log(allHotels);
 												await setFieldValue('city', event.target.value);
 											}}
 											value={values.city}
-											required
+
 										/>
 										<FormControl.Text>{errors.city}</FormControl.Text>
 									</FormControl>
-									{values.photo ? (
-										<div className="flex items-center justify-between mb-4">
-											<div className="w-10/12">
-												<img
-													src={values.photo}
-													alt="Imagen seleccionada"
-													className="max-h-full max-w-full"
-												/>
-											</div>
-											<button
-												type="button"
-												onClick={async () => {
-													await setFieldValue('photo', '');
-												}}
-												className="text-xl font-semibold text-red-500 hover:text-red-700 hover:underline focus:outline-none"
-											>
-												Borrar
-											</button>
-										</div>
-									) : (
-										<FormControl
-											validation={
-												values.photo.length === 0
-													? 'none'
-													: errors.photo
-														? 'invalid'
-														: 'valid'
-											}
-											className="mb-4"
-										>
-											<FormControl.Label className="text-white">
-												Foto
-											</FormControl.Label>
-											<FormControl.Input
-												type="file"
-												placeholder="Foto"
-												accept="image/*"
-												onChange={(event) => {
-													const file = event.target.files?.[0];
-													if (file) {
-														upload(file)
-															.then((image) => {
-																setFieldValue('photo', image);
-															})
-															.catch((error) => {
-																console.error(error);
-
-															});
+									<FormControl
+										validation={
+											values.photo.length === 0
+												? 'none'
+												: values.photo.length > 3
+													? 'invalid'
+													: 'valid'
+										}
+										className="mb-4"
+									>
+										<FormControl.Label className="text-white">Fotos</FormControl.Label>
+										<FormControl.Input
+											type="file"
+											placeholder="Foto"
+											accept="image/*"
+											onChange={(event) => {
+												const files = event.target.files;
+												if (files) {
+													const promises: Promise<string>[] = [];
+													const newPhotos: string[] = [...values.photo];
+													for (let i = 0; i < files.length; i++) {
+														const file = files[i];
+														if (i + values.photo.length < 3) {
+															promises.push(upload(file));
+														} else {
+															break;
+														}
 													}
-												}}
-												value={values.photo}
-												required
-											/>
-
-											<FormControl.Text>{errors.photo}</FormControl.Text>
-										</FormControl>
-									)}
+													Promise.all(promises)
+														.then((images) => {
+															setFieldValue('photo', [...newPhotos, ...images]);
+														})
+														.catch((error) => {
+															console.error(error);
+														});
+												}
+											}}
+											value=""
+											multiple
+										/>
+										{values.photo.map((photo, index) => (
+											<div key={index} className="flex items-center justify-between mt-2">
+												<div className="w-10/12">
+													<img
+														src={photo}
+														alt={`Imagen seleccionada ${index + 1}`}
+														className="max-h-full max-w-full"
+													/>
+												</div>
+												<button
+													type="button"
+													onClick={() => {
+														const newPhotos = [...values.photo];
+														newPhotos.splice(index, 1);
+														setFieldValue('photo', newPhotos);
+													}}
+													className="text-xl font-semibold text-red-500 hover:text-red-700 hover:underline focus:outline-none"
+												>
+													Borrar
+												</button>
+											</div>
+										))}
+										{values.photo.length > 3 && (
+											<FormControl.Text>Se permiten máximo 3 fotos.</FormControl.Text>
+										)}
+									</FormControl>
 									<FormControl
 										validation={
 											values.category.length === 0
@@ -311,7 +330,7 @@ console.log(allHotels);
 										className="mb-4"
 									>
 										<FormControl.Label className="text-white">
-											Category
+											Categoria
 										</FormControl.Label>
 										<FormControl.Input
 											type="number"
@@ -322,7 +341,7 @@ console.log(allHotels);
 												await setFieldValue('category', event.target.value);
 											}}
 											value={values.category}
-											required
+
 										/>
 										<FormControl.Text>{errors.category}</FormControl.Text>
 									</FormControl>
@@ -347,7 +366,7 @@ console.log(allHotels);
 												await setFieldValue('services', event.target.value);
 											}}
 											value={values.services}
-											required
+
 										/>
 										<FormControl.Text>{errors.services}</FormControl.Text>
 									</FormControl>
@@ -358,7 +377,7 @@ console.log(allHotels);
 											type="submit"
 											size="lg"
 										>
-											Update
+											Actualizar
 										</Button>
 										<Button
 											className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-md ml-4"

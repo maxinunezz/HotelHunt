@@ -185,7 +185,7 @@ export default function AdminSetting() {
                         </label>
 
                         <label className="block mb-4">
-                            <span className="text-gray-700 font-semibold">Password</span>
+                            <span className="text-gray-700 font-semibold">Contraseña</span>
                             <input
                                 type="password"
                                 name="password"
@@ -219,7 +219,7 @@ export default function AdminSetting() {
                                 Actualizar datos
                             </button>
                             <button onClick={handleDelete} className="inline-flex ml-4 text-gray-700 text-sm py-2 px-4 border border-gray-300 rounded-md hover:bg-gray-100">
-                                Delete account
+                                Borrar cuenta
                             </button>
                         </div>
                     </div>
