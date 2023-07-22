@@ -41,6 +41,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         defaultValue: null,
         allowNull: true,
+      },
+      favoriteHotel:{
+        type: DataTypes.JSONB,
+        defaultValue:[],
+        allowNull: true
       }
     },
     { paranoid: true,

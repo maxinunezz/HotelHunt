@@ -13,6 +13,8 @@ export default function HomePage() {
 	const { fetchHotels } = hotelStore()
 	const [cookies, setCookie] = useCookies(["json"]);
 	const { saveInfo } = tokenStore();
+	const token = tokenStore((state)=>{state.userState})
+
 
 
 	const findCookie = () => {

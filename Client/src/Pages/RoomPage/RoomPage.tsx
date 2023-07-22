@@ -136,7 +136,7 @@ const RoomPage = () => {
     reserveRoomPayment([...userReserve, newReserve]);
     reserveSuccessToast1();
   };
-  console.log(userReserve);
+  console.log(token);
 
   return (
     <div>

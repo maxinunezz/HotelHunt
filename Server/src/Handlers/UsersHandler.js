@@ -84,6 +84,7 @@ const createUserForEmail = async (req, res) => {
   }
 };
 
+
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -210,6 +211,39 @@ const isTokenExpired = (decodedToken) => {
   return decodedToken.exp < currentTime;
 };
 
+const handleFavorite = async (req, res) => {
+  const { userId } = req.params; // ID del usuario
+  const { hotelId } = req.body; // ID del hotel que se quiere agregar o eliminar
+
+  try {
+    // Busca al usuario en la base de datos por su ID
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Obtiene la lista actual de hoteles favoritos del usuario
+    const currentFavorites = user.favoriteHotel || [];
+
+    // Verifica si el hotel ya está en la lista de favoritos del usuario
+    const hotelIndex = currentFavorites.indexOf(hotelId);
+
+    if (hotelIndex === -1) {
+      // Si el hotel no está en la lista, lo agrega a los favoritos
+      const updatedFavorites = [...currentFavorites, hotelId];
+      await user.update({ favoriteHotel: updatedFavorites });
+      return res.status(200).json({ message: 'Hotel added to favorites successfully' });
+    } else {
+      // Si el hotel está en la lista, lo elimina de los favoritos
+      currentFavorites.splice(hotelIndex, 1);
+      await user.update({ favoriteHotel: currentFavorites });
+      return res.status(200).json({ message: 'Hotel removed from favorites successfully' });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 module.exports = {
   createUserForEmail,
@@ -218,5 +252,6 @@ module.exports = {
   askForPass,
   recoveryPass,
   validateToken,
+  handleFavorite
 };
 

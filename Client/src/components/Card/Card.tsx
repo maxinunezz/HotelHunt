@@ -70,7 +70,7 @@ const Card: React.FC<Hotel> = ({
     return icons;
   };
   
- const isFav = hotelFavorite.some((favHotel) => favHotel.id === id);
+ const isFav = hotelFavorite.some((favHotel:any) => favHotel.id === id);
   const handleFavorite = () => {
    
     const hotel ={
@@ -98,7 +98,6 @@ const Card: React.FC<Hotel> = ({
      // Cambiar el estado local a su valor opuesto (true -> false, false -> true)
   };
 
-  console.log(hotelFavorite);
   
   
 
@@ -158,8 +157,15 @@ const Card: React.FC<Hotel> = ({
           </div>
           <div className="flex justify-end">
        
-          <button onClick={handleFavorite}>{isFav ? "💚" : "🤍"}</button>
-           
+          <button className=" py-2 px-4" onClick={handleFavorite}>{isFav ? "💚" : "🤍"}</button>
+          <Link to={`/hotelpage/${id}`} key={id}>
+            <div>
+              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+              Ver habitaciones
+            </button>
+            </div>
+          
+           </Link>
         </div> 
           </div>
       </div>
