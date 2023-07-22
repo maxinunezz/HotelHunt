@@ -16,8 +16,8 @@ type Actions = {
   orderByName: (array: Hotel[], event: string) => void;
   orderByCategory: (array: Hotel[], event: string) => void;
   resetHotels: () => void;
-  addFavorite: (hotel:any) => void;
-  deleteFavorite: (hotel:any) => void;
+  addFavorite: (hotel:any) => Promise<void>;
+  getFavorite: (hotel:any) => Promise<void> ;
 };
 
 const initialState: States = {
@@ -30,17 +30,30 @@ const initialState: States = {
 export const hotelStore = create<States & Actions>((set) => ({
   ...initialState,
 
-  addFavorite: (hotel)=>{
-set((state)=>({...state,
+  addFavorite: async (hotel)=>{
+
+try {
+  set((state)=>({...state,
   favoriteHotel:[...state.favoriteHotel, hotel]
 }))
+} catch (error) {
+  
+}
+
   },
 
-  deleteFavorite: (hotel)=>{
+  getFavorite: async (hotel)=>{
 
-    set((state)=>({...state,
+
+    try {
+      set((state)=>({...state,
       favoriteHotel:[...state.favoriteHotel.filter(hotels=> hotels.id !== hotel)]
     }))
+    } catch (error) {
+      
+    }
+
+    
   },
 
   fetchHotels: async () => {

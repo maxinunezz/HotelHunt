@@ -29,7 +29,7 @@ const Card: React.FC<Hotel> = ({
 }) => {
 
   const hotelFavorite = hotelStore((state)=>state.favoriteHotel)
-  const { addFavorite, deleteFavorite } = hotelStore();
+  const { addFavorite, getFavorite } = hotelStore();
 
 
   const renderStars = (rating: number) => {
@@ -89,7 +89,7 @@ const Card: React.FC<Hotel> = ({
       addFavorite(hotel);
 
     } else {
-      deleteFavorite(id);
+      getFavorite(id);
 
 
 

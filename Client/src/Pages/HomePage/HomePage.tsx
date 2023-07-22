@@ -37,6 +37,7 @@ export default function HomePage() {
 	useEffect(() => {
 		fetchHotels()
 		findCookie()
+		
 
 	}, [])
 
