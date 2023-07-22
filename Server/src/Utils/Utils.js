@@ -85,17 +85,6 @@ async function firstload() {
       await Promise.all([createdUser, createdAuth]);
     }
 
-    for (const rating of ratings) {
-      const { userId, score, comment, hotelId } = rating;
-      const ratingcreated = await Rating.create({
-        userId,
-        score,
-        comment,
-        hotelId,
-      });
-      await Promise.all([ratingcreated]);
-    }
-
     for (const hotel of hotels) {
       const {
         id,
