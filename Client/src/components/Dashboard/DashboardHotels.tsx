@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react'
 import { tokenStore } from "../../Store";
 import axios from "axios";
 import NavBarDashboard1 from "./NavBarDashboard1";
+import { DashStore } from "../../Store";
 
 
-export default function DashboardDetails() {
+export default function DashboardHotel() {
     const { getHotelByUser } = tokenStore()
     const token = tokenStore((state) => state.userState)
     const url = import.meta.env.VITE_URL;
+    const update = DashStore((state) => state.updated)
     
 
     const [hotelByUser, setHotelByUser] = useState()
@@ -40,6 +42,9 @@ export default function DashboardDetails() {
     useEffect(() => {
         getHotels()
     }, [])
+    useEffect(() => {
+        getHotels()
+    }, [update])
 
 
 

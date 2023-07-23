@@ -1,7 +1,7 @@
 import { Text } from "@rewind-ui/core";
 import axios from "axios";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
-import { tokenStore } from "../../Store";
+import { tokenStore, DashStore } from "../../Store";
 import { userDeleteToast,successToast, errorToast } from "../toast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +27,8 @@ export default function DashboardRow({
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const [showConfirmDisabled, setConfirmDisabled] = useState(false);
     const [isChecked, setIsChecked] = useState(disabled);
+    const { setUpdated } = DashStore();
+    const currentState = DashStore((state) => state.updated)
 
     const handleDelete = () => {
         setShowConfirmDialog(true);
@@ -76,6 +78,7 @@ export default function DashboardRow({
 
             successToast(response.data);
             setConfirmDisabled(false);
+            setUpdated(!currentState)
             
         } catch (error) {
             errorToast(error.response.data);
