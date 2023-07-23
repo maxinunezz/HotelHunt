@@ -1,39 +1,40 @@
 import { Text } from "@rewind-ui/core";
-import axios from "axios";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
-import { tokenStore } from "../../Store";
-import { userDeleteToast } from "../toast";
 import { useState } from "react";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { tokenStore } from "../../Store";
 import { useNavigate } from "react-router-dom";
+import { userDeleteToast } from "../toast";
+import axios from "axios";
 const url = import.meta.env.VITE_URL;
 
-export default function DashboardRow({
+
+
+export default function DashboardRowRoom({
     id,
     name,
-    country,
-    city,
     photo,
+    pax,
+    disabled
 }: {
     id: string;
     name: string;
-    country: string;
-    city: string;
-    photo: string;
+    photo: string[];
+    pax: number;
+    disabled: boolean;
 }) {
     const navigate = useNavigate()
     const userData = tokenStore((state) => state.userState);
+
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
     const handleDelete = () => {
         setShowConfirmDialog(true);
     };
 
-    const { getHotelByUser } = tokenStore();
-
     const confirmDelete = async () => {
         try {
             const data = await axios.delete(
-                `${url}/dashboard/hotel/${id}`,
+                `${url}/dashboard/room/${id}`,
                 {
                     headers: {
                         authorization: `Bearer ${userData[1]}`,
@@ -43,12 +44,11 @@ export default function DashboardRow({
             console.log(data);
             console.log("Hotel eliminado");
 
-            userDeleteToast('Hotel eliminado');
+            userDeleteToast('Room eliminated');
 
 
             setShowConfirmDialog(false);
             navigate(-1)
-            navigate(+1)
 
         } catch (error) {
             console.log(error);
@@ -56,11 +56,12 @@ export default function DashboardRow({
     };
 
     const handleEdit = () => {
-        navigate(`/dashboard/hotelupdate/${id}`)
+        navigate(`/dashboard/roomupdate/${id}`)
     };
-
     return (
+
         <div className="dashboard-row bg-white rounded-md p-4 mb-4">
+            Wena larvas
             <div className="grid grid-cols-7 gap-4">
                 <div className="col-span-2">
                     <img src={photo[0]} alt={name} className="w-48 h-48 object-cover" />
@@ -72,14 +73,15 @@ export default function DashboardRow({
                 </div>
                 <div className="col-span-1 flex items-center justify-center">
                     <Text variant="h6" className="text-lg font-medium">
-                        {country}
+                        {pax}
                     </Text>
                 </div>
                 <div className="col-span-1 flex items-center justify-center">
                     <Text variant="h6" className="text-lg font-medium">
-                        {city}
+                        {`Disabled: ${disabled}`}
                     </Text>
                 </div>
+
                 <div className="col-span-1 flex items-center justify-center">
                     <button onClick={(e) => {
                         e.stopPropagation();
@@ -103,12 +105,12 @@ export default function DashboardRow({
                     <div className="confirm-dialog-overlay" onClick={() => setShowConfirmDialog(false)} />
                     <div className="confirm-dialog-content">
                         <h3 className="confirm-dialog-title">Confirmar eliminación</h3>
-                        <p className="confirm-dialog-message">¿Estás seguro de que deseas eliminar este hotel?</p>
+                        <p className="confirm-dialog-message">¿Estás seguro de que deseas eliminar esta room?</p>
                         <div className="confirm-dialog-buttons">
-                        <button className="border-slate-950 text-white bg-orange-600 w-[100px]" onClick={(e) => { e.stopPropagation(); confirmDelete(); }}>
-  Sí
-</button>
-                            <button className="border-slate-950 text-white bg-lime-500 w-[100px]" onClick={(e) => {setShowConfirmDialog(false); e.stopPropagation();}}>
+                            <button className="border-slate-950 text-white bg-orange-600 w-[100px]" onClick={(e) => { e.stopPropagation(); confirmDelete(); }}>
+                                Sí
+                            </button>
+                            <button className="border-slate-950 text-white bg-lime-500 w-[100px]" onClick={(e) => { setShowConfirmDialog(false); e.stopPropagation(); }}>
                                 No
                             </button>
                         </div>
@@ -116,5 +118,5 @@ export default function DashboardRow({
                 </div>
             )}
         </div>
-    );
+    )
 }

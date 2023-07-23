@@ -20,6 +20,7 @@ import FormPageHotelUpdate from './Pages/FormPageH/FormPageHotelUpdate';
 import RecuPassword from './Pages/RecuperacionPassword/RecuPassword'
 import FormPagePass from './Pages/RecuperacionPassword/FormPass';
 import AddRatingPage from './Pages/AddRatingPage/AddRatingPage';
+import FormPageRoomUpdate from './Pages/FormPageR/FormPageRoomUpdate';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
 				<Route path="/dashboard" element={<DashBoardPage />}></Route>
 				<Route path="/dashboard/hoteldetail/:id" element={<DashboardPageHotelDetail />}></Route>
 				<Route path="/dashboard/hotelupdate/:id" element={<FormPageHotelUpdate />}></Route>
+				<Route path="/dashboard/roomupdate/:id" element={<FormPageRoomUpdate />}></Route>
 				<Route path="/formHotel" element={<FormPageH />}></Route>
 				<Route path="/formRoom" element={<FormPageR />}></Route>
 				<Route path="/usercreate" element={<FormPageUser />}></Route>

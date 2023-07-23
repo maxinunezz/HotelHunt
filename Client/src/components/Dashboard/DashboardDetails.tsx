@@ -59,10 +59,10 @@ export default function DashboardDetails() {
                                 />
                             </div>
                         )
-                    ))
+                    ) )
                 ) : (
                     <p>No hay hoteles</p>
-                )}
+                ) }
             </div>
         </div>
     );
