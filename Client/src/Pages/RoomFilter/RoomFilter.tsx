@@ -166,10 +166,10 @@ const RoomFilter = () => {
               ref={sortByRef}
             >
               <option value="">Ordenar por</option>
-              <option value="price-asc">Price (ascendente)</option>
-              <option value="price-desc">Price (descendente)</option>
-              <option value="capacity-asc">Capacity (ascendente)</option>
-              <option value="capacity-desc">Capacity (descendente)</option>
+              <option value="price-asc">Precio (ascendente)</option>
+              <option value="price-desc">Precio (descendente)</option>
+              <option value="capacity-asc">Capacidad (minima)</option>
+              <option value="capacity-desc">Capacidad (maxima)</option>
             </select>
           </div>
           {/* Div de categoría */}
@@ -189,7 +189,7 @@ const RoomFilter = () => {
                 }
               />
               <label htmlFor="checkbox1" className="flex ml-2">
-                5 stars{" "}
+                5 estrellas{" "}
                 &nbsp;
                 {<Star size={26} color="gold" weight="fill" />}
                 {<Star size={26} color="gold" weight="fill" />}
@@ -212,7 +212,7 @@ const RoomFilter = () => {
                 }
               />
               <label htmlFor="checkbox1" className="flex ml-2">
-                4 stars{" "}
+                4 estrellas{" "}
                 &nbsp;
                 {<Star size={26} color="gold" weight="fill" />}
                 {<Star size={26} color="gold" weight="fill" />}
@@ -233,7 +233,7 @@ const RoomFilter = () => {
                 }
               />
               <label htmlFor="checkbox1" className="flex ml-2">
-                3 stars{" "}
+                3 estrellas{" "}
                 &nbsp;
                 {<Star size={26} color="gold" weight="fill" />}
                 {<Star size={26} color="gold" weight="fill" />}
@@ -253,7 +253,7 @@ const RoomFilter = () => {
                 }
               />
               <label htmlFor="checkbox1" className="flex ml-2">
-                2 stars{" "}
+                2 estrellas{" "}
                 &nbsp;
                 {<Star size={26} color="gold" weight="fill" />}
                 {<Star size={26} color="gold" weight="fill" />}
@@ -272,7 +272,7 @@ const RoomFilter = () => {
                 }
               />
               <label htmlFor="checkbox1" className="flex ml-2">
-                1 star
+                1 estrella
                 &nbsp;
                 {<Star size={26} color="gold" weight="fill" />}
               </label>
@@ -299,7 +299,7 @@ const RoomFilter = () => {
                 }
               />
               <label htmlFor="checkbox1" className="flex ml-2 text-white">
-                4 people{" "}
+                4 personas{" "}
                 &nbsp;
                 {<UsersFour size={26} color="white" weight="fill" />}
               </label>
@@ -317,7 +317,7 @@ const RoomFilter = () => {
                 }
               />
               <label htmlFor="checkbox1" className="flex ml-2 text-white">
-                3 people{" "}
+                3 personas{" "}
                 &nbsp;
                 {<UsersThree size={26} color="white" weight="fill" />}
               </label>
@@ -335,7 +335,7 @@ const RoomFilter = () => {
                 }
               />
               <label htmlFor="checkbox1" className="flex ml-2 text-white">
-                2 people
+                2 personas
                 &nbsp;
                 {<Users size={26} color="white" weight="fill" />}
               </label>
@@ -353,7 +353,7 @@ const RoomFilter = () => {
                 }
               />
               <label htmlFor="checkbox1" className="flex ml-2 text-white">
-                1 person
+                1 persona
                 &nbsp;
                 {<User size={26} color="white" weight="fill" />}
               </label>
@@ -371,7 +371,7 @@ const RoomFilter = () => {
               onClick={handleReset}
               className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded ml-4"
             >
-              Reset filtros
+              Resetear filtros
             </button>
           </div>
         </div>

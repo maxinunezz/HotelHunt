@@ -13,7 +13,7 @@ const AuthHandler = async (req, res) => {
         const results = await Auth.findOne({ where: { email: email } });
 
         if(!results){
-            return res.status(401).send("User doesn't exist");
+            return res.status(401).send("El usuario no existe");
         }
         
         if(results){
@@ -24,12 +24,12 @@ const AuthHandler = async (req, res) => {
         const access = await bcrypt.compare(password, storedpassword);
 
         if(!access){
-            return res.status(401).send("Wrong password");
+            return res.status(401).send("Contraseña incorrecta");
         }
         const user = await User.findOne({ where: { id: results.userId, disabled: false } })
         
         if(!user){
-            return res.status(401).send("User doesnt exist");
+            return res.status(401).send("El usuario no existe");
         }
 
         const token = jwt.sign({id: user.id, admin: user.admin}, JWT_SECRET, { expiresIn: '6h' });

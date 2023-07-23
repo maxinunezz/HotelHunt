@@ -1,23 +1,47 @@
 import ProfileSideBar from "../../components/ProfileSideBar/ProfileSideBar";
+import axios from "axios";
+import { tokenStore } from '../../Store';
+import { useEffect } from "react";
+import { useState } from "react";
 
-const reservations = [
-    {
-        hotel: "Hotel A",
-        room: "Standard Room",
-        checkInDate: "10/07/2023",
-        checkOutDate: "15/07/2023",
-        price: "$200",
-    },
-    {
-        hotel: "Hotel B",
-        room: "Deluxe Suite",
-        checkInDate: "20/07/2023",
-        checkOutDate: "25/07/2023",
-        price: "$300",
-    },
-];
+interface Reservation {
+    hotel: string;
+    room: string;
+    checkin: string;
+    checkout: string;
+    paymentStatus: string;
+    price: number;
+  }
 
 export default function ReservasPage() {
+    const [reservations, setReservations] = useState<Reservation[]>([]);
+    const url = import.meta.env.VITE_URL;
+    const token = tokenStore((state) => state.userState);
+    
+    const getReserves = async () => {
+        try {
+            const response = await axios.get(`${url}/booking/getReserves`, {
+                headers: {
+                    authorization: `Bearer ${token[1]}`
+                }
+            });
+            const reserves: Reservation[] = response.data;
+            console.log(reserves);
+            setReservations(reserves); 
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getReserves();
+    }, []);
+
+    console.log(reservations);
+
+
+
     return (
         <div className="flex">
             <ProfileSideBar />
@@ -44,28 +68,48 @@ export default function ReservasPage() {
                                         Fecha de salida
                                     </th>
                                     <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Precio
+                                        Importe
+                                    </th>
+                                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Estado de pago
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {reservations.map((reservation, index) => (
-                                        <tr key={index} className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{reservation.hotel}</td>
-                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {reservation.room}
-                                            </td>
-                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {reservation.checkInDate}
-                                            </td>
-                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {reservation.checkOutDate}
-                                            </td>
-                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {reservation.price}
-                                            </td>
-                                        </tr>
-                                ))}
+                                {(reservations.length > 0) ? (reservations.map((reservation, index) => (
+                                    <tr
+                                        key={index}
+                                        className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                                    >
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            {reservation.hotel}
+                                        </td>
+                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            {reservation.room}
+                                        </td>
+                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            {reservation.checkin}
+                                        </td>
+                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            {reservation.checkout}
+                                        </td>
+                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            {reservation.price}
+                                        </td>
+                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            {reservation.paymentStatus}
+                                        </td>
+                                    </tr>
+                                ))) : (
+                                    <tr>
+                                        <td
+                                            colSpan={6} // Indicar el número de columnas para ocupar en la tabla
+                                            className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                                        >
+                                            No tienes reservas aún
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>

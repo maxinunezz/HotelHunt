@@ -52,7 +52,7 @@ export const userStore = create<States & Actions>((set) => ({
       );
 
       const urlPago = data.urlpago; // Ajusta esto según la estructura de la respuesta del backend
-      console.log(data);
+      
        
       set((state) => ({
 		...state,

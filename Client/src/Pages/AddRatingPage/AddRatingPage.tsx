@@ -70,7 +70,7 @@ const CommentForm: React.FC = () => {
                 <form onSubmit={handleFormSubmit} className="flex flex-col space-y-4">
                     <div className="flex flex-col">
                         <label htmlFor="score" className="text-lg font-medium mb-2">
-                            Score:
+                            Puntaje:
                         </label>
                         <input
                             id="score"
@@ -85,7 +85,7 @@ const CommentForm: React.FC = () => {
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="comment" className="text-lg font-medium mb-2">
-                            Comment:
+                            Comentario:
                         </label>
                         <textarea
                             id="comment"

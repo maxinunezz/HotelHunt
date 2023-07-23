@@ -14,7 +14,6 @@ import ProfilePage from './Pages/ProfilePage/ProfilePage';
 import ReservasPage from './Pages/ReservasPage/ReservasPage';
 import UserSettings from './Pages/UserSettings/UserSettings';
 import ShoppingCartPage from './Pages/ShoppingCartPage/ShoppingCartPage';
-import CheckoutTransitionPage from './Pages/CheckoutTransitionPage/CheckoutTransitionPage';
 import RoomFilter from './Pages/RoomFilter/RoomFilter';
 import FormPageHotelUpdate from './Pages/FormPageH/FormPageHotelUpdate';
 import RecuPassword from './Pages/RecuperacionPassword/RecuPassword'
@@ -53,6 +52,39 @@ function App() {
 
 	// if (userData.length === 0) return
 
+
+
+function App() {
+	// const userData = tokenStore((state) => state.userState)
+	// const { saveInfo } = tokenStore();
+
+	// const [cookies] = useCookies(["json"]);
+	// const findCookie = () => {
+	// 	if (cookies.json) {
+	// 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// 		// @ts-ignore:next-line
+	// 		const arrayAux: UserState = []; 
+	// 		const logeado = true
+	// 		const userData = cookies.json && cookies.json.data;
+	// 		const tokenRaw = cookies.json && cookies.json.token;
+	// 		const statusadmin = cookies.json && cookies.json.admin;
+	// 		arrayAux[0] = userData
+	// 		arrayAux[1] = tokenRaw
+	// 		arrayAux[2] = statusadmin
+	// 		arrayAux[3] = logeado
+	// 		saveInfo(arrayAux)
+	// 	}
+	// }
+	// useEffect(() => {
+	// 	findCookie()
+	// }, [cookies]) // eslint-disable-line
+
+
+	// if (userData.length === 0) return
+
+	useEffect(() => {
+		document.title = 'Hotel Hunt';
+	  }, []);
 	return (
 		<div id="app">
 			<Routes>
@@ -71,7 +103,6 @@ function App() {
 				<Route path="/roompage/:id" element={<RoomPage />}></Route>
 				<Route path="/farewell" element={<FarewellPage />}></Route>
 				<Route path="/shoppingcart" element={<ShoppingCartPage />}></Route>
-				<Route path="/paymenttransition" element={<CheckoutTransitionPage />}></Route>
 				<Route path="/roomSearch" element={<RoomFilter />}></Route>
 				<Route path="/RecuPassword" element={<RecuPassword />}></Route>
 				<Route path='/SetNewPass' element={<FormPagePass />}></Route>

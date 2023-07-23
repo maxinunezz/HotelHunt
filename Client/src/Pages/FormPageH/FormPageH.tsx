@@ -65,7 +65,6 @@ export default function FormPageH() {
 	const handleSubmit = useCallback(
 		async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
 			try {
-				console.log(token[1]);
 
 				const data = await axios.post(
 					`${url}/dashboard/hotel/`,
@@ -84,7 +83,7 @@ export default function FormPageH() {
 						},
 					}
 				);
-				
+
 				helpers.resetForm()
 				setIsCreated(true);
 				successToast('Hotel creado correctamente');
@@ -298,7 +297,7 @@ export default function FormPageH() {
 										className="mb-4"
 									>
 										<FormControl.Label className="text-white">
-											Category
+											Categoria
 										</FormControl.Label>
 										<FormControl.Input
 											type="number"
@@ -307,6 +306,10 @@ export default function FormPageH() {
 											placeholder="category"
 											onChange={async (event) => {
 												await setFieldValue('category', event.target.value);
+											}}
+											onKeyDown={(event) => {
+												// Evitar que el usuario pueda escribir manualmente en el campo
+												event.preventDefault();
 											}}
 											value={values.category}
 											required
