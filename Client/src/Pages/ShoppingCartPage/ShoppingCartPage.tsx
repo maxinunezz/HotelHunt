@@ -2,16 +2,32 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CurrencyDollar, ShoppingCart, Trash } from '@phosphor-icons/react';
 import { userStore } from '../../Store/UserStore';
-import { tokenStore } from '../../Store';
+import { roomsStore, tokenStore } from '../../Store';
 
 const ShoppingCartPage = () => {
   const navigate = useNavigate()
+  const allRooms = roomsStore((state) => state.rooms);
   const urlPayment = userStore((state) => state.urlPayment)
   const sessionId = userStore((state) => state.sessionIdUser)
   const allSessionData = userStore((state) => state.allSessionData)
   const token = tokenStore((state) => state.userState)
   console.log(allSessionData);
 
+  const calculateDays = (item) => {
+    // Convertir las fechas a objetos Date
+    const checkinDate = new Date(item.checkin);
+    const checkoutDate = new Date(item.checkout);
+
+    // Calcular la diferencia en milisegundos entre las fechas
+    const differenceInMs = checkoutDate.getTime() - checkinDate.getTime();
+
+    // Convertir la diferencia en dÃ­as
+    const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
+
+
+
+    return differenceInDays;
+  };
 
   const userReserve = userStore((state) => state.reserves)
   const { reserveRoomPayment } = userStore()
@@ -35,11 +51,39 @@ const ShoppingCartPage = () => {
   const handleCheckout = () => {
     // Lógica para procesar el pago y completar la compra
 
-    window.localStorage.setItem('session', JSON.stringify(allSessionData.session));
-    window.localStorage.setItem('token', JSON.stringify(token));
+    window.sessionStorage.setItem('token', JSON.stringify(token));
+
     console.log("Handler");
 
   };
+
+  const roomName = (item) => {
+    for (let i = 0; i < allRooms.length; i++) {
+      if (allRooms[i].id === item.roomId) {
+        return (
+          <div>
+            <p>{allRooms[i].name}</p>
+            <div className='bg-teal-300 flex space-x-2'>
+              <p>checkin:{item.checkin}</p>
+              <p>checkout:{item.checkout}</p>
+            </div>
+          </div>
+        );
+      }
+    }
+  };
+
+  const roomPhoto = (item) => {
+    for (let i = 0; i < allRooms.length; i++) {
+      if (allRooms[i].id === item.roomId) {
+        return allRooms[i].photo[0]
+      }
+    }
+  };
+  const totalValueCart = userReserve.reduce((total, reserve) => {
+    const parcialPrice = reserve.price * calculateDays(reserve);
+    return total + parcialPrice;
+  }, 0);
 
   return (
     <div className="container mx-auto p-4">
@@ -51,10 +95,14 @@ const ShoppingCartPage = () => {
         <div>
           {userReserve.map((item: any) => (
             <div key={item.roomId} className="flex items-center border-b border-gray-200 py-2">
-              <img src={item.image} alt={item.name} className="w-16 h-16 mr-4" />
-              <div>
-                <h2 className="text-lg font-medium">{item.name}</h2>
-                <p className="text-gray-500">Price: ${item.price}</p>
+              <div className="w-[100px] h-[100px] flex justify-center items-center text-center">
+                <img src={roomPhoto(item)} alt="" />
+              </div>
+              <div className="flex flex-col ml-2">
+                <div>{roomName(item)}</div>
+                <p>Dias: {calculateDays(item)}</p>
+                <p>Precio por noche: ${item.price}</p>
+                <p>Precio por días: ${item.price * calculateDays(item)}</p>
               </div>
               <button
                 onClick={() => handleDeleteItem(item.roomId)}
@@ -73,7 +121,7 @@ const ShoppingCartPage = () => {
             <h3 className="text-lg font-medium">Total:</h3>
             <span className="text-2xl font-bold">
               <CurrencyDollar size={24} className="inline-block align-middle" />
-
+              {totalValueCart}
             </span>
           </div>
           <Link to={urlPayment}>
