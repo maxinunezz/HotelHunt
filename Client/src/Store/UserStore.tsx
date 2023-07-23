@@ -7,20 +7,25 @@ const url = import.meta.env.VITE_URL;
 type States = {
   reserves: ReserveBooking[];
   urlPayment: string | null;
+  sessionIdUser: string;
+  allSessionData: object;
   favoriteHotel: any[];
 };
 
+
 type Actions = {
   reserveRoomPayment: (data: []) => Promise<void>;
-  roomPayment: (data: {}, token:string) => Promise<void>;
-  addFavorite: (hotelId:any, userData:any) => Promise<void>;
-  getFavorite: (userData:any) => Promise<void> ;
+  roomPayment: (data: {}, token:string ) => Promise<void>;
+  getFavorite:(userData: any) => Promise<void>
+  addFavorite:(hotelId:any ,userData: any) => Promise<void>
   reset: (stateKey: keyof States) => void;
 };
 
 const initialState: States = {
   reserves: [],
   urlPayment: null,
+  sessionIdUser: "",
+  allSessionData:{},
   favoriteHotel: []
 
 };
@@ -94,7 +99,7 @@ export const userStore = create<States & Actions>((set) => ({
     }));
   },
 
-  roomPayment: async (info:any, token:any) => {
+  roomPayment: async (info, token) => {
     try {
       const { data } = await axios.post(
         `${url}/booking/reserva`,
@@ -107,10 +112,13 @@ export const userStore = create<States & Actions>((set) => ({
       );
 
       const urlPago = data.urlpago; // Ajusta esto según la estructura de la respuesta del backend
-
+      
+       
       set((state) => ({
 		...state,
+    allSessionData: data,
 		urlPayment: urlPago,
+    sessionIdUser: data.sessionId
 	}));
     } catch (error) {
       console.log(error);

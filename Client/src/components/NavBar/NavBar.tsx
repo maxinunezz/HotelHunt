@@ -17,6 +17,7 @@ export default function NavBar() {
   const { reset, orderByCategorySearch, orderByNameSearch } = searchStore();
   const { orderByName, resetHotels, fetchHotels , orderByCategory} = hotelStore();
   const [filterByNameState, setfilterByNameState] = useState();
+  
 
   const [orderByNameState, setOrderByNameState] = useState("");
   const [orderByCategoryState, setOrderByCategoryState] = useState("");
@@ -76,7 +77,7 @@ export default function NavBar() {
 				className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
 				onClick={handleAllHotels}
 			>
-				reset filter
+			restablecer filtro
 			</button>
 
 			<Dropdown size='md'>

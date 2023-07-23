@@ -28,6 +28,7 @@ const Card: React.FC<Hotel> = ({
   city,
   photo,
   hotelCategory,
+  services
 }) => {
 
   const hotelFavorite = userStore((state)=>state.favoriteHotel)
@@ -70,7 +71,7 @@ const Card: React.FC<Hotel> = ({
     const icons = [];
 
     for (let i = 0; i < score; i++) {
-      icons.push(<Buildings key={`building-${i}`} size={32} />);
+      icons.push(<Buildings key={`building-${i}`} size={32} color='darkblue' />);
     }
 
     return icons;
@@ -112,16 +113,21 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
     const fetchRating = async () => {
       try {
         const response = await axios.get(`${url}/rating/${id}`);
-        const score = response.data[0].score;
-     
-
-        setRatingValue(score);
+        const scores = response.data.map((element:any) => element.score);
+        const sum = scores.reduce((acc:any, score:any) => acc + score, 0);
+        const average = Math.round(sum / scores.length);
+        setRatingValue(average);
       } catch (error) {
         console.log(error);
       }
     };
     fetchRating();
   }, [id]);
+
+  const orderedServices = () => {
+    const stringRaw = services.join(', ');
+    return stringRaw    
+  }
 
   return (
   
@@ -145,27 +151,30 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
             <p className="text-gray-600 text-sm overflow-hidden overflow-ellipsis">
               {description}
             </p>
-            <p className="text-gray-500 mt-1 text-sm">
-              Ubicación: {city}, {country}
-            </p>
           </div>
-          <div> 
-            <div className="flex">
-              <p>Hotel category: </p>
+          <div>
+            Servicios: {orderedServices()}
+          </div>
+          <div>
+            <div className='flex'>
+            <p>Categoria: </p>
               {renderStars(Number(hotelCategory))}
             </div>
-            <div className="flex">
-              <p>Popular rating:</p>
+            <div className='flex'>
+              <p>Calificación popular:</p>
               {/* Renderizar el icono de Phosphor repetidamente */}
               {ratingValue !== null && renderIcon(ratingValue)}
             </div>
           </div>
           <div className="flex justify-end">
-       
-          <button className=" py-2 px-4" onClick={handleFavorite}>{isFav? "💙" : "🤍"}</button>
+       <div><button className=" py-2 px-4" onClick={handleFavorite}>{isFav? "💙" : "🤍"}</button></div>
+          
           <Link to={`/hotelpage/${id}`} key={id}>
             <div>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+              <p className="text-gray-500 mt-1 text-sm">
+              Ubicación: {city}, {country}
+            </p>
+            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
               Ver habitaciones
             </button>
             </div>

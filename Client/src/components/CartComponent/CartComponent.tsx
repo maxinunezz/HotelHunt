@@ -9,7 +9,7 @@ import {
 } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../../Store/UserStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { roomsStore } from "../../Store/RoomsStores";
 import { tokenStore } from "../../Store";
 
@@ -68,7 +68,7 @@ const CartComponent = () => {
   const roomPhoto = (item) => {
     for (let i = 0; i < allRooms.length; i++) {
       if (allRooms[i].id === item.roomId) {
-        return allRooms[i].photo;
+        return allRooms[i].photo[0]
       }
     }
   };
@@ -89,22 +89,26 @@ const CartComponent = () => {
     }
   };
 
+  const [reserveLocal, setReserveLocal] = useState([])
+  useEffect(() => {
+    setReserveLocal(userReserve);
+  }, [userReserve]);
+  
+
   const handleCheckout = async () => {
     if (userReserve.length === 0) {
       return alert('Agregar habitación');
     }
 
     const data = {
-      roomsToReserve: userReserve
-    };
-    console.log(data);
-  
-   await roomPayment(data, token[1]);
+      roomsToReserve: reserveLocal
+    }
 
-  
-  
+
+    await roomPayment(data, token[1]);
+    
     // Redireccionar a la URL externa en una nueva pestaña
-    navigate('/paymenttransition')
+    navigate('/shoppingcart')
 
     //  reset() //esta linea resetea el estado global del carrito  porque la app aun no tiene respuesta del pago
 
@@ -184,7 +188,7 @@ const CartComponent = () => {
             className="flex justify-center items-center"
           >
             <Money size={20} weight="duotone" className="mr-1.5" />
-            Checkout
+            Verificar
           </Dropdown.Item>
           <Dropdown.Divider />
 
@@ -193,7 +197,7 @@ const CartComponent = () => {
             className="flex justify-center items-center"
           >
             <ShoppingCart size={20} weight="duotone" className="mr-1.5" />
-            View cart
+            Ver carrito
           </Dropdown.Item>
         </Dropdown.Content>
       </Dropdown>

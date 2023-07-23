@@ -4,7 +4,6 @@ import PaginadoGlobal from "../../components/Pagination/PaginadoGlobal";
 import { userStore } from "../../Store/UserStore";
 import { useEffect } from "react";
 import { favoriteStore } from "../../Store/FavoriteStore";
-import NavBar from "../../components/NavBar/NavBar";
 import NavbarDetail from "../../components/NavBarDetail/NavBarDetail";
 
 const FavoritePage = () => {
@@ -40,7 +39,7 @@ const FavoritePage = () => {
     setCurrentPageFavorites(pageNumber);
   };
 
-  console.log(favorites);
+
   
 
   return (

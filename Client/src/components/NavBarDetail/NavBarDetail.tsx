@@ -26,7 +26,7 @@ export default function NavbarDetail() {
             </li>
             <li className="mr-4 flex items-center">
               <Bed onClick={() => navigate('/roomsearch')} size={32}  weight="thin" className="mr-4 text-blue-500" />
-              <a href="/roomsearch" className="text-white">All Rooms</a>
+              <a href="/roomsearch" className="text-white">Todas las habitaciones</a>
             </li>
 
           </ul>

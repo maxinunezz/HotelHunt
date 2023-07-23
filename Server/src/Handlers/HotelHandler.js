@@ -6,7 +6,7 @@ const getAllhotels = async (req, res) => {
 
     const data = await Hotel.findAll({where: {disabled: false}});
     if (data.length === 0) {
-      throw Error("No hotels found");
+      throw Error("No se encontraron hoteles");
     }
 
     data.forEach((hotel) => {
@@ -36,7 +36,7 @@ const updateHotel = async (req, res) => {
   try {
     const hotel = await Hotel.findByPk(id);
     if (!hotel) {
-      return res.status(404).send("Hotel not found");
+      return res.status(404).send("Hotel no encontrado");
     }
 		await hotel.update(req.body);
 		return res.status(200).json(hotel);
@@ -50,10 +50,10 @@ const deleteHotel = async (req, res) => {
   try {
     const hotel = await Hotel.findByPk(id);
     if (!hotel) {
-      return res.status(404).send("Hotel not found");
+      return res.status(404).send("Hotel no encontrado");
     }
     await hotel.destroy();
-    return res.status(200).send("Hotel successfully removed");
+    return res.status(200).send("Hotel eliminado con éxito");
   } catch (error) {
     return res.status(500).send(error.message);
   }

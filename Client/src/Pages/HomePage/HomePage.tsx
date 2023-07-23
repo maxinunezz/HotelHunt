@@ -12,7 +12,7 @@ import { userStore } from '../../Store/UserStore';
 export default function HomePage() {
 	const searchResults = searchStore((state) => state.searchResults)
 	const { fetchHotels } = hotelStore()
-	const [cookies, setCookie] = useCookies(["json"]);
+	const [cookies] = useCookies(["json"]);
 	const { saveInfo } = tokenStore();
 	const token = tokenStore((state)=>state.userState)
 	const { getFavorite}= userStore()

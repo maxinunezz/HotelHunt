@@ -48,6 +48,7 @@ export default function FormPageH() {
 	const navigate = useNavigate()
 	const [isCreated, setIsCreated] = useState(false);
 	const token = tokenStore((state) => state.userState)
+
 	const CLOUD_NAME = "hotelmatimaxi4342";
 	const UPLOAD_PRESET = "hotel_pf";
 
@@ -64,7 +65,6 @@ export default function FormPageH() {
 	const handleSubmit = useCallback(
 		async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
 			try {
-				console.log(token[1]);
 
 				const data = await axios.post(
 					`${url}/dashboard/hotel/`,
@@ -84,12 +84,11 @@ export default function FormPageH() {
 					}
 				);
 
-
 				helpers.resetForm()
 				setIsCreated(true);
 				successToast('Hotel creado correctamente');
 				console.log('data', data);
-				navigate(-1);
+				navigate(-1)
 			} catch (error) {
 
 				errorToast('Hubo un error, intenta de nuevo');
@@ -298,15 +297,19 @@ export default function FormPageH() {
 										className="mb-4"
 									>
 										<FormControl.Label className="text-white">
-											Category
+											Categoria
 										</FormControl.Label>
 										<FormControl.Input
 											type="number"
-											placeholder="category"
 											min="1"
 											max="5"
+											placeholder="category"
 											onChange={async (event) => {
 												await setFieldValue('category', event.target.value);
+											}}
+											onKeyDown={(event) => {
+												// Evitar que el usuario pueda escribir manualmente en el campo
+												event.preventDefault();
 											}}
 											value={values.category}
 											required
