@@ -2,10 +2,9 @@ import { Text } from "@rewind-ui/core";
 import axios from "axios";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { tokenStore } from "../../Store";
-import { userDeleteToast, successToast, errorToast } from "../toast";
+import { userDeleteToast,successToast, errorToast } from "../toast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getHotels } from "../../utils/GlobalFunction";
 const url = import.meta.env.VITE_URL;
 
 export default function DashboardRow({
@@ -14,7 +13,7 @@ export default function DashboardRow({
     country,
     city,
     photo,
-    disabled
+    disabled,
 }: {
     id: string;
     name: string;
@@ -24,11 +23,10 @@ export default function DashboardRow({
     disabled: boolean;
 }) {
     const navigate = useNavigate()
-    const token = tokenStore((state) => state.userState);
+    const userData = tokenStore((state) => state.userState);
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const [showConfirmDisabled, setConfirmDisabled] = useState(false);
     const [isChecked, setIsChecked] = useState(disabled);
-    const { getHotelByUser } = tokenStore();
 
     const handleDelete = () => {
         setShowConfirmDialog(true);
@@ -40,7 +38,7 @@ export default function DashboardRow({
                 `${url}/dashboard/hotel/${id}`,
                 {
                     headers: {
-                        authorization: `Bearer ${token[1]}`,
+                        authorization: `Bearer ${userData[1]}`,
                     },
                 }
             );
@@ -49,11 +47,40 @@ export default function DashboardRow({
 
             userDeleteToast('Hotel eliminado');
 
+
             setShowConfirmDialog(false);
+            navigate(-1)
+            navigate(+1)
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleEdit = () => {
+        // Acción de edición
+        navigate(`/dashboard/hotelupdate/${id}`)
+    };
+    const ConfirmDisabled = async () => {
+        try {
+            const requestBody = { disabled: isChecked };
+            const response = await axios.put(
+                `${url}/dashboard/hotel/${id}`,
+                requestBody,
+                {
+                    headers: {
+                        authorization: `Bearer ${userData[1]}`,
+                    },
+                }
+            );
+
+            successToast(response.data);
+            setConfirmDisabled(false);
+            
         } catch (error) {
             errorToast(error.response.data);
         }
-    };
+    }
 
     const handleChangeCheckbox = (e) => {
         e.stopPropagation();
@@ -64,42 +91,13 @@ export default function DashboardRow({
             setConfirmDisabled(false)
         }
     }
-
-    const ConfirmDisabled = async () => {
-        try {
-            
-            const response = await axios.put(
-                `${url}/dashboard/hotel/${id}`,
-                { 
-                    body: {
-                        disabled: isChecked,
-                    }
-                },
-                {
-                    headers: {
-                        authorization: `Bearer ${token[1]}`,
-                    },
-                }
-            );
-
-            successToast(response.data);
-            setConfirmDisabled(false);
-            const hotels = getHotels();
-            getHotelByUser(hotels);
-        } catch (error) {
-            errorToast(error.response.data);
-        }
-    }
-
-    const handleEdit = () => {
-        navigate(`/dashboard/hotelupdate/${id}`);
-    };
+    
 
     return (
         <div className="dashboard-row bg-white rounded-md p-4 mb-4">
             <div className="grid grid-cols-8 gap-4">
                 <div className="col-span-2">
-                    <img src={photo[0]} alt={name} className="w-48 h-48 object-cover" onClick={() => navigate(`/dashboard/hoteldetail/${id}`)} />
+                    <img src={photo[0]} alt={name} className="w-48 h-48 object-cover" />
                 </div>
                 <div className="col-span-1 flex flex-col justify-center">
                     <Text variant="h6" className="text-lg font-medium">
@@ -148,10 +146,10 @@ export default function DashboardRow({
                         <h3 className="confirm-dialog-title">Confirmar eliminación</h3>
                         <p className="confirm-dialog-message">¿Estás seguro de que deseas eliminar este hotel?</p>
                         <div className="confirm-dialog-buttons">
-                            <button className="border-slate-950 text-white bg-orange-600 w-[100px]" onClick={(e) => { confirmDelete(); e.stopPropagation(); }}>
-                                Sí
-                            </button>
-                            <button className="border-slate-950 text-white bg-lime-500 w-[100px]" onClick={(e) => { setShowConfirmDialog(false); e.stopPropagation(); }}>
+                        <button className="border-slate-950 text-white bg-orange-600 w-[100px]" onClick={(e) => { e.stopPropagation(); confirmDelete(); }}>
+  Sí
+</button>
+                            <button className="border-slate-950 text-white bg-lime-500 w-[100px]" onClick={(e) => {setShowConfirmDialog(false); e.stopPropagation();}}>
                                 No
                             </button>
                         </div>
