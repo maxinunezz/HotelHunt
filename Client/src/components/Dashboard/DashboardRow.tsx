@@ -60,7 +60,6 @@ export default function DashboardRow({
     };
 
     const handleEdit = () => {
-        // Acción de edición
         navigate(`/dashboard/hotelupdate/${id}`)
     };
     const ConfirmDisabled = async () => {

@@ -20,6 +20,7 @@ interface Room {
 
 type States = {
 	rooms: Room[];
+	allRoomsDashboard: Room[];
 	roomsHotelSelect: Room[];
 	roomDetail: Room[];
 	currentPage: number;
@@ -28,6 +29,7 @@ type States = {
 
 type Actions = {
 	fetchRooms: () => Promise<void>;
+	fetchRoomsDashboard: (hotelId: string, token:string) => Promise<void>;
 	hotelIdSetter: (roomsHotelSelected: []) => Promise<void>;
 	setRoom: (roomDetail: []) => Promise<void>;
 	changeCurrentPage: (payload: number | boolean) => void;
@@ -35,6 +37,7 @@ type Actions = {
 
 const initialState: States = {
 	rooms: [],
+	allRoomsDashboard: [],
 	roomsHotelSelect: [],
 	roomDetail: [],
 	currentPage: 1,
@@ -45,7 +48,7 @@ export const roomsStore = create<States & Actions>((set) => ({
 	...initialState,
 
 	fetchRooms: async () => {
-	
+
 		const { data } = await axios.get(`${url}/room`);
 
 
@@ -56,14 +59,31 @@ export const roomsStore = create<States & Actions>((set) => ({
 			}));
 		}
 	},
+	fetchRoomsDashboard: async (hotelId, token) => {
+
+		const { data } = await axios.get(`${url}/dashboard/room/${hotelId}`,
+			{
+				headers: {
+					authorization: `Bearer ${token}`,
+				},
+			});
+
+
+		if (data.length > 0) {
+			set((state) => ({
+				...state,
+				allRoomsDashboard: data,
+			}));
+		}
+	},
 
 	hotelIdSetter: async (roomsHotelSelected) => {
 		const arrayAux: Room[] = [];
-		
+
 
 		return await axios.get(`${url}/room`).then((response) => {
 			const allroomsAux = response.data;
-			
+
 
 			for (let i = 0; i < roomsHotelSelected?.length; i++) {
 				for (let j = 0; j < allroomsAux.length; j++) {
@@ -106,8 +126,8 @@ export const roomsStore = create<States & Actions>((set) => ({
 				typeof payload === 'number'
 					? payload
 					: payload
-					? state.currentPage + 1
-					: state.currentPage - 1,
+						? state.currentPage + 1
+						: state.currentPage - 1,
 		}));
 	},
 

@@ -22,8 +22,9 @@ interface FormValues {
 	city: string;
 	photo: string[];
 	category: string;
-	services: string;
+	services: string[];
 }
+const arrayDePrueba = ['Servicio A', 'Servicio B', 'Servicio C'];
 
 const formValidationSchema = yup.object().shape({
 	name: yup
@@ -46,6 +47,7 @@ const formValidationSchema = yup.object().shape({
 		.string()
 		.matches(/^[0-9]+$/, 'Solo se admiten numeros')
 		.max(2, 'Maximo 2 digitos'),
+	services: yup.array().min(1, 'Seleccione al menos un servicio'),
 });
 
 export default function FormPageHotelUpdate() {
@@ -148,12 +150,13 @@ export default function FormPageHotelUpdate() {
 							city: '',
 							photo: currentHotelData?.photo || [],
 							category: '',
-							services: ""
+							services: []
 						}}
 						onSubmit={handleSubmit}
 						validationSchema={formValidationSchema}
 					>
 						{({ values, errors, setFieldValue, resetForm }) => {
+							const areServicesSelected = values.services.length > 0;
 							return (
 								<Form>
 									<FormControl
@@ -347,29 +350,56 @@ export default function FormPageHotelUpdate() {
 									</FormControl>
 
 									<FormControl
-										validation={
-											values.services.length === 0
-												? 'none'
-												: errors.services
-													? 'invalid'
-													: 'valid'
-										}
+										validation={errors.services && !areServicesSelected ? 'invalid' : 'valid'}
 										className="mb-4"
 									>
-										<FormControl.Label className="text-white">
-											Servicios
-										</FormControl.Label>
-										<FormControl.Input
-											type="text"
-											placeholder={`Current services: ${currentHotelData?.services}`}
+										<FormControl.Label className="text-white">Servicios</FormControl.Label>
+										<FormControl.Select
+											placeholder="Seleccione un servicio"
 											onChange={async (event) => {
-												await setFieldValue('services', event.target.value);
+												const selectedService = event.target.value;
+												if (!values.services.includes(selectedService)) {
+													await setFieldValue('services', [...values.services, selectedService]);
+												}
 											}}
 											value={values.services}
 
-										/>
+										>
+											<option value="">Seleccione un servicio</option>
+											{arrayDePrueba.map((option) => (
+												<option key={option} value={option}>
+													{option}
+												</option>
+											))}
+										</FormControl.Select>
 										<FormControl.Text>{errors.services}</FormControl.Text>
 									</FormControl>
+
+									{values.services.length > 0 && (
+										<div className="mb-4">
+											<FormControl.Label className="text-white">Servicios seleccionados</FormControl.Label>
+											<ul className="list-disc pl-8 text-white">
+												{values.services.map((service, index) => (
+													<li key={index}>{service}</li>
+												))}
+											</ul>
+										</div>
+									)}
+
+									{values.services.length > 0 && (
+										<div className="mb-4">
+											<Button
+												className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md"
+												onClick={() => {
+													const newServices = [...values.services];
+													newServices.pop();
+													setFieldValue('services', newServices);
+												}}
+											>
+												Eliminar último servicio
+											</Button>
+										</div>
+									)}
 
 									<div className="flex items-center justify-center">
 										<Button

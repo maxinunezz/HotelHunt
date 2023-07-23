@@ -68,10 +68,10 @@ export default function DashboardHotel() {
                                 />
                             </div>
                         )
-                    ))
+                    ) )
                 ) : (
                     <p>No hay hoteles</p>
-                )}
+                ) }
             </div>
         </div>
     );
