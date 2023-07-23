@@ -37,7 +37,6 @@ const Card: React.FC<CardProps> = ({
 
     const stars = [];
 
-    // Renderizar estrellas llenas
     for (let i = 0; i < filledStars; i++) {
       stars.push(
         <span key={`filled-star-${i}`} className="text-yellow-500">
@@ -45,8 +44,6 @@ const Card: React.FC<CardProps> = ({
         </span>
       );
     }
-
-    // Renderizar estrellas vacías
     for (let i = 0; i < emptyStars; i++) {
       stars.push(
         <span key={`empty-star-${i}`} className="text-gray-300">

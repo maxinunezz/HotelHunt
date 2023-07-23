@@ -99,7 +99,7 @@ export default function DashboardRow({
         <div className="dashboard-row bg-white rounded-md p-4 mb-4">
             <div className="grid grid-cols-8 gap-4">
                 <div className="col-span-2">
-                    <img src={photo[0]} alt={name} className="w-48 h-48 object-cover" />
+                    <img src={photo[0]} alt={name} className="w-48 h-48 object-cover" onClick={() => navigate(`/dashboard/hoteldetail/${id}`)}/>
                 </div>
                 <div className="col-span-1 flex flex-col justify-center">
                     <Text variant="h6" className="text-lg font-medium">
