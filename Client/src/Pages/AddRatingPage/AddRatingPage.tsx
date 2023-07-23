@@ -65,45 +65,46 @@ const CommentForm: React.FC = () => {
     
     return (
         <div className="w-80 mx-auto mt-8">
-            <div className="bg-lime-400 rounded-lg shadow-lg p-4 hover:shadow-xl">
-                <h2 className="text-2xl font-semibold mb-4">Agregar Comentario</h2>
-                <form onSubmit={handleFormSubmit} className="flex flex-col space-y-4">
-                    <div className="flex flex-col">
-                        <label htmlFor="score" className="text-lg font-medium mb-2">
-                            Puntaje:
-                        </label>
-                        <input
-                            id="score"
-                            type="number"
-                            min="1"
-                            max="5"
-                            value={score}
-                            onChange={(e) => setScore(parseInt(e.target.value, 10))}
-                            required
-                            className="border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-                        />
-                    </div>
-                    <div className="flex flex-col">
-                        <label htmlFor="comment" className="text-lg font-medium mb-2">
-                            Comentario:
-                        </label>
-                        <textarea
-                            id="comment"
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                            required
-                            className="border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-                        />
-                    </div>
-                    <button                     
-                        type="submit"
-                        className="bg-blue-500 text-white font-bold px-4 py-2 rounded-md hover:bg-blue-600"
-                    >
-                        Enviar comentario
-                    </button>
-                </form>
+        <div className="bg-slate-700 rounded-lg shadow-lg p-4 hover:shadow-xl">
+          <h2 className="text-2xl font-semibold mb-4 text-black">Agregar Comentario</h2>
+          <form onSubmit={handleFormSubmit} className="flex flex-col space-y-4">
+            <div className="flex flex-col">
+              <label htmlFor="score" className="text-lg font-medium mb-2 text-black">
+                Puntaje:
+              </label>
+              <input
+                id="score"
+                type="number"
+                min="1"
+                max="5"
+                value={score}
+                onChange={(e) => setScore(parseInt(e.target.value, 10))}
+                required
+                className="border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+              />
             </div>
+            <div className="flex flex-col">
+              <label htmlFor="comment" className="text-lg font-medium mb-2 text-black">
+                Comentario:
+              </label>
+              <textarea
+                id="comment"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                required
+                className="border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white font-bold px-4 py-2 rounded-md hover:bg-blue-600"
+            >
+              Enviar comentario
+            </button>
+          </form>
         </div>
+      </div>
+      
     );
 };
 
