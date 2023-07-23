@@ -5,10 +5,10 @@ const NavBarDashboard1 = () => {
     const navigate = useNavigate()
 
     return (
-        <div className="grid grid-cols-7 gap-4 bg-white">
+        <div className="grid grid-cols-8 gap-4 bg-white">
                 <div className="col-span-2">
                     <Text>
-                    <button onClick={() => navigate(-1)} className="bg-blue-500 font-bold w-[80px] border-black rounded ml-5">Back</button>
+                    <button onClick={() => navigate("/formHotel")} className="bg-blue-500 font-bold w-[80px] border-black rounded ml-5">Crear hotel</button>
                     </Text>
                 </div>
                 <div className="col-span-1 flex items-center justify-center">
@@ -27,13 +27,20 @@ const NavBarDashboard1 = () => {
                     </Text>
                 </div>
                 <div className="col-span-1 flex items-center justify-center">
-
+                    <Text variant="h6" className="text-lg font-medium">
+                        Editar
+                    </Text>
                 </div>
-                <div className="col-span-1">
-                    
+                <div className="col-span-1 flex items-center justify-center">
+                    <Text variant="h6" className="text-lg font-medium">
+                        Eliminar
+                    </Text>
                 </div>
-                
-                
+                <div className="col-span-1 flex items-center justify-center">
+                    <Text variant="h6" className="text-lg font-medium">
+                        Desactivar
+                    </Text>
+                </div>               
             </div>
     );
 };

@@ -24,6 +24,7 @@ async function createBooking(req, res) {
         const roomDetails = await Room.findByPk(room.roomId);
         return {
           ...room,
+          hotelId: roomDetails.hotelId,
           name: roomDetails.name,
           price: roomDetails.price,
         };
@@ -82,11 +83,12 @@ async function createBooking(req, res) {
     const urlpago = session.url;
 
     for (const room of rooms) {
-      const { roomId, checkin, checkout } = room;
+      const { roomId, checkin, checkout, hotelId } = room;
 
-      const isReserved = await isRoomAlreadyReserved(roomId, checkin, checkout);
+      const isReserved = await isRoomAlreadyReserved(roomId, checkin, checkout, hotelId);
       if (!isReserved) {
         const booking = await Booking.create({
+          hotelId,
           roomId,
           userId: id,
           checkin,

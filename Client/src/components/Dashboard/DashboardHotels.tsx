@@ -1,54 +1,31 @@
 import DashboardRow from "./DashboardRow";
 import { useEffect, useState } from 'react'
 import { tokenStore } from "../../Store";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import  NavBarDashboard1  from "./NavBarDashboard1"
+import  { getHotels } from '../../utils/GlobalFunction'
 
-export default function DashboardDetails() {
+export default function DashboardHotel() {
     const { getHotelByUser } = tokenStore()
-    const navigate = useNavigate()
-    const token = tokenStore((state) => state.userState)
-    const url = import.meta.env.VITE_URL;
-
     const [hotelByUser, setHotelByUser] = useState()
-
-    const getHotels = async () => {
-        try {
-            const response = await axios.get(
-                `${url}/dashboard`,
-                {
-                    headers:
-                    {
-                        authorization:
-                            `Bearer ${token[1]}`,
-                    },
-                },
-            )
-            if (response.data) {
-
-                setHotelByUser(response.data);
-                getHotelByUser(response.data);
-            }
-        } catch (error) {
-            console.log(error);
-
-        }
-    }
+    
 
 
     useEffect(() => {
-        getHotels()
+        const hotels = getHotels()
+        setHotelByUser(hotels);
+        getHotelByUser(hotels);
     }, [])
 
 
     return (
         <div className="flex flex-col h-full mt-2 bg-slate-300 rounded-xl">
-            <hr />
+            <hr />            
+            <NavBarDashboard1 />
             <div className="flex flex-col h-full overflow-y-auto">
                 {hotelByUser?.length > 0 ? (
-                    hotelByUser?.map((element: { id: string, name: string, country: string, city: string, photo: string }) => (
+                    hotelByUser?.map((element: { id: string, name: string, country: string, city: string, photo: string, disabled: boolean }) => (
                         (
-                            <div onClick={() => navigate(`/dashboard/hoteldetail/${element.id}`)}>
+                            <div>
                                 <DashboardRow
                                     key={element.id}
                                     id={element.id}
@@ -56,6 +33,7 @@ export default function DashboardDetails() {
                                     country={element.country}
                                     city={element.city}
                                     photo={element.photo}
+                                    disabled={element.disabled}
                                 />
                             </div>
                         )

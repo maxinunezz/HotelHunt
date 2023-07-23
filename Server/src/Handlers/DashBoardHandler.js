@@ -1,4 +1,4 @@
-const { Hotel, Room, User } = require("../db");
+const { Hotel, Room, User, Booking, Auth, Rating } = require("../db");
 
 const getAllHotelsById = async (req, res) => {
 
@@ -9,7 +9,6 @@ const getAllHotelsById = async (req, res) => {
     const hotels = await Hotel.findAll({
       where: {
         userId: id,
-        disabled: false,
       },
     })
 
@@ -52,7 +51,7 @@ const UpdateRoomsByHotel = async (req, res) => {
     if (!room) {
       return res.status(404).send("Habitación no encontrada");
     }
-    
+
 
     let tuhotel;
 
@@ -95,8 +94,8 @@ const deleteRoomsByHotel = async (req, res) => {
       }
     });
     if (hotel) {
-      
-      await room.update({disabled:true})
+
+      await room.update({ disabled: true })
       await room.destroy();
 
       return res.status(200).send("Sala eliminada con éxito");
@@ -107,7 +106,7 @@ const deleteRoomsByHotel = async (req, res) => {
   } catch (error) {
     return res.status(500).send(error.message);
   }
-}
+};
 
 const restoreRoom = async (req, res) => {
   const { roomId } = req.params;
@@ -129,6 +128,7 @@ const restoreRoom = async (req, res) => {
 
 const UpdateHotelByUser = async (req, res) => {
   const { hotelId } = req.params;
+  console.log(req.body)
   try {
     const hotel = await Hotel.findOne({
       where: {
@@ -141,11 +141,11 @@ const UpdateHotelByUser = async (req, res) => {
     }
 
     await hotel.update(req.body);
-    return res.status(200).json(hotel);
+    return res.status(200).json('Hotel actualizado');
   } catch (error) {
     return res.status(500).send(error.message);
   }
-}
+};
 
 const createHotelByUser = async (req, res) => {
   try {
@@ -184,7 +184,7 @@ const createHotelByUser = async (req, res) => {
     return res.status(500).json(error.message);
   }
 
-}
+};
 
 const createRoomByHotel = async (req, res) => {
 
@@ -208,7 +208,7 @@ const createRoomByHotel = async (req, res) => {
         price,
         photo,
         floorNumber,
-        hotelCategory:hotel.hotelCategory
+        hotelCategory: hotel.hotelCategory
       });
 
       const RoomsIds = hotel.roomsId;
@@ -232,7 +232,7 @@ const createRoomByHotel = async (req, res) => {
     return res.status(500).json(error.message);
   }
 
-}
+};
 
 const deleteHotelByUser = async (req, res) => {
   const { id } = req.params;
@@ -240,14 +240,14 @@ const deleteHotelByUser = async (req, res) => {
   try {
     const hotel = await Hotel.findOne({
       where: {
-        id: id, 
+        id: id,
         userId: userData.id,
       }
     });
     if (!hotel) {
       return res.status(404).send("Hotel no encontrado");
     }
-    await hotel.update({disabled: true})
+    await hotel.update({ disabled: true })
     await hotel.destroy();
     return res.status(200).send("Hotel eliminado con éxito");
   } catch (error) {
@@ -305,28 +305,131 @@ const updateAccount = async (req, res) => {
   }
 };
 
-const getUserInfo = async(req,res) =>{
+const getUserInfo = async (req, res) => {
   const { id } = userData;
 
+
   try {
-    const userInfo = await findByPk({id: id})
-    const mailinfo = await findOne({where: { userId: id }})
+    const userInfo = await findByPk({ id: id })
+    const mailinfo = await findOne({ where: { userId: id } })
 
     const allInfo = {
-      name: userInfo.name ,
+      name: userInfo.name,
       lastName: userInfo.lastName,
       birthDate: userInfo.birthDate,
-      phoneNumber: userInfo.phoneNumber, 
+      phoneNumber: userInfo.phoneNumber,
       admin: userInfo.admin,
       email: mailinfo.email
     }
 
     return res.status(200).json(allInfo);
-    
+
   } catch (error) {
     return res.status(500).json(error);
   }
-}
+};
+
+const getAllBooking = async (req, res) => {
+  const { id } = userData;
+  let reservas = [];
+
+  try {
+    const hotels = await Hotel.findAll({
+      where: {
+        userId: id,
+      }
+    })
+    if (!hotels) {
+      return res.status(404).send("Aun no has registrado un hotel")
+    }
+
+    for (const hotel of hotels) {
+      let booking = [];
+      booking = await Booking.findAll({
+        where: {
+          hotelId: hotel.id,
+        }
+      })
+
+      if (booking.length === 0) {
+        return res.status(404).send('No tienes reservas')
+      } else {
+        for (const reserve of booking) {
+          let room = []
+          room = await Room.findByPk(reserve.roomId)
+          if (room.length === 0) {
+            return res.status(404).send('Aun no tienes habitaciones')
+          }
+          const user = await Auth.findOne({ where: { userId: id } })
+          const one_reserve = {
+            checkin: reserve.checkin,
+            checkout: reserve.checkout,
+            price: reserve.price,
+            roomName: room.name,
+            hotelName: hotel.name,
+            paymentStatus: reserve.paymentStatus,
+            userEmail: user.email,
+          }
+          reservas.push(one_reserve)
+        }
+      }
+    }
+    if (reservas.length > 0) {
+      return res.status(200).json(reservas)
+    } else {
+      return res.status(404).send('Aun no tienes reservas')
+    }
+
+
+  } catch (error) {
+    return res.status(500).json(error)
+  }
+};
+
+
+
+
+
+const getAllRating = async (req, res) => {
+  const { id } = userData;
+  let comentario = [];
+  try {
+    const hotels = await Hotel.findAll({
+      where: {
+        userId: id,
+      }
+    })
+    if (!hotels) {
+      return res.status(404).send("No exsiste el hotel")
+    }
+    for (const hotel of hotels) {
+      const ratings = await Rating.findAll({
+        where: {
+          hotelId: hotel.id,
+        }
+      });
+      if (!ratings) {
+        return res.status(404).send("No exsisten comentario")
+      }
+      for (const rating of ratings) {
+        const one_reserve = {
+          score: rating.score,
+          coment: rating.comment,
+          hotel: hotel.name
+        }
+        comentario.push(one_reserve)
+
+      }
+    }
+    if (comentario.length > 0) {
+      return res.status(200).json(comentario)
+    }else{
+      return res.status(404).send("No existen comentarios")
+    }
+  } catch (error) {
+    return res.status(500).json(error)
+  }
+};
 
 
 
@@ -343,6 +446,8 @@ module.exports = {
   deleteAccount,
   updateAccount,
   restoreRoom,
-  restoreHotel
+  restoreHotel,
+  getAllBooking,
+  getAllRating,
 };
 
