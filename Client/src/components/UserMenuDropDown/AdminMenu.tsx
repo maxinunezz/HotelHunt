@@ -2,11 +2,14 @@ import { Dropdown, Button} from '@rewind-ui/core';
 import { MouseEvent, useState } from 'react';
 import { tokenStore } from '../../Store';
 import { useNavigate } from 'react-router-dom';
-import { farewellAdminToast } from '../toast';
+import { farewellAdminToast, reserveErrorToast } from '../toast';
+import { userStore } from '../../Store/UserStore';
 
 
 const AdminMenu = () => {
     const navigate = useNavigate()
+    const hotelFavorite= userStore((state)=>state.favoriteHotel)
+    const {reset} = userStore()
     const isAdmin = tokenStore((state) => state.userState)  //análogo a UserMenu
     const [selectedOption, setSelectedOption] = useState<string | undefined>();
     const { resetToken } = tokenStore()
@@ -16,6 +19,8 @@ const AdminMenu = () => {
         resetToken()
         farewellAdminToast("Gracias y éxito en sus ventas")
         navigate('/farewell')
+        reset('favoriteHotel')
+
     }
     return (
         <div>

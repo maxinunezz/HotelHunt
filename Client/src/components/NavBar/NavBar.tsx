@@ -71,6 +71,8 @@ export default function NavBar() {
       <button onClick={handleRoomSearch} className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600">
         Habitaciones</button>
 
+		<button onClick={()=>navigate('/myfavorites')}>favorites</button>
+
 			<button
 				className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
 				onClick={handleAllHotels}

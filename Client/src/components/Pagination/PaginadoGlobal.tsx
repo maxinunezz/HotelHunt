@@ -3,8 +3,8 @@ import { Hotel } from '../../models';
 
 interface PaginadoGlobalProps {
   elementsPerPage: number;
-  elementToShow: Hotel[]; 
-  pageSet: (pageNumber: number) => void; 
+  elementToShow: Hotel[];
+  pageSet: (pageNumber: number) => void;
   currentPage: number;
 }
 
@@ -14,7 +14,9 @@ const PaginadoGlobal: React.FC<PaginadoGlobalProps> = ({
   pageSet,
   currentPage,
 }) => {
-  const totalPages = Math.ceil(elementToShow?.length / elementsPerPage);
+  const totalPages = Math.ceil(elementToShow.length / elementsPerPage);
+
+  
 
   //Obtener rango de paginas para mostrar en paginado
   const getPageRange = () => {
