@@ -72,10 +72,9 @@ export default function FormPageRoomUpdate() {
                 const servicesToBack = values.services ? values.services : currentRoomData?.services
                 const priceToBack = values.price ? values.price : currentRoomData?.price
                 const photoToBack = values.photo ? values.photo : currentRoomData?.photo
-                const disabledToBack = values.disabled ? values.disabled : currentRoomData?.disabled
 
                 const data = await axios.put(
-                    `${url}/dashboard/room/${currentRoomData?.id}`,
+                    `${url}/dashboard/room/${id}`,
                     {
                         name: nameToBack,
                         floorNumber: floorNumberToBack,
@@ -84,7 +83,7 @@ export default function FormPageRoomUpdate() {
                         services: servicesToBack,
                         price: priceToBack,
                         photo: photoToBack,
-                        disabled: disabledToBack
+                        disabled: values.disabled
                     },
                     {
                         headers: {
@@ -166,14 +165,14 @@ export default function FormPageRoomUpdate() {
                     <Formik<FormValues>
                         enableReinitialize
                         initialValues={{
-                            roomName: currentRoomData?.name || '',  
-                            floorNumber: currentRoomData?.floorNumber || '',  
-                            description: currentRoomData?.description || '',  
-                            capacity: currentRoomData?.pax || '',  
-                            services: currentRoomData?.services || [],  
-                            price: currentRoomData?.price ? currentRoomData.price.toString() : '',  
-                            photo: currentRoomData?.photo || [],  
-                            disabled: currentRoomData?.disabled || false,
+                            roomName: currentRoomData?.name || '',
+                            floorNumber: currentRoomData?.floorNumber || '',
+                            description: currentRoomData?.description || '',
+                            capacity: currentRoomData?.pax || '',
+                            services: currentRoomData?.services || [],
+                            price: currentRoomData?.price ? currentRoomData.price.toString() : '',
+                            photo: currentRoomData?.photo || [],
+                            disabled: false,
                         }}
                         onSubmit={handleSubmit}
                         validationSchema={formValidationSchema}
@@ -407,7 +406,7 @@ export default function FormPageRoomUpdate() {
                                             <FormControl.Text>Se permiten máximo 3 fotos.</FormControl.Text>
                                         )}
                                     </FormControl>
-                                    <div className="flex justify-center">
+                                    <div className="flex items-center justify-center">
                                         <FormControl.Label className="text-white items-center">
                                             Disable room
                                         </FormControl.Label>
@@ -417,7 +416,7 @@ export default function FormPageRoomUpdate() {
                                                 onChange={(event) => {
                                                     setFieldValue('disabled', event.target.checked);
                                                 }}
-                                                value={values.disabled}
+                                                checked={values.disabled}
                                                 className="form-checkbox w-6 h-6 text-blue-500"
                                             />
                                         </div>

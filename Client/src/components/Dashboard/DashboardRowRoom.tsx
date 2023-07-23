@@ -58,9 +58,9 @@ export default function DashboardRowRoom({
     const handleEdit = () => {
         navigate(`/dashboard/roomupdate/${id}`)
     };
-    return (
+    return (        
 
-        <div className="dashboard-row bg-white rounded-md p-4 mb-4">
+        <div className={`dashboard-row rounded-md p-4 mb-4 ${disabled ? 'bg-slate-400' : 'bg-white'}`}>
             Wena larvas
             <div className="grid grid-cols-7 gap-4">
                 <div className="col-span-2">
