@@ -1,79 +1,94 @@
 import { Star, User, Users, UsersFour, UsersThree } from "@phosphor-icons/react";
+import { useEffect, useRef, useState } from "react";
+import { Link } from 'react-router-dom';
 import { roomsSearchStore, roomsStore } from "../../Store";
 import NavbarDetail from "../../components/NavBarDetail/NavBarDetail";
 import RoomCard from "../../components/RoomCard/RoomCard";
-import { useFetchRooms } from "../../hooks";
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import { Button, Dropdown } from "@rewind-ui/core";
 import { filterResetToast } from "../../components/toast";
+import { useFetchRooms } from "../../hooks";
 
 const RoomFilter = () => {
-  const navigate = useNavigate();
-  useFetchRooms();
-  const allRooms = roomsStore((state) => state.rooms);
+  useFetchRooms()
+	const allRooms = roomsStore((state) => state.rooms);
   const roomsFiltered = roomsSearchStore((state) => state.roomsFilter)
   const { fetchFilterRooms, sortByPrice, reset } = roomsSearchStore()
-  const [filters, setFilters] = useState({
-    minPrice: "",
-    maxPrice: ""
-  });
-  const [checkboxValuesCategory, setCheckboxValues] = useState({
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false,
-    checkbox4: false,
-    checkbox5: false
-  });
-  const [checkboxValuesCapacity, setCheckboxCapacity] = useState({
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false,
-    checkbox4: false,
-    checkbox5: false
-  });
 
-  const handleMinPriceChange = (e) => {
-    setFilters({ ...filters, minPrice: e.target.value });
+  useEffect(() => {
+    reset(allRooms)
+  }, [allRooms]) // eslint-disable-line
+
+  const initialStates = {
+    filters: {
+      minPrice: "",
+      maxPrice: ""
+    },
+    category: {
+      checkbox1: false,
+      checkbox2: false,
+      checkbox3: false,
+      checkbox4: false,
+      checkbox5: false
+    },
+    capacity: {
+      checkbox1: false,
+      checkbox2: false,
+      checkbox3: false,
+      checkbox4: false,
+      checkbox5: false
+    }
+  }
+
+  const [filters, setFilters] = useState(initialStates.filters);
+  const [checkboxValuesCategory, setCheckboxValues] = useState(initialStates.category);
+  const [checkboxValuesCapacity, setCheckboxCapacity] = useState(initialStates.capacity);
+  const sortByRef = useRef<HTMLSelectElement | null>(null)
+
+  const handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters({ ...filters, minPrice: event.target.value });
   };
 
-  const handleMaxPriceChange = (e) => {
-    setFilters({ ...filters, maxPrice: e.target.value });
+  const handleMaxPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters({ ...filters, maxPrice: event.target.value });
   };
 
   useEffect(() => {
     applyFilters();
-  }, [filters]); // Ejecuta applyFilters cuando filters cambie
+  }, [filters]); // eslint-disable-line
 
   const applyFilters = () => {
     // Lógica para aplicar los filtros
-    if (Number(filters.maxPrice) < Number(filters.minPrice)) {
-      const maxAux = filters.minPrice;
-      const minAux = filters.maxPrice;
-      console.log("ctm ctm ctm");
+    const minPrice = Number(filters.minPrice);
+    const maxPrice = Number(filters.maxPrice);
+
+    if (minPrice > maxPrice) {
+      const maxAux = minPrice;
+      const minAux = maxPrice;
+
       setFilters({
-        minPrice: minAux,
-        maxPrice: maxAux
+        ...filters,
+        minPrice: minAux.toString(),
+        maxPrice: maxAux.toString()
       });
     }
 
     fetchFilterRooms(allRooms, filters, checkboxValuesCategory, checkboxValuesCapacity)
-
-
   };
 
 
-  const handleSortBy = async (event) => {
+  const handleSortBy = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     const sortByValue = event.target.value;
     roomsFiltered.length ? sortByPrice(roomsFiltered, sortByValue) : sortByPrice(allRooms, sortByValue)
-
-
-
   };
 
   const handleReset = () => {
     filterResetToast("Filtros reseteados")
-    reset()
+    setFilters(initialStates.filters)
+    setCheckboxValues(initialStates.category)
+    setCheckboxCapacity(initialStates.capacity)
+    if(sortByRef.current?.value){
+    sortByRef.current.value = ''
+  }
+    reset(allRooms)
   }
   
   const filteredRooms = filters.minPrice === "62" && filters.maxPrice === "62" ? [] : roomsFiltered;
@@ -86,7 +101,7 @@ const RoomFilter = () => {
       {/* Espacio para los filtros y la lista de habitaciones */}
       <div className="flex">
         {/* Filtros */}
-        <div className="dark:bg-gray-900 dark:border-gray-700 w-[500px] h-[700px] p-10 text-white mt-[20px] ml-[20px] rounded h-screen ">
+        <div className="dark:bg-gray-900 dark:border-gray-700 w-[500px] p-10 text-white mt-[20px] ml-[20px] rounded h-screen ">
           <div className="flex">
             <div className="mx-2 text-black">
               <div className="text-blue-500 font-bold">
@@ -148,6 +163,7 @@ const RoomFilter = () => {
               id="sort-by"
               className="bg-blue-500 rounded"
               onChange={handleSortBy}
+              ref={sortByRef}
             >
               <option value="">Ordenar por</option>
               <option value="price-asc">Price (ascendente)</option>

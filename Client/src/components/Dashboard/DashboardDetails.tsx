@@ -10,7 +10,7 @@ export default function DashboardDetails() {
     const token = tokenStore((state) => state.userState)
     const url = import.meta.env.VITE_URL;
 
-    const [hotelByUser, setHotelByUser] = useState()
+    const [hotelByUser, setHotelByUser] = useState<any[]>([])
 
     const getHotels = async () => {
         try {
@@ -38,7 +38,7 @@ export default function DashboardDetails() {
 
     useEffect(() => {
         getHotels()
-    }, [])
+    }, []) // eslint-disable-line
 
 
     return (

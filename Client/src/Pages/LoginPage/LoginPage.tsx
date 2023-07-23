@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import gif from './gif.gif'
-import { tokenStore } from '../../Store';
+import { UserState, tokenStore } from '../../Store';
 import { errorToast, successToast } from '../../components/toast';
 import axios from 'axios';
 import GoogleSignInButton from '../../components/Google/GoogleSignIn';
@@ -40,17 +40,19 @@ const LogingPage = () => {
 		async (values: LoginValues, helpers: FormikHelpers<LoginValues>) => {
 			try {
 				console.log('values', values);
-				const arrayAux: [] = [];
 				return await axios.post(`${URL}/user/auth`, values).then((response) => {
 					if (response.data) {
+						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+						// @ts-ignore:next-line
+						const arrayAux: UserState = [];
 						const tokenRaw = response.data.token
 						const statusadmin = response.data.admin
 						const logeado = true
 						const userData = response.data.data
-						arrayAux.push(userData)
-						arrayAux.push(tokenRaw)
-						arrayAux.push(statusadmin)
-						arrayAux.push(logeado)
+						arrayAux[0] = userData
+						arrayAux[1] = tokenRaw
+						arrayAux[2] = statusadmin
+						arrayAux[3] = logeado
 						saveInfo(arrayAux)
 					}
 					console.log("values", values);
@@ -60,7 +62,7 @@ const LogingPage = () => {
 				}
 				)
 
-			} catch (error) {
+			} catch (error: any) {
 				errorToast(error.response.data);
 				console.log(error);
 
@@ -68,7 +70,7 @@ const LogingPage = () => {
 
 			helpers.setSubmitting(false);
 		},
-		[saveInfo]
+		[saveInfo] // eslint-disable-line
 	);
 
 
@@ -153,7 +155,7 @@ const LogingPage = () => {
 												className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
 												onClick={() => setShowPassword((prevState) => !prevState)} // Alternar el estado para mostrar/ocultar contraseña
 											>
-												
+
 												{showPassword ? (
 													<Eye size={24} color="#1d6bb4" />
 												) : (

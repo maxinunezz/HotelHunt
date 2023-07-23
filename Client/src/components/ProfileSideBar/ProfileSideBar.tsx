@@ -5,11 +5,12 @@ import { farewellAdminToast, farewellToast } from '../toast';
 import { MouseEvent } from 'react';
 
 export default function ProfileSideBar() {
+    const userData = tokenStore((state) => state.userState)
     const navigate = useNavigate()
     const isAdmin = tokenStore((state) => state.userState)
     const { resetToken } = tokenStore()
 
-    const role = isAdmin[0].admin === 'admin'
+    const role = userData[2] === 'admin';
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
@@ -40,7 +41,7 @@ export default function ProfileSideBar() {
                 <nav className="-mx-3 space-y-6">
 
                     <span className="ml-3 my-8 py-3">
-                        <button onClick={() => navigate(-1)} type="button" className="flex items-center text-slate-100 text-m hover:underline">
+                        <button onClick={() => navigate('/')} type="button" className="flex items-center text-slate-100 text-m hover:underline">
                             <span className="inline-flex leading-none rotate-180 transform">
                                 <svg width="24" height="24" className="pointer-events-none max-h-full max-w-full">
                                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2">

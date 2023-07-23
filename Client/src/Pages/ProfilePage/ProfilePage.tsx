@@ -1,10 +1,10 @@
 import { tokenStore } from "../../Store";
 import ProfileSideBar from "../../components/ProfileSideBar/ProfileSideBar";
 
+
 const AdminProfilePage = () => {
   const userData = tokenStore((state) => state.userState)
   console.log(userData);
-
   const user = {
     name: `${userData[0].name}`,
     lastName: `${userData[0].lastName}`,
@@ -12,7 +12,7 @@ const AdminProfilePage = () => {
     phoneNumber: `${userData[0].phoneNumber}`,
   };
 
-  const isAdmin = userData[0].admin === 'admin';
+  const isAdmin = userData[2] === 'admin';
 
   return (
     <div className="flex-auto">

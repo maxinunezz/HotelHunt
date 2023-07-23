@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { create } from 'zustand';
 
 interface Room {
@@ -22,9 +21,9 @@ type States = {
 };
 
 type Actions = {
-    fetchFilterRooms: (arrayToFilter: Room[], price: object, category: object, capacity: object) => void;
+    fetchFilterRooms: (arrayToFilter: Room[], price: {minPrice: string, maxPrice: string}, category: object, capacity: object) => void;
     sortByPrice: (elements: Room[], sortBy: string) => void;
-    reset: () => void;
+    reset: (rooms: Room[]) => void;
 };
 
 const initialState: States = {
@@ -49,7 +48,7 @@ export const roomsSearchStore = create<States & Actions>((set) => ({
 
         // filtro de category
         const selectedCategories = Object.entries(category)
-            .filter(([key, value]) => value)
+            .filter(([,value]) => value)
             .map(([key]) => Number(key.replace("checkbox", "")));
         if (selectedCategories.length > 0) {
             filteredRooms = filteredRooms.filter((room) =>
@@ -59,7 +58,7 @@ export const roomsSearchStore = create<States & Actions>((set) => ({
 
         // filtro de capacity
         const selectedCapacities = Object.entries(capacity)
-            .filter(([key, value]) => value)
+            .filter(([,value]) => value)
             .map(([key]) => Number(key.replace("checkbox", "")));
         if (selectedCapacities.length > 0) {
             filteredRooms = filteredRooms.filter((room) =>
@@ -99,7 +98,10 @@ export const roomsSearchStore = create<States & Actions>((set) => ({
     },
 
 
-    reset: () => {
-        set(initialState);
+    reset: (rooms) => {
+        set((state) => ({
+            ...state,
+            roomsFilter: rooms
+        }));
     },
 }));

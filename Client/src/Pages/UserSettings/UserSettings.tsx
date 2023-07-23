@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { tokenStore } from "../../Store";
+import { tokenStore, UserState } from "../../Store";
 import { userStore } from "../../Store/UserStore";
 import ProfileSideBar from "../../components/ProfileSideBar/ProfileSideBar";
 import { userDeleteToast, userUpdateToast } from "../../components/toast";
@@ -10,8 +10,8 @@ const url = import.meta.env.VITE_URL;
 export default function AdminSetting() {
     const navigate = useNavigate()
     const userData = tokenStore((state) => state.userState)
-    const { deleteAccount, reset } = userStore()
-    const { resetToken } = tokenStore()
+    const { reset } = userStore()
+    const { resetToken, saveInfo } = tokenStore()
 
     const user = {
         name: `${userData[0].name}`,
@@ -21,9 +21,50 @@ export default function AdminSetting() {
         email: `${userData[0].email}`
     };
 
+    const [input, setInput] = useState({
+        firstName: "",
+        lastName: "",
+        birthDate: "",
+        phoneNumber: "",
+        isChecked: false,
+        nuevo_password: "",
+        password: "",
+        isCheckedValue: "normal",
+        nuevo_email: "",
+        email: ""
+    });
+
+    const [errors, setErrors] = useState<{ [key: string]: string }>({})
+
+    const validation = (inputObject: typeof input) => {
+        const errors: { [key: string]: string } = {};
+
+        if (!inputObject.firstName || !/^(?:[A-Z][a-zA-Z]*)(?: [A-Z][a-zA-Z]*){0,2}$/.test(inputObject.firstName)) {
+            errors.firstName = "Debe tener un nombre válido con la primera letra mayúscula y permitir nombres compuestos de hasta 255 caracteres.";
+        }
+
+        if (!inputObject.lastName || !/^(?:[A-Z][a-zA-Z]*)(?:-[A-Z][a-zA-Z]*){0,1}$/.test(inputObject.lastName)) {
+            errors.lastName = "Debe tener un apellido válido con la primera letra mayúscula. Permite compuestos separados por un guión (-)";
+        }
+
+        if (!inputObject.password || inputObject.password.length < 6) {
+            errors.password = "Debe tener una contraseña válida con al menos 6 caracteres.";
+        }
+
+        if (!inputObject.email || inputObject.email.length === 0 || inputObject.email !== user.email) {
+            errors.email = "Debe ingresar su email actual";
+        }
+
+        if (!inputObject.phoneNumber || !/^\d{10}$/.test(inputObject.phoneNumber)) {
+            errors.phoneNumber = "Debe tener un número de teléfono válido de 10 dígitos.";
+        }
+
+        return errors;
+    };
+
     const handleDelete = async () => {
         try {
-            const data = await axios.delete(
+            await axios.delete(
                 `${url}/dashboard/user`,
                 {
                     headers: {
@@ -31,53 +72,16 @@ export default function AdminSetting() {
                     },
                 }
             );
-            console.log(data);
-
             userDeleteToast('Lamentamos verte partir')
             reset()
             resetToken()
             navigate('/')
         } catch (error) {
             console.log(error);
-
         }
     }
 
-    const [input, setInput] = useState({
-        firstName: "",
-        lastName: "",
-        birthDate: "",
-        phoneNumber: "",
-        isChecked: false,
-        password: "",
-        isCheckedValue: "normal",
-
-    });
-    const [errors, setErrors] = useState({})
-    const validation = (input) => {
-        let errors = {};
-
-        if (!input.firstName || !/^(?:[A-Z][a-zA-Z]*)(?: [A-Z][a-zA-Z]*){0,2}$/.test(input.firstName)) {
-            errors.firstName = "Debe tener un nombre válido con la primera letra mayúscula y permitir nombres compuestos de hasta 255 caracteres.";
-        }
-
-        if (!input.lastName || !/^(?:[A-Z][a-zA-Z]*)(?:-[A-Z][a-zA-Z]*){0,1}$/.test(input.lastName)) {
-            errors.lastName = "Debe tener un apellido válido con la primera letra mayúscula. Permite compuestos separados por un guión (-)";
-        }
-
-        if (!input.password || input.password.length < 6) {
-            errors.password = "Debe tener una contraseña válida con al menos 6 caracteres.";
-        }
-
-        if (!input.phoneNumber || !/^\d{10}$/.test(input.phoneNumber)) {
-            errors.phoneNumber = "Debe tener un número de teléfono válido de 10 dígitos.";
-        }
-
-        return errors;
-    };
-
-
-    const handleChange = (event) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 
         setInput({
             ...input,
@@ -87,12 +91,15 @@ export default function AdminSetting() {
             ...input,
             [event.target.name]: event.target.value
         }))
-        console.log(input);
     };
 
     const handleUpdate = async () => {
 
-        const data = await axios.put(
+        if (input.email.length === 0 || input.password.length === 0) {
+            return userUpdateToast('Ingrese su email y contraseña')
+        }
+
+        const { data } = await axios.put(
             `${url}/dashboard/user`,
             {
                 name: input.firstName,
@@ -100,7 +107,8 @@ export default function AdminSetting() {
                 birthDate: input.birthDate,
                 phoneNumber: input.phoneNumber,
                 admin: input.isCheckedValue,
-                password: input.password,
+                email: input.nuevo_email,
+                password: input.nuevo_password,
             },
             {
                 headers: {
@@ -108,8 +116,34 @@ export default function AdminSetting() {
                 },
             }
         );
-        userUpdateToast("UserData updated!")
-        navigate('/')
+
+        if (data?.error) {
+            userUpdateToast(data.error)
+        } else if (data.message) {
+            const values = {
+                email: input.email,
+                password: input.password
+            }
+            await axios.post(`${url}/user/auth`, values).then((response) => {
+                if (response.data) {
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore:next-line
+                    const arrayAux: UserState = [];
+                    const tokenRaw = response.data.token
+                    const statusadmin = response.data.admin
+                    const logeado = true
+                    const userData = response.data.data
+                    arrayAux[0] = userData
+                    arrayAux[1] = tokenRaw
+                    arrayAux[2] = statusadmin
+                    arrayAux[3] = logeado
+                    saveInfo(arrayAux)
+                }
+            }
+            )
+            userUpdateToast("UserData updated!")
+            navigate('/')
+        }
     }
 
     return (
@@ -171,13 +205,39 @@ export default function AdminSetting() {
                             <span className="text-gray-700 font-semibold">Email</span>
                             <input
                                 type="text"
-                                name="email"
+                                name="nuevo_email"
                                 className="h-11 w-full px-3 border border-solid rounded text-grey-900 text-l 2xl:rounded-sm border-grey-500"
-                                placeholder="Tu email"
+                                placeholder="Ingrese su nuevo Email (opcional)"
                                 aria-invalid="false"
-                                value={user.email}
                             />
                         </label>
+                        {errors.nuevo_email && <p className="text-red-700">{errors.nuevo_email}</p>}
+
+                        <label className="block mb-4">
+                            <span className="text-gray-700 font-semibold">Email</span>
+                            <input
+                                type="text"
+                                name="email"
+                                className="h-11 w-full px-3 border border-solid rounded text-grey-900 text-l 2xl:rounded-sm border-grey-500"
+                                placeholder="Email actual (requerido)"
+                                aria-invalid="false"
+                                onChange={(event) => handleChange(event)}
+                            />
+                        </label>
+                        {errors.email && <p className="text-red-700">{errors.email}</p>}
+
+                        <label className="block mb-4">
+                            <span className="text-gray-700 font-semibold">Password</span>
+                            <input
+                                type="password"
+                                name="nuevo_password"
+                                className="h-11 w-full px-3 border border-solid rounded text-grey-900 text-l 2xl:rounded-sm border-grey-500"
+                                placeholder="Ingrese su nueva password (opcional)"
+                                aria-invalid="false"
+                                onChange={(event) => handleChange(event)}
+                            />
+                        </label>
+                        {errors.nuevo_password && <p className="text-red-700">{errors.nuevo_password}</p>}
 
                         <label className="block mb-4">
                             <span className="text-gray-700 font-semibold">Password</span>
@@ -185,7 +245,7 @@ export default function AdminSetting() {
                                 type="password"
                                 name="password"
                                 className="h-11 w-full px-3 border border-solid rounded text-grey-900 text-l 2xl:rounded-sm border-grey-500"
-                                placeholder="Tu password"
+                                placeholder="Password actual (requerido)"
                                 aria-invalid="false"
                                 onChange={(event) => handleChange(event)}
                             />
@@ -205,13 +265,13 @@ export default function AdminSetting() {
                         <div className="flex justify-between">
                             <button
                                 onClick={handleUpdate}
-                                className= "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                                
+                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-300"
+                                disabled={(input.email.length === 0 || input.password.length === 0) || Object.keys(errors).length > 0}
                             >
                                 Actualizar datos
                             </button>
-                            <button onClick={handleDelete} className="inline-flex ml-4 text-gray-700 text-sm py-2 px-4 border border-gray-300 rounded-md hover:bg-gray-100">
-                                Delete account
+                            <button onClick={handleDelete} className="inline-flex ml-4 text-white text-sm py-2 px-4 border border-red-500 bg-red-700 rounded-md hover:bg-red-600">
+                                Borrar Cuenta
                             </button>
                         </div>
                     </div>
