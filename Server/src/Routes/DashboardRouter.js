@@ -11,7 +11,7 @@ dashBoardRouter.get('/', authMiddleware,AdminCheck, getAllHotelsById);
 dashBoardRouter.get('/room/:hotelId',authMiddleware, AdminCheck, getRoomsByHotel);
 dashBoardRouter.get('/user', authMiddleware, getUserInfo);
 dashBoardRouter.get("/booking", authMiddleware, AdminCheck, getAllBooking);
-dashBoardRouter.get("/rating/:userId", getAllRating)
+dashBoardRouter.get("/rating",authMiddleware,AdminCheck, getAllRating)
 dashBoardRouter.post('/room/:hotelId', authMiddleware, AdminCheck, createRoomByHotel);
 dashBoardRouter.post('/hotel',authMiddleware, AdminCheck,createHotelByUser);
 dashBoardRouter.put('/room/:roomId', authMiddleware,AdminCheck, UpdateRoomsByHotel);

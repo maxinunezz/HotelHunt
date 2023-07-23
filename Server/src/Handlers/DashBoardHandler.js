@@ -9,7 +9,6 @@ const getAllHotelsById = async (req, res) => {
     const hotels = await Hotel.findAll({
       where: {
         userId: id,
-        disabled: false,
       },
     })
 
@@ -129,6 +128,7 @@ const restoreRoom = async (req, res) => {
 
 const UpdateHotelByUser = async (req, res) => {
   const { hotelId } = req.params;
+  console.log(req.body)
   try {
     const hotel = await Hotel.findOne({
       where: {
@@ -141,7 +141,7 @@ const UpdateHotelByUser = async (req, res) => {
     }
 
     await hotel.update(req.body);
-    return res.status(200).json(hotel);
+    return res.status(200).json('Hotel actualizado');
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -339,7 +339,7 @@ const getAllBooking = async (req, res) => {
         userId: id,
       }
     })
-    if(!hotels){
+    if (!hotels) {
       return res.status(404).send("Aun no has registrado un hotel")
     }
 
@@ -350,14 +350,14 @@ const getAllBooking = async (req, res) => {
           hotelId: hotel.id,
         }
       })
-      
-      if (booking.length === 0){
+
+      if (booking.length === 0) {
         return res.status(404).send('No tienes reservas')
-      }else{
+      } else {
         for (const reserve of booking) {
           let room = []
           room = await Room.findByPk(reserve.roomId)
-          if(room.length === 0){
+          if (room.length === 0) {
             return res.status(404).send('Aun no tienes habitaciones')
           }
           const user = await Auth.findOne({ where: { userId: id } })
@@ -374,13 +374,13 @@ const getAllBooking = async (req, res) => {
         }
       }
     }
-    if(reservas.length > 0){
+    if (reservas.length > 0) {
       return res.status(200).json(reservas)
-    }else{
+    } else {
       return res.status(404).send('Aun no tienes reservas')
     }
 
-    
+
   } catch (error) {
     return res.status(500).json(error)
   }
@@ -390,43 +390,42 @@ const getAllBooking = async (req, res) => {
 
 
 
-const getAllRating = async (req,res) => {
+const getAllRating = async (req, res) => {
   const { id } = userData;
   let comentario = [];
   try {
-    const ratings = await Hotel.findAll({
+    const hotels = await Hotel.findAll({
       where: {
         userId: id,
       }
     })
-    if(!ratings) {
-      res.status(404).send("No exsiste el hotel")
+    if (!hotels) {
+      return res.status(404).send("No exsiste el hotel")
     }
-
-    for (const rating of ratings) {
-      const coment = await Rating.findAll({
+    for (const hotel of hotels) {
+      const ratings = await Rating.findAll({
         where: {
-          hotelId: rating.id,
+          hotelId: hotel.id,
         }
       });
-        if(!coment) {
-          res.status(404).send("No exsisten comentario")
-        }
-      for(const reserve of coment) {
-        const hotel = await Hotel.findByPk(reserve.hotelId)
-        const user = await Auth.findOne({where: {userId: id}})
+      if (!ratings) {
+        return res.status(404).send("No exsisten comentario")
+      }
+      for (const rating of ratings) {
         const one_reserve = {
-          score: reserve.score,
-          commet: reserve.comment,
-          userId: user.id,
-          hotelId: hotel.id 
+          score: rating.score,
+          coment: rating.comment,
+          hotel: hotel.name
         }
         comentario.push(one_reserve)
 
       }
     }
-    
-    res.status(200).json(comentario)
+    if (comentario.length > 0) {
+      return res.status(200).json(comentario)
+    }else{
+      return res.status(404).send("No existen comentarios")
+    }
   } catch (error) {
     return res.status(500).json(error)
   }

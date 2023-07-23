@@ -23,7 +23,7 @@ export default function ComentsDashboard() {
 
     const getRatings = async () => {
         try {
-            const response = await axios.get(`${url}/dashboard/booking`, {
+            const response = await axios.get(`${url}/dashboard/rating`, {
                 headers: {
                     authorization: `Bearer ${token[1]}`
                 }
@@ -69,16 +69,16 @@ export default function ComentsDashboard() {
                                             {rating.hotel}
                                         </td>
                                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {rating.score}
+                                            {rating.coments}
                                         </td>
                                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {rating.coments}
+                                            {rating.score}
                                         </td>
                                     </tr>
                                 ))) : (
                                     <tr>
                                         <td
-                                            colSpan={6} // Indicar el número de columnas para ocupar en la tabla
+                                            colSpan={6} 
                                             className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                                         >
                                             {error}
