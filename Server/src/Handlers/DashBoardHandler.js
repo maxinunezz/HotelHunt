@@ -1,4 +1,4 @@
-const { Hotel, Room, User, Booking, Auth } = require("../db");
+const { Hotel, Room, User, Booking, Auth, Rating } = require("../db");
 
 const getAllHotelsById = async (req, res) => {
 
@@ -388,6 +388,52 @@ const getAllBooking = async (req, res) => {
 
 
 
+
+
+const getAllRating = async (req,res) => {
+  const { id } = userData;
+  let comentario = [];
+  try {
+    const ratings = await Hotel.findAll({
+      where: {
+        userId: id,
+      }
+    })
+    if(!ratings) {
+      res.status(404).send("No exsiste el hotel")
+    }
+
+    for (const rating of ratings) {
+      const coment = await Rating.findAll({
+        where: {
+          hotelId: rating.id,
+        }
+      });
+        if(!coment) {
+          res.status(404).send("No exsisten comentario")
+        }
+      for(const reserve of coment) {
+        const hotel = await Hotel.findByPk(reserve.hotelId)
+        const user = await Auth.findOne({where: {userId: id}})
+        const one_reserve = {
+          score: reserve.score,
+          commet: reserve.comment,
+          userId: user.id,
+          hotelId: hotel.id 
+        }
+        comentario.push(one_reserve)
+
+      }
+    }
+    
+    res.status(200).json(comentario)
+  } catch (error) {
+    return res.status(500).json(error)
+  }
+};
+
+
+
 module.exports = {
   getAllHotelsById,
   getRoomsByHotel,
@@ -402,6 +448,7 @@ module.exports = {
   updateAccount,
   restoreRoom,
   restoreHotel,
-  getAllBooking
+  getAllBooking,
+  getAllRating,
 };
 
