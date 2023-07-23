@@ -1,19 +1,27 @@
-import DashboardDetails from "../../components/Dashboard/DashboardDetails";
-import DashboardHeader from "../../components/Dashboard/DashboardHeader";
-import NavBarDashboard1 from "../../components/Dashboard/NavBarDashboard1";
+import SideBarDash from "../../components/DashboardSide/SideBarDash"
+import { DashStore } from "../../Store";
+import DashboardHotel from "../../components/Dashboard/DashboardHotels";
 
-const DashBoardPage = () => {
+const DashBoardPage = () => { 
+    const { coments, hotels } = DashStore((state)=> state)
+
+    const render = () => {
+
+        if(coments === true){
+            return // componente coments
+        }else if(hotels === true){
+            return DashboardHotel();
+        }else{
+            return // component reservs
+        }
+    }
+
     return (
-        <div className="flex bg-slate-100 h-full overflow-hidden">
-            <div className="flex flex-col flex-1">
-                <div className="p-4">
-                    <DashboardHeader />
-                </div>
-                <div className="flex-1 bg-white p-4 flex flex-col">
-                    <NavBarDashboard1 />
-                    <div className="mt-4">
-                        <DashboardDetails />
-                    </div>
+        <div className="flex-auto">
+            <div className="flex">
+                <SideBarDash />
+                <div>
+                    {render()}
                 </div>
             </div>
         </div>

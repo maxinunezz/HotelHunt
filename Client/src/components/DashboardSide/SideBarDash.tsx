@@ -1,25 +1,38 @@
-import { CallBell, ClipboardText, Gear, SignOut, User } from '@phosphor-icons/react';
+import { ClipboardText, Gear, SignOut, User } from '@phosphor-icons/react';
 import { useNavigate } from 'react-router-dom';
 import { tokenStore } from '../../Store';
-import { farewellAdminToast, farewellToast } from '../toast';
+import { farewellAdminToast } from '../toast';
 import { MouseEvent } from 'react';
+import { DashStore } from '../../Store';
 
 export default function ProfileSideBar() {
     const navigate = useNavigate()
-    const isAdmin = tokenStore((state) => state.userState)
+    const { setHotels, setReservs, setComents} = DashStore();
     const { resetToken } = tokenStore()
 
-    const role = isAdmin[0].admin === 'admin'
+
+    const setRender = (arg:String) => {
+        if(arg === "coments"){
+            setComents(true);
+            setHotels(false);
+            setReservs(false)
+        }
+        else if(arg === "reserves"){
+            setReservs(true);
+            setHotels(false);
+            setReservs(false);
+        }else {
+            setHotels(true);
+            setReservs(false);
+            setComents(false);
+        }
+    }
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         resetToken()
-        role ? (
-            farewellAdminToast("Gracias y éxito en sus ventas")
-        ) : (
-            farewellToast("Adiós y buena suerte!")
-        )
+        farewellAdminToast("Gracias y éxito en sus ventas")
         navigate('/farewell')
     }
 
@@ -58,7 +71,7 @@ export default function ProfileSideBar() {
 
                     <div className="space-y-3">
                         <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
-                            cuenta
+                            Panel de Administración
                         </label>
                         <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             <div className="w-5 h-5">
@@ -67,9 +80,9 @@ export default function ProfileSideBar() {
 
                             <span
                                 className="mx-2 text-sm font-medium"
-                                onClick={() => navigate(`/profile/${isAdmin[0].name}+${isAdmin[0].lastName}`)}
+                                onClick={() => setRender("hotels")}
                             >
-                                Usuario
+                                Hoteles
                             </span>
                         </a>
                     </div>
@@ -79,19 +92,11 @@ export default function ProfileSideBar() {
                             contenido
                         </label>
                         <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
-                            {role ? (
-                                <><div className="w-5 h-5">
-                                    <ClipboardText size={20} color="#fffafa" />
-                                </div><span className="mx-2 text-sm font-medium" onClick={() => navigate('/profile/reservas')}>
-                                        Reservas
-                                    </span></>
-                            ) : (
-                                <><div className="w-5 h-5">
-                                    <CallBell size={20} color="#fffafa" />
-                                </div><span className="mx-2 text-sm font-medium" onClick={() => navigate('/profile/reservas')}>
-                                        Mis Reservas
-                                    </span></>
-                            )}
+                            <><div className="w-5 h-5">
+                                <ClipboardText size={20} color="#fffafa" />
+                            </div><span className="mx-2 text-sm font-medium" onClick={() => setRender("reserves")}>
+                                    Reservas
+                                </span></>
                         </a>
                     </div>
 
@@ -105,8 +110,8 @@ export default function ProfileSideBar() {
                                 <Gear size={20} color="#fffafa" />
                             </div>
 
-                            <span className="mx-2 text-sm font-medium" onClick={() => navigate('/profile/configuracion')}>
-                                Configuración
+                            <span className="mx-2 text-sm font-medium" onClick={() => setRender("coments")}>
+                                Comentarios
                             </span>
                         </a>
                     </div>
@@ -124,7 +129,7 @@ export default function ProfileSideBar() {
                 </nav>
 
                 <div>
-                    <p className=" text-xs text-white ">© 2022 - Todos los derechos reservados</p>
+                    <p className=" text-xs text-white ">© 2023 - Todos los derechos reservados</p>
                 </div>
 
             </div>

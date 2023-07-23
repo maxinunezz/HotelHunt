@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react'
 import { tokenStore } from "../../Store";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import  NavBarDashboard1  from "./NavBarDashboard1"
 
-export default function DashboardDetails() {
+export default function DashboardHotel() {
     const { getHotelByUser } = tokenStore()
     const navigate = useNavigate()
     const token = tokenStore((state) => state.userState)
@@ -30,7 +31,7 @@ export default function DashboardDetails() {
                 getHotelByUser(response.data);
             }
         } catch (error) {
-            console.log(error);
+            console.log(error);//aca va un toast
 
         }
     }
@@ -43,7 +44,8 @@ export default function DashboardDetails() {
 
     return (
         <div className="flex flex-col h-full mt-2 bg-slate-300 rounded-xl">
-            <hr />
+            <hr />            
+            <NavBarDashboard1 />
             <div className="flex flex-col h-full overflow-y-auto">
                 {hotelByUser?.length > 0 ? (
                     hotelByUser?.map((element: { id: string, name: string, country: string, city: string, photo: string }) => (

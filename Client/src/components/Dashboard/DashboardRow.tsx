@@ -28,8 +28,6 @@ export default function DashboardRow({
         setShowConfirmDialog(true);
     };
 
-    const { getHotelByUser } = tokenStore();
-
     const confirmDelete = async () => {
         try {
             const data = await axios.delete(
@@ -56,7 +54,6 @@ export default function DashboardRow({
     };
 
     const handleEdit = () => {
-        // Acción de edición
         navigate(`/dashboard/hotelupdate/${id}`)
     };
 
