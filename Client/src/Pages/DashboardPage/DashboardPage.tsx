@@ -1,28 +1,31 @@
-import SideBarDash from "../../components/DashboardSide/SideBarDash"
+import SideBarDash from "../../components/DashboardSide/SideBarDash";
 import { DashStore } from "../../Store";
 import DashboardHotel from "../../components/Dashboard/DashboardHotels";
+import ReservesDashboard from "../../components/Dashboard/DashboardReserves";
+import ComentsDashboard from "../../components/Dashboard/DashboardComents";
+import { useEffect, useState } from "react";
 
 const DashBoardPage = () => { 
-    const { coments, hotels } = DashStore((state)=> state)
+    const { coments, hotels, reserves } = DashStore((state)=> state)
+    const [renderComponent, setRenderComponent] = useState<React.ReactNode>(null);
 
-    const render = () => {
-
-        if(coments === true){
-            return // componente coments
-        }else if(hotels === true){
-            return DashboardHotel();
-        }else{
-            return // component reservs
+    useEffect(() => {
+        if (coments === true) {
+          setRenderComponent(< ComentsDashboard/>);
+        } else if (hotels === true) {
+          setRenderComponent(<DashboardHotel />);
+        } else if (reserves === true) {
+          setRenderComponent(<ReservesDashboard />);
+        } else {
+          setRenderComponent(<div>No se seleccionó ninguna opción.</div>);
         }
-    }
+      }, [coments, hotels, reserves]);
 
     return (
         <div className="flex-auto">
             <div className="flex">
                 <SideBarDash />
-                <div>
-                    {render()}
-                </div>
+                <div>{renderComponent}</div>
             </div>
         </div>
 

@@ -18,9 +18,9 @@ export default function ProfileSideBar() {
             setReservs(false)
         }
         else if(arg === "reserves"){
-            setReservs(true);
             setHotels(false);
-            setReservs(false);
+            setReservs(true);
+            setComents(false);
         }else {
             setHotels(true);
             setReservs(false);
