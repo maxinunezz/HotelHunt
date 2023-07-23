@@ -12,14 +12,12 @@ async function fetchHotelsData() {
   }
 }
 
-async function getAllRating () {
+async function getAllRating() {
   try {
     const response = await axios.get("http://localhost:5000/ratings");
     const ratings = response.data;
     return ratings;
-  } catch (error) {
-    
-  }
+  } catch (error) {}
 }
 
 async function loadusers() {
@@ -61,7 +59,7 @@ async function firstload() {
         email,
         password,
       } = user;
-      let adminvalue = ""
+      let adminvalue = "";
       if (admin) {
         adminvalue = "admin";
       }
@@ -88,7 +86,17 @@ async function firstload() {
     }
 
     for (const hotel of hotels) {
-      const { id, name, description, photo, city, country, userId, hotelCategory, services } = hotel;
+      const {
+        id,
+        name,
+        description,
+        photo,
+        city,
+        country,
+        userId,
+        hotelCategory,
+        services,
+      } = hotel;
       const hotelcreated = await Hotel.create({
         id,
         name,
@@ -105,19 +113,27 @@ async function firstload() {
     }
 
     for (const rating of ratings) {
-      const { userId, score, comment, hotelId} = rating;
+      const { userId, score, comment, hotelId } = rating;
       const ratingcreated = await Rating.create({
         userId,
-        score, 
-        comment, 
+        score,
+        comment,
         hotelId,
       });
       await Promise.all([ratingcreated]);
     }
 
     for (const room of rooms) {
-      const { name, description, photo, pax, hotelId, services, floorNumber, price } =
-        room;
+      const {
+        name,
+        description,
+        photo,
+        pax,
+        hotelId,
+        services,
+        floorNumber,
+        price,
+      } = room;
       const newRoom = await Room.create({
         name,
         description,
@@ -131,8 +147,8 @@ async function firstload() {
       const hotel = await Hotel.findByPk(hotelId);
       const RoomsIds = hotel.roomsId;
       await newRoom.update({
-        hotelCategory: hotel.hotelCategory
-      })
+        hotelCategory: hotel.hotelCategory,
+      });
       RoomsIds.push(newRoom.id);
 
       await Hotel.update(

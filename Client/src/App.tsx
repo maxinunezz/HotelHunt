@@ -21,6 +21,7 @@ import FormPagePass from './Pages/RecuperacionPassword/FormPass';
 import AddRatingPage from './Pages/AddRatingPage/AddRatingPage';
 import FormPageRoomUpdate from './Pages/FormPageR/FormPageRoomUpdate';
 import { useEffect } from 'react';
+import FavoritePage from './Pages/FavoritePage/FavoritePage';
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
 				<Route path="/RecuPassword" element={<RecuPassword/>}></Route>
 				<Route path='/SetNewPass' element={<FormPagePass/>}></Route>
 				<Route path="/addcomment/:hotelId" element={<AddRatingPage />}></Route>
+        <Route path="/myfavorites" element={<FavoritePage />}></Route>
 			</Routes>
 		</div>
 	);
