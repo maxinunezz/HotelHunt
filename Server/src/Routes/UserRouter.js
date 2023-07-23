@@ -26,7 +26,7 @@ userRouter.put("/:id", authMiddleware, SuperAdminCheck, updateUser);
 userRouter.get("/askpass/:email", askForPass);
 userRouter.get("/validateAsk/:token", validateToken);
 userRouter.put("/updatePass", authMiddleware, recoveryPass);
-userRouter.post("/favorites/:id", authMiddleware, handleFavorite);
-userRouter.get("/favorites/:id", authMiddleware, getUserFavorites);
+userRouter.post("/favorites/", authMiddleware, handleFavorite);
+userRouter.get("/favorites/", authMiddleware, getUserFavorites);
 
 module.exports = userRouter;

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Hotel } from "../../models";
 import { Link } from "react-router-dom";
 import { userStore } from "../../Store/UserStore";
+import { favoriteStore } from "../../Store/FavoriteStore";
 const url = import.meta.env.VITE_URL;
 
 interface CardProps {
@@ -30,8 +31,11 @@ const Card: React.FC<Hotel> = ({
 }) => {
 
   const hotelFavorite = userStore((state)=>state.favoriteHotel)
-  const {  addFavorite, getFavorite } = userStore();
+  const hotels = hotelStore((state)=>state.hotels)
+  const {  addFavorite } = userStore();
+  const {  setHotelFavorites} = favoriteStore();
   const token = tokenStore((state)=>state.userState)
+  const {favorites} = favoriteStore(state=>state)
 
 
   const renderStars = (rating: number) => {
@@ -71,26 +75,34 @@ const Card: React.FC<Hotel> = ({
 
     return icons;
   };
+   
+
   
- const isFav = hotelFavorite.some((favHotel:any) => favHotel.id === id);
+
 
  
-  const handleFavorite = () => {
+
+ const isFav = hotelFavorite.some((favHotel:any) => favHotel == id);
+
+  const handleFavorite = async () => {
    
     const info ={
       hotelId: id
     }
 
-    console.log(info);
-    
-
-      addFavorite(info, token[1]);
-
+      await addFavorite(info, token[1]);
+     
+     
   };
 
+ 
+ 
+useEffect(()=>{
+const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
 
-  
-
+   setHotelFavorites(hotelFavorites)
+    
+}, [hotelFavorite])
   
   
 
@@ -150,7 +162,7 @@ const Card: React.FC<Hotel> = ({
           </div>
           <div className="flex justify-end">
        
-          <button className=" py-2 px-4" onClick={handleFavorite}>{isFav ? "💚" : "🤍"}</button>
+          <button className=" py-2 px-4" onClick={handleFavorite}>{isFav? "💙" : "🤍"}</button>
           <Link to={`/hotelpage/${id}`} key={id}>
             <div>
               <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">

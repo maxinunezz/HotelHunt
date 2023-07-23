@@ -7,7 +7,7 @@ type States = {
   hotels: Hotel[];
   currentPage: number;
   pageNumbers: number[];
-  favoriteHotel: Hotel[];
+
 };
 
 type Actions = {
@@ -23,7 +23,7 @@ const initialState: States = {
   hotels: [],
   currentPage: 1,
   pageNumbers: [],
-  favoriteHotel: [],
+
 };
 
 export const hotelStore = create<States & Actions>((set) => ({
@@ -44,6 +44,7 @@ export const hotelStore = create<States & Actions>((set) => ({
       currentPage: pageNum,
     }));
   },
+  
   orderByName: (array, event) => {
     if (event === "ASC") {
       const arrayAux = array.sort(function (a, b) {

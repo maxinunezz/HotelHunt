@@ -14,8 +14,8 @@ type Actions = {
   reserveRoomPayment: (data: []) => Promise<void>;
   roomPayment: (data: {}, token:string) => Promise<void>;
   addFavorite: (hotelId:any, userData:any) => Promise<void>;
-  getFavorite: (hotel:any) => Promise<void> ;
-  reset: () => void;
+  getFavorite: (userData:any) => Promise<void> ;
+  reset: (stateKey: keyof States) => void;
 };
 
 const initialState: States = {
@@ -41,24 +41,38 @@ export const userStore = create<States & Actions>((set) => ({
           },
         }
       )
+
+      
+      
       set((state)=>({...state,
-      favoriteHotel:[...state.favoriteHotel, ]
+      favoriteHotel:data
     }))
     } catch (error) {
-      
+      console.log(error);
     }
     
       },
     
-      getFavorite: async (hotel)=>{
-    
-    
+      getFavorite: async (userData)=>{
         try {
-          set((state)=>({...state,
-          favoriteHotel:[...state.favoriteHotel.filter(hotels=> hotels.id !== hotel)]
-        }))
-        } catch (error) {
+
           
+         const { data } = await axios.get(
+          `${url}/user/favorites`,
+         {
+           headers: {
+             authorization: `Bearer ${userData}`,
+           },
+         })
+
+         
+
+          set(()=>({
+          favoriteHotel:data
+        }))
+
+        } catch (error) {
+          console.log(error);
         }
     
         
@@ -73,8 +87,11 @@ export const userStore = create<States & Actions>((set) => ({
     }
   },
 
-  reset: () => {
-    set(initialState);
+  reset: (stateKey) => {
+    set((state) => ({
+      ...state,
+      [stateKey]: initialState[stateKey],
+    }));
   },
 
   roomPayment: async (info:any, token:any) => {

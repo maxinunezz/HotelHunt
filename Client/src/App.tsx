@@ -20,6 +20,7 @@ import ShoppingCartPage from './Pages/ShoppingCartPage/ShoppingCartPage';
 import CheckoutTransitionPage from './Pages/CheckoutTransitionPage/CheckoutTransitionPage';
 import RoomFilter from './Pages/RoomFilter/RoomFilter';
 import FormPageHotelUpdate from './Pages/FormPageH/FormPageHotelUpdate';
+import FavoritePage from './Pages/FavoritePage/FavoritePage';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
         <Route path="/shoppingcart" element={<ShoppingCartPage />}></Route>
         <Route path="/paymenttransition" element={<CheckoutTransitionPage />}></Route>
         <Route path="/roomSearch" element={<RoomFilter />}></Route>
+        <Route path="/myfavorites" element={<FavoritePage />}></Route>
       </Routes>
     </div>
   );
