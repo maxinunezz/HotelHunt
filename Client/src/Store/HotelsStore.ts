@@ -3,33 +3,29 @@ import { create } from "zustand";
 import { Hotel } from "../models";
 const url = import.meta.env.VITE_URL;
 
-type States = {
+export type States = {
   hotels: Hotel[];
   currentPage: number;
   pageNumbers: number[];
-
 };
 
-type Actions = {
+export type Actions = {
   fetchHotels: () => Promise<void>;
   setCurrentPage: (pageNum: number) => void;
   orderByName: (array: Hotel[], event: string) => void;
   orderByCategory: (array: Hotel[], event: string) => void;
   resetHotels: () => void;
-
 };
 
 const initialState: States = {
   hotels: [],
   currentPage: 1,
   pageNumbers: [],
-
 };
 
 export const hotelStore = create<States & Actions>((set) => ({
   ...initialState,
 
-  
   fetchHotels: async () => {
     const { data } = await axios.get<Hotel[]>(`${url}/hotel`);
 
@@ -44,7 +40,7 @@ export const hotelStore = create<States & Actions>((set) => ({
       currentPage: pageNum,
     }));
   },
-  
+
   orderByName: (array, event) => {
     if (event === "ASC") {
       const arrayAux = array.sort(function (a, b) {
