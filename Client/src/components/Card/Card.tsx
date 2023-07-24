@@ -127,10 +127,9 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
   }
 
   return (
-  
-    <div className="bg-white h-[460px] max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
-  
-        <img
+    <div className="bg-white h-[480px] max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
+      {/* Hotel Photo */}
+      <img
         src={photo}
         alt={name}
         onError={({ currentTarget }) => {
@@ -143,27 +142,38 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
      
       <div className="w-2/3 p-4 flex flex-col justify-between">
         <div className="h-full flex flex-col justify-between">
+          {/* Hotel Name (made it larger) */}
           <div>
-            <h2 className="text-lg font-bold mb-1">{name}</h2>
-            <p className="text-gray-600 text-sm overflow-hidden overflow-ellipsis">
+            <h2 className="text-2xl font-bold mb-4">{name}</h2>
+            <div className="flex justify-start mt-auto">
+          <p className="text-gray-500 text-sm mb-4">
+            Ubicación: {city}, {country}
+          </p>
+        </div>
+            <p className="text-black text-sm  text-[18px] ">
               {description}
             </p>
           </div>
+          {/* Ordered Services */}
+          {/*<div>
+            <p>Servicios: {orderedServices()}</p>
+          </div>*}
+          {/* Hotel Category and Popular Rating */}
           <div>
-            Servicios: {orderedServices()}
-          </div>
-          <div>
-            <div className='flex'>
-            <p>Categoria: </p>
-              {renderStars(Number(hotelCategory))}
-            </div>
-            <div className='flex'>
+            <div className='flex text-[20px]'>
               <p>Calificación popular:</p>
-              {/* Renderizar el icono de Phosphor repetidamente */}
+              {/* Render the Phosphor icon repeatedly */}
               {ratingValue !== null && renderIcon(ratingValue)}
             </div>
+
+            <div className='flex '>
+              <p className='text-[20px]'>Categoria:{renderStars(Number(hotelCategory))} </p>
+              
+            </div>
           </div>
+          {/* "Ver habitaciones" button */}
           <div className="flex justify-end">
+<<<<<<< HEAD
        <div><button className=" py-2 px-4" onClick={handleFavorite}>{isFav? "💙" : "🤍"}</button></div>
           
           <Link to={`/hotelpage/${id}`} key={id}>
@@ -171,6 +181,8 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
               <p className="text-gray-500 mt-1 text-sm">
               Ubicación: {city}, {country}
             </p>
+=======
+>>>>>>> 269becdfa52391a139226937d020fcd927ef8e06
             <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
               Ver habitaciones
             </button>
@@ -179,9 +191,17 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
            </Link>
         </div> 
           </div>
+<<<<<<< HEAD
+=======
+        </div>
+        {/* Hotel Location (moved it to the leftmost side) */}
+        
+>>>>>>> 269becdfa52391a139226937d020fcd927ef8e06
       </div>
     </div>  
   );
+  
+  
 };
 
 export default Card;
