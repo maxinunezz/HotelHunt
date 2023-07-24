@@ -20,15 +20,16 @@ interface CardProps {
   score: number;
 }
 
-const Card: React.FC<Hotel> = ({
+const Card: React.FC<CardProps> = ({
   id,
   name,
   description,
   country,
   city,
   photo,
+  services,
   hotelCategory,
-  services
+  score
 }) => {
 
   const hotelFavorite = userStore((state)=>state.favoriteHotel)
@@ -38,13 +39,14 @@ const Card: React.FC<Hotel> = ({
   const token = tokenStore((state)=>state.userState)
   const {favorites} = favoriteStore(state=>state)
 
-
+  
   const renderStars = (rating: number) => {
     const filledStars = rating;
     const emptyStars = 5 - rating;
 
     const stars = [];
 
+    // Renderizar estrellas llenas
     for (let i = 0; i < filledStars; i++) {
       stars.push(
         <span key={`filled-star-${i}`} className="text-yellow-500">
@@ -52,6 +54,8 @@ const Card: React.FC<Hotel> = ({
         </span>
       );
     }
+
+    // Renderizar estrellas vacías
     for (let i = 0; i < emptyStars; i++) {
       stars.push(
         <span key={`empty-star-${i}`} className="text-gray-300">
@@ -62,7 +66,6 @@ const Card: React.FC<Hotel> = ({
 
     return stars;
   };
-
 
   const renderIcon = (score: number) => {
     const icons = [];
@@ -139,7 +142,6 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
         }}
         className="w-1/3 h-full object-cover rounded-l-md"
       />
-     
       <div className="w-2/3 p-4 flex flex-col justify-between">
         <div className="h-full flex flex-col justify-between">
           {/* Hotel Name (made it larger) */}
@@ -173,7 +175,6 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
           </div>
           {/* "Ver habitaciones" button */}
           <div className="flex justify-end">
-<<<<<<< HEAD
        <div><button className=" py-2 px-4" onClick={handleFavorite}>{isFav? "💙" : "🤍"}</button></div>
           
           <Link to={`/hotelpage/${id}`} key={id}>
@@ -181,24 +182,18 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
               <p className="text-gray-500 mt-1 text-sm">
               Ubicación: {city}, {country}
             </p>
-=======
->>>>>>> 269becdfa52391a139226937d020fcd927ef8e06
             <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
               Ver habitaciones
             </button>
-            </div>
+          </div>
           
            </Link>
         </div> 
           </div>
-<<<<<<< HEAD
-=======
         </div>
         {/* Hotel Location (moved it to the leftmost side) */}
-        
->>>>>>> 269becdfa52391a139226937d020fcd927ef8e06
-      </div>
-    </div>  
+
+    </div>
   );
   
   
