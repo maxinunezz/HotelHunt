@@ -10,6 +10,7 @@ import { errorToast, successToast } from '../../components/toast';
 import Hotel from "./Hotel.png"
 import { hotelStore, roomsStore, tokenStore } from '../../Store';
 import { useNavigate, useParams } from 'react-router-dom';
+import { servicesHotel } from '../../utils/servicesArray';
 const url = import.meta.env.VITE_URL;
 
 
@@ -24,7 +25,7 @@ interface FormValues {
 	category: string;
 	services: string[];
 }
-const arrayDePrueba = ['Servicio A', 'Servicio B', 'Servicio C'];
+
 
 const formValidationSchema = yup.object().shape({
 	name: yup
@@ -366,7 +367,7 @@ export default function FormPageHotelUpdate() {
 
 										>
 											<option value="">Seleccione un servicio</option>
-											{arrayDePrueba.map((option) => (
+											{servicesHotel.map((option) => (
 												<option key={option} value={option}>
 													{option}
 												</option>

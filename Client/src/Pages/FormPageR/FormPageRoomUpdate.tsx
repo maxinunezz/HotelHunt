@@ -8,6 +8,7 @@ import axios from 'axios';
 import { errorToast, successToast } from '../../components/toast';
 import { roomsStore, tokenStore } from '../../Store';
 import { useNavigate, useParams } from 'react-router-dom';
+import { servicesRoom } from '../../utils/servicesArray';
 const url = import.meta.env.VITE_URL;
 
 interface FormValues {
@@ -20,8 +21,6 @@ interface FormValues {
     photo: string[];
     disabled: boolean;
 }
-
-const arrayDePrueba = ['Servicio A', 'Servicio B', 'Servicio C'];
 
 const formValidationSchema = yup.object().shape({
     roomName: yup.string().trim().min(2, 'Minimo 2 caracteres'),
@@ -53,7 +52,6 @@ export default function FormPageRoomUpdate() {
     const { fetchRoomsDashboard } = roomsStore()
     const allRoomsHotel = roomsStore((state) => state.allRoomsDashboard)
     const currentRoomData = allRoomsHotel.find((room) => room.id === id)
-    console.log(currentRoomData);
 
     useEffect(() => {
         fetchRoomsDashboard(String(hotelsUser[0].id), token[1])
@@ -300,7 +298,7 @@ export default function FormPageRoomUpdate() {
 
                                         >
                                             <option value="">Seleccione un servicio</option>
-                                            {arrayDePrueba.map((option) => (
+                                            {servicesRoom.map((option) => (
                                                 <option key={option} value={option}>
                                                     {option}
                                                 </option>
