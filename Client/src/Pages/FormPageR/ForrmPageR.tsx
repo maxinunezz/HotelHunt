@@ -1,5 +1,5 @@
 import { Button, FormControl } from '@rewind-ui/core';
-import { Field, Form, Formik, FormikHelpers } from 'formik';
+import { Field, FieldProps, Form, Formik, FormikHelpers } from 'formik';
 import { useCallback, useState } from 'react';
 import * as yup from 'yup';
 import BackButton from '../../components/BackButton/BackButton';

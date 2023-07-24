@@ -61,7 +61,6 @@ export default function DashboardRowRoom({
     return (        
 
         <div className={`dashboard-row rounded-md p-4 mb-4 ${disabled ? 'bg-slate-400' : 'bg-white'}`}>
-            Wena larvas
             <div className="grid grid-cols-7 gap-4">
                 <div className="col-span-2">
                     <img src={photo[0]} alt={name} className="w-48 h-48 object-cover" />
@@ -83,11 +82,13 @@ export default function DashboardRowRoom({
                 </div>
 
                 <div className="col-span-1 flex items-center justify-center">
-                    <button onClick={(e) => {
+                    <button
+                  
+                     onClick={(e) => {
                         e.stopPropagation();
                         handleEdit();
                     }}>
-                        <FaEdit />
+                        <FaEdit size={32} />
                     </button>
                 </div>
                 <div className="col-span-1 flex items-center justify-center">
@@ -95,7 +96,7 @@ export default function DashboardRowRoom({
                         e.stopPropagation();
                         handleDelete();
                     }}>
-                        <FaTrashAlt />
+                        <FaTrashAlt size={32} />
                     </button>
                 </div>
             </div>

@@ -190,13 +190,7 @@ const CartComponent = () => {
           </Dropdown.Item>
           <Dropdown.Divider />
 
-          <Dropdown.Item
-            onClick={() => navigate("/shoppingcart")}
-            className="flex justify-center items-center"
-          >
-            <ShoppingCart size={20} weight="duotone" className="mr-1.5" />
-            Ver carrito
-          </Dropdown.Item>
+        
         </Dropdown.Content>
       </Dropdown>
     </div>

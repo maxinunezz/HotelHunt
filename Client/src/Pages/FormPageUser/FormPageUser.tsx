@@ -44,12 +44,12 @@ const loginValidationSchema = yup.object().shape({
     .min(8, 'La contraseña debe tener al menos 8 caracteres'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password'), null], 'Las contraseñas deben coincidir')
+    .oneOf([yup.ref('password')], 'Las contraseñas deben coincidir')
     .required('Debes confirmar tu contraseña')
 });
 
 const FormPageUser = () => {
-  const [isCreated, setIsCreated] = useState(false);
+  const [,setIsCreated] = useState(false);
   const navigate = useNavigate()
   const url = import.meta.env.VITE_URL;
 
@@ -76,7 +76,7 @@ const FormPageUser = () => {
         successToast('Correo de confirmación enviado. Revisa tu email para continuar.');
         console.log('data', data);
         navigate(-1)
-      } catch (error) {
+      } catch (error:any) {
 
         errorToast(error.response.data);
       }
@@ -124,7 +124,7 @@ const FormPageUser = () => {
             onSubmit={handleSubmit}
             validationSchema={loginValidationSchema}
           >
-            {({ values, errors, submitForm, setFieldValue }) => (
+            {({ values, errors, setFieldValue }) => (
               <Form className="space-y-4 h-[530px]">
                 <div className="flex space-x-4">
                   <div className="w-1/2">
@@ -281,7 +281,6 @@ const FormPageUser = () => {
                       onChange={(event) => {
                         setFieldValue('admin', event.target.checked);
                       }}
-                      value={values.admin}
                       className="form-checkbox w-6 h-6 text-blue-500"
                     />
                   </div>

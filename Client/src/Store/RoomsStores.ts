@@ -3,12 +3,12 @@ import { create } from 'zustand';
 import calculatePageNumbers from '../utils/calculatePageNamber';
 const url = import.meta.env.VITE_URL;
 
-interface Room {
+export interface Room {
 	key: string;
 	id: string;
 	name: string;
 	description: string;
-	services: string;
+	services: string[];
 	photo: string[];
 	pax: number;
 	hotelId: string;
@@ -31,7 +31,7 @@ type Actions = {
 	fetchRooms: () => Promise<void>;
 	fetchRoomsDashboard: (hotelId: string, token:string) => Promise<void>;
 	hotelIdSetter: (roomsHotelSelected: []) => Promise<void>;
-	setRoom: (roomDetail: []) => Promise<void>;
+	setRoom: (roomDetail: string|undefined) => Promise<void>;
 	changeCurrentPage: (payload: number | boolean) => void;
 };
 

@@ -1,5 +1,5 @@
 import { Button, FormControl } from '@rewind-ui/core';
-import { Field, Form, Formik, FormikHelpers } from 'formik';
+import { Field, FieldProps, Form, Formik, FormikHelpers } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
 import * as yup from 'yup';
 import BackButton from '../../components/BackButton/BackButton';
@@ -15,7 +15,7 @@ interface FormValues {
     roomName: string;
     floorNumber: string;
     description: string;
-    capacity: string;
+    capacity: number;
     services: string[];
     price: string;
     photo: string[];
@@ -63,7 +63,7 @@ export default function FormPageRoomUpdate() {
                 console.log('Submitting form data:', values);
                 console.log(token[0]);
 
-                const nameToBack = values.roomName !== '' ? values.roomName : currentRoomData?.name
+                const nameToBack = values.roomName ? values.roomName : currentRoomData?.name
                 const floorNumberToBack = values.floorNumber ? values.floorNumber : currentRoomData?.floorNumber
                 const descriptionToBack = values.description ? values.description : currentRoomData?.description
                 const paxToBack = values.capacity ? values.capacity : currentRoomData?.pax
@@ -166,7 +166,7 @@ export default function FormPageRoomUpdate() {
                             roomName: currentRoomData?.name || '',
                             floorNumber: currentRoomData?.floorNumber || '',
                             description: currentRoomData?.description || '',
-                            capacity: currentRoomData?.pax || '',
+                            capacity: currentRoomData?.pax || 1,
                             services: currentRoomData?.services || [],
                             price: currentRoomData?.price ? currentRoomData.price.toString() : '',
                             photo: currentRoomData?.photo || [],
@@ -255,7 +255,7 @@ export default function FormPageRoomUpdate() {
 
                                     <FormControl
                                         validation={
-                                            values.capacity.length === 0
+                                            values.capacity === 0
                                                 ? 'none'
                                                 : errors.capacity
                                                     ? 'invalid'
@@ -425,6 +425,7 @@ export default function FormPageRoomUpdate() {
                                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md"
                                             type="submit"
                                             size="lg"
+                                            onClick={()=>{navigate(-1)}}
                                         >
                                             Update Room
                                         </Button>
