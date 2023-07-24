@@ -1,20 +1,51 @@
 import DashboardRow from "./DashboardRow";
 import { useEffect, useState } from 'react'
 import { tokenStore } from "../../Store";
-import  NavBarDashboard1  from "./NavBarDashboard1"
-import  { getHotels } from '../../utils/GlobalFunction'
+import axios from "axios";
+import NavBarDashboard1 from "./NavBarDashboard1";
+import { DashStore } from "../../Store";
+
 
 export default function DashboardHotel() {
     const { getHotelByUser } = tokenStore()
-    const [hotelByUser, setHotelByUser] = useState()
+    const token = tokenStore((state) => state.userState)
+    const url = import.meta.env.VITE_URL;
+    const update = DashStore((state) => state.updated)
     
+
+    const [hotelByUser, setHotelByUser] = useState<any[]>([])
+
+    const getHotels = async () => {
+        try {
+            const response = await axios.get(
+                `${url}/dashboard`,
+                {
+                    headers:
+                    {
+                        authorization:
+                            `Bearer ${token[1]}`,
+                    },
+                },
+            )
+            if (response.data) {
+
+                setHotelByUser(response.data);
+                getHotelByUser(response.data);
+            }
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
 
 
     useEffect(() => {
-        const hotels = getHotels()
-        setHotelByUser(hotels);
-        getHotelByUser(hotels);
+        getHotels()
     }, [])
+    useEffect(() => {
+        getHotels()
+    }, [update])
+
 
 
     return (
@@ -37,10 +68,10 @@ export default function DashboardHotel() {
                                 />
                             </div>
                         )
-                    ))
+                    ) )
                 ) : (
                     <p>No hay hoteles</p>
-                )}
+                ) }
             </div>
         </div>
     );

@@ -3,15 +3,17 @@ import { tokenStore } from '../../Store';
 import { useEffect } from "react";
 import { useState } from "react";
 import { errorToast } from "../toast";
+import * as XLSX from 'xlsx';
+
 
 interface Reservation {
-    hotel: string;
-    room: string;
+    hotelName: string;
+    roomName: string;
     checkin: string;
     checkout: string;
     paymentStatus: string;
     price: number;
-    UserEmail: string;
+    userEmail: string;
 }
 
 export default function ReservesDashboard() {
@@ -19,38 +21,23 @@ export default function ReservesDashboard() {
     const url = import.meta.env.VITE_URL;
     const token = tokenStore((state) => state.userState);
     const [error, setError] = useState<string>("");
+    const [totalPrice, setTotalPrice] = useState<number>(0); 
 
 
-    const convertToCSV = (reservations) => {
-
-        const csvRows = [];
-        const headers = Object.keys(reservations[0]);
-        csvRows.push(headers.join(","));
-
-        for (const row of reservations) {
-            const values = headers.map((header) => row[header]);
-            csvRows.push(values.join(","));
-        }
-
-        return csvRows.join("\n");
-
-    };
-
-    const handleDownloadCSV = () => {
+    const handleDownloadExcel = () => {
         if (reservations === undefined || reservations === null || reservations.length === 0) {
-            errorToast("No hay datos que descargar");
+          errorToast("No hay datos que descargar");
         } else {
-            const csvData = convertToCSV(reservations);
-            const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
-            const link = document.createElement("a");
-            link.setAttribute("href", URL.createObjectURL(blob));
-            link.setAttribute("download", "reservations.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+          const worksheet = XLSX.utils.json_to_sheet(reservations);
+      
+          const totalRow = { hotelName: 'Total:', price: totalPrice };
+          XLSX.utils.sheet_add_json(worksheet, [totalRow], { skipHeader: true, origin: -1 });
+      
+          const workbook = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(workbook, worksheet, "Reservas");
+          XLSX.writeFile(workbook, "reservations.xlsx");
         }
-    };
-
+      };
 
 
 
@@ -60,18 +47,22 @@ export default function ReservesDashboard() {
 
     const getReserves = async () => {
         try {
-            const response = await axios.get(`${url}/dashboard/booking`, {
-                headers: {
-                    authorization: `Bearer ${token[1]}`
-                }
-            });
-            const reserves: Reservation[] = response.data;
-            setReservations(reserves);
-
+          const response = await axios.get(`${url}/dashboard/booking`, {
+            headers: {
+              authorization: `Bearer ${token[1]}`
+            }
+          });
+          const reserves: Reservation[] = response.data;
+          setReservations(reserves);
+    
+          // Calcular la suma de los importes
+          const total = reserves.reduce((acc, reservation) => acc + (+reservation.price), 0);
+          setTotalPrice(total);
+    
         } catch (error) {
-            setError(error.response.data);
+          setError(error.response.data);
         }
-    }
+      };
 
 
     return (
@@ -83,8 +74,8 @@ export default function ReservesDashboard() {
                             <div className="text-2xl font-bold mb-4 mt-16">Reservas</div>
                             <button
                                 className="ml-4 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
-                                onClick={handleDownloadCSV}>
-                                Descargar CSV
+                                onClick={handleDownloadExcel}>
+                                Descargar Excel
                             </button>
                         </div>
                         <table className="min-w-full">
@@ -120,13 +111,13 @@ export default function ReservesDashboard() {
                                         className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
                                     >
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            {reservation.hotel}
+                                            {reservation.hotelName}
                                         </td>
                                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {reservation.room}
+                                            {reservation.roomName}
                                         </td>
                                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {reservation.UserEmail}
+                                            {reservation.userEmail}
                                         </td>
                                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             {reservation.checkin}
@@ -149,6 +140,17 @@ export default function ReservesDashboard() {
                                         >
                                             {error}
                                         </td>
+                                    </tr>
+                                )}
+                                {reservations.length > 0 && (
+                                    <tr className="bg-gray-100">
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900" colSpan={5}>
+                                            Total:
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
+                                            ${totalPrice.toFixed(2)}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap"></td>
                                     </tr>
                                 )}
                             </tbody>

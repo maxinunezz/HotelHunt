@@ -10,48 +10,45 @@ import CartComponent from '../CartComponent/CartComponent';
 
 
 export default function NavBar() {
-  const navigate = useNavigate();
-  const isLogged = tokenStore((state) => state.userState);
-  const allHotels = hotelStore((state) => state.hotels);
-  const searchResults = searchStore((state) => state.searchResults)
-  const { reset, orderByCategorySearch, orderByNameSearch } = searchStore();
-  const { orderByName, resetHotels, fetchHotels , orderByCategory} = hotelStore();
-  const [filterByNameState, setfilterByNameState] = useState();
-  
+	const navigate = useNavigate();
+	const isLogged = tokenStore((state) => state.userState);
+	const allHotels = hotelStore((state) => state.hotels);
+	const searchResults = searchStore((state) => state.searchResults)
+	const { reset, orderByCategorySearch, orderByNameSearch } = searchStore();
+	const { orderByName, resetHotels, fetchHotels, orderByCategory } = hotelStore();
+	const [filterByNameState, setfilterByNameState] = useState();
 
-  const [orderByNameState, setOrderByNameState] = useState("");
-  const [orderByCategoryState, setOrderByCategoryState] = useState("");
-	
-  const handleAllHotels = (element: Event) => {
-    element.preventDefault();
-    resetHotels();
-    fetchHotels();
-    reset();
-  };
 
-  
-  
+	const [orderByNameState, setOrderByNameState] = useState("");
+	const [orderByCategoryState, setOrderByCategoryState] = useState("");
 
-  
-  useEffect(() => {
-    orderByName(allHotels, orderByNameState);
-    orderByNameSearch(searchResults, orderByNameState)
-	setOrderByNameState("")
-	setOrderByCategoryState("")
-  }, [orderByNameState]);
+	const handleAllHotels = (element: Event) => {
+		element.preventDefault();
+		resetHotels();
+		fetchHotels();
+		reset();
+	};
 
-  useEffect(() => {
-    orderByCategory(allHotels, orderByCategoryState);
-    orderByCategorySearch(searchResults, orderByCategoryState)
-	setOrderByNameState("")
-	setOrderByCategoryState("")
-  }, [orderByCategoryState]);
 
-  const handleRoomSearch=()=>{
-    navigate('/roomSearch')
-  }
+	useEffect(() => {
+		orderByName(allHotels, orderByNameState);
+		orderByNameSearch(searchResults, orderByNameState)
+		setOrderByNameState("")
+		setOrderByCategoryState("")
+	}, [orderByNameState]);
 
-  return (
+	useEffect(() => {
+		orderByCategory(allHotels, orderByCategoryState);
+		orderByCategorySearch(searchResults, orderByCategoryState)
+		setOrderByNameState("")
+		setOrderByCategoryState("")
+	}, [orderByCategoryState]);
+
+	const handleRoomSearch = () => {
+		navigate('/roomSearch')
+	}
+
+	return (
 		<nav className="fixed top-0 left-0 right-0 bg-gray-900 text-white p-4 space-x-5 flex items-center justify-between w-full">
 
 			<div className="flex items-center">
@@ -68,14 +65,16 @@ export default function NavBar() {
 				</div>
 			</div>
 			<SearchBar />
-      <button onClick={handleRoomSearch} className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600">
-        Habitaciones</button>
+			<button onClick={handleRoomSearch} className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600">
+				Habitaciones</button>
+
+		<button onClick={()=>navigate('/myfavorites')}>favorites</button>
 
 			<button
 				className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
 				onClick={handleAllHotels}
 			>
-			restablecer filtro
+				restablecer filtro
 			</button>
 
 			<Dropdown size='md'>
@@ -83,18 +82,18 @@ export default function NavBar() {
 					<Button className="w-500">{`Ordenar por: `}</Button>
 				</Dropdown.Trigger>
 				<Dropdown.Content>
-        <Dropdown.Item onClick={() => setOrderByNameState("ASC")}>
-            Ordenar por Nombre ASC
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setOrderByNameState("DES")}>
-            Ordenar por Nombre DES
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setOrderByCategoryState("ASC")}>
-            Ordenar por Categoria ASC
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setOrderByCategoryState("DES")}>
-            Ordenar por Categoria DES
-          </Dropdown.Item>					
+					<Dropdown.Item onClick={() => setOrderByNameState("ASC")}>
+						Ordenar por Nombre ASC
+					</Dropdown.Item>
+					<Dropdown.Item onClick={() => setOrderByNameState("DES")}>
+						Ordenar por Nombre DES
+					</Dropdown.Item>
+					<Dropdown.Item onClick={() => setOrderByCategoryState("ASC")}>
+						Ordenar por Categoria ASC
+					</Dropdown.Item>
+					<Dropdown.Item onClick={() => setOrderByCategoryState("DES")}>
+						Ordenar por Categoria DES
+					</Dropdown.Item>
 				</Dropdown.Content>
 			</Dropdown>
 
@@ -109,13 +108,13 @@ export default function NavBar() {
 						</div>
 					)
 			}
-        {
-			isLogged.length ? <CartComponent/> : null
-		}
+			{
+				isLogged.length ? <CartComponent /> : null
+			}
 
 		</nav>
 	);
 
-  
+
 }
 

@@ -77,7 +77,7 @@ async function createBooking(req, res) {
       success_url: `http://localhost:5173/`,
       cancel_url: `http://localhost:5173/`,
     });
-    const price = session.amount_total;
+    const price = session.amount_total / 100;
     const name = user.name
     const sessionId = session.id;
     const urlpago = session.url;
@@ -184,7 +184,7 @@ const getReserves = async (req, res) => {
         checkin: reserve.checkin,
         checkout: reserve.checkout,
         paymentStatus: reserve.paymentStatus,
-        price: reserve.price / 100,
+        price: reserve.price,
       }
       reservas.push(one_reserve);
 

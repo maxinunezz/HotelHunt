@@ -3,12 +3,15 @@ import { tokenStore } from '../../Store';
 import { useNavigate } from 'react-router-dom';
 import { farewellToast } from '../toast';
 import { MouseEvent } from 'react';
+import { userStore } from '../../Store/UserStore';
 
 
 const UserMenu = () => {
     const navigate = useNavigate()
     const isAdmin = tokenStore((state) => state.userState)  //análogo a AdminMenu  
     const { resetToken } = tokenStore()
+    const {reset} = userStore()
+
 
 
 
@@ -18,6 +21,7 @@ const UserMenu = () => {
         resetToken()
         farewellToast("Adiós y buena suerte!")
         navigate('/farewell')
+        reset('favoriteHotel')
     }
     return (
         <div>

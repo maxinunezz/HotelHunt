@@ -6,6 +6,8 @@ import NavBar from '../../components/NavBar/NavBar';
 import Footer from "../../components/Footer/Footer";
 import { useCookies } from 'react-cookie';
 import { tokenStore } from '../../Store';
+import { userStore } from '../../Store/UserStore';
+
 
 
 export default function HomePage() {
@@ -13,6 +15,9 @@ export default function HomePage() {
 	const { fetchHotels } = hotelStore()
 	const [cookies] = useCookies(["json"]);
 	const { saveInfo } = tokenStore();
+	const token = tokenStore((state)=>state.userState)
+	const { getFavorite}= userStore()
+
 
 
 	const findCookie = () => {
@@ -35,8 +40,14 @@ export default function HomePage() {
 	useEffect(() => {
 		fetchHotels()
 		findCookie()
+		
+		
 
 	}, [])
+
+	useEffect(()=>{
+		getFavorite(token[1])
+	},[token])
 
 
 	return (
@@ -49,6 +60,9 @@ export default function HomePage() {
 			<div className="p-10">
 				<div className="mt-[70px]">
 				</div>
+
+
+
 
 
 				<div className="mt-8">

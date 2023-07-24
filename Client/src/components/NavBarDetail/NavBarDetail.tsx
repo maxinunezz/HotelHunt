@@ -1,9 +1,14 @@
 import { House,Bed } from '@phosphor-icons/react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 
 
 export default function NavbarDetail() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isRoomSearch = location.pathname.toLocaleLowerCase().includes('/roomsearch')
+  console.log(location.pathname);
+  
+  
   return (
     <nav className="bg-gray-900 p-4">
       <div className="flex items-center justify-between">
@@ -20,15 +25,14 @@ export default function NavbarDetail() {
         </div>
         <div className="flex items-center">
         <ul className="flex ml-8">
-            <li className="mr-4 flex items-center">
-              <House onClick={() => navigate('/')} size={32} weight="thin" className="mr-4 text-blue-500" />
-              <a href="/" className="text-white">Inicio</a>
+            <li onClick={() => navigate('/')} className="mr-4 flex items-center px-2 py-2 cursor-pointer transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+              <House size={32} weight="thin" className="mr-4 text-blue-500" />
+              <a className="text-white">Inicio</a>
             </li>
-            <li className="mr-4 flex items-center">
-              <Bed onClick={() => navigate('/roomsearch')} size={32}  weight="thin" className="mr-4 text-blue-500" />
-              <a href="/roomsearch" className="text-white">Todas las habitaciones</a>
-            </li>
-
+            {!isRoomSearch && <li onClick={() => navigate('/roomsearch')} className="mr-4 flex items-center px-2 py-2 cursor-pointer transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+              <Bed size={32}  weight="thin" className="mr-4 text-blue-500" />
+              <a className="text-white">All Rooms</a>
+            </li>}
           </ul>
         </div>
       </div>

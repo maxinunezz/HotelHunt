@@ -20,7 +20,7 @@ const CartComponent = () => {
   const allRooms = roomsStore((state) => state.rooms);
   const token = tokenStore((state) => state.userState);
 
-  const calculateDays = (item) => {
+  const calculateDays = (item:any) => {
     // Convertir las fechas a objetos Date
     const checkinDate = new Date(item.checkin);
     const checkoutDate = new Date(item.checkout);
@@ -107,7 +107,6 @@ const CartComponent = () => {
 
     await roomPayment(data, token[1]);
     
-    // Redireccionar a la URL externa en una nueva pestaña
     navigate('/shoppingcart')
 
     //  reset() //esta linea resetea el estado global del carrito  porque la app aun no tiene respuesta del pago

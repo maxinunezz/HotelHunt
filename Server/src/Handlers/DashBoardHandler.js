@@ -339,40 +339,38 @@ const getAllBooking = async (req, res) => {
         userId: id,
       }
     })
+    console.log(hotels);
     if (!hotels) {
       return res.status(404).send("Aun no has registrado un hotel")
     }
 
     for (const hotel of hotels) {
-      let booking = [];
-      booking = await Booking.findAll({
+      const booking = await Booking.findAll({
         where: {
           hotelId: hotel.id,
         }
       })
 
-      if (booking.length === 0) {
-        return res.status(404).send('No tienes reservas')
-      } else {
-        for (const reserve of booking) {
-          let room = []
-          room = await Room.findByPk(reserve.roomId)
-          if (room.length === 0) {
-            return res.status(404).send('Aun no tienes habitaciones')
-          }
-          const user = await Auth.findOne({ where: { userId: id } })
-          const one_reserve = {
-            checkin: reserve.checkin,
-            checkout: reserve.checkout,
-            price: reserve.price,
-            roomName: room.name,
-            hotelName: hotel.name,
-            paymentStatus: reserve.paymentStatus,
-            userEmail: user.email,
-          }
-          reservas.push(one_reserve)
+
+      for (const reserve of booking) {
+        let room = []
+        room = await Room.findByPk(reserve.roomId)
+        if (room.length === 0) {
+          return res.status(404).send('Aun no tienes habitaciones')
         }
+        const user = await Auth.findOne({ where: { userId: id } })
+        const one_reserve = {
+          checkin: reserve.checkin,
+          checkout: reserve.checkout,
+          price: reserve.price,
+          roomName: room.name,
+          hotelName: hotel.name,
+          paymentStatus: reserve.paymentStatus,
+          userEmail: user.email,
+        }
+        reservas.push(one_reserve)
       }
+
     }
     if (reservas.length > 0) {
       return res.status(200).json(reservas)
@@ -414,7 +412,7 @@ const getAllRating = async (req, res) => {
       for (const rating of ratings) {
         const one_reserve = {
           score: rating.score,
-          coment: rating.comment,
+          coments: rating.comment,
           hotel: hotel.name
         }
         comentario.push(one_reserve)
@@ -423,7 +421,7 @@ const getAllRating = async (req, res) => {
     }
     if (comentario.length > 0) {
       return res.status(200).json(comentario)
-    }else{
+    } else {
       return res.status(404).send("No existen comentarios")
     }
   } catch (error) {

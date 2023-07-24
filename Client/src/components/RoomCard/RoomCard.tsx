@@ -35,7 +35,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
       </div>
 
       <div className="p-[15px]">
-
+        
         <h2 className="text-[20px] font-bold h-[55px] overflow-hidden">{name}</h2>
 
         <div className="mb-[10px]">

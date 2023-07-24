@@ -52,6 +52,7 @@ const HotelPage = () => {
 	}, [id]);
 
 
+
 	const overallScoreHandler = () => {
 		let sum = 0;
 		for (let i = 0; i < hotelRatings.length; i++) {
