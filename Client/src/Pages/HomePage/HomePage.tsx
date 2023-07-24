@@ -9,6 +9,7 @@ import { tokenStore } from '../../Store';
 import { userStore } from '../../Store/UserStore';
 
 
+
 export default function HomePage() {
 	const searchResults = searchStore((state) => state.searchResults)
 	const { fetchHotels } = hotelStore()
@@ -59,10 +60,6 @@ export default function HomePage() {
 			<div className="p-10">
 				<div className="mt-[70px]">
 				</div>
-
-
-
-
 
 				<div className="mt-8">
 					{searchResults?.length ? <HotelListSearch /> : <HotelList />}

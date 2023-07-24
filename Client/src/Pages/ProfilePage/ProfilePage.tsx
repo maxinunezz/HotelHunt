@@ -12,7 +12,7 @@ const AdminProfilePage = () => {
     phoneNumber: `${userData[0].phoneNumber}`,
   };
 
-  const isAdmin = userData[0].admin === 'admin';
+  const isAdmin = userData[2] === 'admin';
 
   return (
     <div className="flex-auto">

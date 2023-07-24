@@ -412,7 +412,7 @@ const getAllRating = async (req, res) => {
       for (const rating of ratings) {
         const one_reserve = {
           score: rating.score,
-          coment: rating.comment,
+          coments: rating.comment,
           hotel: hotel.name
         }
         comentario.push(one_reserve)

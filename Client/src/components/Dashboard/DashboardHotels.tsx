@@ -13,7 +13,7 @@ export default function DashboardHotel() {
     const update = DashStore((state) => state.updated)
     
 
-    const [hotelByUser, setHotelByUser] = useState()
+    const [hotelByUser, setHotelByUser] = useState<any[]>([])
 
     const getHotels = async () => {
         try {

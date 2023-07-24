@@ -25,9 +25,11 @@ import FavoritePage from './Pages/FavoritePage/FavoritePage';
 
 
 function App() {
+
+
 	useEffect(() => {
 		document.title = 'Hotel Hunt';
-	  }, []);
+	}, []);
 	return (
 		<div id="app">
 			<Routes>
@@ -48,10 +50,10 @@ function App() {
 				<Route path="/farewell" element={<FarewellPage />}></Route>
 				<Route path="/shoppingcart" element={<ShoppingCartPage />}></Route>
 				<Route path="/roomSearch" element={<RoomFilter />}></Route>
-				<Route path="/RecuPassword" element={<RecuPassword/>}></Route>
-				<Route path='/SetNewPass' element={<FormPagePass/>}></Route>
+				<Route path="/RecuPassword" element={<RecuPassword />}></Route>
+				<Route path='/SetNewPass' element={<FormPagePass />}></Route>
 				<Route path="/addcomment/:hotelId" element={<AddRatingPage />}></Route>
-        <Route path="/myfavorites" element={<FavoritePage />}></Route>
+        		<Route path="/myfavorites" element={<FavoritePage />}></Route>
 			</Routes>
 		</div>
 	);
