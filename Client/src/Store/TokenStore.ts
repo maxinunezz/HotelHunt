@@ -15,7 +15,7 @@ interface User {
 
 type Token = string; 
 
-type IsAdmin = 'admin' | 'normal'
+type IsAdmin = 'admin' | 'normal' | 'super'
 
 export interface UserState extends Array<any> {
     0: User,

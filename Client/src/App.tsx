@@ -22,6 +22,7 @@ import AddRatingPage from './Pages/AddRatingPage/AddRatingPage';
 import FormPageRoomUpdate from './Pages/FormPageR/FormPageRoomUpdate';
 import { useEffect } from 'react';
 import FavoritePage from './Pages/FavoritePage/FavoritePage';
+import SAPage from './Pages/SAPage/SAPage';
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
 				<Route path='/SetNewPass' element={<FormPagePass />}></Route>
 				<Route path="/addcomment/:hotelId" element={<AddRatingPage />}></Route>
         		<Route path="/myfavorites" element={<FavoritePage />}></Route>
+				<Route path='/SAP' element={<SAPage/>}></Route>
 			</Routes>
 		</div>
 	);
