@@ -184,7 +184,7 @@ const getReserves = async (req, res) => {
         checkin: reserve.checkin,
         checkout: reserve.checkout,
         paymentStatus: reserve.paymentStatus,
-        price: reserve.price / 100,
+        price: reserve.price,
       }
       reservas.push(one_reserve);
 
