@@ -111,7 +111,7 @@ const Card: React.FC<CardProps> = ({
                 Ubicación: {city}, {country}
               </p>
             </div>
-            <p className="text-black text-sm  text-[18px] ">
+            <p className="text-black  ">
               {description}
             </p>
           </div>
@@ -120,18 +120,18 @@ const Card: React.FC<CardProps> = ({
             <p>Servicios: {orderedServices()}</p>
           </div>*}
           {/* Hotel Category and Popular Rating */}
-          <div>
-            <div className='flex text-[20px] mt-[100px]'>
+          
+          <div className="flex flex-col mt-[40px]">
+            <div className="flex text-[20px]">
               <p>Calificación popular:</p>
               {/* Render the Phosphor icon repeatedly */}
               {ratingValue !== null && renderIcon(ratingValue)}
             </div>
-
-            <div className='flex mt-'>
-              <p className='text-[20px]'>Categoria:{renderStars(Number(hotelCategory))} </p>
-
+            <div className="flex mt-1">
+              <p className="text-[20px]">Categoría: {renderStars(Number(hotelCategory))}</p>
             </div>
           </div>
+          
           {/* "Ver habitaciones" button */}
           <div className="flex justify-end">
             <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">

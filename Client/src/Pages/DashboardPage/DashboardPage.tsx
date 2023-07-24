@@ -22,8 +22,8 @@ const DashBoardPage = () => {
       }, [coments, hotels, reserves]);
 
     return (
-        <div className="flex-auto">
-            <div className="flex">
+        <div className="">
+            <div className="flex h-full">
                 <SideBarDash />
                 <div>{renderComponent}</div>
             </div>

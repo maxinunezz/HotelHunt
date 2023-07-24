@@ -105,6 +105,21 @@ const HotelPage = () => {
 					</div>
 				</div>
 
+				{/* Ordered Services */}
+				{hotelOnScreen?.services && hotelOnScreen?.services.length > 0 && (
+					<div className="bg-white max-w-screen-lg mx-auto p-4 rounded-lg shadow-lg w-[960px]">
+						<h3 className="text-[22px] font-bold mb-4">Servicios</h3>
+						<ul className="list-disc list-inside space-y-2">
+							{hotelOnScreen.services.map((service, index) => (
+								<li key={index} className="text-gray-700">{service}</li>
+							))}
+						</ul>
+					</div>
+				)}
+
+
+				{/* Render Rooms */}
+
 				<div className="max-w-screen-lg mx-auto p-8 mt-8 overflow-hidden">
 					{hotelOnScreen ? (
 						<div className="room-list transform transition duration-300 mt-8">
@@ -116,26 +131,14 @@ const HotelPage = () => {
 				</div>
 
 				{/* Agregar comentario button */}
-				
+
 			</div>
 
 			{/* Comentarios section */}
-			<div className="h-96 overflow-y-scroll border border-gray-300 rounded-lg p-4 shadow-lg bg-white max-w-screen-lg mx-auto">
-				<h2 className="text-2xl font-semibold mb-4">Comentarios</h2>
-				<div className="space-y-4">
-					{hotelRatings.length > 0 ? (
-						hotelRatings.map((rating, index) => (
-							<div key={index} className="border-b border-gray-300 pb-2">
-								<p className="text-lg font-semibold text-blue-500">Puntaje: {rating.score}</p>
-								<p className="text-gray-700">{rating.comment}</p>
-							</div>
-						))
-					) : (
-						<p className="text-gray-700">No hay comentarios disponibles.</p>
-					)}
-				</div>
+
+			<div className="h-[500px] border border-gray-300 rounded-lg p-4 shadow-lg bg-white max-w-screen-lg mx-auto mb-2">
 				{token.length > 0 && (
-					<div className="flex justify-center mt-4">
+					<div className="flex justify-center  mt-4">
 						<button
 							onClick={handleOpenNewWindow}
 							className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full shadow-md focus:outline-none focus:ring focus:border-blue-400"
@@ -144,7 +147,31 @@ const HotelPage = () => {
 						</button>
 					</div>
 				)}
+
+				<div className="mt-4">
+					<h2 className="text-2xl font-semibold mb-4">Comentarios</h2>
+					<div className="max-h-[300px] overflow-y-scroll">
+						{hotelRatings.length > 0 ? (
+							hotelRatings.map((rating, index) => (
+								<div key={index} className="border-b border-gray-300 pb-2">
+									<div className="flex items-center mb-2">
+										<p className="text-lg font-semibold text-blue-500">Puntaje: {rating.score}</p>
+										<div className="flex ml-2">
+
+										</div>
+									</div>
+									<p className="text-gray-700">{rating.comment}</p>
+								</div>
+							))
+						) : (
+							<p className="text-gray-700">No hay comentarios disponibles.</p>
+						)}
+					</div>
+				</div>
 			</div>
+
+
+
 
 
 

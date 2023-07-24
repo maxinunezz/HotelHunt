@@ -264,7 +264,7 @@ const RoomFilter = () => {
           </div>
 
           <div className="mt-6">
-            <h3 className="text-blue-500 font-bold">Capacity</h3>
+            <h3 className="text-blue-500 font-bold">Capacidad</h3>
             {/* Componente de checkboxes */}
             <div className="flex mt-2">
 
