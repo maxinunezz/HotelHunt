@@ -13,6 +13,7 @@ type Actions = {
 	orderByNameSearch: (array:Hotel[], event:string) => void;
 	orderByCategorySearch: (array:Hotel[], event:string) => void;
 	setCurrentPageSearch:(pageNum:number)=>void;
+	reset:()=>void;
 };
 
 const initialState: States = {

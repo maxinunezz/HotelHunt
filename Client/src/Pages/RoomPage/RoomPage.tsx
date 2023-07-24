@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { hotelStore, roomsStore } from "../../Store";
 import { useEffect, useState } from "react";
-import { setRoomDetail, useFetchRooms } from "../../hooks";
+import { useFetchRooms } from "../../hooks";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import NavbarDetail from "../../components/NavBarDetail/NavBarDetail";
@@ -9,7 +9,6 @@ import Footer from "../../components/Footer/Footer";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { tokenStore } from "../../Store";
-import { string } from "yup";
 import { userStore } from "../../Store/UserStore";
 import {
   reserveErrorToast,
@@ -18,7 +17,6 @@ import {
   noDatesToast,
   mustLoginToast,
 } from "../../components/toast";
-import { toast } from "react-hot-toast";
 
 export interface ReserveBooking {
   roomId: string;
@@ -34,9 +32,8 @@ const RoomPage = () => {
   const [arrivalDate, setArrivalDate] = useState("");
   const [departureDate, setDepartureDate] = useState(null);
   const [date, setDate] = useState({ in: "", out: "" });
-  const [reserve, setReserve] = useState<ReserveBooking[] | null>(null);
+  const [ setReserve] = useState<ReserveBooking[] | null>(null);
   const token = tokenStore((state) => state.userState);
-  const room = roomsStore((state) => state.rooms);
   const { reserveRoomPayment } = userStore();
   const userReserve = userStore((state) => state.reserves);
   const navigate = useNavigate();

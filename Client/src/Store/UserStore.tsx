@@ -14,7 +14,7 @@ type States = {
 
 
 type Actions = {
-  reserveRoomPayment: (data: []) => Promise<void>;
+  reserveRoomPayment: (data: ReserveBooking[]) => Promise<void>;
   roomPayment: (data: {}, token:string ) => Promise<void>;
   getFavorite:(userData: any) => Promise<void>
   addFavorite:(hotelId:any ,userData: any) => Promise<void>

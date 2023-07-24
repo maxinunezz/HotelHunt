@@ -31,7 +31,7 @@ export default function ComentsDashboard() {
             const ratings: Ratings[] = response.data;
             setRatings(ratings);
 
-        } catch (error) {
+        } catch (error:any) {
             setError(error.response.data);
         }
     }

@@ -2,7 +2,6 @@ import { Buildings } from "@phosphor-icons/react";
 import axios from "axios";
 import { hotelStore, tokenStore } from "../../Store";
 import { useEffect, useState } from "react";
-import { Hotel } from "../../models";
 import { Link } from "react-router-dom";
 import { userStore } from "../../Store/UserStore";
 import { favoriteStore } from "../../Store/FavoriteStore";
@@ -29,7 +28,6 @@ const Card: React.FC<CardProps> = ({
   photo,
   services,
   hotelCategory,
-  score
 }) => {
 
   const hotelFavorite = userStore((state)=>state.favoriteHotel)
@@ -37,7 +35,6 @@ const Card: React.FC<CardProps> = ({
   const {  addFavorite } = userStore();
   const {  setHotelFavorites} = favoriteStore();
   const token = tokenStore((state)=>state.userState)
-  const {favorites} = favoriteStore(state=>state)
 
   
   const renderStars = (rating: number) => {
@@ -124,16 +121,13 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
     fetchRating();
   }, [id]);
 
-  const orderedServices = () => {
-    const stringRaw = services.join(', ');
-    return stringRaw    
-  }
+
 
   return (
     <div className="bg-white h-[480px] max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
       {/* Hotel Photo */}
       <img
-        src={photo}
+        src={Array.isArray(photo) ? photo[0] : photo}
         alt={name}
         onError={({ currentTarget }) => {
           currentTarget.onerror = null;

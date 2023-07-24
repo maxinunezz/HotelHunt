@@ -9,9 +9,6 @@ interface GoogleSignInButtonProps {
 const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({ clientID, endpoint }) => {
 
   useEffect(() => {
-    const handleCredentialResponse = (response) => {
-      console.log(response);
-    };
 
     const initializeGoogleSignIn = () => {
       google.accounts.id.initialize({

@@ -1,7 +1,7 @@
 const Stripe = require('stripe');
 const { Booking, Room, User, Hotel, Auth } = require('../db');
 const { Op } = require('sequelize');
-const stripe = new Stripe('sk_test_51NVdmjB3jfe4i46dYiBgwgb9jcft9tZ8mmSQC2YJf4w5xVew4tCtdiZ1frDkUvpagyM0FskqPMISAe3oRPRoClRf00aif6TnEF');
+const stripe = new Stripe('sk_test_51NTrfKHJDBCJMNrhc1URooDk9yKEJU0TONg60genqgT77WYcIyNQlhGdEa7Gn7pvado3D6WLIbXwDwKlGBitKNF000mPbEiXwv');
 const nodemailer = require('nodemailer');
 const endpointSecret = "whsec_ed391f08ba83c4f8e82d04709ee19174dcbd2b36cdbaaadcbc3cc7817a778a45";
 require('dotenv').config();

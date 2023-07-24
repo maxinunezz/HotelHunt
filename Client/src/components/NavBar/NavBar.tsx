@@ -16,13 +16,12 @@ export default function NavBar() {
 	const searchResults = searchStore((state) => state.searchResults)
 	const { reset, orderByCategorySearch, orderByNameSearch } = searchStore();
 	const { orderByName, resetHotels, fetchHotels, orderByCategory } = hotelStore();
-	const [filterByNameState, setfilterByNameState] = useState();
 
 
 	const [orderByNameState, setOrderByNameState] = useState("");
 	const [orderByCategoryState, setOrderByCategoryState] = useState("");
 
-	const handleAllHotels = (element: Event) => {
+	const handleAllHotels = (element:any) => {
 		element.preventDefault();
 		resetHotels();
 		fetchHotels();
