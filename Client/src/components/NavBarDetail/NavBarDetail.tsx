@@ -5,7 +5,9 @@ import { useNavigate, useLocation } from 'react-router';
 export default function NavbarDetail() {
   const navigate = useNavigate();
   const location = useLocation();
-  const isRoomSearch = location.pathname.includes('/roomsearch')
+  const isRoomSearch = location.pathname.toLocaleLowerCase().includes('/roomsearch')
+  console.log(location.pathname);
+  
   
   return (
     <nav className="bg-gray-900 p-4">

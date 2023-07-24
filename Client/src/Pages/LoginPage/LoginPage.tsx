@@ -10,6 +10,7 @@ import axios from 'axios';
 import GoogleSignInButton from '../../components/Google/GoogleSignIn';
 import { Eye, EyeClosed } from '@phosphor-icons/react';
 import { useState } from 'react';
+import { useCookies } from 'react-cookie';
 
 interface LoginValues {
 	email: string;
@@ -32,6 +33,9 @@ const LogingPage = () => {
 	const CLIENT_GOOGLE_ID = import.meta.env.VITE_CLIENT_GOOGLE_ID;
 	const URL = import.meta.env.VITE_URL;
 	const endpoint = URL + (`/user/google_singin`);
+	const [cookies, setCookies] = useCookies([
+		'json'
+	])
 
 
 
@@ -53,6 +57,9 @@ const LogingPage = () => {
 						arrayAux[1] = tokenRaw
 						arrayAux[2] = statusadmin
 						arrayAux[3] = logeado
+						console.log(JSON.stringify(arrayAux));
+						
+						setCookies('json', JSON.stringify(arrayAux))
 						saveInfo(arrayAux)
 					}
 					console.log("values", values);

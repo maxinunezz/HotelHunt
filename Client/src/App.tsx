@@ -25,74 +25,54 @@ import { UserState, tokenStore } from './Store';
 
 
 function App() {
-	// const userData = tokenStore((state) => state.userState)
-	// const { saveInfo } = tokenStore();
+	const userData = tokenStore((state) => state.userState)
+	const { saveInfo } = tokenStore();
 
-	// const [cookies] = useCookies(["json"]);
-	// const findCookie = () => {
-	// 	if (cookies.json) {
-	// 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// 		// @ts-ignore:next-line
-	// 		const arrayAux: UserState = []; 
-	// 		const logeado = true
-	// 		const userData = cookies.json && cookies.json.data;
-	// 		const tokenRaw = cookies.json && cookies.json.token;
-	// 		const statusadmin = cookies.json && cookies.json.admin;
-	// 		arrayAux[0] = userData
-	// 		arrayAux[1] = tokenRaw
-	// 		arrayAux[2] = statusadmin
-	// 		arrayAux[3] = logeado
-	// 		saveInfo(arrayAux)
-	// 	}
-	// }
-	// useEffect(() => {
-	// 	findCookie()
-	// }, [cookies]) // eslint-disable-line
+	const [cookies] = useCookies(["json"]);
+	const findCookie = () => {
+		if (cookies.json) {
+			if (Array.isArray(cookies.json)) {
+				return saveInfo(cookies.json as UserState) 
+			} else {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+						// @ts-ignore:next-line
+						const arrayAux: UserState = [];
+						const tokenRaw = cookies.json.token
+						const statusadmin = cookies.json.admin
+						const logeado = true
+						const userData = cookies.json.data
+						arrayAux[0] = userData
+						arrayAux[1] = tokenRaw
+						arrayAux[2] = statusadmin
+						arrayAux[3] = logeado
+						saveInfo(arrayAux)
+			}
+		}
+	}
+	console.log(cookies.json);
 
-
-	// if (userData.length === 0) return
-
-
-
-function App() {
-	// const userData = tokenStore((state) => state.userState)
-	// const { saveInfo } = tokenStore();
-
-	// const [cookies] = useCookies(["json"]);
-	// const findCookie = () => {
-	// 	if (cookies.json) {
-	// 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// 		// @ts-ignore:next-line
-	// 		const arrayAux: UserState = []; 
-	// 		const logeado = true
-	// 		const userData = cookies.json && cookies.json.data;
-	// 		const tokenRaw = cookies.json && cookies.json.token;
-	// 		const statusadmin = cookies.json && cookies.json.admin;
-	// 		arrayAux[0] = userData
-	// 		arrayAux[1] = tokenRaw
-	// 		arrayAux[2] = statusadmin
-	// 		arrayAux[3] = logeado
-	// 		saveInfo(arrayAux)
-	// 	}
-	// }
-	// useEffect(() => {
-	// 	findCookie()
-	// }, [cookies]) // eslint-disable-line
-
-
-	// if (userData.length === 0) return
+	useEffect(() => {
+		findCookie()
+	}, [cookies])  // eslint-disable-line
 
 	useEffect(() => {
 		document.title = 'Hotel Hunt';
-	  }, []);
+	}, []);
+
+	// if (userData.length === 0) {
+	// 	return null
+	// }
+
+
+
 	return (
 		<div id="app">
 			<Routes>
 				<Route path="/" element={<HomePage />}></Route>
 				<Route path="/login" element={<LogingPage />}></Route>
-				<Route path="/profile/:name" element={<ProfilePage />}></Route>
+				{userData.length > 0 && <Route path="/profile/:name" element={<ProfilePage />}></Route>}
 				<Route path="/profile/reservas" element={<ReservasPage />}></Route>
-				<Route path='/profile/configuracion' element={<UserSettings />}></Route>
+				{userData.length > 0 && <Route path='/profile/configuracion' element={<UserSettings />}></Route>}
 				<Route path="/dashboard" element={<DashBoardPage />}></Route>
 				<Route path="/dashboard/hoteldetail/:id" element={<DashboardPageHotelDetail />}></Route>
 				<Route path="/dashboard/hotelupdate/:id" element={<FormPageHotelUpdate />}></Route>
