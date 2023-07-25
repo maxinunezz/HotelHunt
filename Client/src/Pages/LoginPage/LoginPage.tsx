@@ -56,7 +56,7 @@ const LogingPage = () => {
 					console.log("values", values);
 
 					successToast('Usuario logeado correctamente');
-					navigate('/')
+					navigate(-1)
 				}
 				)
 

@@ -7,6 +7,7 @@ import { MapPinLine } from '@phosphor-icons/react'
 import Footer from "../../components/Footer/Footer";
 import axios from 'axios';
 import { Hotel } from '../../models';
+import NavbarDetail from '../../components/NavBarDetail/NavBarDetail';
 
 const url = import.meta.env.VITE_URL;
 
@@ -81,7 +82,8 @@ const HotelPage = () => {
 
 	return (
 		<div className="bg-slate-600 min-h-screen flex flex-col overflow-hidden">
-			<div className="flex-grow mt-20 overflow-y-auto">
+			<NavbarDetail />
+			<div className="flex-grow mt-10 overflow-y-auto">
 				<div className="max-w-screen-lg mx-auto p-8">
 					<div className="mt-2 flex justify-between">
 						<button onClick={() => navigate('/')} className="bg-blue-500 font-bold w-[80px] border-neutral-950">Back</button>
@@ -157,7 +159,7 @@ const HotelPage = () => {
 
 
 
-			<NavBar />
+			
 			<div className="mt-auto">
 				<Footer />
 			</div>

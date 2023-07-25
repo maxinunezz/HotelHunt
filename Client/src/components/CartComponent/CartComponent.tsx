@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import { roomsStore } from "../../Store/RoomsStores";
 import { tokenStore } from "../../Store";
 import { ReserveBooking } from "../../Pages/RoomPage/RoomPage";
+import { toast } from "react-hot-toast";
+import { farewellToast } from "../toast";
 
 
 const CartComponent = () => {
@@ -103,8 +105,9 @@ const CartComponent = () => {
       roomsToReserve: reserveLocal
     }
 
-
+   farewellToast('Loading...')
     await roomPayment(data, token[1]);
+  
     
     navigate('/shoppingcart')
 

@@ -153,9 +153,9 @@ const Card: React.FC<CardProps> = ({
           {/* "Ver habitaciones" button */}
           <div className="flex justify-end">
             <div>
-              <button className=" py-2 px-4" onClick={handleFavorite}>
-                {isFav ? "💙" : "🤍"}
-              </button>
+             {token.length >0 && <button className=" py-2 px-4" onClick={handleFavorite}>
+              {isFav ? "💙" : "🤍"}
+              </button>}
             </div>
 
             <Link to={`/hotelpage/${id}`} key={id}>

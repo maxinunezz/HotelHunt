@@ -82,14 +82,16 @@ export default function NavBar() {
         Habitaciones
       </button>
 
-      <button onClick={() => navigate("/myfavorites")}>favorites</button>
+     {isLogged.length>0&& <button onClick={() => navigate("/myfavorites")}>favorites</button>} 
 
-      <button
-        className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
-        onClick={handleAllHotels}
-      >
-        restablecer filtro
-      </button>
+      {location.pathname === '/' && (
+        <button
+          className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          onClick={handleAllHotels}
+        >
+          Restablecer filtro
+        </button>
+      )}
 
       <Dropdown size="md">
         <Dropdown.Trigger>
