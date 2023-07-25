@@ -2,7 +2,6 @@ import { Buildings } from "@phosphor-icons/react";
 import axios from "axios";
 import { hotelStore, tokenStore } from "../../Store";
 import { useEffect, useState } from "react";
-import { Hotel } from "../../models";
 import { Link } from "react-router-dom";
 import { userStore } from "../../Store/UserStore";
 import { favoriteStore } from "../../Store/FavoriteStore";
@@ -31,7 +30,15 @@ const Card: React.FC<CardProps> = ({
   hotelCategory,
   score
 }) => {
-  
+
+  const hotelFavorite = userStore((state) => state.favoriteHotel)
+  const hotels = hotelStore((state) => state.hotels)
+  const { addFavorite } = userStore();
+  const { setHotelFavorites } = favoriteStore();
+  const token = tokenStore((state) => state.userState)
+  const { favorites } = favoriteStore(state => state)
+
+
   const renderStars = (rating: number) => {
     const filledStars = rating;
     const emptyStars = 5 - rating;
@@ -68,36 +75,36 @@ const Card: React.FC<CardProps> = ({
 
     return icons;
   };
-   
-
-  
 
 
- 
 
- const isFav = hotelFavorite.some((favHotel:any) => favHotel == id);
+
+
+
+
+  const isFav = hotelFavorite.some((favHotel: any) => favHotel == id);
 
   const handleFavorite = async () => {
-   
-    const info ={
+
+    const info = {
       hotelId: id
     }
 
-      await addFavorite(info, token[1]);
-     
-     
+    await addFavorite(info, token[1]);
+
+
   };
 
- 
- 
-useEffect(()=>{
-const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
 
-   setHotelFavorites(hotelFavorites)
-    
-}, [hotelFavorite])
-  
-  
+
+  useEffect(() => {
+    const hotelFavorites = hotels.filter(hotel => hotelFavorite.includes(hotel.id))
+
+    setHotelFavorites(hotelFavorites)
+
+  }, [hotelFavorite])
+
+
 
 
   const [ratingValue, setRatingValue] = useState<number | null>(null);
@@ -105,8 +112,8 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
     const fetchRating = async () => {
       try {
         const response = await axios.get(`${url}/rating/${id}`);
-        const scores = response.data.map((element:any) => element.score);
-        const sum = scores.reduce((acc:any, score:any) => acc + score, 0);
+        const scores = response.data.map((element: any) => element.score);
+        const sum = scores.reduce((acc: any, score: any) => acc + score, 0);
         const average = Math.round(sum / scores.length);
         setRatingValue(average);
       } catch (error) {
@@ -144,7 +151,7 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
                 Ubicación: {city}, {country}
               </p>
             </div>
-            <p className="text-black  ">
+            <p className="text-black text-sm  text-[18px] ">
               {description}
             </p>
           </div>
@@ -153,37 +160,37 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
             <p>Servicios: {orderedServices()}</p>
           </div>*}
           {/* Hotel Category and Popular Rating */}
-          
-          <div className="flex flex-col mt-[40px]">
-            <div className="flex text-[20px]">
+          <div>
+            <div className='flex text-[20px]'>
               <p>Calificación popular:</p>
               {/* Render the Phosphor icon repeatedly */}
               {ratingValue !== null && renderIcon(ratingValue)}
             </div>
-            <div className="flex mt-1">
-              <p className="text-[20px]">Categoría: {renderStars(Number(hotelCategory))}</p>
+
+            <div className='flex '>
+              <p className='text-[20px]'>Categoria:{renderStars(Number(hotelCategory))} </p>
+
             </div>
           </div>
-          
           {/* "Ver habitaciones" button */}
           <div className="flex justify-end">
-       <div><button className=" py-2 px-4" onClick={handleFavorite}>{isFav? "💙" : "🤍"}</button></div>
-          
-          <Link to={`/hotelpage/${id}`} key={id}>
-            <div>
-              <p className="text-gray-500 mt-1 text-sm">
-              Ubicación: {city}, {country}
-            </p>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              Ver habitaciones
-            </button>
-          </div>
-          
-           </Link>
-        </div> 
+            <div><button className=" py-2 px-4" onClick={handleFavorite}>{isFav ? "💙" : "🤍"}</button></div>
+
+            <Link to={`/hotelpage/${id}`} key={id}>
+              <div>
+                <p className="text-gray-500 mt-1 text-sm">
+                  Ubicación: {city}, {country}
+                </p>
+                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                  Ver habitaciones
+                </button>
+              </div>
+
+            </Link>
           </div>
         </div>
-        {/* Hotel Location (moved it to the leftmost side) */}
+      </div>
+      {/* Hotel Location (moved it to the leftmost side) */}
 
     </div>
   );

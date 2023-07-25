@@ -137,9 +137,9 @@ const HotelPage = () => {
 
 			{/* Comentarios section */}
 
-			<div className="h-[500px] border border-gray-300 rounded-lg p-4 shadow-lg bg-white max-w-screen-lg mx-auto mb-2">
+			<div className="max-h-[500px] w-[970px] border border-gray-300 rounded-lg p-4 shadow-lg bg-white  mx-auto mb-2">
 				{token.length > 0 && (
-					<div className="flex justify-center  mt-4">
+					<div className="flex justify-center mt-4">
 						<button
 							onClick={handleOpenNewWindow}
 							className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full shadow-md focus:outline-none focus:ring focus:border-blue-400"
@@ -158,10 +158,10 @@ const HotelPage = () => {
 									<div className="flex items-center mb-2">
 										<p className="text-lg font-semibold text-blue-500">Puntaje: {rating.score}</p>
 										<div className="flex ml-2">
-
+											{/* Agrega aquí cualquier contenido adicional si es necesario */}
 										</div>
 									</div>
-									<p className="text-gray-700">{rating.comment}</p>
+									<p className="text-gray-700 break-words">{rating.comment}</p>
 								</div>
 							))
 						) : (
@@ -169,12 +169,9 @@ const HotelPage = () => {
 						)}
 					</div>
 				</div>
+
+
 			</div>
-
-
-
-
-
 
 			<NavBar />
 			<div className="mt-auto">

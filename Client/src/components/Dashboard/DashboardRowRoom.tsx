@@ -58,10 +58,10 @@ export default function DashboardRowRoom({
     const handleEdit = () => {
         navigate(`/dashboard/roomupdate/${id}`)
     };
-    return (        
+    return (
 
         <div className={`dashboard-row rounded-md p-4 mb-4 ${disabled ? 'bg-slate-400' : 'bg-white'}`}>
-            Wena larvas
+
             <div className="grid grid-cols-7 gap-4">
                 <div className="col-span-2">
                     <img src={photo[0]} alt={name} className="w-48 h-48 object-cover" />
@@ -103,19 +103,20 @@ export default function DashboardRowRoom({
             {showConfirmDialog && (
                 <div className="bg-slate-600">
                     <div className="confirm-dialog-overlay" onClick={() => setShowConfirmDialog(false)} />
-                    <div className="confirm-dialog-content">
-                        <h3 className="confirm-dialog-title">Confirmar eliminación</h3>
-                        <p className="confirm-dialog-message">¿Estás seguro de que deseas eliminar esta room?</p>
-                        <div className="confirm-dialog-buttons">
-                            <button className="border-slate-950 text-white bg-orange-600 w-[100px]" onClick={(e) => { e.stopPropagation(); confirmDelete(); }}>
+                    <div className="confirm-dialog-content bg-white rounded-lg p-6 shadow-lg">
+                        <h3 className="confirm-dialog-title text-xl font-semibold mb-4">Confirmar eliminación</h3>
+                        <p className="confirm-dialog-message text-gray-800">¿Estás seguro de que deseas eliminar esta room?</p>
+                        <div className="confirm-dialog-buttons mt-6 flex justify-end">
+                            <button className="border-slate-950 text-white bg-lime-500 w-[100px] py-2 px-4 rounded-md mr-4" onClick={(e) => { e.stopPropagation(); confirmDelete(); }}>
                                 Sí
                             </button>
-                            <button className="border-slate-950 text-white bg-lime-500 w-[100px]" onClick={(e) => { setShowConfirmDialog(false); e.stopPropagation(); }}>
+                            <button className="border-slate-950 text-white bg-red-500 w-[100px] py-2 px-4 rounded-md" onClick={(e) => { setShowConfirmDialog(false); e.stopPropagation(); }}>
                                 No
                             </button>
                         </div>
                     </div>
                 </div>
+
             )}
         </div>
     )

@@ -149,9 +149,11 @@ export default function FormPageRoomUpdate() {
 
     return (
         <div className="flex h-screen">
-            <div className="w-full bg-blue-500 flex flex-col justify-center">
-                <h2 className="text-3xl text-white font-bold px-8 text-center">Título del área azul</h2>
+            <div className="w-full bg-blue-500 flex flex-col justify-center items-center py-8">
+                <h2 className="text-3xl text-white font-bold">Bienvenido a nuestro Hotel</h2>
+                <p className="text-lg text-white">¡Crea nuevas habitaciones para tus huéspedes!</p>
             </div>
+
             <div className="w-full bg-gray-800 shadow-lg p-8 overflow-y-auto">
                 <div className="max-h-full">
                     <div className="flex justify-start">

@@ -7,21 +7,21 @@ import { DashStore } from '../../Store';
 
 export default function ProfileSideBar() {
     const navigate = useNavigate()
-    const { setHotels, setReservs, setComents} = DashStore();
+    const { setHotels, setReservs, setComents } = DashStore();
     const { resetToken } = tokenStore()
 
 
-    const setRender = (arg:String) => {
-        if(arg === "coments"){
+    const setRender = (arg: String) => {
+        if (arg === "coments") {
             setComents(true);
             setHotels(false);
             setReservs(false)
         }
-        else if(arg === "reserves"){
+        else if (arg === "reserves") {
             setHotels(false);
             setReservs(true);
             setComents(false);
-        }else {
+        } else {
             setHotels(true);
             setReservs(false);
             setComents(false);
@@ -37,7 +37,7 @@ export default function ProfileSideBar() {
     }
 
     return (
-        <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+        <aside className="flex-col w-full h-screen px-5 py-8  bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700 inline-block">
 
             <a>
                 <div>
@@ -94,7 +94,7 @@ export default function ProfileSideBar() {
                         <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             <><div className="w-5 h-5">
                                 <ClipboardText size={20} color="#fffafa" />
-                            </div><span className="mx-2 text-sm font-medium" onClick={() => setRender("reserves")}>
+                            </div><span className="mx- text-sm font-medium" onClick={() => setRender("reserves")}>
                                     Reservas
                                 </span></>
                         </a>
@@ -128,8 +128,8 @@ export default function ProfileSideBar() {
                     </div>
                 </nav>
 
-                <div>
-                    <p className=" text-xs text-white ">© 2023 - Todos los derechos reservados</p>
+                <div className="mt-[230px]">
+                    <p className=" text-xs text-white  ">© 2023 - Todos los derechos reservados</p>
                 </div>
 
             </div>
