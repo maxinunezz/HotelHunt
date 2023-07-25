@@ -1,4 +1,4 @@
-import { ClipboardText, Gear, SignOut, User } from '@phosphor-icons/react';
+import { Gear, SignOut, User } from '@phosphor-icons/react';
 import { useNavigate } from 'react-router-dom';
 import { tokenStore, SAStore } from '../../Store';
 import { farewellAdminToast, errorToast } from '../toast';
@@ -6,13 +6,13 @@ import { MouseEvent, useEffect } from 'react';
 
 export default function SABar() {
     const navigate = useNavigate()
-    const { setHotels, setReservs, setComents, setUsers} = SAStore();
+    const { setHotels, setComents, setUsers, setRooms} = SAStore();
     const { resetToken } = tokenStore()
     const isLogged = tokenStore((state) => state.userState)
 
     useEffect(()=>{
         if(isLogged[2] !== 'super'){
-            errorToast('Acceso Restringido');
+            errorToast('Acceso Restringido')
             navigate('/')
         }
     },[])
@@ -23,24 +23,25 @@ export default function SABar() {
         if(arg === "coments"){
             setComents(true);
             setHotels(false);
-            setReservs(false)
             setUsers(false);
+            setRooms(false);
         }
-        else if(arg === "reserves"){
-            setHotels(false);
-            setReservs(true);
-            setComents(false);
-            setUsers(false);
-        }else if(arg === "hotels" ){
+        else if(arg === "hotels" ){
             setHotels(true);
-            setReservs(false);
             setComents(false);
             setUsers(false);
+            setRooms(false);
         }else if(arg === "users"){
             setHotels(false);
-            setReservs(false);
             setComents(false);
             setUsers(true);
+            setRooms(false);
+
+        }else if(arg === "rooms"){
+            setHotels(false);
+            setComents(false);
+            setUsers(false);
+            setRooms(true);
 
         }
     }
@@ -88,21 +89,19 @@ export default function SABar() {
                                 Hoteles
                             </span>
                         </a>
-                    </div>
-
-                    <div className="space-y-3 ">
-                        <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
-                            contenido
-                        </label>
                         <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
-                            <><div className="w-5 h-5">
-                                <ClipboardText size={20} color="#fffafa" />
-                            </div><span className="mx-2 text-sm font-medium" onClick={() => setRender("reserves")}>
-                                    Reservas
-                                </span></>
+                            <div className="w-5 h-5">
+                                <User size={20} />
+                            </div>
+
+                            <span
+                                className="mx-2 text-sm font-medium"
+                                onClick={() => setRender("rooms")}
+                            >
+                                Habitaciones
+                            </span>
                         </a>
                     </div>
-
                     <div className="space-y-3 ">
                         <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
                             personalización

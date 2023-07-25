@@ -9,6 +9,7 @@ const {
   recoveryPass,
   handleFavorite,
   getUserFavorites,
+  getAllUsers,
 } = require("../Handlers/UsersHandler.js");
 const { authMiddleware } = require("../Middleware/AuthMiddleware");
 const { SuperAdminCheck } = require("../Middleware/SuperAdminMiddleware");
@@ -28,5 +29,6 @@ userRouter.get("/validateAsk/:token", validateToken);
 userRouter.post("/updatePass", authMiddleware,  recoveryPass);
 userRouter.post("/favorites/", authMiddleware, handleFavorite);
 userRouter.get("/favorites/", authMiddleware, getUserFavorites);
+userRouter.get("/", authMiddleware, SuperAdminCheck, getAllUsers);
 
 module.exports = userRouter;

@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react'
-import NavSADB from '../NavBar/NavSADB';
-import { tokenStore } from "../../Store";
+import { SAStore, tokenStore } from "../../Store";
+import { errorToast } from '../toast';
 import axios from "axios";
+import NavUserSA from '../NavBar/NavUserSa';
+import SAUserRow from './SAUserRow';
 
 
 
-export default function SAHotels() {
+export default function SAUsers() {
+    const token = tokenStore((state) => state.userState);
     const url = import.meta.env.VITE_URL;
-    
-    
-    
+    const [users, setUsers] = useState<any[]>([])
+    const update = SAStore((state)=> state.updated)
 
-    const [hotelByUser, setHotelByUser] = useState<any[]>([])
-
-    const getHotels = async () => {
+    const getUsers = async () => {
         try {
             const response = await axios.get(
-                `${url}/dashboard`,
+                `${url}/user`,
                 {
                     headers:
                     {
@@ -26,22 +26,20 @@ export default function SAHotels() {
                 },
             )
             if (response.data) {
-
-                setHotelByUser(response.data);
-                getHotelByUser(response.data);
+                setUsers(response.data);
             }
-        } catch (error) {
-            console.log(error);
+        } catch (error:any) {
+            errorToast(error.response.data);
 
         }
     }
 
 
     useEffect(() => {
-        getHotels()
+        getUsers()
     }, [])
     useEffect(() => {
-        getHotels()
+        getUsers()
     }, [update])
 
 
@@ -49,26 +47,24 @@ export default function SAHotels() {
     return (
         <div className="flex flex-col h-full mt-2 bg-slate-300 rounded-xl">
             <hr />            
-            <NavSADB />
+            <NavUserSA />
             <div className="flex flex-col h-full overflow-y-auto">
-                {hotelByUser?.length > 0 ? (
-                    hotelByUser?.map((element: { id: string, name: string, country: string, city: string, photo: string, disabled: boolean }) => (
+                {users?.length > 0 ? (
+                    users?.map((element: { id: string, name: string, lastName: string,  phoneNumber: string, disabled: boolean }) => (
                         (
-                            <div>
-                                <DashboardRow
-                                    key={element.id}
+                            <div key={element.id}>
+                                <SAUserRow                                    
                                     id={element.id}
                                     name={element.name}
-                                    country={element.country}
-                                    city={element.city}
-                                    photo={element.photo}
+                                    lastName={element.lastName}
+                                    phoneNumber={element.phoneNumber}
                                     disabled={element.disabled}
                                 />
                             </div>
                         )
                     ) )
                 ) : (
-                    <p>No hay hoteles</p>
+                    <p>No hay usuarios</p>
                 ) }
             </div>
         </div>

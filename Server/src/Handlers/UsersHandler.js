@@ -199,12 +199,10 @@ const recoveryPass = async (req,res) => {
     };
     const allinfo = { token: token, admin: admin, data: data };
 
-    res.cookie('json', allinfo,{
-      secure:true,
-    })
+    res.cookie('json', allinfo)
 
 
-    return res.status(200).redirect('http://localhost:5173/')
+    return res.status(200).send('Contraseña actualizada')
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -256,6 +254,32 @@ const getUserFavorites = async (req, res) => {
   }
 };
 
+const getAllUsers = async(req,res) =>  {
+  let users_array = []
+  try {
+    const users = await User.findAll();
+    if(users.length === 0) {
+      return res.status(404).json({ message: "No hay usuarios" });
+    }
+
+    users.forEach((user) => {
+      const one_user = {
+        id: user.id,
+        name: user.name,
+        lastName: user.lastName,
+        birthDate: user.birthDate,
+        phoneNumber: user.phoneNumber,
+        disabled: user.disabled,
+      };
+      users_array.push(one_user)
+    })
+
+    return res.status(200).json(users_array)
+  } catch (error) {
+    return res.status(500).send("Error del servidor")
+  }
+};
+
 module.exports = {
   createUserForEmail,
   deleteUser,
@@ -265,4 +289,5 @@ module.exports = {
   validateToken,
   handleFavorite,
   getUserFavorites,
+  getAllUsers,
 };

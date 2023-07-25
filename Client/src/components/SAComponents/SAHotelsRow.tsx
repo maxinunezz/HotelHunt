@@ -1,10 +1,9 @@
 import { Text } from "@rewind-ui/core";
 import axios from "axios";
 import { FaTrashAlt } from "react-icons/fa";
-import { tokenStore, DashStore } from "../../Store";
-import { userDeleteToast,successToast, errorToast } from "../toast";
+import { tokenStore, SAStore } from "../../Store";
+import { userDeleteToast, successToast, errorToast } from "../toast";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 const url = import.meta.env.VITE_URL;
 
 export default function HotelsRow({
@@ -22,13 +21,13 @@ export default function HotelsRow({
     photo: string;
     disabled: boolean;
 }) {
-    const navigate = useNavigate()
+
     const userData = tokenStore((state) => state.userState);
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const [showConfirmDisabled, setConfirmDisabled] = useState(false);
     const [isChecked, setIsChecked] = useState(disabled);
-    const { setUpdated } = DashStore();
-    const currentState = DashStore((state) => state.updated)
+    const { setUpdated } = SAStore();
+    const currentState = SAStore((state) => state.updated)
 
     const handleDelete = () => {
         setShowConfirmDialog(true);
@@ -36,7 +35,7 @@ export default function HotelsRow({
 
     const confirmDelete = async () => {
         try {
-            const data = await axios.delete(
+            const response = await axios.delete(
                 `${url}/hotel/${id}`,
                 {
                     headers: {
@@ -44,13 +43,12 @@ export default function HotelsRow({
                     },
                 }
             );
-            console.log(data);
-            console.log("Hotel eliminado");
 
-            userDeleteToast('Hotel eliminado');
-
-
-            setShowConfirmDialog(false);
+            if (response.data) {
+                userDeleteToast("Usuario eliminado");
+                setShowConfirmDialog(false);
+                setUpdated(!currentState);
+            }
 
         } catch (error) {
             console.log(error);
@@ -59,7 +57,7 @@ export default function HotelsRow({
 
     const ConfirmDisabled = async () => {
         try {
-            const requestBody = { disabled: isChecked,  };
+            const requestBody = { disabled: isChecked, };
             const response = await axios.put(
                 `${url}/hotel/${id}`,
                 requestBody,
@@ -69,12 +67,13 @@ export default function HotelsRow({
                     },
                 }
             );
+            if (response.data) {
+                successToast("Habitacion actualizada");
+                setConfirmDisabled(false);
+                setUpdated(!currentState)
+            }
 
-            successToast(response.data);
-            setConfirmDisabled(false);
-            setUpdated(!currentState)
-            
-        } catch (error) {
+        } catch (error: any) {
             errorToast(error.response.data);
         }
     }
@@ -88,13 +87,13 @@ export default function HotelsRow({
             setConfirmDisabled(false)
         }
     }
-    
+
 
     return (
-        <div className="dashboard-row bg-white rounded-md p-4 mb-4">
+        <div className={`dashboard-row rounded-md p-4 mb-4 ${disabled ? 'bg-slate-400' : 'bg-white'}`}>
             <div className="grid grid-cols-8 gap-4">
                 <div className="col-span-2">
-                    <img src={photo[0]} alt={name} className="w-48 h-48 object-cover"/>
+                    <img src={photo[0]} alt={name} className="w-48 h-48 object-cover" />
                 </div>
                 <div className="col-span-1 flex flex-col justify-center">
                     <Text variant="h6" className="text-lg font-medium">
@@ -135,10 +134,10 @@ export default function HotelsRow({
                         <h3 className="confirm-dialog-title">Confirmar eliminación</h3>
                         <p className="confirm-dialog-message">¿Estás seguro de que deseas eliminar este hotel?</p>
                         <div className="confirm-dialog-buttons">
-                        <button className="border-slate-950 text-white bg-orange-600 w-[100px]" onClick={(e) => { e.stopPropagation(); confirmDelete(); }}>
-  Sí
-</button>
-                            <button className="border-slate-950 text-white bg-lime-500 w-[100px]" onClick={(e) => {setShowConfirmDialog(false); e.stopPropagation();}}>
+                            <button className="border-slate-950 text-white bg-orange-600 w-[100px]" onClick={(e) => { e.stopPropagation(); confirmDelete(); }}>
+                                Sí
+                            </button>
+                            <button className="border-slate-950 text-white bg-lime-500 w-[100px]" onClick={(e) => { setShowConfirmDialog(false); e.stopPropagation(); }}>
                                 No
                             </button>
                         </div>

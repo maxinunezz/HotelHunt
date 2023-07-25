@@ -7,21 +7,25 @@ import HotelsRow from './SAHotelsRow';
 
 
 export default function SAHotels() {
-    const { getHotelByUser } = tokenStore()
     const [hotelByUser, setHotelByUser] = useState<any[]>([])
     const update = SAStore((state) => state.updated)
+    const userData = tokenStore((state)=> state.userState)
     const url = import.meta.env.VITE_URL;
     
 
     const getHotels = async () => {
         try {
             const response = await axios.get(
-                `${url}/hotel`
+                `${url}/hotel/admin`,
+                {
+                    headers: {
+                        authorization: `Bearer ${userData[1]}`,
+                    },
+                }
             )
             if (response.data) {
 
                 setHotelByUser(response.data);
-                getHotelByUser(response.data);
             }
         } catch (error) {
             console.log(error);
@@ -46,7 +50,7 @@ export default function SAHotels() {
                 {hotelByUser?.length > 0 ? (
                     hotelByUser?.map((element: { id: string, name: string, country: string, city: string, photo: string, disabled: boolean }) => (
                         (
-                            <div>
+                            <div key={element.id}>
                                 <HotelsRow
                                     key={element.id}
                                     id={element.id}

@@ -2,26 +2,26 @@ import { create } from 'zustand';
 
 type States = {
 	hotels: boolean;
-	reserves: boolean;
 	coments: boolean;
     updated: boolean;
     users: boolean;
+    rooms: boolean;
 };
 
 type Actions = {
 	setHotels: ( boolean:boolean) => void;
-	setReservs: ( boolean:boolean) => void;
     setComents: ( boolean:boolean) => void;
     setUpdated: ( boolean:boolean) => void;
     setUsers: (boolean: boolean) => void;
+    setRooms: (boolean: boolean) => void;
 };
 
 const initialState: States = {
     users:false,
 	hotels: false,
-	reserves: false,
 	coments: false,
     updated: false,
+    rooms: false,
 };
 
 export const SAStore = create<States & Actions>((set) => ({
@@ -30,12 +30,6 @@ export const SAStore = create<States & Actions>((set) => ({
         set((state) => ({
             ...state,
             hotels: boolean,
-        }))
-    },
-    setReservs: (boolean)=>{
-        set((state) => ({
-            ...state,
-           reserves: boolean,
         }))
     },
     setComents: (boolean)=>{
@@ -54,6 +48,12 @@ export const SAStore = create<States & Actions>((set) => ({
         set((state) => ({
             ...state,
             users: boolean,
+        }))
+    },
+    setRooms: (boolean) => {
+        set((state) => ({
+            ...state,
+            rooms: boolean,
         }))
     }
 

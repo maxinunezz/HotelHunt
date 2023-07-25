@@ -42,7 +42,7 @@ const FormPagePass = () => {
         async (values: passCreateValues, helpers: FormikHelpers<passCreateValues>) => {
             try {
 
-                const data = await axios.post(
+                const response = await axios.post(
                     `${url}/user/updatePass`,
                     {
                         password: values.password,
@@ -53,7 +53,7 @@ const FormPagePass = () => {
                         },
                     }
                 );
-                successToast('Clave cambiado con exitos');
+                successToast(response.data);
                 navigate('/')
             } catch (error) {
 
