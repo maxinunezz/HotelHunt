@@ -1,10 +1,12 @@
 const Stripe = require('stripe');
 const { Booking, Room, User, Hotel, Auth } = require('../db');
 const { Op } = require('sequelize');
-const stripe = new Stripe('sk_test_51NVdmjB3jfe4i46dYiBgwgb9jcft9tZ8mmSQC2YJf4w5xVew4tCtdiZ1frDkUvpagyM0FskqPMISAe3oRPRoClRf00aif6TnEF');
 const nodemailer = require('nodemailer');
-const endpointSecret = "whsec_ed391f08ba83c4f8e82d04709ee19174dcbd2b36cdbaaadcbc3cc7817a778a45";
 require('dotenv').config();
+
+const { END_POINT } = process.env;
+const { STRIPE_SECRET,FRONT_URL } = process.env
+const stripe = new Stripe(`${STRIPE_SECRET}`);
 
 async function createBooking(req, res) {
   
@@ -76,8 +78,8 @@ async function createBooking(req, res) {
         quantity: 1,
       })),
       mode: 'payment',
-      success_url: `http://localhost:5173/paymenttransition`,
-      cancel_url: `http://localhost:5173/`,
+      success_url: `${FRONT_URL}/paymenttransition`,
+      cancel_url: `${FRONT_URL}`,
     });
     const price = session.amount_total / 100;
     const name = user.name
