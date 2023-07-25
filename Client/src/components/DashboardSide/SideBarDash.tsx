@@ -58,7 +58,7 @@ export default function ProfileSideBar() {
                 <nav className="-mx-3 space-y-6">
 
                     <span className="ml-3 my-8 py-3">
-                        <button onClick={() => navigate(-1)} type="button" className="flex items-center text-slate-100 text-m hover:underline">
+                        <button onClick={() => navigate('/')} type="button" className="flex items-center text-slate-100 text-m hover:underline">
                             <span className="inline-flex leading-none rotate-180 transform">
                                 <svg width="24" height="24" className="pointer-events-none max-h-full max-w-full">
                                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2">

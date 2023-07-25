@@ -2,7 +2,6 @@ import { Buildings } from "@phosphor-icons/react";
 import axios from "axios";
 import { hotelStore, tokenStore } from "../../Store";
 import { useEffect, useState } from "react";
-import { Hotel } from "../../models";
 import { Link } from "react-router-dom";
 import { userStore } from "../../Store/UserStore";
 import { favoriteStore } from "../../Store/FavoriteStore";
@@ -32,14 +31,14 @@ const Card: React.FC<CardProps> = ({
   score
 }) => {
 
-  const hotelFavorite = userStore((state)=>state.favoriteHotel)
-  const hotels = hotelStore((state)=>state.hotels)
-  const {  addFavorite } = userStore();
-  const {  setHotelFavorites} = favoriteStore();
-  const token = tokenStore((state)=>state.userState)
-  const {favorites} = favoriteStore(state=>state)
+  const hotelFavorite = userStore((state) => state.favoriteHotel)
+  const hotels = hotelStore((state) => state.hotels)
+  const { addFavorite } = userStore();
+  const { setHotelFavorites } = favoriteStore();
+  const token = tokenStore((state) => state.userState)
+  const { favorites } = favoriteStore(state => state)
 
-  
+
   const renderStars = (rating: number) => {
     const filledStars = rating;
     const emptyStars = 5 - rating;
@@ -76,36 +75,30 @@ const Card: React.FC<CardProps> = ({
 
     return icons;
   };
-   
 
-  
-
-
- 
-
- const isFav = hotelFavorite.some((favHotel:any) => favHotel == id);
+  const isFav = hotelFavorite.some((favHotel: any) => favHotel == id);
 
   const handleFavorite = async () => {
-   
-    const info ={
+
+    const info = {
       hotelId: id
     }
 
-      await addFavorite(info, token[1]);
-     
-     
+    await addFavorite(info, token[1]);
+
+
   };
 
- 
- 
-useEffect(()=>{
-const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
 
-   setHotelFavorites(hotelFavorites)
-    
-}, [hotelFavorite])
-  
-  
+
+  useEffect(() => {
+    const hotelFavorites = hotels.filter(hotel => hotelFavorite.includes(hotel.id))
+
+    setHotelFavorites(hotelFavorites)
+
+  }, [hotelFavorite]) // eslint-disable-line
+
+
 
 
   const [ratingValue, setRatingValue] = useState<number | null>(null);
@@ -113,8 +106,8 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
     const fetchRating = async () => {
       try {
         const response = await axios.get(`${url}/rating/${id}`);
-        const scores = response.data.map((element:any) => element.score);
-        const sum = scores.reduce((acc:any, score:any) => acc + score, 0);
+        const scores = response.data.map((element: any) => element.score);
+        const sum = scores.reduce((acc: any, score: any) => acc + score, 0);
         const average = Math.round(sum / scores.length);
         setRatingValue(average);
       } catch (error) {
@@ -126,7 +119,7 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
 
   const orderedServices = () => {
     const stringRaw = services.join(', ');
-    return stringRaw    
+    return stringRaw
   }
 
   return (
@@ -148,10 +141,10 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
           <div>
             <h2 className="text-2xl font-bold mb-4">{name}</h2>
             <div className="flex justify-start mt-auto">
-          <p className="text-gray-500 text-sm mb-4">
-            Ubicación: {city}, {country}
-          </p>
-        </div>
+              <p className="text-gray-500 text-sm mb-4">
+                Ubicación: {city}, {country}
+              </p>
+            </div>
             <p className="text-black text-sm  text-[18px] ">
               {description}
             </p>
@@ -165,38 +158,44 @@ const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
             <div className='flex text-[20px]'>
               <p>Calificación popular:</p>
               {/* Render the Phosphor icon repeatedly */}
-              {ratingValue !== null && renderIcon(ratingValue)}
+              {ratingValue !== null && (
+                <>
+                {renderIcon(ratingValue)}
+                <span className="ml-1">
+                  (<span className="text-sm">{ratingValue}</span>)
+                </span>
+                </>
+              )}
             </div>
 
             <div className='flex '>
               <p className='text-[20px]'>Categoria:{renderStars(Number(hotelCategory))} </p>
-              
             </div>
           </div>
+
           {/* "Ver habitaciones" button */}
           <div className="flex justify-end">
-       <div><button className=" py-2 px-4" onClick={handleFavorite}>{isFav? "💙" : "🤍"}</button></div>
-          
-          <Link to={`/hotelpage/${id}`} key={id}>
-            <div>
-              <p className="text-gray-500 mt-1 text-sm">
-              Ubicación: {city}, {country}
-            </p>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              Ver habitaciones
-            </button>
-          </div>
-          
-           </Link>
-        </div> 
+            {token.length > 0 && <div><button className=" py-2 px-4" onClick={handleFavorite}>{isFav ? "💙" : "🤍"}</button></div>}
+
+            <Link to={`/hotelpage/${id}`} key={id}>
+              <div>
+                <p className="text-gray-500 mt-1 text-sm">
+                  Ubicación: {city}, {country}
+                </p>
+                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                  Ver habitaciones
+                </button>
+              </div>
+            </Link>
           </div>
         </div>
-        {/* Hotel Location (moved it to the leftmost side) */}
+      </div>
+      {/* Hotel Location (moved it to the leftmost side) */}
 
     </div>
   );
-  
-  
+
+
 };
 
 export default Card;

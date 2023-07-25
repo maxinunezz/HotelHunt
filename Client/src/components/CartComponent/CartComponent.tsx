@@ -12,6 +12,7 @@ import { userStore } from "../../Store/UserStore";
 import { useEffect, useState } from "react";
 import { roomsStore } from "../../Store/RoomsStores";
 import { tokenStore } from "../../Store";
+import { ReserveBooking } from "../../Pages/RoomPage/RoomPage";
 
 const CartComponent = () => {
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ const CartComponent = () => {
 
   }
 
-  const roomPhoto = (item) => {
+  const roomPhoto = (item: any) => {
     for (let i = 0; i < allRooms.length; i++) {
       if (allRooms[i].id === item.roomId) {
         return allRooms[i].photo[0]
@@ -73,7 +74,7 @@ const CartComponent = () => {
     }
   };
 
-  const roomName = (item) => {
+  const roomName = (item: any) => {
     for (let i = 0; i < allRooms.length; i++) {
       if (allRooms[i].id === item.roomId) {
         return (
@@ -89,7 +90,7 @@ const CartComponent = () => {
     }
   };
 
-  const [reserveLocal, setReserveLocal] = useState([])
+  const [reserveLocal, setReserveLocal] = useState<ReserveBooking[]>([])
   useEffect(() => {
     setReserveLocal(userReserve);
   }, [userReserve]);
@@ -170,7 +171,7 @@ const CartComponent = () => {
 
           <Dropdown.Label
             className="flex justify-start items-center"
-            weight="Bold"
+            weight="bold"
           >
             <div className="text-black">Total:</div>
             <span className="ml-20 flex justify-end items-center text-green-500">

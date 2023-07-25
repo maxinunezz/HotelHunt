@@ -55,7 +55,7 @@ function App() {
 				<Route path="/RecuPassword" element={<RecuPassword />}></Route>
 				<Route path='/SetNewPass' element={<FormPagePass />}></Route>
 				<Route path="/addcomment/:hotelId" element={<AddRatingPage />}></Route>
-        		<Route path="/myfavorites" element={<FavoritePage />}></Route>
+				<Route path="/myfavorites" element={<FavoritePage />}></Route>
 				<Route path='/SAP' element={<SAPage />}></Route>
 				<Route path='/SALogin' element={<SALogin />}></Route>
 			</Routes>

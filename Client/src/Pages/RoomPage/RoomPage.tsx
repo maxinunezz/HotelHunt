@@ -24,7 +24,7 @@ export interface ReserveBooking {
   roomId: string;
   checkin: string;
   checkout: string;
-  price: string;
+  price: number;
 }
 
 const RoomPage = () => {

@@ -14,19 +14,19 @@ const FavoritePage = () => {
   const { getFavorite } = userStore();
   const token = tokenStore((state) => state.userState);
   const hotelFavorite=userStore(state=>state.favoriteHotel)
-  const hotels=hotelStore(state=>state.hotels)
+  const hotels= hotelStore(state=>state.hotels)
 
   useEffect(() => {
     // fetchHotels();
     getFavorite(token[1]);
-  }, [token]);
+  }, [token]); // eslint-disable-line
 
   useEffect(()=>{
     const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
     
-       setHotelFavorites(hotelFavorites)
+        setHotelFavorites(hotelFavorites)
         
-    }, [hotelFavorite])
+    }, [hotelFavorite]) // eslint-disable-line
       
 
   const totalHotels = favorites?.length;

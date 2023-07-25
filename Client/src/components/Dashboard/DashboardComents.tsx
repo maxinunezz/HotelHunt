@@ -19,7 +19,7 @@ export default function ComentsDashboard() {
 
     useEffect(() => {
         getRatings();
-    }, []);
+    }, []); // eslint-disable-line
 
     const getRatings = async () => {
         try {
@@ -31,7 +31,7 @@ export default function ComentsDashboard() {
             const ratings: Ratings[] = response.data;
             setRatings(ratings);
 
-        } catch (error) {
+        } catch (error:any) {
             setError(error.response.data);
         }
     }

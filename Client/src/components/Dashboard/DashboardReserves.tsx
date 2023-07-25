@@ -21,23 +21,23 @@ export default function ReservesDashboard() {
     const url = import.meta.env.VITE_URL;
     const token = tokenStore((state) => state.userState);
     const [error, setError] = useState<string>("");
-    const [totalPrice, setTotalPrice] = useState<number>(0); 
+    const [totalPrice, setTotalPrice] = useState<number>(0);
 
 
     const handleDownloadExcel = () => {
         if (reservations === undefined || reservations === null || reservations.length === 0) {
-          errorToast("No hay datos que descargar");
+            errorToast("No hay datos que descargar");
         } else {
-          const worksheet = XLSX.utils.json_to_sheet(reservations);
-      
-          const totalRow = { hotelName: 'Total:', price: totalPrice };
-          XLSX.utils.sheet_add_json(worksheet, [totalRow], { skipHeader: true, origin: -1 });
-      
-          const workbook = XLSX.utils.book_new();
-          XLSX.utils.book_append_sheet(workbook, worksheet, "Reservas");
-          XLSX.writeFile(workbook, "reservations.xlsx");
+            const worksheet = XLSX.utils.json_to_sheet(reservations);
+
+            const totalRow = { hotelName: 'Total:', price: totalPrice };
+            XLSX.utils.sheet_add_json(worksheet, [totalRow], { skipHeader: true, origin: -1 });
+
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Reservas");
+            XLSX.writeFile(workbook, "reservations.xlsx");
         }
-      };
+    };
 
 
 
@@ -47,22 +47,22 @@ export default function ReservesDashboard() {
 
     const getReserves = async () => {
         try {
-          const response = await axios.get(`${url}/dashboard/booking`, {
-            headers: {
-              authorization: `Bearer ${token[1]}`
-            }
-          });
-          const reserves: Reservation[] = response.data;
-          setReservations(reserves);
-    
-          // Calcular la suma de los importes
-          const total = reserves.reduce((acc, reservation) => acc + (+reservation.price), 0);
-          setTotalPrice(total);
-    
-        } catch (error) {
-          setError(error.response.data);
+            const response = await axios.get(`${url}/dashboard/booking`, {
+                headers: {
+                    authorization: `Bearer ${token[1]}`
+                }
+            });
+            const reserves: Reservation[] = response.data;
+            setReservations(reserves);
+
+            // Calcular la suma de los importes
+            const total = reserves.reduce((acc, reservation) => acc + (+reservation.price), 0);
+            setTotalPrice(total);
+
+        } catch (error:any) {
+            setError(error.response.data);
         }
-      };
+    };
 
 
     return (
