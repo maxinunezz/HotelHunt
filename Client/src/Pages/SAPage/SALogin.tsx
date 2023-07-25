@@ -7,6 +7,7 @@ import axios from 'axios';
 import { errorToast, successToast } from '../../components/toast';
 import { tokenStore } from '../../Store';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -28,6 +29,7 @@ const loginValidationSchema = yup.object().shape({
 export default function SALogin() {
     const [showPassword, setShowPassword] = useState(false);
     const { saveInfo } = tokenStore();
+    const navigate = useNavigate();
     const URL = import.meta.env.VITE_URL;
 
     const handleSubmit = useCallback(
@@ -48,6 +50,7 @@ export default function SALogin() {
                         saveInfo(arrayAux)
                     }
                     successToast('Usuario logeado correctamente');
+                    navigate('/SAP')
 
                 }
                 )

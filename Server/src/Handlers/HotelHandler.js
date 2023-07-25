@@ -1,4 +1,21 @@
-const { Hotel, conn } = require("../db");
+const { Hotel,User, Auth, conn } = require("../db");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
+
+const { PASSMAIL, COMPANYMAIL } = process.env;
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: COMPANYMAIL,
+    pass: PASSMAIL,
+  },
+});
+
+
+
 
 const getAllhotels = async (req, res) => {
   let hotels_array = [];
@@ -38,7 +55,21 @@ const updateHotel = async (req, res) => {
     if (!hotel) {
       return res.status(404).send("Hotel no encontrado");
     }
+    const user = await User.findByPk(hotel.userId)
+    const auth = await Auth.findOne({where: { userId: user.id }})
+    const email = auth.email;
 		await hotel.update(req.body);
+    await transporter.sendMail({
+      from: `"Hotel Hunt"  <${COMPANYMAIL}>`,
+      to: email,
+      subject: "CONFIRM YOUR ACCOUNT",
+      html: `
+    <b>
+    Su hotel ${hotel.name} ha sido desactivado por que no cumple con las normas del sitio, por favor editelo.
+    Si considera que es un error contactenos a ${COMPANYMAIL}
+    </b>
+    `,
+    });
 		return res.status(200).json(hotel);
 	} catch (error) {
 		return res.status(500).send(error.message);

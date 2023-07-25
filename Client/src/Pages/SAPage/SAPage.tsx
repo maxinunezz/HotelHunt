@@ -1,38 +1,38 @@
 import { SAStore } from "../../Store";
-import DashboardHotel from "../../components/Dashboard/DashboardHotels";
+import SAHotels from "../../components/SAComponents/SAHotels";
 import ReservesDashboard from "../../components/Dashboard/DashboardReserves";
 import ComentsDashboard from "../../components/Dashboard/DashboardComents";
 import { useEffect, useState } from "react";
 import SABar from "../../components/SAComponents/SideSap";
 
-const SAPage = () => { 
-    const { coments, hotels, reserves, users } = SAStore((state)=> state)
-    
-    const [renderComponent, setRenderComponent] = useState<React.ReactNode>(null);
+const SAPage = () => {
+  const { coments, hotels, reserves, users } = SAStore((state) => state)
 
-    useEffect(() => {
-        if (coments === true) {
-          setRenderComponent(< ComentsDashboard/>);
-        } else if (hotels === true) {
-          setRenderComponent(<DashboardHotel />);
-        } else if (reserves === true) {
-          setRenderComponent(<ReservesDashboard />);
-        } else if (users === true){
-            setRenderComponent(<div>User Component</div>)
-        } else {
-          setRenderComponent(<div>No se seleccionó ninguna opción.</div>);
-        }
-      }, [coments, hotels, reserves, users]);
+  const [renderComponent, setRenderComponent] = useState<React.ReactNode>(null);
 
-    return (
-        <div className="flex-auto">
-            <SABar />
-            <div className="flex">
-                <div>{renderComponent}</div>
-            </div>
-        </div>
+  useEffect(() => {
+    if (coments === true) {
+      setRenderComponent(< ComentsDashboard />);
+    } else if (hotels === true) {
+      setRenderComponent(<SAHotels />);
+    } else if (reserves === true) {
+      setRenderComponent(<ReservesDashboard />);
+    } else if (users === true) {
+      setRenderComponent(<div>User Component</div>)
+    } else {
+      setRenderComponent(<div>No se seleccionó ninguna opción. NELSON,PONELE ESTILO A ESTO, MINIMO</div>);
+    }
+  }, [coments, hotels, reserves, users]);
 
-    );
+  return (
+    <div className="flex-auto">
+      <div className="flex">
+        <SABar />
+        <div>{renderComponent}</div>
+      </div>
+    </div>
+
+  );
 };
 
 export default SAPage;

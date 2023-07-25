@@ -204,7 +204,7 @@ const recoveryPass = async (req,res) => {
     })
 
 
-    return res.status(200).send('Contraseña actualiza').redirect('http://localhost:5173/')
+    return res.status(200).redirect('http://localhost:5173/')
   } catch (error) {
     return res.status(500).json(error);
   }

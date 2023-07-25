@@ -5,7 +5,7 @@ type States = {
 	reserves: boolean;
 	coments: boolean;
     updated: boolean;
-    users: boolean
+    users: boolean;
 };
 
 type Actions = {

@@ -69,6 +69,8 @@ async function createBooking(req, res) {
           unit_amount: room.price * calculateDays(room) * 100,
           product_data: {
             name: room.name,
+            photo: room.photo,
+
           },
         },
         quantity: 1,
@@ -208,7 +210,7 @@ const stripehook = async (req, res) => {
   /*const sig = req.headers['stripe-signature'];
   const payload = req.body;
 
-  console.log(payload)
+  
   let event;
 
   try {
@@ -220,6 +222,7 @@ const stripehook = async (req, res) => {
   }*/
   const sessionId = req.body.data.object.id;
   const status = req.body.data.object.payment_status;
+
   
 
   try {

@@ -1,14 +1,22 @@
 import { ClipboardText, Gear, SignOut, User } from '@phosphor-icons/react';
 import { useNavigate } from 'react-router-dom';
 import { tokenStore, SAStore } from '../../Store';
-import { farewellAdminToast } from '../toast';
-import { MouseEvent } from 'react';
+import { farewellAdminToast, errorToast } from '../toast';
+import { MouseEvent, useEffect } from 'react';
 
 export default function SABar() {
     const navigate = useNavigate()
     const { setHotels, setReservs, setComents, setUsers} = SAStore();
     const { resetToken } = tokenStore()
     const isLogged = tokenStore((state) => state.userState)
+
+    useEffect(()=>{
+        if(isLogged[2] !== 'super'){
+            errorToast('Acceso Restringido');
+            navigate('/')
+        }
+    },[])
+
 
 
     const setRender = (arg:String) => {
@@ -41,13 +49,13 @@ export default function SABar() {
         event.preventDefault()
         document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         resetToken()
-        farewellAdminToast("Gracias y éxito en sus ventas")
-        navigate('/farewell')
+        farewellAdminToast("Cierre exitoso")
+        navigate('/SALogin')
     }
 
-    return (
-        
+    return (        
         <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+
             <a>
                 <div>
                     <h1 className="text-white">
@@ -61,9 +69,9 @@ export default function SABar() {
                     </h1>
                 </div>
             </a>
-            {isLogged.length ? (isLogged[2] === "super" ? (
             <div className="flex flex-col justify-between flex-1 mt-6">
                 <nav className="-mx-3 space-y-6">
+
                     <div className="space-y-3">
                         <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
                             Panel de Administración
@@ -121,7 +129,7 @@ export default function SABar() {
                             </div>
 
                             <span className="mx-2 text-sm font-medium" onClick={() => setRender("users")}>
-                                Usuarios
+                                users
                             </span>
                         </a>
                     </div>
@@ -136,23 +144,13 @@ export default function SABar() {
                             Cerrar sesión
                         </button>
                     </div>
-                    </nav>
+                </nav>
+
                 <div>
                     <p className=" text-xs text-white ">© 2023 - Todos los derechos reservados</p>
                 </div>
-            </div>
-            ):(<div>
-                <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
-                        <div className="w-5 h-5">
-                            <User size={20} />
-                        </div>
 
-                        <span
-                            className="mx-2 text-sm font-medium">
-                            Acceso restringido a Administradores de la Página
-                        </span>
-                    </a>
-            </div>)):( <SABar />)}
+            </div>
         </aside>
     )
 } 

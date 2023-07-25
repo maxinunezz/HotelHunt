@@ -97,12 +97,14 @@ async function firstload() {
         hotelCategory,
         services,
       } = hotel;
+      let photos = [];
+      photos.push(photo);
       const hotelcreated = await Hotel.create({
         id,
         name,
         description,
         userId,
-        photo,
+        photo: photos,
         city,
         country,
         hotelCategory,
