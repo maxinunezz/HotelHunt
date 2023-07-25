@@ -28,7 +28,7 @@ const getForSearch = async (req, res) => {
       city: hotel.city,
       photo: hotel.photo,
       services: hotel.services,
-      hotelcategory: hotel.hotelCategory
+      hotelCategory: hotel.hotelCategory
     }));
 
 

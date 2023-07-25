@@ -114,7 +114,7 @@ export default function AdminSetting() {
             }
         );
         userUpdateToast("UserData updated!")
-        navigate('/')
+        navigate(-1)
     }
 
     return (
@@ -180,8 +180,7 @@ export default function AdminSetting() {
                                 className="h-11 w-full px-3 border border-solid rounded text-grey-900 text-l 2xl:rounded-sm border-grey-500"
                                 placeholder="Tu email"
                                 aria-invalid="false"
-                                
-                                
+                                value={user.email}
                             />
                         </label>
 
