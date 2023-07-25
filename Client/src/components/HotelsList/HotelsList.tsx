@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import { hotelStore } from "../../Store";
 import PaginadoGlobal from "../Pagination/PaginadoGlobal";
@@ -22,6 +21,7 @@ const HotelList = () => {
     
   };
 
+  
 
 
   return (
@@ -40,12 +40,14 @@ const HotelList = () => {
                 hotelCategory={hotel.hotelCategory}
                 services={hotel.services}
                 score={hotel.score}
+                
               />
-     
+
           ))
         ) : (
           <p className="bg-neutral-800">No hay hoteles</p>
         )}
+        
       </div>
       <PaginadoGlobal
         elementsPerPage={hotelsPerPage}

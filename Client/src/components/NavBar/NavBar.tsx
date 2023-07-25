@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { hotelStore, searchStore, tokenStore } from "../../Store";
 import UserMenu from "../UserMenuDropDown/UserMenu";
 import AdminMenu from "../UserMenuDropDown/AdminMenu";
-import { Dropdown, Button, Input } from "@rewind-ui/core";
+import { Dropdown, Button } from "@rewind-ui/core";
 import { UserCircle } from '@phosphor-icons/react';
 import { useEffect, useState } from "react";
 import CartComponent from '../CartComponent/CartComponent';
@@ -16,13 +16,12 @@ export default function NavBar() {
 	const searchResults = searchStore((state) => state.searchResults)
 	const { reset, orderByCategorySearch, orderByNameSearch } = searchStore();
 	const { orderByName, resetHotels, fetchHotels, orderByCategory } = hotelStore();
-	const [filterByNameState, setfilterByNameState] = useState();
 
 
 	const [orderByNameState, setOrderByNameState] = useState("");
 	const [orderByCategoryState, setOrderByCategoryState] = useState("");
 
-	const handleAllHotels = (element: Event) => {
+	const handleAllHotels = (element: React.MouseEvent<HTMLButtonElement>) => {
 		element.preventDefault();
 		resetHotels();
 		fetchHotels();
@@ -35,14 +34,14 @@ export default function NavBar() {
 		orderByNameSearch(searchResults, orderByNameState)
 		setOrderByNameState("")
 		setOrderByCategoryState("")
-	}, [orderByNameState]);
+	}, [orderByNameState]); // eslint-disable-line
 
 	useEffect(() => {
 		orderByCategory(allHotels, orderByCategoryState);
 		orderByCategorySearch(searchResults, orderByCategoryState)
 		setOrderByNameState("")
 		setOrderByCategoryState("")
-	}, [orderByCategoryState]);
+	}, [orderByCategoryState]); // eslint-disable-line
 
 	const handleRoomSearch = () => {
 		navigate('/roomSearch')
@@ -68,7 +67,9 @@ export default function NavBar() {
 			<button onClick={handleRoomSearch} className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600">
 				Habitaciones</button>
 
-		<button onClick={()=>navigate('/myfavorites')}>favorites</button>
+			{isLogged.length > 0 && (
+				<button onClick={() => navigate('/myfavorites')}>favorites</button>
+			)}
 
 			<button
 				className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600"

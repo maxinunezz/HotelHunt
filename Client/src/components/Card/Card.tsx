@@ -13,7 +13,7 @@ interface CardProps {
   description: string;
   country: string;
   city: string;
-  photo: string[];
+  photo: string;
   services: string[];
   hotelCategory: string;
   score: number;
@@ -76,12 +76,6 @@ const Card: React.FC<CardProps> = ({
     return icons;
   };
 
-
-
-
-
-
-
   const isFav = hotelFavorite.some((favHotel: any) => favHotel == id);
 
   const handleFavorite = async () => {
@@ -102,7 +96,7 @@ const Card: React.FC<CardProps> = ({
 
     setHotelFavorites(hotelFavorites)
 
-  }, [hotelFavorite])
+  }, [hotelFavorite]) // eslint-disable-line
 
 
 
@@ -164,17 +158,24 @@ const Card: React.FC<CardProps> = ({
             <div className='flex text-[20px]'>
               <p>Calificación popular:</p>
               {/* Render the Phosphor icon repeatedly */}
-              {ratingValue !== null && renderIcon(ratingValue)}
+              {ratingValue !== null && (
+                <>
+                {renderIcon(ratingValue)}
+                <span className="ml-1">
+                  (<span className="text-sm">{ratingValue}</span>)
+                </span>
+                </>
+              )}
             </div>
 
             <div className='flex '>
               <p className='text-[20px]'>Categoria:{renderStars(Number(hotelCategory))} </p>
-
             </div>
           </div>
+
           {/* "Ver habitaciones" button */}
           <div className="flex justify-end">
-            <div><button className=" py-2 px-4" onClick={handleFavorite}>{isFav ? "💙" : "🤍"}</button></div>
+            {token.length > 0 && <div><button className=" py-2 px-4" onClick={handleFavorite}>{isFav ? "💙" : "🤍"}</button></div>}
 
             <Link to={`/hotelpage/${id}`} key={id}>
               <div>
@@ -185,7 +186,6 @@ const Card: React.FC<CardProps> = ({
                   Ver habitaciones
                 </button>
               </div>
-
             </Link>
           </div>
         </div>

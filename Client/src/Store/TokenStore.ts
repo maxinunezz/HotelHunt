@@ -25,6 +25,7 @@ export interface UserState extends Array<any> {
 } 
 
 export type States = {
+    price: number;
     userState: UserState
     hotelsUserById: any[];
 }
@@ -37,7 +38,8 @@ type Actions = {
 
 const initialState: States = {
     userState: [] as any,
-    hotelsUserById: []
+    hotelsUserById: [],
+    price: 0
 }
 
 export const tokenStore = create<States & Actions>((set) => ({

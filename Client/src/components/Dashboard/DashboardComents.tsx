@@ -19,7 +19,7 @@ export default function ComentsDashboard() {
 
     useEffect(() => {
         getRatings();
-    }, []);
+    }, []); // eslint-disable-line
 
     const getRatings = async () => {
         try {
