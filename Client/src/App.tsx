@@ -24,6 +24,7 @@ import { useEffect } from 'react';
 import FavoritePage from './Pages/FavoritePage/FavoritePage';
 import SAPage from './Pages/SAPage/SAPage';
 import SALogin from './Pages/SAPage/SALogin';
+import CheckoutTransitionPage from './Pages/CheckoutTransitionPage/CheckoutTransitionPage';
 
 
 function App() {
@@ -58,7 +59,8 @@ function App() {
 				<Route path="/myfavorites" element={<FavoritePage />}></Route>
 				<Route path='/SAP' element={<SAPage />}></Route>
 				<Route path='/SALogin' element={<SALogin />}></Route>
-			</Routes>
+				<Route path='/paymenttransition' element={<CheckoutTransitionPage />}></Route>
+			</ Routes>
 		</div>
 	);
 }

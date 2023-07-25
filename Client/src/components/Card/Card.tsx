@@ -75,8 +75,6 @@ const Card: React.FC<CardProps> = ({
 
   const isFav = hotelFavorite.some((favHotel: any) => favHotel == id);
 
-  const isFav = hotelFavorite.some((favHotel: any) => favHotel == id);
-
   const handleFavorite = async () => {
 
     const info = {
