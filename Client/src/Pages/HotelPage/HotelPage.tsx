@@ -1,5 +1,5 @@
 import {  useNavigate, useParams } from 'react-router-dom';
-import { hotelStore, roomsStore, tokenStore } from '../../Store';
+import { SAStore, hotelStore, roomsStore, tokenStore } from '../../Store';
 import RoomList from '../../components/RoomList/RoomList';
 import { useEffect, useState } from 'react';
 import { MapPinLine } from '@phosphor-icons/react'
@@ -24,6 +24,7 @@ const HotelPage = () => {
 	const { hotelIdSetter } = roomsStore();
 	const { fetchHotels } = hotelStore();
 	const [hotelsLoaded, setHotelsLoaded] = useState(false);
+	const update = SAStore((state)=>state.updated)
 
 	const allHotels = hotelStore((state) => state.hotels);
 	const token = tokenStore((state) => state.userState);
@@ -57,7 +58,7 @@ const HotelPage = () => {
 		};
 
 		fetchRating();
-	}, [id]);
+	}, [id,update]);
 
 
 
