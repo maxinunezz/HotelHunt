@@ -36,7 +36,7 @@ export default function DashboardRow({
 
     const confirmDelete = async () => {
         try {
-            const data = await axios.delete(
+            const response = await axios.delete(
                 `${url}/dashboard/hotel/${id}`,
                 {
                     headers: {
@@ -48,7 +48,7 @@ export default function DashboardRow({
             userDeleteToast('Hotel eliminado');
 
 
-            setShowConfirmDialog(false);
+            setShowConfirmDialog(response.data);
             navigate(-1)
             navigate(+1)
 

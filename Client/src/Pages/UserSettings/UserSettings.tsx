@@ -63,7 +63,7 @@ export default function AdminSetting() {
 
     });
     const [errors, setErrors] = useState<errores>({password:'', lastName:'',firstName:'', phoneNumber:''})
-    const validation = (input:any) => {
+    const validation = (inputObject:any) => {
         let errors:errores = {password:'', lastName:'',firstName:'', phoneNumber:''};
 
         if (!inputObject.firstName || !/^(?:[A-Z][a-zA-Z]*)(?: [A-Z][a-zA-Z]*){0,2}$/.test(inputObject.firstName)) {

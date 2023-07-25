@@ -78,7 +78,7 @@ export default function HotelsRow({
         }
     }
 
-    const handleChangeCheckbox = (e) => {
+    const handleChangeCheckbox = (e:any) => {
         e.stopPropagation();
         setIsChecked(e.target.checked);
         if (e.target.checked !== disabled) {

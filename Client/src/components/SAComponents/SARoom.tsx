@@ -23,7 +23,7 @@ const SARooms = () => {
             if (response.data) {
                 setRoomByUser(response.data)
             }
-        } catch (error) {
+        } catch (error:any) {
             errorToast(error.response.data);
 
         }

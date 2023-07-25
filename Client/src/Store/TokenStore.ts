@@ -32,7 +32,7 @@ type States = {
 }
 
 type Actions = {
-    saveInfo: (arrayAux: States['userState']) => Promise<void>
+    saveInfo: (arrayAux:any) => Promise<void>
     getHotelByUser: (hotelsArray: any[]) => Promise<void>
     resetToken: () => void
 }

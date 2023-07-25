@@ -126,7 +126,7 @@ const RoomPage = () => {
       roomId: id??'',
       checkin: date.in,
       checkout: date.out,
-      price: roomRender?.price ?? "0"    };
+      price: Number(roomRender?.price)?? 0   };
 
     if (calculateDays(newReserve) < 1) {
       reserveErrorToast("Establezca al menos una noche");

@@ -36,7 +36,7 @@ export default function SALogin() {
         async (values: LoginValues, helpers: FormikHelpers<LoginValues>) => {
             try {
                 console.log('values', values);
-                const arrayAux: [] = [];
+                const arrayAux: any = [];
                 return await axios.post(`${URL}/user/auth`, values).then((response) => {
                     if (response.data) {
                         const tokenRaw = response.data.token
@@ -55,7 +55,7 @@ export default function SALogin() {
                 }
                 )
 
-            } catch (error) {
+            } catch (error:any) {
                 errorToast(error.response.data);
                 console.log(error);
 

@@ -16,7 +16,7 @@ export default function SARoomRow({
     id: string;
     name: string;
     hotelName: string;
-    photo: [];
+    photo: string[];
     disabled: boolean;
 }) {
     const userData = tokenStore((state) => state.userState);
@@ -76,7 +76,7 @@ export default function SARoomRow({
         }
     }
 
-    const handleChangeCheckbox = (e) => {
+    const handleChangeCheckbox = (e:any) => {
         e.stopPropagation();
         setIsChecked(e.target.checked);
         if (e.target.checked !== disabled) {

@@ -186,7 +186,7 @@ export default function FormPageRoomUpdate() {
                             roomName: currentRoomData?.name || '',
                             floorNumber: currentRoomData?.floorNumber || '',
                             description: currentRoomData?.description || '',
-                            capacity: currentRoomData?.pax || '',
+                            capacity: currentRoomData?.pax || 1,
                             services: currentRoomData?.services || [],
                             price: currentRoomData?.price ? currentRoomData.price.toString() : '',
                             photo: currentRoomData?.photo || [],

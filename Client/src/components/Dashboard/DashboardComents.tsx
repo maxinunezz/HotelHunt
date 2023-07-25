@@ -13,7 +13,7 @@ export default function ComentsDashboard() {
     const [ratings, setRatings] = useState<Ratings[]>([]);
     const url = import.meta.env.VITE_URL;
     const token = tokenStore((state) => state.userState);
-    const [error, setError] = useState<string>("");
+    const [, setError] = useState<string>("");
 
 
 

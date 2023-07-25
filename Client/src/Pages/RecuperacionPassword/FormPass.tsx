@@ -88,7 +88,7 @@ const FormPagePass = () => {
                         onSubmit={handleSubmit}
                         validationSchema={loginValidationSchema}
                     >
-                        {({ values, errors, submitForm, setFieldValue }) => (
+                        {({ values, errors,  setFieldValue }) => (
                             <Form className="space-y-4 h-[530px]">
                                 <div className="flex space-x-4">
                                     <div className="w-1/2">
