@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const { PASSMAIL, COMPANYMAIL, JWT_SECRET } = process.env;
+const { PASSMAIL, COMPANYMAIL, JWT_SECRET,BACK_URL, FRONT_URL } = process.env;
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",

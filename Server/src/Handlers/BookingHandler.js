@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const { END_POINT } = process.env;
-const { STRIPE_SECRET } = process.env
+const { STRIPE_SECRET,FRONT_URL } = process.env
 const stripe = new Stripe(`${STRIPE_SECRET}`);
 
 async function createBooking(req, res) {

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET, FRONT_URL } = process.env;
 
 function generateRandomPassword(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

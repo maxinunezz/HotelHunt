@@ -1,6 +1,6 @@
 const { User, Auth, conn } = require("../db");
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET, FRONT_URL } = process.env;
 
 const confirmedAccount = async (req, res) => {
 
