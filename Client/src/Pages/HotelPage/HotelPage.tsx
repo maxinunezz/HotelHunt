@@ -2,7 +2,6 @@ import {  useNavigate, useParams } from 'react-router-dom';
 import { hotelStore, roomsStore, tokenStore } from '../../Store';
 import RoomList from '../../components/RoomList/RoomList';
 import { useEffect, useState } from 'react';
-import NavBar from '../../components/NavBar/NavBar';
 import { MapPinLine } from '@phosphor-icons/react'
 import Footer from "../../components/Footer/Footer";
 import axios from 'axios';
