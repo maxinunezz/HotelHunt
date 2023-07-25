@@ -133,7 +133,7 @@ const CartComponent = () => {
         <Dropdown.Trigger className="flex items-center">
           <Button>
             <ShoppingCart size={30} weight="duotone" className="mr-1.5" />
-            Cart ({
+            Carrito ({
               userReserve.length
             })
           </Button>

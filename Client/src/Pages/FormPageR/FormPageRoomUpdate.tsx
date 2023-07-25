@@ -165,71 +165,62 @@ export default function FormPageRoomUpdate() {
     return data.secure_url;
   };
 
-  return (
-    <div className="flex h-screen">
-      <div className="w-full bg-blue-500 flex flex-col justify-center">
-        <h2 className="text-3xl text-white font-bold px-8 text-center">
-          Título del área azul
-        </h2>
-      </div>
-      <div className="w-full bg-gray-800 shadow-lg p-8 overflow-y-auto">
-        <div className="max-h-full">
-          <div className="flex justify-start">
-            <BackButton />
-          </div>
-          <h2 className="text-2xl font-bold mb-4 text-blue-500 text-center">
-            ✨UPDATE DE HABITACIONES✨
-          </h2>
-          {isCreated && (
-            <p className="text-green-500">El formulario se creó con éxito.</p>
-          )}
-          <p className="text-xl text-white font-bold px-8 text-center">
-            New room for hotel: {hotelsUser[0].name}
-          </p>
-          <Formik<FormValues>
-            enableReinitialize
-            initialValues={{
-              roomName: currentRoomData?.name || "",
-              floorNumber: currentRoomData?.floorNumber || "",
-              description: currentRoomData?.description || "",
-              capacity: currentRoomData?.pax || 1,
-              services: currentRoomData?.services || [],
-              price: currentRoomData?.price
-                ? currentRoomData.price.toString()
-                : "",
-              photo: currentRoomData?.photo || [],
-              disabled: currentRoomData?.disabled || false,
-            }}
-            onSubmit={handleSubmit}
-            validationSchema={formValidationSchema}
-          >
-            {({ values, errors, setFieldValue, resetForm }) => {
-              const areServicesSelected = values.services.length > 0;
-              return (
-                <Form>
-                  <FormControl
-                    validation={
-                      values.roomName.length === 0
-                        ? "none"
-                        : errors.roomName
-                        ? "invalid"
-                        : "valid"
-                    }
-                    className="mb-4"
-                  >
-                    <FormControl.Label className="text-white">
-                      Nombre de habitación
-                    </FormControl.Label>
-                    <FormControl.Input
-                      type="text"
-                      placeholder={`Current name: ${currentRoomData?.name}`}
-                      onChange={async (event) => {
-                        await setFieldValue("roomName", event.target.value);
-                      }}
-                      value={values.roomName}
-                    />
-                    <FormControl.Text>{errors.roomName}</FormControl.Text>
-                  </FormControl>
+    return (
+        <div className="flex h-screen">
+            <div className="w-full bg-blue-500 flex flex-col justify-center items-center py-8">
+                <h2 className="text-3xl text-white font-bold">Bienvenido a nuestro Hotel</h2>
+                <p className="text-lg text-white">¡Crea nuevas habitaciones para tus huéspedes!</p>
+            </div>
+
+            <div className="w-full bg-gray-800 shadow-lg p-8 overflow-y-auto">
+                <div className="max-h-full">
+                    <div className="flex justify-start">
+                        <BackButton />
+                    </div>
+                    <h2 className="text-2xl font-bold mb-4 text-blue-500 text-center">✨UPDATE DE HABITACIONES✨</h2>
+                    {isCreated && <p className="text-green-500">El formulario se creó con éxito.</p>}
+                    <p className="text-xl text-white font-bold px-8 text-center">New room for hotel: {hotelsUser[0].name}</p>
+                    <Formik<FormValues>
+                        enableReinitialize
+                        initialValues={{
+                            roomName: currentRoomData?.name || '',
+                            floorNumber: currentRoomData?.floorNumber || '',
+                            description: currentRoomData?.description || '',
+                            capacity: currentRoomData?.pax || '',
+                            services: currentRoomData?.services || [],
+                            price: currentRoomData?.price ? currentRoomData.price.toString() : '',
+                            photo: currentRoomData?.photo || [],
+                            disabled: false,
+                        }}
+                        onSubmit={handleSubmit}
+                        validationSchema={formValidationSchema}
+                    >
+                        {({ values, errors, setFieldValue, resetForm }) => {
+                            const areServicesSelected = values.services.length > 0;
+                            return (
+                                <Form>
+                                    <FormControl
+                                        validation={
+                                            values.roomName.length === 0
+                                                ? 'none'
+                                                : errors.roomName
+                                                    ? 'invalid'
+                                                    : 'valid'
+                                        }
+                                        className="mb-4"
+                                    >
+                                        <FormControl.Label className="text-white">Nombre de habitación</FormControl.Label>
+                                        <FormControl.Input
+                                            type="text"
+                                            placeholder={`Current name: ${currentRoomData?.name}`}
+                                            onChange={async (event) => {
+                                                await setFieldValue('roomName', event.target.value);
+                                            }}
+                                            value={values.roomName}
+
+                                        />
+                                        <FormControl.Text>{errors.roomName}</FormControl.Text>
+                                    </FormControl>
 
                   <FormControl
                     validation={

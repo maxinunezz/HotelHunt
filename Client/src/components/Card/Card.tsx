@@ -86,21 +86,23 @@ const Card: React.FC<CardProps> = ({
 
   };
 
-  useEffect(() => {
-    const hotelFavorites = hotels.filter((hotel) =>
-      hotelFavorite.includes(hotel.id)
-    );
 
-    setHotelFavorites(hotelFavorites);
-  }, [hotelFavorite, hotels, setHotelFavorites]);
+
+  useEffect(() => {
+    const hotelFavorites = hotels.filter(hotel => hotelFavorite.includes(hotel.id))
+
+    setHotelFavorites(hotelFavorites)
+
+  }, [hotelFavorite])
+
 
   const [ratingValue, setRatingValue] = useState<number | null>(null);
   useEffect(() => {
     const fetchRating = async () => {
       try {
         const response = await axios.get(`${url}/rating/${id}`);
-        const scores = response.data.map((element:any) => element.score);
-        const sum = scores.reduce((acc:any, score:any) => acc + score, 0);
+        const scores = response.data.map((element: any) => element.score);
+        const sum = scores.reduce((acc: any, score: any) => acc + score, 0);
         const average = Math.round(sum / scores.length);
         setRatingValue(average);
       } catch (error) {

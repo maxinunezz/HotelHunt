@@ -62,11 +62,15 @@ export default function HomePage() {
 				<div className="mt-[70px]">
 				</div>
 
+
+
+
+
 				<div className="mt-8">
 					{searchResults?.length ? <HotelListSearch /> : <HotelList />}
 				</div>
 			</div>
-			<div className='mt-[4%]'>
+			<div className='mt-[7%]'>
 				<Footer />
 				</div>
 

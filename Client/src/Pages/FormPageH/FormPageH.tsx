@@ -101,10 +101,16 @@ export default function FormPageH() {
 
 	return (
 		<div className="flex h-screen">
-			<div className="w-full bg-blue-500 flex flex-col justify-center">
-				<img src={Hotel} alt="Imagen" className="mx-auto max-w-full" />
-				<h2 className="text-3xl text-white font-bold px-8 text-center">Título del área azul</h2>
+			<div className="w-full bg-blue-500 flex flex-col justify-center items-center py-8">
+			<img src={Hotel} alt="Imagen" className="mx-auto max-w-full" />
+				<h2 className="text-3xl text-white font-bold px-4 text-center">
+					Publica tu hotel con HOTELHUNT
+				</h2>
+				<p className="text-white text-lg mt-2 opacity-80">
+					Descubre los mejores hoteles con nosotros
+				</p>
 			</div>
+
 			<div className="w-full bg-gray-800 shadow-lg p-8 overflow-y-auto">
 				<div className="max-h-full">
 					<div className="flex justify-start">

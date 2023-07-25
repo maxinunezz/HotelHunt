@@ -199,7 +199,7 @@ const RoomPage = () => {
                     </div>
                     <div className="bg-gray-200 p-4 rounded mt-5 shadow-lg border border-black">
                       <div className="flex ">
-                      <p className="font-bold pe-1">{`Belongs to hotel: `}</p>
+                      <p className="font-bold pe-1">{`Pertenece al hotel: `}</p>
                       <button onClick={()=> navigate(`/hotelpage/${roomRender?.hotelId}`)} className="font-bold hover:text-blue-600">{`${hotelOfThisRoom(roomRender?.hotelId)}`}</button>
                       </div>
 
@@ -225,7 +225,7 @@ const RoomPage = () => {
           </div>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>Cargando...</p>
       )}
       <Footer />
     </div>

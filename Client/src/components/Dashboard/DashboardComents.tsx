@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 interface Ratings {
-    hotel: string; 
+    hotel: string;
     coments: string;
     score: number;
 }
@@ -38,58 +38,41 @@ export default function ComentsDashboard() {
 
 
     return (
-        <div className="flex">
-            <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5 flex-grow">
-                <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                    <div className="overflow-hidden">
-                        <div className="flex justify-center items-center">
-                            <div className="text-2xl font-bold mb-4 mt-16">Comentarios</div>
+        <div className="p-[20px] bg-slate-600 rounded-lg h-full w-full shadow-md border border-gray-300">
+
+
+            <h2 className="text-3xl font-semibold mb-4 text-white shadow-md bg-gradient-to-r from-slate-900 to-slate-900 px-4 py-2 rounded-lg">
+                COMENTARIOS
+            </h2>
+
+
+            <div className="overflow-x-auto w-[1545px] max-h-[820px] overflow-y-auto">
+                <ul className="space-y-4 my-4">
+                    {ratings.length > 0 ? (
+                        ratings.map((rating, index) => (
+                            <li
+                                key={index}
+                                className={`p-4 rounded-lg transition duration-300 ease-in-out ${index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                                    } hover:bg-gray-100 border border-gray-200`}
+                            >
+
+                                <h3 className="text-xl font-semibold mb-2">{rating.hotel}</h3>
+                                <p className="text-lg whitespace-wrap break-words">{rating.coments}</p>
+                                <p className="text-lg whitespace-nowrap">Calificación: {rating.score}</p>
+                            </li>
+                        ))
+                    ) : (
+                        <div className="flex items-center justify-center h-full">
+                            <div className="p-8 rounded-lg border border-red-500 bg-red-500 text-white text-center">
+                                <p className="text-lg font-bold mb-2">No existen comentarios</p>
+                                <p className="text-base">¡Sé el primero en dejar un comentario!</p>
+                            </div>
                         </div>
-                        <table className="min-w-full">
-                            <thead className="bg-gray-200 border-b">
-                                <tr>
-                                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Hotel
-                                    </th>
-                                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Comentario
-                                    </th>
-                                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                        Calificación
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {(ratings.length > 0) ? (ratings.map((rating, index) => (
-                                    <tr
-                                        key={index}
-                                        className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
-                                    >
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            {rating.hotel}
-                                        </td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {rating.coments}
-                                        </td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {rating.score}
-                                        </td>
-                                    </tr>
-                                ))) : (
-                                    <tr>
-                                        <td
-                                            colSpan={6} 
-                                            className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                                        >
-                                            {error}
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+
+                    )}
+                </ul>
             </div>
         </div>
+
     );
 }
