@@ -30,7 +30,7 @@ type States = {
 type Actions = {
 	fetchRooms: () => Promise<void>;
 	fetchRoomsDashboard: (hotelId: string, token:string) => Promise<void>;
-	hotelIdSetter: (roomsHotelSelected: []) => Promise<void>;
+	hotelIdSetter: (roomsHotelSelected: []|undefined) => Promise<void>;
 	setRoom: (roomDetail: string|undefined) => Promise<void>;
 	changeCurrentPage: (payload: number | boolean) => void;
 };
@@ -77,7 +77,7 @@ export const roomsStore = create<States & Actions>((set) => ({
 		}
 	},
 
-	hotelIdSetter: async (roomsHotelSelected) => {
+	hotelIdSetter: async (roomsHotelSelected:any) => {
 		const arrayAux: Room[] = [];
 
 

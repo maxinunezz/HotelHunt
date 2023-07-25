@@ -1,4 +1,4 @@
-import { Form, useNavigate, useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import { hotelStore, roomsStore, tokenStore } from '../../Store';
 import RoomList from '../../components/RoomList/RoomList';
 import { useEffect, useState } from 'react';
@@ -6,18 +6,24 @@ import NavBar from '../../components/NavBar/NavBar';
 import { MapPinLine } from '@phosphor-icons/react'
 import Footer from "../../components/Footer/Footer";
 import axios from 'axios';
+import { Hotel } from '../../models';
 
 const url = import.meta.env.VITE_URL;
+
+interface Rating{
+score: number;
+comment:string;
+hotelId:string;
+}
 
 const HotelPage = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
-	const [hotelOnScreen, setroomsId] = useState([]);
-	const [hotelRatings, setHotelRatings] = useState([]);
+	const [hotelOnScreen, setroomsId] = useState <Hotel>();
+	const [hotelRatings, setHotelRatings] = useState<Rating[]>([]);
 	const { hotelIdSetter } = roomsStore();
 	const { fetchHotels } = hotelStore();
 	const [hotelsLoaded, setHotelsLoaded] = useState(false);
-	const [showCommentForm, setShowCommentForm] = useState(false);
 
 	const allHotels = hotelStore((state) => state.hotels);
 	const token = tokenStore((state) => state.userState);
@@ -43,6 +49,8 @@ const HotelPage = () => {
 			try {
 				const response = await axios.get(`${url}/rating/${id}`);
 				setHotelRatings(response.data);
+				console.log(response.data);
+				
 			} catch (error) {
 				console.error(error);
 			}
@@ -67,7 +75,7 @@ const HotelPage = () => {
 		const newWindowRoute = `/addcomment/${id}`;
 		const windowFeatures = 'height=500,width=800,resizable=yes,scrollbars=yes';
 		window.localStorage.setItem("tokenInfo", JSON.stringify(token))
-		window.localStorage.setItem("hotelId", id)
+		window.localStorage.setItem("hotelId", id||hotelRatings[0].hotelId)
 		window.open(newWindowRoute, '_blank', windowFeatures);
 	};
 

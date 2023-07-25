@@ -6,7 +6,7 @@ const url = import.meta.env.VITE_URL;
 
 type States = {
   reserves: ReserveBooking[];
-  urlPayment: string | null;
+  urlPayment: string ;
   sessionIdUser: string;
   allSessionData: object;
   favoriteHotel: any[];
@@ -19,11 +19,12 @@ type Actions = {
   getFavorite:(userData: any) => Promise<void>
   addFavorite:(hotelId:any ,userData: any) => Promise<void>
   reset: (stateKey: keyof States) => void;
+  resetAll:()=>void;
 };
 
 const initialState: States = {
   reserves: [],
-  urlPayment: null,
+  urlPayment: '',
   sessionIdUser: "",
   allSessionData:{},
   favoriteHotel: []
@@ -97,6 +98,10 @@ export const userStore = create<States & Actions>((set) => ({
       ...state,
       [stateKey]: initialState[stateKey],
     }));
+  },
+
+  resetAll:()=>{
+    set(initialState)
   },
 
   roomPayment: async (info, token) => {

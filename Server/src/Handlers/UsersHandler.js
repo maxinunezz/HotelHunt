@@ -199,12 +199,10 @@ const recoveryPass = async (req,res) => {
     };
     const allinfo = { token: token, admin: admin, data: data };
 
-    res.cookie('json', allinfo,{
-      secure:true,
-    })
+    res.cookie('json', allinfo)
 
 
-    return res.status(200).send('Contraseña actualiza').redirect('http://localhost:5173/')
+    return res.status(200).send('Contraseña actualiza')
   } catch (error) {
     return res.status(500).json(error);
   }

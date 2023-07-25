@@ -7,10 +7,18 @@ import axios from 'axios';
 import { useState } from "react";
 const url = import.meta.env.VITE_URL;
 
+interface errores{
+    password:string;
+    lastName:string;
+    firstName:string;
+    phoneNumber:string;
+
+}
+
 export default function AdminSetting() {
     const navigate = useNavigate()
     const userData = tokenStore((state) => state.userState)
-    const { deleteAccount, reset } = userStore()
+    const { resetAll } = userStore()
     const { resetToken } = tokenStore()
 
 
@@ -35,7 +43,7 @@ export default function AdminSetting() {
             console.log(data);
 
             userDeleteToast('Lamentamos verte partir')
-            reset()
+            resetAll()
             resetToken()
             navigate('/')
         } catch (error) {
@@ -54,9 +62,9 @@ export default function AdminSetting() {
         isCheckedValue: "normal",
 
     });
-    const [errors, setErrors] = useState({})
-    const validation = (input) => {
-        let errors = {};
+    const [errors, setErrors] = useState<errores>({password:'', lastName:'',firstName:'', phoneNumber:''})
+    const validation = (input:any) => {
+        let errors:errores = {password:'', lastName:'',firstName:'', phoneNumber:''};
 
         if (!input.firstName || !/^(?:[A-Z][a-zA-Z]*)(?: [A-Z][a-zA-Z]*){0,2}$/.test(input.firstName)) {
             errors.firstName = "Debe tener un nombre válido con la primera letra mayúscula y permitir nombres compuestos de hasta 255 caracteres.";
@@ -78,7 +86,7 @@ export default function AdminSetting() {
     };
 
 
-    const handleChange = (event) => {
+    const handleChange = (event:any) => {
 
         setInput({
             ...input,
@@ -97,7 +105,7 @@ export default function AdminSetting() {
             return
         }
 
-        const data = await axios.put(
+         await axios.put(
             `${url}/dashboard/user`,
             {
                 name: input.firstName,
@@ -135,7 +143,7 @@ export default function AdminSetting() {
                                 onChange={(event) => handleChange(event)}
                             />
                         </label>
-                        {errors.firstName && <p className="text-red-700">{errors.firstName}</p>}
+                        {errors?.firstName && <p className="text-red-700">{errors.firstName}</p>}
                         <label className="block mb-4">
                             <span className="text-gray-700 font-semibold">Apellidos</span>
                             <input
@@ -147,7 +155,7 @@ export default function AdminSetting() {
                                 onChange={(event) => handleChange(event)}
                             />
                         </label>
-                        {errors.lastName && <p className="text-red-700">{errors.lastName}</p>}
+                        {errors?.lastName && <p className="text-red-700">{errors.lastName}</p>}
                         <label className="block mb-4">
                             <span className="text-gray-700 font-semibold">Fecha de Nacimiento</span>
                             <input
@@ -170,7 +178,7 @@ export default function AdminSetting() {
                                 onChange={(event) => handleChange(event)}
                             />
                         </label>
-                        {errors.phoneNumber && <p className="text-red-700">{errors.phoneNumber}</p>}
+                        {errors?.phoneNumber && <p className="text-red-700">{errors.phoneNumber}</p>}
 
                         <label className="block mb-4">
                             <span className="text-gray-700 font-semibold">Email</span>
@@ -195,7 +203,7 @@ export default function AdminSetting() {
                                 onChange={(event) => handleChange(event)}
                             />
                         </label>
-                        {errors.password && <p className="text-red-700">{errors.password}</p>}
+                        {errors?.password && <p className="text-red-700">{errors.password}</p>}
 
                         <label className="block mb-4">
                             <span className="text-gray-700 font-semibold">Quiero publicar mi hotel</span>

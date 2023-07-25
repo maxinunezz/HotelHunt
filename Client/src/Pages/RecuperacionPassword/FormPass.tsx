@@ -1,12 +1,11 @@
 import { Button, FormControl } from '@rewind-ui/core';
 import { Form, Formik, FormikHelpers } from 'formik';
-import { useCallback, useState } from 'react';
+import { useCallback} from 'react';
 import axios from 'axios';
 import { errorToast, successToast } from '../../components/toast';
 import * as yup from 'yup';
-import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -26,7 +25,7 @@ const loginValidationSchema = yup.object().shape({
         .min(8, 'La contraseña debe tener al menos 8 caracteres'),
     confirmPassword: yup
         .string()
-        .oneOf([yup.ref('password'), null], 'Las contraseñas deben coincidir')
+        .oneOf([yup.ref('password')], 'Las contraseñas deben coincidir')
         .required('Debes confirmar tu contraseña')
 });
 
@@ -35,7 +34,7 @@ const FormPagePass = () => {
     const url = import.meta.env.VITE_URL;
     const [cookies] = useCookies(["token"]);
     const Token = cookies.token && cookies.token.token;
-    console.log(Token);
+
 
 
 
@@ -43,7 +42,7 @@ const FormPagePass = () => {
         async (values: passCreateValues, helpers: FormikHelpers<passCreateValues>) => {
             try {
 
-                const response = await axios.post(
+               const response =  await axios.post(
                     `${url}/user/updatePass`,
                     {
                         password: values.password,
@@ -55,8 +54,9 @@ const FormPagePass = () => {
                     }
                 );
                 successToast(response.data);
-                navigate(-1)
-            } catch (error) {
+                navigate('/')
+              
+            } catch (error:any) {
 
                 errorToast(error.response.data);
             }
@@ -69,14 +69,16 @@ const FormPagePass = () => {
     return (
         <div className="bg-blue-500 flex items-center h-screen justify-center">
             <div className="flex w-full justify-center">
-                <div className="bg-gray-800 p-8 rounded-md w-[480px] h-[500px]">
-                    <h1 className="text-5xl text-center font-bold mt-10 text-white mb-8">
-                        Recupera tu contraseña de
+                <div className="bg-white w-[600px] rounded-md p-8">
+                    <h1 className="text-5xl text-center text-gray-800 font-bold mt-10">
+                        Recupera tu password de
                         <br />
                         <span className="text-5xl text-blue-500 font-extrabold tracking-wider">
                             HOTELHUNT
                         </span>
                     </h1>
+                </div>
+                <div className="bg-gray-800 p-8 rounded-md w-[500px]">
                     <Formik
                         initialValues={{
                             password: '',
@@ -85,58 +87,55 @@ const FormPagePass = () => {
                         onSubmit={handleSubmit}
                         validationSchema={loginValidationSchema}
                     >
-                        {({ values, errors, submitForm, setFieldValue }) => (
-                            <form className="space-y-4">
+                        {({ values, errors, setFieldValue }) => (
+                            <Form className="space-y-4 h-[530px]">
                                 <div className="flex space-x-4">
-                                    <div className="w-full">
-                                        <div className="text-black">
-                                            <div className="text-white">
-                                                <label htmlFor="password">Contraseña</label>
-                                            </div>
-                                            <input
-                                                id="password"
-                                                type="text"
+                                    <div className="w-1/2">
+                                        <FormControl>
+                                            <FormControl.Label className="text-white">
+                                                Contraseña
+                                            </FormControl.Label>
+                                            <FormControl.Input
+                                                type="password"
                                                 placeholder="Contraseña"
                                                 onChange={(event) => {
                                                     setFieldValue('password', event.target.value);
                                                 }}
                                                 value={values.password}
-                                                className="bg-white rounded-md py-2 px-4 w-full"
+                                                className="bg-white rounded-md py-2 px-4"
                                             />
-                                            {errors.password && (
-                                                <p className="text-red-500">{errors.password}</p>
-                                            )}
-                                        </div>
-                                        <div className="text-black">
-                                            <div className="text-white">
-                                                <label htmlFor="confirmPassword">Confirmar contraseña</label>
-                                            </div>
-                                            <input
-                                                id="confirmPassword"
-                                                type="text"
-                                                placeholder="Confirmar contraseña"
-                                                onChange={(event) => {
-                                                    setFieldValue('confirmPassword', event.target.value);
-                                                }}
-                                                value={values.confirmPassword}
-                                                className="bg-white rounded-md py-2 px-4 w-full"
-                                            />
-                                            {errors.confirmPassword && (
-                                                <p className="text-red-500">{errors.confirmPassword}</p>
-                                            )}
-                                        </div>
+                                            <FormControl.Text className="text-red-500">
+                                                {errors.password}
+                                            </FormControl.Text>
+                                        </FormControl>
+                                        <FormControl.Label className="text-white">
+                                            Confirmar contraseña
+                                        </FormControl.Label>
+                                        <FormControl.Input
+                                            type="password"
+                                            placeholder="Confirmar contraseña"
+                                            onChange={(event) => {
+                                                setFieldValue('confirmPassword', event.target.value);
+                                            }}
+                                            value={values.confirmPassword}
+                                            className="bg-white rounded-md py-2 px-4"
+                                        />
+                                        <FormControl.Text className="text-red-500">
+                                            {errors.confirmPassword}
+                                        </FormControl.Text>
                                     </div>
                                 </div>
-                                <div className="flex justify-center">
-                                    <button
+                                <div className="flex items-center justify-center">
+                                    <Button
+                                        color="blue"
                                         type="submit"
                                         disabled={Object.keys(errors).length > 0}
                                         className="py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                                     >
-                                        Establecer nueva contraseña.
-                                    </button>
+                                        Establecer nueva password.
+                                    </Button>
                                 </div>
-                            </form>
+                            </Form>
                         )}
                     </Formik>
                 </div>

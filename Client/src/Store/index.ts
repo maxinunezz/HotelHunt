@@ -1,6 +1,6 @@
 export * from './HotelsStore';
 export * from './SearchStore';
 export * from "./RoomsStores"
-export * from "./TokenStore"
 export * from "./RoomSearchStore"
 export * from "./DashboardStore"
+export * from "./TokenStore"

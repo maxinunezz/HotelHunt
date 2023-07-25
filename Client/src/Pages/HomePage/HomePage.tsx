@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { searchStore, hotelStore } from '../../Store';
+import { searchStore, hotelStore} from '../../Store';
 import HotelListSearch from '../../components/HotelsList/HotelListSearch';
 import HotelList from '../../components/HotelsList/HotelsList';
 import NavBar from '../../components/NavBar/NavBar';
@@ -22,7 +22,8 @@ export default function HomePage() {
 
 	const findCookie = () => {
 		if (cookies.json) {
-			const arrayAux: [] = [];
+			const arrayAux= [];
+		
 			const logeado = true
 			const userData = cookies.json && cookies.json.data;
 			const tokenRaw = cookies.json && cookies.json.token;

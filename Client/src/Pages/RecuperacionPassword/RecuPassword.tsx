@@ -31,7 +31,7 @@ const RecuPassword = () => {
 
         successToast(response.data);
         navigate('/login'); // redirigir a la página de inicio de sesión después de enviar el correo.
-      } catch (error) {
+      } catch (error:any) {
         errorToast(error.response.data);
       }
 
