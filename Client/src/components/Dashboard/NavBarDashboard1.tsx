@@ -1,4 +1,3 @@
-import { Text } from "@rewind-ui/core";
 import { useNavigate } from "react-router-dom";
 
 const NavBarDashboard1 = () => {

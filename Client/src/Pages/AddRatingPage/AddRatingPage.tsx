@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { hotelStore } from '../../Store';
-import { useParams } from 'react-router-dom';
+import { SAStore, hotelStore } from '../../Store';
 import axios from 'axios';
+import {UserState} from '../../Store/TokenStore'
 
 const url = import.meta.env.VITE_URL;
 
 
 
 const CommentForm: React.FC = () => {
-    const { id } = useParams()
     const [score, setScore] = useState<number | undefined>(undefined);
     const [comment, setComment] = useState<string>('');
     const { fetchHotels } = hotelStore();
-    const [token, setToken] = useState(null);
+    const [token, setToken] = useState<UserState | undefined>();
     const [hotelId, setHotelId] = useState("");
     const userId = token?.[0]?.id
+    const { setUpdated } = SAStore();
+    const currentState = SAStore((state)=> state.updated)
+
     useEffect(() => {
         const storedToken = window.localStorage.getItem("tokenInfo");
         if (storedToken) {
@@ -29,14 +31,9 @@ const CommentForm: React.FC = () => {
 
         fetchHotels();
     }, []);
-    const allHotels = hotelStore((state) => state.hotels);
-    console.log({
-         hotelId,
-         userId,
-         comment,
-         score,
-    });
-
+    
+    const authorizationHeader = token ? token[1] : "" ;
+  
     const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -51,11 +48,13 @@ const CommentForm: React.FC = () => {
                 },
                 {
                     headers: {
-                        authorization: `Bearer ${token[1]}`,
+                        authorization: `Bearer ${authorizationHeader}`,
                     },
                 }
             );
-            console.log(response.data);
+            if(response.data){
+              setUpdated(!currentState)
+            }
             window.close();
         } else {
             // Si los inputs no son válidos, puedes mostrar un mensaje de error o hacer alguna otra acción

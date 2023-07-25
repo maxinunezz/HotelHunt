@@ -36,7 +36,7 @@ export default function DashboardRow({
 
     const confirmDelete = async () => {
         try {
-            const data = await axios.delete(
+            const response = await axios.delete(
                 `${url}/dashboard/hotel/${id}`,
                 {
                     headers: {
@@ -44,13 +44,11 @@ export default function DashboardRow({
                     },
                 }
             );
-            console.log(data);
-            console.log("Hotel eliminado");
 
             userDeleteToast('Hotel eliminado');
 
 
-            setShowConfirmDialog(false);
+            setShowConfirmDialog(response.data);
             navigate(-1)
             navigate(+1)
 
@@ -79,12 +77,12 @@ export default function DashboardRow({
             setConfirmDisabled(false);
             setUpdated(!currentState)
 
-        } catch (error) {
+        } catch (error:any) {
             errorToast(error.response.data);
         }
     }
 
-    const handleChangeCheckbox = (e) => {
+    const handleChangeCheckbox = (e:any) => {
         e.stopPropagation();
         setIsChecked(e.target.checked);
         if (e.target.checked !== disabled) {

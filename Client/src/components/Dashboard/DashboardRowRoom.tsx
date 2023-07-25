@@ -83,11 +83,13 @@ export default function DashboardRowRoom({
                 </div>
 
                 <div className="col-span-1 flex items-center justify-center">
-                    <button onClick={(e) => {
+                    <button
+                  
+                     onClick={(e) => {
                         e.stopPropagation();
                         handleEdit();
                     }}>
-                        <FaEdit />
+                        <FaEdit size={32} />
                     </button>
                 </div>
                 <div className="col-span-1 flex items-center justify-center">
@@ -95,7 +97,7 @@ export default function DashboardRowRoom({
                         e.stopPropagation();
                         handleDelete();
                     }}>
-                        <FaTrashAlt />
+                        <FaTrashAlt size={32} />
                     </button>
                 </div>
             </div>

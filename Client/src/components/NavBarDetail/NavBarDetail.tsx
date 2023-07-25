@@ -1,5 +1,9 @@
-import { House,Bed } from '@phosphor-icons/react';
+import { House,Bed, UserCircle } from '@phosphor-icons/react';
 import { useNavigate, useLocation } from 'react-router';
+import CartComponent from "../CartComponent/CartComponent";
+import UserMenu from '../UserMenuDropDown/UserMenu';
+import AdminMenu from '../UserMenuDropDown/AdminMenu';
+import { tokenStore } from '../../Store';
 
 
 export default function NavbarDetail() {
@@ -7,6 +11,8 @@ export default function NavbarDetail() {
   const location = useLocation();
   const isRoomSearch = location.pathname.toLocaleLowerCase().includes('/roomsearch')
   console.log(location.pathname);
+  const isLogged = tokenStore((state) => state.userState);
+
   
   
   return (
@@ -33,6 +39,26 @@ export default function NavbarDetail() {
               <Bed size={32}  weight="thin" className="mr-4 text-blue-500" />
               <a className="text-white">All Rooms</a>
             </li>}
+            <li className='px-5'>
+               {isLogged.length ? (
+        isLogged[2] === "normal" ? (
+          <UserMenu />
+        ) : (
+          <AdminMenu/>
+        )
+      ) : (
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={() => navigate("/login")}
+        >
+          <UserCircle size={32} className="mr-2" />
+          <h1>Login</h1>
+        </div>
+      )}
+            </li>
+            <li>
+              <CartComponent/>
+            </li>
           </ul>
         </div>
       </div>

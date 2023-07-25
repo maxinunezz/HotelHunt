@@ -1,26 +1,23 @@
 const { Hotel, Room, User, Booking, Auth, Rating } = require("../db");
 
 const getAllHotelsById = async (req, res) => {
-
   const { id } = userData;
 
   try {
-
     const hotels = await Hotel.findAll({
       where: {
         userId: id,
       },
-    })
+    });
 
     if (!hotels) {
-      res.status(404).send('No hay hoteles asociados')
+      res.status(404).send("No hay hoteles asociados");
     }
 
-    res.status(200).json(hotels)
-
+    res.status(200).json(hotels);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Dashboard error')
+    res.status(500).send("Dashboard error");
   }
 };
 
@@ -28,14 +25,13 @@ const getRoomsByHotel = async (req, res) => {
   const { hotelId } = req.params;
 
   try {
-    const RoomsByHotel = await Room.findAll({ where: { hotelId: hotelId } })
+    const RoomsByHotel = await Room.findAll({ where: { hotelId: hotelId } });
     if (!RoomsByHotel) {
-      throw Error('Este Hotel aún no tiene habitaciones')
+      throw Error("Este Hotel aún no tiene habitaciones");
     }
     return res.status(200).json(RoomsByHotel);
   } catch (error) {
     return res.status(500).send(error.message);
-
   }
 };
 
@@ -52,7 +48,6 @@ const UpdateRoomsByHotel = async (req, res) => {
       return res.status(404).send("Habitación no encontrada");
     }
 
-
     let tuhotel;
 
     if (room) {
@@ -60,21 +55,20 @@ const UpdateRoomsByHotel = async (req, res) => {
         where: {
           id: room.hotelId,
           userId: userData.id,
-        }
+        },
       });
     }
 
     if (!tuhotel) {
-      return res.status(403).send("No tienes permiso para editar esta sala")
+      return res.status(403).send("No tienes permiso para editar esta sala");
     }
 
     await room.update(req.body);
     return res.status(200).send("Habitación actualizada");
-
   } catch (error) {
-    return res.status(500).json(error.message)
+    return res.status(500).json(error.message);
   }
-}
+};
 
 const deleteRoomsByHotel = async (req, res) => {
   const { roomId } = req.params;
@@ -91,23 +85,20 @@ const deleteRoomsByHotel = async (req, res) => {
       where: {
         id: room.hotelId,
         userId: userData.id,
-      }
+      },
     });
     if (hotel) {
-
-      await room.update({ disabled: true })
+      await room.update({ disabled: true });
       await room.destroy();
 
       return res.status(200).send("Sala eliminada con éxito");
     } else {
       return res.status(403).send("no es tu habitacion");
     }
-
   } catch (error) {
     return res.status(500).send(error.message);
   }
 };
-
 const restoreRoom = async (req, res) => {
   const { roomId } = req.params;
   try {
@@ -115,33 +106,43 @@ const restoreRoom = async (req, res) => {
     if (!room) {
       return res.status(404).send("Habitación no encontrada");
     }
-    if (!room.destroyTime) {
-      return res.status(400).send("La habitación no se elimina");
+    if (!room.deletedAt) {
+      return res.status(400).send("La habitación ya está restaurada");
+    }
+    let turoom;
+    if (room) {
+      turoom = await Hotel.findOne({
+        where: {
+          id: room.hotelId,
+          userId: userData.id,
+        },
+      });
+    }
+
+    if (!turoom) {
+      return res.status(403).send("No tienes permiso para restaurar esta sala");
     }
     await room.restore();
-
     return res.status(200).send("Habitación restaurada con éxito");
   } catch (error) {
     return res.status(500).send(error.message);
   }
 };
-
 const UpdateHotelByUser = async (req, res) => {
   const { hotelId } = req.params;
-  console.log(req.body)
   try {
     const hotel = await Hotel.findOne({
       where: {
         id: hotelId,
-        userId: userData.id
-      }
+        userId: userData.id,
+      },
     });
     if (!hotel) {
       return res.status(404).send("Hotel no encontrado");
     }
 
     await hotel.update(req.body);
-    return res.status(200).json('Hotel actualizado');
+    return res.status(200).json("Hotel actualizado");
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -149,20 +150,20 @@ const UpdateHotelByUser = async (req, res) => {
 
 const createHotelByUser = async (req, res) => {
   try {
-    const { name, description, country, city, photo, hotelCategory, services, } =
+    const { name, description, country, city, photo, hotelCategory, services } =
       req.body;
     const { id } = userData;
 
     const hotel = await Hotel.findOne({
       where: {
-        name: name
-      }
+        name: name,
+      },
     });
     if (hotel) {
       return res.status(404).send("El hotel ya existe");
     }
 
-    const photosArray = []
+    const photosArray = [];
     photosArray.push(photo);
 
     if (!hotel) {
@@ -183,12 +184,11 @@ const createHotelByUser = async (req, res) => {
   } catch (error) {
     return res.status(500).json(error.message);
   }
-
 };
 
 const createRoomByHotel = async (req, res) => {
-
-  const { name, description, pax, services, photo, price, floorNumber } = req.body;
+  const { name, description, pax, services, photo, price, floorNumber } =
+    req.body;
 
   const { hotelId } = req.params;
   try {
@@ -196,7 +196,7 @@ const createRoomByHotel = async (req, res) => {
       where: {
         id: hotelId,
         userId: userData.id,
-      }
+      },
     });
     if (hotel) {
       const newRoom = await Room.create({
@@ -208,7 +208,7 @@ const createRoomByHotel = async (req, res) => {
         price,
         photo,
         floorNumber,
-        hotelCategory: hotel.hotelCategory
+        hotelCategory: hotel.hotelCategory,
       });
 
       const RoomsIds = hotel.roomsId;
@@ -226,12 +226,11 @@ const createRoomByHotel = async (req, res) => {
 
       return res.status(201).send("Habitacion creada con éxito");
     } else {
-      return res.status(403).send("Solo el dueño puede crear habitaciones")
+      return res.status(403).send("Solo el dueño puede crear habitaciones");
     }
   } catch (error) {
     return res.status(500).json(error.message);
   }
-
 };
 
 const deleteHotelByUser = async (req, res) => {
@@ -242,12 +241,12 @@ const deleteHotelByUser = async (req, res) => {
       where: {
         id: id,
         userId: userData.id,
-      }
+      },
     });
     if (!hotel) {
       return res.status(404).send("Hotel no encontrado");
     }
-    await hotel.update({ disabled: true })
+    await hotel.update({ disabled: true });
     await hotel.destroy();
     return res.status(200).send("Hotel eliminado con éxito");
   } catch (error) {
@@ -262,11 +261,15 @@ const restoreHotel = async (req, res) => {
     if (!hotel) {
       return res.status(404).send("Hotel no encontrado");
     }
-    if (!hotel.destroyTime) {
-      return res.status(400).send("El hotel no se elimina");
+    if (!hotel.deletedAt) {
+      return res.status(400).send("El hotel ya está restaurado");
+    }
+    if (hotel.userId !== userData.id) {
+      return res
+        .status(403)
+        .send("No tienes permiso para restaurar este hotel");
     }
     await hotel.restore();
-
     return res.status(200).send("Hotel restaurado con éxito");
   } catch (error) {
     return res.status(500).send(error.message);
@@ -282,7 +285,9 @@ const deleteAccount = async (req, res) => {
     }
     const destroyUser = await user.destroy();
     await Promise.all([destroyUser]);
-    return res.status(200).json({ message: "Tienes 30 días después de que se elimine tu cuenta" });
+    return res
+      .status(200)
+      .json({ message: "Tienes 30 días después de que se elimine tu cuenta" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -308,10 +313,9 @@ const updateAccount = async (req, res) => {
 const getUserInfo = async (req, res) => {
   const { id } = userData;
 
-
   try {
-    const userInfo = await findByPk({ id: id })
-    const mailinfo = await findOne({ where: { userId: id } })
+    const userInfo = await findByPk({ id: id });
+    const mailinfo = await findOne({ where: { userId: id } });
 
     const allInfo = {
       name: userInfo.name,
@@ -319,11 +323,10 @@ const getUserInfo = async (req, res) => {
       birthDate: userInfo.birthDate,
       phoneNumber: userInfo.phoneNumber,
       admin: userInfo.admin,
-      email: mailinfo.email
-    }
+      email: mailinfo.email,
+    };
 
     return res.status(200).json(allInfo);
-
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -337,28 +340,27 @@ const getAllBooking = async (req, res) => {
     const hotels = await Hotel.findAll({
       where: {
         userId: id,
-      }
-    })
+      },
+    });
     console.log(hotels);
     if (!hotels) {
-      return res.status(404).send("Aun no has registrado un hotel")
+      return res.status(404).send("Aun no has registrado un hotel");
     }
 
     for (const hotel of hotels) {
       const booking = await Booking.findAll({
         where: {
           hotelId: hotel.id,
-        }
-      })
-
+        },
+      });
 
       for (const reserve of booking) {
-        let room = []
-        room = await Room.findByPk(reserve.roomId)
+        let room = [];
+        room = await Room.findByPk(reserve.roomId);
         if (room.length === 0) {
-          return res.status(404).send('Aun no tienes habitaciones')
+          return res.status(404).send("Aun no tienes habitaciones");
         }
-        const user = await Auth.findOne({ where: { userId: id } })
+        const user = await Auth.findOne({ where: { userId: id } });
         const one_reserve = {
           checkin: reserve.checkin,
           checkout: reserve.checkout,
@@ -367,26 +369,19 @@ const getAllBooking = async (req, res) => {
           hotelName: hotel.name,
           paymentStatus: reserve.paymentStatus,
           userEmail: user.email,
-        }
-        reservas.push(one_reserve)
+        };
+        reservas.push(one_reserve);
       }
-
     }
     if (reservas.length > 0) {
-      return res.status(200).json(reservas)
+      return res.status(200).json(reservas);
     } else {
-      return res.status(404).send('Aun no tienes reservas')
+      return res.status(404).send("Aun no tienes reservas");
     }
-
-
   } catch (error) {
-    return res.status(500).json(error)
+    return res.status(500).json(error);
   }
 };
-
-
-
-
 
 const getAllRating = async (req, res) => {
   const { id } = userData;
@@ -395,41 +390,38 @@ const getAllRating = async (req, res) => {
     const hotels = await Hotel.findAll({
       where: {
         userId: id,
-      }
-    })
+      },
+    });
     if (!hotels) {
-      return res.status(404).send("No exsiste el hotel")
+      return res.status(404).send("No exsiste el hotel");
     }
     for (const hotel of hotels) {
       const ratings = await Rating.findAll({
         where: {
           hotelId: hotel.id,
-        }
+        },
       });
       if (!ratings) {
-        return res.status(404).send("No exsisten comentario")
+        return res.status(404).send("No exsisten comentario");
       }
       for (const rating of ratings) {
         const one_reserve = {
           score: rating.score,
           coments: rating.comment,
-          hotel: hotel.name
-        }
-        comentario.push(one_reserve)
-
+          hotel: hotel.name,
+        };
+        comentario.push(one_reserve);
       }
     }
     if (comentario.length > 0) {
-      return res.status(200).json(comentario)
+      return res.status(200).json(comentario);
     } else {
-      return res.status(404).send("No existen comentarios")
+      return res.status(404).send("No existen comentarios");
     }
   } catch (error) {
-    return res.status(500).json(error)
+    return res.status(500).json(error);
   }
 };
-
-
 
 module.exports = {
   getAllHotelsById,
@@ -448,4 +440,3 @@ module.exports = {
   getAllBooking,
   getAllRating,
 };
-

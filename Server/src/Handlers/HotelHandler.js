@@ -1,10 +1,26 @@
-const { Hotel, conn } = require("../db");
+const { Hotel,User, Auth, conn } = require("../db");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
+
+const { PASSMAIL, COMPANYMAIL } = process.env;
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: COMPANYMAIL,
+    pass: PASSMAIL,
+  },
+});
+
+
+
 
 const getAllhotels = async (req, res) => {
   let hotels_array = [];
   try {
-
-    const data = await Hotel.findAll({where: {disabled: false}});
+    const data = await Hotel.findAll({ where: { disabled: false } });
     if (data.length === 0) {
       throw Error("No se encontraron hoteles");
     }
@@ -30,7 +46,6 @@ const getAllhotels = async (req, res) => {
   }
 };
 
-
 const updateHotel = async (req, res) => {
   const { id } = req.params;
   try {
@@ -38,7 +53,22 @@ const updateHotel = async (req, res) => {
     if (!hotel) {
       return res.status(404).send("Hotel no encontrado");
     }
+
+    const user = await User.findByPk(hotel.userId)
+    const auth = await Auth.findOne({where: { userId: user.id }})
+    const email = auth.email;
 		await hotel.update(req.body);
+    await transporter.sendMail({
+      from: `"Hotel Hunt"  <${COMPANYMAIL}>`,
+      to: email,
+      subject: "Hotel desactivado",
+      html: `
+    <b>
+    Su hotel ${hotel.name} ha sido desactivado por que no cumple con las normas del sitio, por favor editelo.
+    Si considera que es un error contactenos a ${COMPANYMAIL}
+    </b>
+    `,
+    });
 		return res.status(200).json(hotel);
 	} catch (error) {
 		return res.status(500).send(error.message);
@@ -59,8 +89,40 @@ const deleteHotel = async (req, res) => {
   }
 };
 
+const getHotelsAdmin = async (req, res) => {
+  let hotels_array = [];
+  try {
+
+    const data = await Hotel.findAll();
+    if (data.length === 0) {
+      throw Error("No se encontraron hoteles");
+    }
+
+    data.forEach((hotel) => {
+      const one_hotel = {
+        id: hotel.id,
+        userId: hotel.userId,
+        name: hotel.name,
+        description: hotel.description,
+        country: hotel.country,
+        city: hotel.city,
+        services: hotel.services,
+        hotelCategory: hotel.hotelCategory,
+        photo: hotel.photo,
+        roomsId: hotel.roomsId,
+        disabled: hotel.disabled,
+      };
+      hotels_array.push(one_hotel);
+    });
+    return res.status(200).json(hotels_array);
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   getAllhotels,
   updateHotel,
   deleteHotel,
+  getHotelsAdmin,
 };

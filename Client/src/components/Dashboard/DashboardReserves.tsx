@@ -59,7 +59,7 @@ export default function ReservesDashboard() {
             const total = reserves.reduce((acc, reservation) => acc + (+reservation.price), 0);
             setTotalPrice(total);
 
-        } catch (error) {
+        } catch (error:any) {
             setError(error.response.data);
         }
     };

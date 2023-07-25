@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { userStore } from '../../Store/UserStore';
 import { tokenStore } from '../../Store';
 
 const CheckoutTransitionPage = () => {
     const navigate = useNavigate();
-    const sessionStorageInfo = JSON.parse(window.sessionStorage.getItem("token"))
+    const sessionStorageInfo = sessionStorage.getItem("token");
+    const parsedSessionStorageInfo = sessionStorageInfo ? JSON.parse(sessionStorageInfo) : null;
     const { saveInfo } = tokenStore()
     const token = tokenStore((state) => state.userState)
     
     console.log(sessionStorageInfo);
     console.log(token);
+    
     useEffect(() =>{
-        saveInfo(sessionStorageInfo)
+        saveInfo(parsedSessionStorageInfo)
     }, [])
 
 

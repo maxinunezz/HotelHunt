@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const FarewellPage = () => {
@@ -10,10 +10,9 @@ const FarewellPage = () => {
         };
 
         // Duración del gif en milisegundos
-        const gifDuration = 2000; // Cambia este valor según la duración de tu gif en milisegundos
 
         // Redirigir a la página Home después de la duración del gif
-        const timeoutId = setTimeout(redirectHome, gifDuration);
+        const timeoutId = setTimeout(redirectHome,2000);
 
         // Limpiar el timeout al desmontar el componente
         return () => clearTimeout(timeoutId);

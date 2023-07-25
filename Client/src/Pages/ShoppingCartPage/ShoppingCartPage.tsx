@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { CurrencyDollar, ShoppingCart, Trash } from '@phosphor-icons/react';
+import { CurrencyDollar, Trash } from '@phosphor-icons/react';
 import { userStore } from '../../Store/UserStore';
 import { roomsStore, tokenStore } from '../../Store';
 
@@ -8,12 +8,11 @@ const ShoppingCartPage = () => {
   const navigate = useNavigate()
   const allRooms = roomsStore((state) => state.rooms);
   const urlPayment = userStore((state) => state.urlPayment)
-  const sessionId = userStore((state) => state.sessionIdUser)
   const allSessionData = userStore((state) => state.allSessionData)
   const token = tokenStore((state) => state.userState)
   console.log(allSessionData);
 
-  const calculateDays = (item) => {
+  const calculateDays = (item:any) => {
     // Convertir las fechas a objetos Date
     const checkinDate = new Date(item.checkin);
     const checkoutDate = new Date(item.checkout);
@@ -57,7 +56,7 @@ const ShoppingCartPage = () => {
 
   };
 
-  const roomName = (item) => {
+  const roomName = (item:any) => {
     for (let i = 0; i < allRooms.length; i++) {
       if (allRooms[i].id === item.roomId) {
         return (
@@ -73,7 +72,7 @@ const ShoppingCartPage = () => {
     }
   };
 
-  const roomPhoto = (item) => {
+  const roomPhoto = (item:any) => {
     for (let i = 0; i < allRooms.length; i++) {
       if (allRooms[i].id === item.roomId) {
         return allRooms[i].photo[0]
@@ -81,7 +80,7 @@ const ShoppingCartPage = () => {
     }
   };
   const totalValueCart = userReserve.reduce((total, reserve) => {
-    const parcialPrice = reserve.price * calculateDays(reserve);
+    const parcialPrice = Number(reserve.price) * calculateDays(reserve);
     return total + parcialPrice;
   }, 0);
 

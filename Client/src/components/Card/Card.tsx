@@ -26,18 +26,13 @@ const Card: React.FC<CardProps> = ({
   country,
   city,
   photo,
-  services,
   hotelCategory,
-  score
 }) => {
-
-  const hotelFavorite = userStore((state) => state.favoriteHotel)
-  const hotels = hotelStore((state) => state.hotels)
+  const hotelFavorite = userStore((state) => state.favoriteHotel);
+  const hotels = hotelStore((state) => state.hotels);
   const { addFavorite } = userStore();
   const { setHotelFavorites } = favoriteStore();
-  const token = tokenStore((state) => state.userState)
-  const { favorites } = favoriteStore(state => state)
-
+  const token = tokenStore((state) => state.userState);
 
   const renderStars = (rating: number) => {
     const filledStars = rating;
@@ -70,17 +65,13 @@ const Card: React.FC<CardProps> = ({
     const icons = [];
 
     for (let i = 0; i < score; i++) {
-      icons.push(<Buildings key={`building-${i}`} size={32} color='darkblue' />);
+      icons.push(
+        <Buildings key={`building-${i}`} size={32} color="darkblue" />
+      );
     }
 
     return icons;
   };
-
-
-
-
-
-
 
   const isFav = hotelFavorite.some((favHotel: any) => favHotel == id);
 
@@ -105,8 +96,6 @@ const Card: React.FC<CardProps> = ({
   }, [hotelFavorite])
 
 
-
-
   const [ratingValue, setRatingValue] = useState<number | null>(null);
   useEffect(() => {
     const fetchRating = async () => {
@@ -123,16 +112,11 @@ const Card: React.FC<CardProps> = ({
     fetchRating();
   }, [id]);
 
-  const orderedServices = () => {
-    const stringRaw = services.join(', ');
-    return stringRaw
-  }
-
   return (
     <div className="bg-white h-[480px] max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
       {/* Hotel Photo */}
       <img
-        src={photo}
+        src={Array.isArray(photo) ? photo[0] : photo}
         alt={name}
         onError={({ currentTarget }) => {
           currentTarget.onerror = null;
@@ -158,20 +142,27 @@ const Card: React.FC<CardProps> = ({
          
           {/* Hotel Category and Popular Rating */}
           <div>
-            <div className='flex text-[20px]'>
+            <div className="flex text-[20px]">
               <p>Calificación popular:</p>
               {/* Render the Phosphor icon repeatedly */}
-              {ratingValue !== null && renderIcon(ratingValue)}
+              {ratingValue !== null && (
+                <>
+                {renderIcon(ratingValue)}
+                <span className="ml-1">
+                  (<span className="text-sm">{ratingValue}</span>)
+                </span>
+                </>
+              )}
             </div>
 
             <div className='flex '>
               <p className='text-[20px]'>Categoria:{renderStars(Number(hotelCategory))} </p>
-
             </div>
           </div>
+
           {/* "Ver habitaciones" button */}
           <div className="flex justify-end">
-            <div><button className=" py-2 px-4" onClick={handleFavorite}>{isFav ? "💙" : "🤍"}</button></div>
+            {token.length > 0 && <div><button className=" py-2 px-4" onClick={handleFavorite}>{isFav ? "💙" : "🤍"}</button></div>}
 
             <Link to={`/hotelpage/${id}`} key={id}>
               <div>
@@ -180,7 +171,6 @@ const Card: React.FC<CardProps> = ({
                   Ver habitaciones
                 </button>
               </div>
-
             </Link>
           </div>
         </div>

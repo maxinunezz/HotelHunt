@@ -1,9 +1,7 @@
-import { Dropdown, Button, Checkbox } from "@rewind-ui/core";
+import { Dropdown, Button } from "@rewind-ui/core";
 import {
   CurrencyDollar,
-  MagnifyingGlass,
   Money,
-  ReceiptX,
   ShoppingCart,
   Trash,
 } from "@phosphor-icons/react";
@@ -12,11 +10,12 @@ import { userStore } from "../../Store/UserStore";
 import { useEffect, useState } from "react";
 import { roomsStore } from "../../Store/RoomsStores";
 import { tokenStore } from "../../Store";
+import { ReserveBooking } from "../../Pages/RoomPage/RoomPage";
+import { farewellToast } from "../toast";
 
 const CartComponent = () => {
   const navigate = useNavigate();
   const userReserve = userStore((state) => state.reserves);
-  const urlPayment = userStore((state) => state.urlPayment);
   const allRooms = roomsStore((state) => state.rooms);
   const token = tokenStore((state) => state.userState);
 
@@ -36,10 +35,9 @@ const CartComponent = () => {
     return differenceInDays;
   };
 
-  const { reserveRoomPayment, roomPayment, reset } = userStore();
+  const { reserveRoomPayment, roomPayment } = userStore();
 
   const [cartItems, setCartItems] = useState(userReserve); // Aquí se almacenarán los elementos del carrito
-  const [totalPay, setTotalPay] = useState([])
 
   const handleDeleteItem = (roomId: string) => {
     const newArray = cartItems.filter((element) => element.roomId !== roomId);
@@ -55,7 +53,7 @@ const CartComponent = () => {
     const totales = userReserve.map(element => {
 
 
-      return (element.price * calculateDays(element))
+      return (Number(element.price) * calculateDays(element))
     })
 
     const sum = totales.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
@@ -65,7 +63,7 @@ const CartComponent = () => {
 
   }
 
-  const roomPhoto = (item) => {
+  const roomPhoto = (item: any) => {
     for (let i = 0; i < allRooms.length; i++) {
       if (allRooms[i].id === item.roomId) {
         return allRooms[i].photo[0]
@@ -73,7 +71,8 @@ const CartComponent = () => {
     }
   };
 
-  const roomName = (item) => {
+  const roomName = (item: any) => {
+
     for (let i = 0; i < allRooms.length; i++) {
       if (allRooms[i].id === item.roomId) {
         return (
@@ -88,8 +87,9 @@ const CartComponent = () => {
       }
     }
   };
+  
+  const [reserveLocal, setReserveLocal] = useState<ReserveBooking[]>([])
 
-  const [reserveLocal, setReserveLocal] = useState([])
   useEffect(() => {
     setReserveLocal(userReserve);
   }, [userReserve]);
@@ -104,8 +104,9 @@ const CartComponent = () => {
       roomsToReserve: reserveLocal
     }
 
-
+   farewellToast('Loading...')
     await roomPayment(data, token[1]);
+  
     
     navigate('/shoppingcart')
 
@@ -170,7 +171,7 @@ const CartComponent = () => {
 
           <Dropdown.Label
             className="flex justify-start items-center"
-            weight="Bold"
+            weight="bold"
           >
             <div className="text-black">Total:</div>
             <span className="ml-20 flex justify-end items-center text-green-500">
@@ -191,13 +192,7 @@ const CartComponent = () => {
           </Dropdown.Item>
           <Dropdown.Divider />
 
-          <Dropdown.Item
-            onClick={() => navigate("/shoppingcart")}
-            className="flex justify-center items-center"
-          >
-            <ShoppingCart size={20} weight="duotone" className="mr-1.5" />
-            Ver carrito
-          </Dropdown.Item>
+        
         </Dropdown.Content>
       </Dropdown>
     </div>

@@ -6,7 +6,7 @@ const url = import.meta.env.VITE_URL;
 
 type States = {
   reserves: ReserveBooking[];
-  urlPayment: string | null;
+  urlPayment: string ;
   sessionIdUser: string;
   allSessionData: object;
   favoriteHotel: any[];
@@ -14,18 +14,19 @@ type States = {
 
 
 type Actions = {
-  reserveRoomPayment: (data: []) => Promise<void>;
+  reserveRoomPayment: (data: ReserveBooking[]) => Promise<void>;
   roomPayment: (data: {}, token:string ) => Promise<void>;
   getFavorite:(userData: any) => Promise<void>
   addFavorite:(hotelId:any ,userData: any) => Promise<void>
   reset: (stateKey: keyof States) => void;
+  resetAll:()=>void;
 };
 
 const initialState: States = {
   reserves: [],
-  urlPayment: null,
+  urlPayment: '',
   sessionIdUser: "",
-  allSessionData:{},
+  allSessionData: {},
   favoriteHotel: []
 
 };
@@ -33,7 +34,7 @@ const initialState: States = {
 export const userStore = create<States & Actions>((set) => ({
   ...initialState,
 
-  addFavorite: async (hotelId, userData)=>{
+  addFavorite: async (hotelId, userData) => {
 
     try {
 
@@ -47,42 +48,43 @@ export const userStore = create<States & Actions>((set) => ({
         }
       )
 
-      
-      
-      set((state)=>({...state,
-      favoriteHotel:data
-    }))
+
+
+      set((state) => ({
+        ...state,
+        favoriteHotel: data
+      }))
     } catch (error) {
       console.log(error);
     }
-    
-      },
-    
-      getFavorite: async (userData)=>{
-        try {
 
-          
-         const { data } = await axios.get(
-          `${url}/user/favorites`,
-         {
-           headers: {
-             authorization: `Bearer ${userData}`,
-           },
-         })
+  },
 
-         
+  getFavorite: async (userData) => {
+    try {
 
-          set(()=>({
-          favoriteHotel:data
-        }))
 
-        } catch (error) {
-          console.log(error);
-        }
-    
-        
-      },
-    
+      const { data } = await axios.get(
+        `${url}/user/favorites`,
+        {
+          headers: {
+            authorization: `Bearer ${userData}`,
+          },
+        })
+
+
+
+      set(() => ({
+        favoriteHotel: data
+      }))
+
+    } catch (error) {
+      console.log(error);
+    }
+
+
+  },
+
 
   reserveRoomPayment: async (data) => {
     try {
@@ -99,6 +101,10 @@ export const userStore = create<States & Actions>((set) => ({
     }));
   },
 
+  resetAll:()=>{
+    set(initialState)
+  },
+
   roomPayment: async (info, token) => {
     try {
       const { data } = await axios.post(
@@ -112,14 +118,14 @@ export const userStore = create<States & Actions>((set) => ({
       );
 
       const urlPago = data.urlpago; // Ajusta esto según la estructura de la respuesta del backend
-      
-       
+
+
       set((state) => ({
-		...state,
-    allSessionData: data,
-		urlPayment: urlPago,
-    sessionIdUser: data.sessionId
-	}));
+        ...state,
+        allSessionData: data,
+        urlPayment: urlPago,
+        sessionIdUser: data.sessionId
+      }));
     } catch (error) {
       console.log(error);
     }

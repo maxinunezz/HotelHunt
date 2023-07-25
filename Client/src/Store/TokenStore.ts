@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface User {
+export interface User {
     id: string
     email: string;
     phoneNumber: string;
@@ -15,7 +15,7 @@ interface User {
 
 type Token = string; 
 
-type IsAdmin = 'admin' | 'normal'
+type IsAdmin = 'admin' | 'normal' | 'super'
 
 export interface UserState extends Array<any> {
     0: User,
@@ -24,26 +24,29 @@ export interface UserState extends Array<any> {
     3: boolean
 } 
 
-export type States = {
-    userState: UserState
+
+type States = {
+    price: number;
+    userState: UserState | any;
     hotelsUserById: any[];
 }
 
 type Actions = {
-    saveInfo: (arrayAux: States['userState']) => Promise<void>
+    saveInfo: (arrayAux:any) => Promise<void>
     getHotelByUser: (hotelsArray: any[]) => Promise<void>
     resetToken: () => void
 }
 
 const initialState: States = {
     userState: [] as any,
-    hotelsUserById: []
+    hotelsUserById: [],
+    price: 0
 }
 
-export const tokenStore = create<States & Actions>((set) => ({
+ export const tokenStore = create<States & Actions>((set) => ({
     ...initialState,
 
-    saveInfo: async(arrayAux) => {
+    saveInfo: async(arrayAux:any) => {
         set(() => ({
             userState: arrayAux
         }))

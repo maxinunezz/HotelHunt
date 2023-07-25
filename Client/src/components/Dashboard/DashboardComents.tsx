@@ -13,13 +13,13 @@ export default function ComentsDashboard() {
     const [ratings, setRatings] = useState<Ratings[]>([]);
     const url = import.meta.env.VITE_URL;
     const token = tokenStore((state) => state.userState);
-    const [error, setError] = useState<string>("");
+    const [, setError] = useState<string>("");
 
 
 
     useEffect(() => {
         getRatings();
-    }, []);
+    }, []); // eslint-disable-line
 
     const getRatings = async () => {
         try {
@@ -31,7 +31,7 @@ export default function ComentsDashboard() {
             const ratings: Ratings[] = response.data;
             setRatings(ratings);
 
-        } catch (error) {
+        } catch (error:any) {
             setError(error.response.data);
         }
     }

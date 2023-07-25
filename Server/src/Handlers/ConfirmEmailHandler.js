@@ -1,6 +1,6 @@
 const { User, Auth, conn } = require("../db");
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET, FRONT_URL } = process.env;
 
 const confirmedAccount = async (req, res) => {
 
@@ -26,7 +26,7 @@ const confirmedAccount = async (req, res) => {
 
         const allInfo = { admin: admin, token: token, data: data }
         res.cookie('json', allInfo)
-        return res.status(200).redirect('http://localhost:5173/');
+        return res.status(200).redirect(`${FRONT_URL}`);
 
     } catch (error) {
         return res.status(401).send(error.message);        

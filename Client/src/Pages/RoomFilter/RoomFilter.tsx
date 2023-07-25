@@ -9,9 +9,13 @@ import { useFetchRooms } from "../../hooks";
 
 const RoomFilter = () => {
   useFetchRooms()
-	const allRooms = roomsStore((state) => state.rooms);
+  const allRooms = roomsStore((state) => state.rooms) ;
   const roomsFiltered = roomsSearchStore((state) => state.roomsFilter)
   const { fetchFilterRooms, sortByPrice, reset } = roomsSearchStore()
+
+  console.log(allRooms);
+  
+  
 
   useEffect(() => {
     reset(allRooms)

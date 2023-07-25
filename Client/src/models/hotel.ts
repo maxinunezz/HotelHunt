@@ -9,5 +9,6 @@ export interface Hotel {
 	services:string[];
 	hotelCategory:string;
 	photo: string;
-	score:number
+	score:number;
+	roomsId:[]|undefined;
 }
