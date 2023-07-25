@@ -58,7 +58,7 @@ const createUserForEmail = async (req, res) => {
       const token = jwt.sign({ email: authcreate.email }, JWT_SECRET, {
         expiresIn: "1h",
       });
-      const verificationLink = `http://localhost:3001/user/confirmEmail/${token}`;
+      const verificationLink = `${BACK_URL}/user/confirmEmail/${token}`;
 
       await usercreate.reload();
 
@@ -131,7 +131,7 @@ const askForPass = async (req, res) => {
         JWT_SECRET,
         { expiresIn: "15m" }
       );
-      const verificationLink = `http://localhost:3001/user/validateAsk/${token}`; 
+      const verificationLink = `${BACK_URL}/user/validateAsk/${token}`; 
 
       await transporter.sendMail({
         from: `"Hotel Hunt"  <${COMPANYMAIL}>`,
@@ -161,7 +161,7 @@ const validateToken = async (req, res) => {
     const Token = { token : emailToken}
     if (decodedToken && !isTokenExpired(decodedToken)){
       res.cookie('token', Token)
-      return res.status(200).redirect('http://localhost:5173/SetNewPass')
+      return res.status(200).redirect(`${FRONT_URL}/SetNewPass`)
     }else{
       throw Error(message, '')
     }
