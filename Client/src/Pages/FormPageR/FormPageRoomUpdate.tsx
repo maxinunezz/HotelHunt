@@ -106,8 +106,8 @@ export default function FormPageRoomUpdate() {
 
         helpers.resetForm();
         setIsCreated(true);
-        successToast("Habitación creada correctamente");
-        // navigate(-1);
+        successToast("Habitación editada correctamente, redirigiendo...");
+        setTimeout(() => navigate(-1), 3500);
       } catch (error) {
         console.error("Error submitting form:", error);
         errorToast("Hubo un error, intenta de nuevo");
@@ -198,7 +198,7 @@ export default function FormPageRoomUpdate() {
                 ? currentRoomData.price.toString()
                 : "",
               photo: currentRoomData?.photo || [],
-              disabled: false,
+              disabled: currentRoomData?.disabled || false,
             }}
             onSubmit={handleSubmit}
             validationSchema={formValidationSchema}
@@ -460,7 +460,7 @@ export default function FormPageRoomUpdate() {
                       </FormControl.Text>
                     )}
                   </FormControl>
-                  <div className="flex items-center justify-center">
+                  {/* <div className="flex items-center justify-center">
                     <FormControl.Label className="text-white items-center">
                       Disable room
                     </FormControl.Label>
@@ -474,16 +474,28 @@ export default function FormPageRoomUpdate() {
                         className="form-checkbox w-6 h-6 text-blue-500"
                       />
                     </div>
-                  </div>
+                  </div> */}
+                  <label>
+                    <Field
+                      type="checkbox"
+                      name="checked"
+                      value="One"
+                      onChange={(event: any) => {
+                        setFieldValue("disabled", event.target.checked);
+                      }}
+                      checked={values.disabled}
+                    />
+                    Desactivar habitacion
+                  </label>
 
                   <div className="flex items-center justify-center">
                     <Button
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md"
                       type="submit"
                       size="lg"
-                      onClick={() => {
-                        navigate(-1);
-                      }}
+                      // onClick={() => {
+                      //   navigate(-1);
+                      // }}
                     >
                       Update Room
                     </Button>

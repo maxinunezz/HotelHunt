@@ -1,5 +1,5 @@
 import { Button, FormControl } from "@rewind-ui/core";
-import { Form, Formik, FormikHelpers } from "formik";
+import { Field, Form, Formik, FormikHelpers } from "formik";
 import { useCallback, useState } from "react";
 import axios from "axios";
 import { errorToast, successToast } from "../../components/toast";
@@ -286,7 +286,7 @@ const FormPageUser = () => {
                   </div>
                 </div>
 
-                <div className="flex justify-center">
+                {/* <div className="flex justify-center">
                   <FormControl.Label className="text-white items-center">
                     Quiero publicar mi hotel
                   </FormControl.Label>
@@ -299,7 +299,19 @@ const FormPageUser = () => {
                       className="form-checkbox w-6 h-6 text-blue-500"
                     />
                   </div>
-                </div>
+                </div> */}
+                <label>
+                  <Field
+                    type="checkbox"
+                    name="checked"
+                    value="One"
+                    onChange={(event: any) => {
+                      setFieldValue("admin", event.target.checked);
+                    }}
+                    checked={values.admin}
+                  />
+                  Quiero publicar mi hotel
+                </label>
 
                 <div className="flex items-center justify-center">
                   <Button
