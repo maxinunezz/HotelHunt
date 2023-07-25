@@ -73,14 +73,14 @@ export default function ProfileSideBar() {
                         <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
                             Panel de Administración
                         </label>
-                        <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
+                        <a   onClick={() => setRender("hotels")} className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             <div className="w-5 h-5">
                                 <User size={20} />
                             </div>
 
                             <span
                                 className="mx-2 text-sm font-medium"
-                                onClick={() => setRender("hotels")}
+                              
                             >
                                 Hoteles
                             </span>
@@ -91,10 +91,10 @@ export default function ProfileSideBar() {
                         <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
                             contenido
                         </label>
-                        <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
+                        <a onClick={() => setRender("reserves")} className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             <><div className="w-5 h-5">
                                 <ClipboardText size={20} color="#fffafa" />
-                            </div><span className="mx-2 text-sm font-medium" onClick={() => setRender("reserves")}>
+                            </div><span className="mx-2 text-sm font-medium" >
                                     Reservas
                                 </span></>
                         </a>
@@ -105,12 +105,12 @@ export default function ProfileSideBar() {
                             personalización
                         </label>
 
-                        <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
+                        <a onClick={() => setRender("coments")} className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             <div className="w-5 h-5">
                                 <Gear size={20} color="#fffafa" />
                             </div>
 
-                            <span className="mx-2 text-sm font-medium" onClick={() => setRender("coments")}>
+                            <span className="mx-2 text-sm font-medium" >
                                 Comentarios
                             </span>
                         </a>

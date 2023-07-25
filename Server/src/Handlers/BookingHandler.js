@@ -76,7 +76,7 @@ async function createBooking(req, res) {
         quantity: 1,
       })),
       mode: 'payment',
-      success_url: `http://localhost:5173/`,
+      success_url: `http://localhost:5173/paymenttransition`,
       cancel_url: `http://localhost:5173/`,
     });
     const price = session.amount_total / 100;

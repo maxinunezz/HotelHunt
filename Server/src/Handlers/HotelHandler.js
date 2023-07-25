@@ -20,8 +20,7 @@ const transporter = nodemailer.createTransport({
 const getAllhotels = async (req, res) => {
   let hotels_array = [];
   try {
-
-    const data = await Hotel.findAll({where: {disabled: false}});
+    const data = await Hotel.findAll({ where: { disabled: false } });
     if (data.length === 0) {
       throw Error("No se encontraron hoteles");
     }
@@ -47,7 +46,6 @@ const getAllhotels = async (req, res) => {
   }
 };
 
-
 const updateHotel = async (req, res) => {
   const { id } = req.params;
   try {
@@ -55,6 +53,7 @@ const updateHotel = async (req, res) => {
     if (!hotel) {
       return res.status(404).send("Hotel no encontrado");
     }
+
     const user = await User.findByPk(hotel.userId)
     const auth = await Auth.findOne({where: { userId: user.id }})
     const email = auth.email;
@@ -62,7 +61,7 @@ const updateHotel = async (req, res) => {
     await transporter.sendMail({
       from: `"Hotel Hunt"  <${COMPANYMAIL}>`,
       to: email,
-      subject: "CONFIRM YOUR ACCOUNT",
+      subject: "Hotel desactivado",
       html: `
     <b>
     Su hotel ${hotel.name} ha sido desactivado por que no cumple con las normas del sitio, por favor editelo.

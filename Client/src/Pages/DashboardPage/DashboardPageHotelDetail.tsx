@@ -1,8 +1,9 @@
-import { React, useEffect, useState } from "react"
+import {  useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
 import { tokenStore } from "../../Store";
 import DashboardRowRoom from "../../components/Dashboard/DashboardRowRoom";
 import axios from "axios";
+import { Room } from "../../Store";
 const url = import.meta.env.VITE_URL;
 
 const DashboardPageHotelDetail = () => {
@@ -12,7 +13,7 @@ const DashboardPageHotelDetail = () => {
     const hotelsUser = tokenStore((state) => state.hotelsUserById)
     console.log(hotelsUser);
 
-    const [roomByUser, setRoomByUser] = useState()
+    const [roomByUser, setRoomByUser] = useState<Room[]>([])
 
 
     const hotelonScreen = hotelsUser.find((hotel) => {

@@ -200,6 +200,7 @@ const recoveryPass = async (req,res) => {
     const allinfo = { token: token, admin: admin, data: data };
 
     res.cookie('json', allinfo)
+    res.cookie('json', allinfo)
 
 
     return res.status(200).send('Contraseña actualizada')

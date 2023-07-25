@@ -14,14 +14,13 @@ const SearchBar = () => {
 		value: "",
 	})
 	const { fetchSearchResults, setCurrentPageSearch } = searchStore()
-	const searchResultsAux = searchStore((state) => state.searchResults)
 
 
 	useEffect(() => {
 		if (data.criterion !== "" && data.value !== "") {
 			fetchSearchResults(data);
 		}
-	}, [data]) // eslint-disable-line
+	}, [data, fetchSearchResults]) // eslint-disable-line
 
 	const handleSearch = async (element: React.MouseEvent<HTMLButtonElement>) => {
 		element.preventDefault()
@@ -75,13 +74,11 @@ const SearchBar = () => {
 				</Dropdown.Content>
 			</Dropdown>
 
-			<button className="p-2" onClick={(element) => handleSearch(element)}>
-				<MagnifyingGlass size={28} weight="bold" />
-			</button>
-		</div>
-
-	);
-
+      <button className="p-2" onClick={(element) => handleSearch(element)}>
+        <MagnifyingGlass size={28} weight="bold" />
+      </button>
+    </div>
+  );
 };
 
 export default SearchBar;

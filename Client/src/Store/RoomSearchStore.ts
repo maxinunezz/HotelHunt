@@ -5,7 +5,7 @@ interface Room {
     id: string;
     name: string;
     description: string;
-    services: string;
+    services: string[];
     photo: string[];
     pax: number;
     hotelId: string;
@@ -21,9 +21,9 @@ type States = {
 };
 
 type Actions = {
-    fetchFilterRooms: (arrayToFilter: Room[], price: {minPrice: string, maxPrice: string}, category: object, capacity: object) => void;
-    sortByPrice: (elements: Room[], sortBy: string) => void;
-    reset: (rooms: Room[]) => void;
+    fetchFilterRooms: (arrayToFilter: any, price: {minPrice: string, maxPrice: string}, category: object, capacity: object) => void;
+    sortByPrice: (elements: any, sortBy: string) => void;
+    reset: (rooms: any) => void;
 };
 
 const initialState: States = {
@@ -77,16 +77,16 @@ export const roomsSearchStore = create<States & Actions>((set) => ({
         console.log(sortBy, elements);
         switch (sortBy) {
             case "price-asc":
-                elements.sort((a, b) => Number(a.price) - Number(b.price));
+                elements.sort((a:any, b: any) => Number(a.price) - Number(b.price));
                 break;
             case "price-desc":
-                elements.sort((a, b) => Number(b.price) - Number(a.price));
+                elements.sort((a:any, b: any) => Number(b.price) - Number(a.price));
                 break;
             case "capacity-asc":
-                elements.sort((a, b) => a.pax - b.pax);
+                elements.sort((a: any, b:any) => a.pax - b.pax);
                 break;
             case "capacity-desc":
-                elements.sort((a, b) => b.pax - a.pax);
+                elements.sort((a: any, b: any) => b.pax - a.pax);
                 break;
             default:
                 break;

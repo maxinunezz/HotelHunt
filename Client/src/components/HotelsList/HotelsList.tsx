@@ -36,7 +36,7 @@ const HotelList = () => {
                 description={hotel.description}
                 country={hotel.country}
                 city={hotel.city}
-                photo={hotel.photo}
+                photo={Array.isArray(hotel.photo) ? hotel.photo[0] : hotel.photo}
                 hotelCategory={hotel.hotelCategory}
                 services={hotel.services}
                 score={hotel.score}

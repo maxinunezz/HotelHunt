@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { hotelStore } from '../../Store';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import {UserState} from '../../Store/TokenStore'
 
 const url = import.meta.env.VITE_URL;
 
 
 
 const CommentForm: React.FC = () => {
-    const { id } = useParams()
     const [score, setScore] = useState<number | undefined>(undefined);
     const [comment, setComment] = useState<string>('');
     const { fetchHotels } = hotelStore();
-    const [token, setToken] = useState(null);
+    const [token, setToken] = useState<UserState | undefined>();
     const [hotelId, setHotelId] = useState("");
     const userId = token?.[0]?.id
     useEffect(() => {
@@ -29,14 +28,9 @@ const CommentForm: React.FC = () => {
 
         fetchHotels();
     }, []);
-    const allHotels = hotelStore((state) => state.hotels);
-    console.log({
-         hotelId,
-         userId,
-         comment,
-         score,
-    });
-
+    
+    const authorizationHeader = token ? { authorization: `Bearer ${token[1]}` } : {};
+  
     const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -51,7 +45,7 @@ const CommentForm: React.FC = () => {
                 },
                 {
                     headers: {
-                        authorization: `Bearer ${token[1]}`,
+                        authorization: `Bearer ${authorizationHeader}`,
                     },
                 }
             );

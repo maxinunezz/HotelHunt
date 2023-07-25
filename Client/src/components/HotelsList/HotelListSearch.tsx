@@ -9,14 +9,12 @@ import PaginadoGlobal from "../Pagination/PaginadoGlobal";
     const { setCurrentPageSearch } = searchStore();
     const searchResults = searchStore((state) => state.searchResults); //para este componente, este es el segundo parametro del paginado
 
-
-
     const totalHotels = searchResults?.length;
     const firstIndex = (currentPageSearch - 1) * hotelsPerPage;
     const lastIndex = currentPageSearch * hotelsPerPage;
     const currentHotels = searchResults?.slice(firstIndex, lastIndex);
 
-    const handlePaginado = (pageNumber:any) => {
+    const handlePaginado = (pageNumber: any) => {
       //tercer parametro del paginado
       setCurrentPageSearch(pageNumber);
     };
@@ -28,13 +26,15 @@ import PaginadoGlobal from "../Pagination/PaginadoGlobal";
           {totalHotels ? (
               currentHotels.map((hotel) => (
                   <Card
-                  key={hotel.id}
+                    key={hotel.id}
                     id={hotel.id}
                     name={hotel.name}
                     description={hotel.description}
                     country={hotel.country}
                     city={hotel.city}
-                    photo={hotel.photo}
+                    photo={
+                  Array.isArray(hotel.photo) ? hotel.photo[0] : hotel.photo
+                }
                     hotelCategory={hotel.hotelCategory}
                     services={hotel.services}
                     score={hotel.score}

@@ -61,14 +61,14 @@ export default function ProfileSideBar() {
                         <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
                             cuenta
                         </label>
-                        <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
+                        <a  onClick={() => navigate(`/profile/${isAdmin[0].name}+${isAdmin[0].lastName}`)} className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             <div className="w-5 h-5">
                                 <User size={20} />
                             </div>
 
                             <span
                                 className="mx-2 text-sm font-medium"
-                                onClick={() => navigate(`/profile/${isAdmin[0].name}+${isAdmin[0].lastName}`)}
+                               
                             >
                                 Usuario
                             </span>
@@ -79,11 +79,11 @@ export default function ProfileSideBar() {
                         <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
                             contenido
                         </label>
-                        <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
+                        <a onClick={() => navigate('/profile/reservas')} className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             {role ? (
                                 <><div className="w-5 h-5">
                                     <ClipboardText size={20} color="#fffafa" />
-                                </div><span className="mx-2 text-sm font-medium" onClick={() => navigate('/profile/reservas')}>
+                                </div><span className="mx-2 text-sm font-medium" >
                                         Reservas
                                     </span></>
                             ) : (
@@ -101,12 +101,12 @@ export default function ProfileSideBar() {
                             personalización
                         </label>
 
-                        <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
+                        <a onClick={() => navigate('/profile/configuracion')} className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             <div className="w-5 h-5">
                                 <Gear size={20} color="#fffafa" />
                             </div>
 
-                            <span className="mx-2 text-sm font-medium" onClick={() => navigate('/profile/configuracion')}>
+                            <span className="mx-2 text-sm font-medium" >
                                 Configuración
                             </span>
                         </a>

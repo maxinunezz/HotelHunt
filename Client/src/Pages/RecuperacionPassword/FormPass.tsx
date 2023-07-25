@@ -4,8 +4,8 @@ import { useCallback} from 'react';
 import axios from 'axios';
 import { errorToast, successToast } from '../../components/toast';
 import * as yup from 'yup';
-import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -25,7 +25,7 @@ const loginValidationSchema = yup.object().shape({
         .min(8, 'La contraseña debe tener al menos 8 caracteres'),
     confirmPassword: yup
         .string()
-        .oneOf([yup.ref('password'), null], 'Las contraseñas deben coincidir')
+        .oneOf([yup.ref('password')], 'Las contraseñas deben coincidir')
         .required('Debes confirmar tu contraseña')
 });
 
@@ -38,11 +38,12 @@ const FormPagePass = () => {
 
 
 
+
     const handleSubmit = useCallback(
         async (values: passCreateValues, helpers: FormikHelpers<passCreateValues>) => {
             try {
 
-                const response = await axios.post(
+               const response =  await axios.post(
                     `${url}/user/updatePass`,
                     {
                         password: values.password,
@@ -55,7 +56,8 @@ const FormPagePass = () => {
                 );
                 successToast(response.data);
                 navigate('/')
-            } catch (error) {
+              
+            } catch (error:any) {
 
                 errorToast(error.response.data);
             }
@@ -135,16 +137,11 @@ const FormPagePass = () => {
                                     </Button>
                                 </div>
                             </Form>
-                        )}
+                            )}
                     </Formik>
                 </div>
             </div>
         </div>
     );
-
-
-
-
 }
-
 export default FormPagePass;

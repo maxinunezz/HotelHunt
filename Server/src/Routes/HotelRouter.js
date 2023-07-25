@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const {
 	getAllhotels,
 	updateHotel,
@@ -6,11 +6,11 @@ const {
 	getHotelsAdmin,
 } = require('../Handlers/HotelHandler');
 
-const { getForSearch } = require('../Handlers/SearchHandler');
-const { authMiddleware } = require('../Middleware/AuthMiddleware');
-const { SuperAdminCheck } = require('../Middleware/SuperAdminMiddleware');
-const { AdminCheck } = require('../Middleware/AdminMiddleware');
-const { getHotelBin } = require('../Handlers/BinHandler');
+const { getForSearch } = require("../Handlers/SearchHandler");
+const { authMiddleware } = require("../Middleware/AuthMiddleware");
+const { SuperAdminCheck } = require("../Middleware/SuperAdminMiddleware");
+const { AdminCheck } = require("../Middleware/AdminMiddleware");
+const { getHotelBin } = require("../Handlers/BinHandler");
 
 const hotelRouter = Router();
 hotelRouter.post('/search', getForSearch);

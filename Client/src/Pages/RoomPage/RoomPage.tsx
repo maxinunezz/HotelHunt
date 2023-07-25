@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { hotelStore, roomsStore } from "../../Store";
 import { useEffect, useState } from "react";
-import { setRoomDetail, useFetchRooms } from "../../hooks";
+import { useFetchRooms } from "../../hooks";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import NavbarDetail from "../../components/NavBarDetail/NavBarDetail";
@@ -9,8 +9,8 @@ import Footer from "../../components/Footer/Footer";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { tokenStore } from "../../Store";
-import { string } from "yup";
 import { userStore } from "../../Store/UserStore";
+import { Room } from "../../Store";
 import {
   reserveErrorToast,
   reserveSuccessToast1,
@@ -18,7 +18,6 @@ import {
   noDatesToast,
   mustLoginToast,
 } from "../../components/toast";
-import { toast } from "react-hot-toast";
 
 export interface ReserveBooking {
   roomId: string;
@@ -30,13 +29,11 @@ export interface ReserveBooking {
 const RoomPage = () => {
   const { id } = useParams();
   const { setRoom } = roomsStore();
-  const [roomRender, setRoomRender] = useState();
-  const [arrivalDate, setArrivalDate] = useState("");
+  const [roomRender, setRoomRender] = useState<Room| null>();
+  const [arrivalDate, setArrivalDate] = useState();
   const [departureDate, setDepartureDate] = useState(null);
   const [date, setDate] = useState({ in: "", out: "" });
-  const [reserve, setReserve] = useState<ReserveBooking[] | null>(null);
   const token = tokenStore((state) => state.userState);
-  const room = roomsStore((state) => state.rooms);
   const { reserveRoomPayment } = userStore();
   const userReserve = userStore((state) => state.reserves);
   const navigate = useNavigate();
@@ -59,9 +56,10 @@ const RoomPage = () => {
   const images = roomRender?.photo.map((url) => ({
     original: url,
     thumbnail: url,
-  }));
+   
+  }))||[];
 
-  const handleArrivalDateChange = (date) => {
+  const handleArrivalDateChange = (date:any) => {
     const currentDate = new Date();
 
     if (date.getTime() < currentDate.getTime()) {
@@ -79,7 +77,7 @@ const RoomPage = () => {
     setDate((state) => ({ ...state, in: formattedDate }));
   };
 
-  const handleDepartureDateChange = (date) => {
+  const handleDepartureDateChange = (date:any) => {
     const currentDate = new Date();
 
     if (date.getTime() < currentDate.getTime()) {
@@ -97,7 +95,7 @@ const RoomPage = () => {
     setDate((state) => ({ ...state, out: formattedDate }));
   };
 
-  const calculateDays = (item) => {
+  const calculateDays = (item:any) => {
     const checkinDate = new Date(item.checkin);
     const checkoutDate = new Date(item.checkout);
 
@@ -125,18 +123,16 @@ const RoomPage = () => {
     }
 
     const newReserve: ReserveBooking = {
-      roomId: id,
+      roomId: id??'',
       checkin: date.in,
       checkout: date.out,
-      price: roomRender?.price,
-    };
+      price: roomRender?.price ?? "0"    };
 
     if (calculateDays(newReserve) < 1) {
       reserveErrorToast("Establezca al menos una noche");
       return;
     }
 
-    setReserve([newReserve]);
 
     for (let i = 0; i < userReserve.length; i++) {
       if (userReserve[i].roomId === newReserve.roomId) {
@@ -150,7 +146,7 @@ const RoomPage = () => {
     reserveSuccessToast1();
   };
   
-  const hotelOfThisRoom = (hotelId) => {
+  const hotelOfThisRoom = (hotelId:any) => {
     
     const hotelBelong = allHotels.find((hotel) => {
       return hotel.id.toString() === hotelId;
@@ -172,7 +168,7 @@ const RoomPage = () => {
                   <div className="w-full h-auto">
                     <h1 className="text-2xl font-bold mb-4">Habitación: {roomRender?.name}</h1>
                     <div className="w-full h-90 overflow-hidden shadow-lg">
-                      <ImageGallery items={images} className="w-full h-full object-cover" />
+                      <ImageGallery items={images}   />
                     </div>
                     <div className="flex justify-start mt-2">
                       <div className="flex items-center">
@@ -215,7 +211,7 @@ const RoomPage = () => {
               <div className="md:w-[500px] md:ml-[30px] inline-block">
                 <h2 className="text-2xl font-bold mt-4 mb-2">Servicios:</h2>
                 <ul className="list-disc list-inside border-2 rounded shadow-lg">
-                  {roomRender?.services.map((service) => (
+                  {roomRender?.services.map((service:any) => (
                     <li key={service} className="text-lg text-gray-800">
                       {service}
                     </li>

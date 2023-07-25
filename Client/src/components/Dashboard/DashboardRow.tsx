@@ -77,12 +77,12 @@ export default function DashboardRow({
             setConfirmDisabled(false);
             setUpdated(!currentState)
             
-        } catch (error) {
+        } catch (error:any) {
             errorToast(error.response.data);
         }
     }
 
-    const handleChangeCheckbox = (e) => {
+    const handleChangeCheckbox = (e:any) => {
         e.stopPropagation();
         setIsChecked(e.target.checked);
         if (e.target.checked !== disabled) {
