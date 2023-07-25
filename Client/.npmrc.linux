@@ -1,0 +1,3 @@
+# .npmrc.linux
+resolutions:
+  "@esbuild/linux-x64": "0.18.11" 
