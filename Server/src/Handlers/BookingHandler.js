@@ -273,7 +273,10 @@ const getAllReserves = async (req,res) => {
         roomId: reserve.roomId,
       }
       reservas.push(one_reserve);
+      console.log(one_reserve)
     }
+
+    console.log(reservas)
 
     return res.status(200).json(reservas)
 
@@ -294,8 +297,10 @@ const getReservesByRoom = async(req,res) => {
         checkout: reserve.checkout,
         roomId: reserve.roomId,
       }
+      console.log(one_reserve);
       reservas.push(one_reserve);
     }
+    console.log(reservas)
 
     return res.status(200).json(reservas)
 
