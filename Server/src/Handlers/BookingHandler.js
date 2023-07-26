@@ -153,7 +153,7 @@ const confirmationEmail = async (id, urlpago, name) => {
       to: userEmail, 
       subject: 'Confirmación de la reserva', 
       html: 
-      ` <!DOCTYPE html>
+      `<!DOCTYPE html>
       <html lang="es">
         <head>
           <meta charset="UTF-8" />
@@ -196,8 +196,6 @@ const confirmationEmail = async (id, urlpago, name) => {
               color: #767575;
             }
       
-          
-      
             button {
               background-color: #0066cc;
               color: #fff;
@@ -228,14 +226,21 @@ const confirmationEmail = async (id, urlpago, name) => {
                   En caso de no haber realizado el pago haga click en el siguiente link.
                 <br>
                 <div>
-               <button href=${urlpago}">Link de pago</button>
-             </div>
-             <br>
-              ¡Gracias por elegir HotelHunt!</p> 
+               <button onclick=redirectToWebsite()>Link de pago</button>
+             </div><br>
+                 ¡Gracias por elegir HotelHunt!</p>
+                 
+               
              </div>
              
            </div>
        
+           <script>
+             // Función para redireccionar
+             function redirectToWebsite() {
+               window.location.href = ${urlpago}'
+             }
+           </script>
          </body>
        </html>`
     });
