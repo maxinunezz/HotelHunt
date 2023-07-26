@@ -81,6 +81,7 @@ async function createBooking(req, res) {
       success_url: `${FRONT_URL}/paymenttransition`,
       cancel_url: `${FRONT_URL}`,
     });
+    console.log(session)
     const price = session.amount_total / 100;
     const name = user.name
     const sessionId = session.id;
@@ -216,7 +217,7 @@ const stripehook = async (req, res) => {
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+    event = stripe.webhooks.constructEvent(payload, sig, END_POINT);
     console.log('Event:', event);
     console.log('Event type:', event.type);
   } catch (error) {
