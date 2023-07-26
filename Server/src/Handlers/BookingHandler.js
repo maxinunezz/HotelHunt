@@ -260,10 +260,20 @@ const DeleteAllreserves = async(req,res)=>{
   }
 }
 
+const getAllReserves = async (req,res) => {
+  try {
+    reserves = Booking.findAll();
+    return res.status(200).json(reserves)
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}
+
 module.exports = {
   createBooking,
   confirmationEmail,
   getReserves,
   stripehook,
   DeleteAllreserves,
+  getAllReserves,
 };
