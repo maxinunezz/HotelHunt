@@ -46,7 +46,7 @@ const createUserForEmail = async (req, res) => {
         birthDate,
         phoneNumber,
         admin: adminvalue,
-        disabled: false,
+        disabled: true,
       });
 
       const authcreate = await Auth.create({

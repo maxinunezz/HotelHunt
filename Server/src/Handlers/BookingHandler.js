@@ -209,7 +209,7 @@ const getReserves = async (req, res) => {
 
 
 const stripehook = async (req, res) => {
-  /*const sig = req.headers['stripe-signature'];
+  const sig = req.headers['stripe-signature'];
   const payload = req.body;
 
   
@@ -221,7 +221,7 @@ const stripehook = async (req, res) => {
     console.log('Event type:', event.type);
   } catch (error) {
     res.status(400).send(`Webhook Error: ${error.message}`);    
-  }*/
+  }
   const sessionId = req.body.data.object.id;
   const status = req.body.data.object.payment_status;
 
