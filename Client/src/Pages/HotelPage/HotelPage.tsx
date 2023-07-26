@@ -1,4 +1,4 @@
-import {  useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { SAStore, hotelStore, roomsStore, tokenStore } from '../../Store';
 import RoomList from '../../components/RoomList/RoomList';
 import { useEffect, useState } from 'react';
@@ -10,24 +10,34 @@ import NavbarDetail from '../../components/NavBarDetail/NavBarDetail';
 
 const url = import.meta.env.VITE_URL;
 
-interface Rating{
-score: number;
-comment:string;
-hotelId:string;
+interface Rating {
+	score: number;
+	comment: string;
+	hotelId: string;
 }
 
 const HotelPage = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
-	const [hotelOnScreen, setroomsId] = useState <Hotel>();
+	const [hotelOnScreen, setroomsId] = useState<Hotel>();
 	const [hotelRatings, setHotelRatings] = useState<Rating[]>([]);
 	const { hotelIdSetter } = roomsStore();
 	const { fetchHotels } = hotelStore();
+	const { saveInfo } = tokenStore()
 	const [hotelsLoaded, setHotelsLoaded] = useState(false);
-	const update = SAStore((state)=>state.updated)
+	const update = SAStore((state) => state.updated)
 
 	const allHotels = hotelStore((state) => state.hotels);
 	const token = tokenStore((state) => state.userState);
+
+	useEffect(() => {
+		const session: string | null = window.sessionStorage.getItem("tokenUser");
+		if (session) {
+			const parsedSession = JSON.parse(session);
+			console.log(parsedSession);
+			saveInfo(parsedSession);
+		}
+	}, []);
 
 	useEffect(() => {
 		const fetchAllHotels = async () => {
@@ -51,14 +61,14 @@ const HotelPage = () => {
 				const response = await axios.get(`${url}/rating/${id}`);
 				setHotelRatings(response.data);
 				console.log(response.data);
-				
+
 			} catch (error) {
 				console.error(error);
 			}
 		};
 
 		fetchRating();
-	}, [id,update]);
+	}, [id, update]);
 
 
 
@@ -76,7 +86,7 @@ const HotelPage = () => {
 		const newWindowRoute = `/addcomment/${id}`;
 		const windowFeatures = 'height=500,width=800,resizable=yes,scrollbars=yes';
 		window.localStorage.setItem("tokenInfo", JSON.stringify(token))
-		window.localStorage.setItem("hotelId", id||hotelRatings[0].hotelId)
+		window.localStorage.setItem("hotelId", id || hotelRatings[0].hotelId)
 		window.open(newWindowRoute, '_blank', windowFeatures);
 	};
 

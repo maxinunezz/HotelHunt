@@ -7,11 +7,10 @@ import axios from 'axios';
 import { useState } from "react";
 const url = import.meta.env.VITE_URL;
 
-interface errores{
-    password:string;
-    lastName:string;
-    firstName:string;
-    phoneNumber:string;
+interface errores {
+    lastName: string;
+    firstName: string;
+    phoneNumber: string;
 
 }
 
@@ -58,13 +57,13 @@ export default function AdminSetting() {
         birthDate: "",
         phoneNumber: "",
         isChecked: false,
-        password: "",
+
         isCheckedValue: "normal",
 
     });
-    const [errors, setErrors] = useState<errores>({password:'', lastName:'',firstName:'', phoneNumber:''})
-    const validation = (inputObject:any) => {
-        let errors:errores = {password:'', lastName:'',firstName:'', phoneNumber:''};
+    const [errors, setErrors] = useState<errores>({ lastName: '', firstName: '', phoneNumber: '' })
+    const validation = (inputObject: any) => {
+        const errors: errores = { lastName: '', firstName: '', phoneNumber: '' };
 
         if (!inputObject.firstName || !/^(?:[A-Z][a-zA-Z]*)(?: [A-Z][a-zA-Z]*){0,2}$/.test(inputObject.firstName)) {
             errors.firstName = "Debe tener un nombre válido con la primera letra mayúscula y permitir nombres compuestos de hasta 255 caracteres.";
@@ -74,9 +73,6 @@ export default function AdminSetting() {
             errors.lastName = "Debe tener un apellido válido con la primera letra mayúscula. Permite compuestos separados por un guión (-)";
         }
 
-        if (!inputObject.password || inputObject.password.length < 6) {
-            errors.password = "Debe tener una contraseña válida con al menos 6 caracteres.";
-        }
 
         if (!inputObject.phoneNumber || !/^\d{10}$/.test(inputObject.phoneNumber)) {
             errors.phoneNumber = "Debe tener un número de teléfono válido de 10 dígitos.";
@@ -86,7 +82,7 @@ export default function AdminSetting() {
     };
 
 
-    const handleChange = (event:any) => {
+    const handleChange = (event: any) => {
 
         setInput({
             ...input,
@@ -100,20 +96,19 @@ export default function AdminSetting() {
     };
 
     const handleUpdate = async () => {
-        if (Object.keys(errors).length > 0) {
-            userUpdateToast("Must complete all fields!")
-            return
-        }
+        // if (Object.keys(errors).length > 0) {
+        //     userUpdateToast("Must complete all fields!")
+        //     return
+        // }
 
-         await axios.put(
+        await axios.put(
             `${url}/dashboard/user`,
             {
-                name: input.firstName,
-                lastName: input.lastName,
-                birthDate: input.birthDate,
-                phoneNumber: input.phoneNumber,
+                name: input.firstName || user.name,
+                lastName: input.lastName || user.lastName,
+                birthDate: input.birthDate || user.dateOfBirth,
+                phoneNumber: input.phoneNumber || user.phoneNumber,
                 admin: input.isCheckedValue,
-                password: input.password,
             },
             {
                 headers: {
@@ -182,28 +177,18 @@ export default function AdminSetting() {
 
                         <label className="block mb-4">
                             <span className="text-gray-700 font-semibold">Email</span>
+                            <span className="text-gray-500 italic text-sm"> (No se puede cambiar)</span>
                             <input
                                 type="text"
                                 name="email"
                                 className="h-11 w-full px-3 border border-solid rounded text-grey-900 text-l 2xl:rounded-sm border-grey-500"
-                                placeholder="Tu email"
                                 aria-invalid="false"
-                                value={user.email}
+                                value={`${user.email}`}
+                                readOnly // Hace que el input sea de solo lectura
                             />
                         </label>
 
-                        <label className="block mb-4">
-                            <span className="text-gray-700 font-semibold">Contraseña</span>
-                            <input
-                                type="password"
-                                name="password"
-                                className="h-11 w-full px-3 border border-solid rounded text-grey-900 text-l 2xl:rounded-sm border-grey-500"
-                                placeholder="Tu password"
-                                aria-invalid="false"
-                                onChange={(event) => handleChange(event)}
-                            />
-                        </label>
-                        {errors?.password && <p className="text-red-700">{errors.password}</p>}
+
 
                         <label className="block mb-4">
                             <span className="text-gray-700 font-semibold">Quiero publicar mi hotel</span>
@@ -218,11 +203,7 @@ export default function AdminSetting() {
                         <div className="flex justify-between">
                             <button
                                 onClick={handleUpdate}
-                                className={`${Object.keys(errors).length > 0 || input.firstName === ""
-                                        ? "bg-blue-500 text-white px-4 py-2 rounded cursor-not-allowed opacity-50"
-                                        : "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                                    }`}
-                                disabled={Object.keys(errors).length > 0}
+                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                             >
                                 Actualizar datos
                             </button>

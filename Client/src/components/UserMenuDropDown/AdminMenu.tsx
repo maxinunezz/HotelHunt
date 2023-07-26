@@ -13,6 +13,7 @@ const AdminMenu = () => {
   const { resetToken } = tokenStore();
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    window.sessionStorage.removeItem('tokenUser');
     document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     resetToken();
     farewellAdminToast("Gracias y éxito en sus ventas");
