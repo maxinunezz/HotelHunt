@@ -228,6 +228,8 @@ const stripehook = async (req, res) => {
   const sessionId = req.body.data.object.id;
   const status = req.body.data.object.payment_status;
 
+  console.log(req.body)
+
   
 
   try {
@@ -264,12 +266,10 @@ const getAllReserves = async (req,res) => {
 
   try {
     const reserves = await Booking.findAll();
-    console.log('reserves',reserves)
 
     let reservas = []
 
     for(const reserve of reserves){
-      console.log('reserve',reserve)
       const one_reserve =  {
         checkin: reserve.checkin,
         checkout: reserve.checkout,
