@@ -240,9 +240,7 @@ const confirmationEmail = async (id, urlpago, name) => {
              </div>
              
            </div>
-       
            <script>
-          // Función para redireccionar
             function redirectToWebsite() {
             window.location.href = '${urlpago}';
              }

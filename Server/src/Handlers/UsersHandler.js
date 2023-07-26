@@ -143,12 +143,17 @@ const createUserForEmail = async (req, res) => {
                 </p>
               </div>
               <div>
-                <button href=${verificationLink}>Link de accesso</button>
+                <button onclick="redirectToWebsite()">Link de accesso</button>
                 <br>
                 <br>
                 <b> El enlace caduca en 1 hora <b>
               </div>
             </div>
+            <script>
+              funtion redirectToWebsite() {
+                window.location.href = ${verificationLink}
+              }
+            </script>
           </body>
         </html>
       `,
