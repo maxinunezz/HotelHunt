@@ -128,34 +128,31 @@ const createUserForEmail = async (req, res) => {
             </style>
           </head>
           <body>
-            <div class="container">
-              <div  >
-                <img src="https://cdn.discordapp.com/attachments/1125503406371524661/1127923542743334912/image.png" alt="" />
-              </div>
-        
-              <h1>
-                Te damos la bienvenida!!
-              </h1>
-        
-              <div>
-                <p>
-                  <b>Haga clic en el siguiente enlace para confirmar su cuenta:</b>
-                </p>
-              </div>
-              <div>
-                <button onclick="redirectToWebsite()">Link de accesso</button>
-                <br>
-                <br>
-                <b> El enlace caduca en 1 hora <b>
-              </div>
-            </div>
-            <script>
-              funtion redirectToWebsite() {
-                window.location.href = ${verificationLink}
-              }
-            </script>
-          </body>
-        </html>
+    <div class="container">
+      <div>
+        <img src="https://cdn.discordapp.com/attachments/1125503406371524661/1127923542743334912/image.png" alt="" />
+      </div>
+
+      <h1>
+        Te damos la bienvenida!!
+      </h1>
+
+      <div>
+        <p>
+          <b>Haga clic en el siguiente enlace para confirmar su cuenta:</b>
+        </p>
+      </div>
+      <div>
+        <a href="${verificationLink}">
+          <button>Link de acceso</button>
+        </a>
+        <br>
+        <br>
+        <b>El enlace caduca en 1 hora</b>
+      </div>
+    </div>
+  </body>
+</html>
       `,
       });
 
