@@ -263,20 +263,22 @@ const DeleteAllreserves = async(req,res)=>{
 const getAllReserves = async (req,res) => {
 
   try {
-    const reserves = Booking.findAll();
+    const reserves = await Booking.findAll();
+    console.log('reserves',reserves)
+
     let reservas = []
 
     for(const reserve of reserves){
+      console.log('reserve',reserve)
       const one_reserve =  {
         checkin: reserve.checkin,
         checkout: reserve.checkout,
         roomId: reserve.roomId,
       }
       reservas.push(one_reserve);
-      console.log(one_reserve)
+
     }
 
-    console.log(reservas)
 
     return res.status(200).json(reservas)
 
@@ -288,7 +290,7 @@ const getAllReserves = async (req,res) => {
 const getReservesByRoom = async(req,res) => {
   const { id } = req.params;
   try {
-    const reserves = Booking.findAll({where:{roomId: id}});
+    const reserves = await Booking.findAll({where:{roomId: id}});
     let reservas = []
 
     for(const reserve of reserves){
@@ -297,10 +299,9 @@ const getReservesByRoom = async(req,res) => {
         checkout: reserve.checkout,
         roomId: reserve.roomId,
       }
-      console.log(one_reserve);
+
       reservas.push(one_reserve);
     }
-    console.log(reservas)
 
     return res.status(200).json(reservas)
 

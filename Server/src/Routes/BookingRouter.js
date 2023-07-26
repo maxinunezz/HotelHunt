@@ -11,7 +11,7 @@ BookingRouter.post("/reserva",authMiddleware, createBooking);
 BookingRouter.post("/webhook", express.raw({ type: 'application/json' }), stripehook);
 BookingRouter.get("/getReserves", authMiddleware, getReserves);
 BookingRouter.delete("/all",authMiddleware,SuperAdminCheck,DeleteAllreserves);
-BookingRouter.get("/all",getAllReserves);
+BookingRouter.get("/all", getAllReserves);
 BookingRouter.get("/all/:id", getReservesByRoom);
 
 
