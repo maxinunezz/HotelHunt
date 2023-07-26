@@ -261,9 +261,44 @@ const DeleteAllreserves = async(req,res)=>{
 }
 
 const getAllReserves = async (req,res) => {
+
   try {
-    reserves = Booking.findAll();
-    return res.status(200).json(reserves)
+    const reserves = Booking.findAll();
+    let reservas = []
+
+    for(const reserve of reserves){
+      const one_reserve =  {
+        checkin: reserve.checkin,
+        checkout: reserve.checkout,
+        roomId: reserve.roomId,
+      }
+      reservas.push(one_reserve);
+    }
+
+    return res.status(200).json(reservas)
+
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}
+
+const getReservesByRoom = async(req,res) => {
+  const { id } = req.params;
+  try {
+    const reserves = Booking.findAll({where:{roomId: id}});
+    let reservas = []
+
+    for(const reserve of reserves){
+      const one_reserve =  {
+        checkin: reserve.checkin,
+        checkout: reserve.checkout,
+        roomId: reserve.roomId,
+      }
+      reservas.push(one_reserve);
+    }
+
+    return res.status(200).json(reservas)
+
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -276,4 +311,5 @@ module.exports = {
   stripehook,
   DeleteAllreserves,
   getAllReserves,
+  getReservesByRoom
 };
