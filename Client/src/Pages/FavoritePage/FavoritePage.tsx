@@ -27,17 +27,22 @@ const FavoritePage = () => {
   }, []);
 
   useEffect(() => {
-    // fetchHotels();
-    getFavorite(token[1]);
-  }, [token]); // eslint-disable-line
-
+    const fetchFavoriteData = async () => {
+      if (token[1]) {
+        await getFavorite(token[1]);
+      }
+    };
+  
+    fetchFavoriteData();
+  }, [token, getFavorite, hotelFavorite]);
+  
   useEffect(() => {
     const hotelFavorites = hotels.filter(hotel => hotelFavorite.includes(hotel.id))
-
+    
     setHotelFavorites(hotelFavorites)
-
+    
   }, [hotelFavorite]) // eslint-disable-line
-
+  
 
   const totalHotels = favorites?.length;
   const firstIndex = (currentPageFavorites - 1) * hotelsPerPage;

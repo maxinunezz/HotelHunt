@@ -7,6 +7,7 @@ import Footer from "../../components/Footer/Footer";
 import { useCookies } from 'react-cookie';
 import { tokenStore } from '../../Store';
 import { userStore } from '../../Store/UserStore';
+import { favoriteStore } from '../../Store/FavoriteStore';
 
 
 
@@ -17,7 +18,8 @@ export default function HomePage() {
 	const { saveInfo } = tokenStore();
 	const token = tokenStore((state) => state.userState)
 	const { getFavorite } = userStore()
-
+	
+	
 	useEffect(() => {
 		const session: string | null = window.sessionStorage.getItem("tokenUser");
 		if (session) {

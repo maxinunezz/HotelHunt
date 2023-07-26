@@ -177,17 +177,18 @@ export default function AdminSetting() {
 
                         <label className="block mb-4">
                             <span className="text-gray-700 font-semibold">Email</span>
+                            <span className="text-gray-500 italic text-sm"> (No se puede cambiar)</span>
                             <input
                                 type="text"
                                 name="email"
                                 className="h-11 w-full px-3 border border-solid rounded text-grey-900 text-l 2xl:rounded-sm border-grey-500"
-                                placeholder="Tu email"
                                 aria-invalid="false"
-                                value={user.email}
+                                value={`${user.email}`}
+                                readOnly // Hace que el input sea de solo lectura
                             />
                         </label>
 
-                        
+
 
                         <label className="block mb-4">
                             <span className="text-gray-700 font-semibold">Quiero publicar mi hotel</span>
