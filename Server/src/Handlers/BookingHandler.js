@@ -153,11 +153,91 @@ const confirmationEmail = async (id, urlpago, name) => {
       to: userEmail, 
       subject: 'Confirmación de la reserva', 
       html: 
-      `¡Gracias ${name} por reservar con nosotros!
-      En tu perfil, de nuestra página, puedes ver los detalles de la/s reserva/s.
-      En caso de no haber realizado el pago haga click en el siguente link: ${urlpago}
-      Recuerda realizar el pago en las proximas 24 horas o la reserva será dada de baja.
-      ¡Gracias por elegir HotelHunt!`, 
+      ` <!DOCTYPE html>
+      <html lang="es">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Document</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              background-color: #f2f2f2;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              margin: 0;
+            }
+      
+            .container {
+              text-align: center;
+              max-width: 600px;
+              padding: 20px;
+              background-color: #fff;
+              border-radius: 10px;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+      
+            img {
+              max-width: 50%;
+              height: auto;
+              border-radius: 5px;
+              margin-bottom: 10px;
+              background-color: none;
+            }
+      
+            h1 {
+              color: #010101;
+              margin-bottom: 10px;
+            }
+      
+            h4 {
+              color: #767575;
+            }
+      
+          
+      
+            button {
+              background-color: #0066cc;
+              color: #fff;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+              margin-top: 20px;
+            }
+          </style>
+         </head>
+         <body>
+           <div class="container">
+             <div>
+               <!-- Imagen -->
+               <img src="https://cdn.discordapp.com/attachments/1125503406371524661/1127923542743334912/image.png" alt="" />
+             </div>
+       
+             <h2>
+               ¡Gracias ${name} por reservar con nosotros!
+             </h2>
+       
+             <div >
+               <p>
+                 En tu perfil, de nuestra página, puedes ver los detalles de la/s reserva/s.
+                 <br />
+                 Recuerda realizar el pago en las próximas 24 horas o la reserva será dada de baja.
+                  En caso de no haber realizado el pago haga click en el siguiente link.
+                <br>
+                <div>
+               <button href=${urlpago}">Link de pago</button>
+             </div>
+             <br>
+              ¡Gracias por elegir HotelHunt!</p> 
+             </div>
+             
+           </div>
+       
+         </body>
+       </html>`
     });
 
   } catch (error) {

@@ -69,9 +69,88 @@ const createUserForEmail = async (req, res) => {
         to: email,
         subject: "CONFIRM YOUR ACCOUNT",
         html: `
-      <b>Please click on the following link to confirm your account:</b>
-      ,<a href="${verificationLink}">${verificationLink}</a>
-      <b> Link expires in 1 hr <b>
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Document</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+              }
+        
+              .container {
+                text-align: center;
+                max-width: 600px;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+              }
+        
+              img {
+                max-width: 50%;
+                height: auto;
+                border-radius: 5px;
+                margin-bottom: 10px;
+                background-color: none;
+              }
+        
+              h1 {
+                color: #010101;
+                margin-bottom: 10px;
+              }
+        
+              h4 {
+                color: #767575;
+              }
+        
+              p {
+                line-height: 1.6;
+              }
+        
+              button {
+                background-color: #0066cc;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-top: 20px;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div  >
+                <img src="https://cdn.discordapp.com/attachments/1125503406371524661/1127923542743334912/image.png" alt="" />
+              </div>
+        
+              <h1>
+                Te damos la bienvenida!!
+              </h1>
+        
+              <div>
+                <p>
+                  <b>Haga clic en el siguiente enlace para confirmar su cuenta:</b>
+                </p>
+              </div>
+              <div>
+                <button href=${verificationLink}>Link de accesso</button>
+                <br>
+                <br>
+                <b> El enlace caduca en 1 hora <b>
+              </div>
+            </div>
+          </body>
+        </html>
       `,
       });
 
@@ -136,11 +215,11 @@ const askForPass = async (req, res) => {
       await transporter.sendMail({
         from: `"Hotel Hunt"  <${COMPANYMAIL}>`,
         to: email,
-        subject: "Recovery your password",
+        subject: "Recupera tu contraseña",
         html: `
-      <b>Please click on the following link to recover your password </b>
-      ,<a href="${verificationLink}">${verificationLink}</a>
-      <b> Link expires in 15m <b>
+      <b>Haga clic en el siguiente enlace para recuperar su contraseña</b>
+      <a href="${verificationLink}">${verificationLink}</a>
+      <b> Link expira en 15min <b>
       `,
       });
 
