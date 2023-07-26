@@ -81,7 +81,6 @@ async function createBooking(req, res) {
       success_url: `${FRONT_URL}/paymenttransition`,
       cancel_url: `${FRONT_URL}`,
     });
-    console.log(session)
     const price = session.amount_total / 100;
     const name = user.name
     const sessionId = session.id;
@@ -212,6 +211,9 @@ const getReserves = async (req, res) => {
 const stripehook = async (req, res) => {
   const sig = req.headers['stripe-signature'];
   const payload = req.body;
+
+  console.log(sig);
+  console.log('payload', payload)
 
   
   let event;
