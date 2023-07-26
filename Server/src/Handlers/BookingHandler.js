@@ -247,9 +247,23 @@ const stripehook = async (req, res) => {
     
 };
 
+const DeleteAllreserves = async(req,res)=>{
+  try {
+    const reserves = await Booking.findAll();
+
+    for(const reserve of reserves){
+      reserve.destroy();
+    }
+    return res.status(200).json('eliminadas todas las reservas')
+  } catch (error) {
+    return res.status(500).json(error.message)
+  }
+}
+
 module.exports = {
   createBooking,
   confirmationEmail,
   getReserves,
-  stripehook
+  stripehook,
+  DeleteAllreserves,
 };
