@@ -78,7 +78,7 @@ async function createBooking(req, res) {
         quantity: 1,
       })),
       mode: 'payment',
-      success_url: `${FRONT_URL}/paymenttransition`,
+      success_url: `${FRONT_URL}`,
       cancel_url: `${FRONT_URL}`,
     });
     const price = session.amount_total / 100;
