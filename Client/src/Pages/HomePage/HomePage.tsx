@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { searchStore, hotelStore} from '../../Store';
+import { searchStore, hotelStore } from '../../Store';
 import HotelListSearch from '../../components/HotelsList/HotelListSearch';
 import HotelList from '../../components/HotelsList/HotelsList';
 import NavBar from '../../components/NavBar/NavBar';
@@ -15,15 +15,24 @@ export default function HomePage() {
 	const { fetchHotels } = hotelStore()
 	const [cookies] = useCookies(["json"]);
 	const { saveInfo } = tokenStore();
-	const token = tokenStore((state)=>state.userState)
-	const { getFavorite}= userStore()
+	const token = tokenStore((state) => state.userState)
+	const { getFavorite } = userStore()
+
+	useEffect(() => {
+		const session: string | null = window.sessionStorage.getItem("tokenUser");
+		if (session) {
+			const parsedSession = JSON.parse(session);
+			console.log(parsedSession);
+			saveInfo(parsedSession);
+		}
+	}, []);
 
 
 
 	const findCookie = () => {
 		if (cookies.json) {
-			const arrayAux= [];
-		
+			const arrayAux = [];
+
 			const logeado = true
 			const userData = cookies.json && cookies.json.data;
 			const tokenRaw = cookies.json && cookies.json.token;
@@ -41,14 +50,14 @@ export default function HomePage() {
 	useEffect(() => {
 		fetchHotels()
 		findCookie()
-		
-		
+
+
 
 	}, [])
 
-	useEffect(()=>{
+	useEffect(() => {
 		getFavorite(token[1])
-	},[token])
+	}, [token])
 
 
 	return (
@@ -72,7 +81,7 @@ export default function HomePage() {
 			</div>
 			<div className='mt-[7%]'>
 				<Footer />
-				</div>
+			</div>
 
 		</div>
 

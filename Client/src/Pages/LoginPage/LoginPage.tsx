@@ -54,7 +54,7 @@ const LogingPage = () => {
 						saveInfo(arrayAux)
 					}
 					console.log("values", values);
-
+					window.sessionStorage.setItem("tokenUser", JSON.stringify(arrayAux))
 					successToast('Usuario logeado correctamente');
 					navigate(-1)
 				}
