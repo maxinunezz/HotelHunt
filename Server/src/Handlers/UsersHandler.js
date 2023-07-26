@@ -173,7 +173,7 @@ const deleteUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
-    const destroyUser = await user.destroy();
+    const destroyUser = await user.destroy({force:true});
     await Promise.all([destroyUser]);
     return res.status(200).json({ message: "Usuario eliminado exitosamente" });
   } catch (error) {
