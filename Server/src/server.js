@@ -9,7 +9,12 @@ server.use(morgan("dev"));
 server.use(express.json());
 server.use(cookieParser());
 server.use(express.urlencoded({ extended: false }));
-server.use(cors());
+const corsOptions = {
+    origin: ['http://localhost:5173', 'https://hotelhunt.kerchakpetshop.com.ar'],
+    methods: ['GET', 'POST'],
+    credentials: true,
+  };
+server.use(cors(corsOptions));
 
 server.use(router);
 
