@@ -52,33 +52,36 @@ const SearchBar = () => {
 	// }
 
 	return (
-		<div className="bg-slate-500 p-2 rounded-md flex items-center w-[600px]">
+		<div className="bg-slate-500 p-2 rounded-md flex items-center w-[500px]">
 			<Input
 				value={input}
 				onChange={(event) => setinput(event.target.value)}
-				className="rounded-md text-black mr-2 flex-grow"
+				className="rounded-md text-black px-3 py-2 mr-2 flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500"
 				type="text"
 				placeholder="Buscar hotel..."
 			/>
 			<Dropdown>
 				<Dropdown.Trigger>
-					<Button className="w-40 justify-center">{selectedOption ? traduccion[selectedOption] : 'Buscar por'}</Button>
+					<Button className="w-32 justify-center">
+						{selectedOption ? traduccion[selectedOption] : 'Buscar por'}
+					</Button>
 				</Dropdown.Trigger>
 				<Dropdown.Content>
-					<Dropdown.Item className='w-20' onClick={() => setSelectedOption("country")}>
-						Pais
+					<Dropdown.Item className="w-32" onClick={() => setSelectedOption("country")}>
+						Buscar por País
 					</Dropdown.Item>
-					<Dropdown.Item onClick={() => setSelectedOption("name")}>
-						Nombre
+					<Dropdown.Item className="w-32" onClick={() => setSelectedOption("name")}>
+						Buscar por Nombre
 					</Dropdown.Item>
 				</Dropdown.Content>
 			</Dropdown>
 
-      <button className="p-2" onClick={(element) => handleSearch(element)}>
-        <MagnifyingGlass size={28} weight="bold" />
-      </button>
-    </div>
-  );
+			<button className="p-2" onClick={(element) => handleSearch(element)}>
+				<MagnifyingGlass size={28} weight="bold" />
+			</button>
+		</div>
+
+	);
 };
 
 export default SearchBar;

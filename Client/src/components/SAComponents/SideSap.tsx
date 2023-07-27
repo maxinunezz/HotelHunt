@@ -1,4 +1,4 @@
-import { Gear, SignOut, User } from '@phosphor-icons/react';
+import { Gear, SignOut, User , Bed,HouseLine} from '@phosphor-icons/react';
 import { useNavigate } from 'react-router-dom';
 import { tokenStore, SAStore } from '../../Store';
 import { farewellAdminToast, errorToast } from '../toast';
@@ -55,7 +55,7 @@ export default function SABar() {
     }
 
     return (        
-        <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+        <aside className="flex flex-col w-[300px] h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
 
             <a>
                 <div>
@@ -79,7 +79,7 @@ export default function SABar() {
                         </label>
                         <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             <div className="w-5 h-5">
-                                <User size={20} />
+                            <HouseLine size={20} color="#fffafa" weight="thin" />
                             </div>
 
                             <span
@@ -91,7 +91,7 @@ export default function SABar() {
                         </a>
                         <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             <div className="w-5 h-5">
-                                <User size={20} />
+                            <Bed size={20} color="#fffafa" weight="thin" />
                             </div>
 
                             <span
@@ -99,6 +99,7 @@ export default function SABar() {
                                 onClick={() => setRender("rooms")}
                             >
                                 Habitaciones
+                                
                             </span>
                         </a>
                     </div>
@@ -124,11 +125,11 @@ export default function SABar() {
 
                         <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             <div className="w-5 h-5">
-                                <Gear size={20} color="#fffafa" />
+                                <User size={20} color="#fffafa" />
                             </div>
 
                             <span className="mx-2 text-sm font-medium" onClick={() => setRender("users")}>
-                                users
+                                Users
                             </span>
                         </a>
                     </div>

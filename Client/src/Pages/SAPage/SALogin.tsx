@@ -55,7 +55,7 @@ export default function SALogin() {
                 }
                 )
 
-            } catch (error:any) {
+            } catch (error: any) {
                 errorToast(error.response.data);
                 console.log(error);
 
@@ -69,87 +69,98 @@ export default function SALogin() {
 
 
     return (
-        <div>
-            <Formik
-                enableReinitialize
-                initialValues={{
-                    email: '',
-                    password: '',
-                }}
-                onSubmit={handleSubmit}
-                validationSchema={loginValidationSchema}
-            >
-                {({ values, errors, submitForm, setFieldValue }) => (
-                    <Form>
-                        <FormControl
-                            validation={
-                                values.email.length === 0
-                                    ? 'none'
-                                    : errors.email
-                                        ? 'invalid'
-                                        : 'valid'
-                            }
-                        >
-                            <FormControl.Label>Email</FormControl.Label>
-                            <FormControl.Input
-                                type="email"
-                                placeholder="email"
-                                onChange={async (event) => {
-                                    await setFieldValue('email', event.target.value);
-                                }}
-                                value={values.email}
-                            />
-                            <FormControl.Text className="text-red-500">{errors.email}</FormControl.Text>
-                        </FormControl>
-                        <FormControl
-                            validation={
-                                values.password.length === 0
-                                    ? 'none'
-                                    : errors.password
-                                        ? 'invalid'
-                                        : 'valid'
-                            }
-                        >
-                            <FormControl.Label>Contraseña</FormControl.Label>
-                            <div className="relative">
-                                <FormControl.Input
-                                    type={showPassword ? 'text' : 'password'} // Mostrar contraseña o no según el estado
-                                    placeholder="Contraseña"
-                                    onChange={async (event) => {
-                                        await setFieldValue('password', event.target.value);
-                                    }}
-                                    value={values.password}
-                                />
-                                <div
-                                    className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
-                                    onClick={() => setShowPassword((prevState) => !prevState)} // Alternar el estado para mostrar/ocultar contraseña
-                                >
-
-                                    {showPassword ? (
-                                        <Eye size={24} color="#1d6bb4" />
-                                    ) : (
-                                        <EyeClosed size={24} color="#1d6bb4" />
-                                    )}
-                                </div>
-                            </div>
-                            <FormControl.Text className="text-red-500">
-                                {errors.password}
-                            </FormControl.Text>
-                        </FormControl>
-                        <div className="mt-4 flex items-center justify-center">
-                            <Button
-                                color="blue"
-                                onClick={submitForm}
-                                disabled={errors.email || errors.password ? true : false}
-                            >
-                                login
-                            </Button>
-                        </div>
-                    </Form>
-                )}
-            </Formik>
+        <div className="bg-gray-900 min-h-screen flex items-center justify-center">
+          <Formik
+            enableReinitialize
+            initialValues={{
+              email: '',
+              password: '',
+            }}
+            onSubmit={handleSubmit}
+            validationSchema={loginValidationSchema}
+          >
+            {({ values, errors, submitForm, setFieldValue }) => (
+              <Form className="bg-white shadow-md rounded-md p-6 w-[400px] h-[380px]">
+                <h2 className="text-3xl font-bold text-blue-500 mb-6">
+                  ¡Bienvenido al panel de administración!
+                </h2>
+                <FormControl
+                  validation={
+                    values.email.length === 0
+                      ? 'none'
+                      : errors.email
+                      ? 'invalid'
+                      : 'valid'
+                  }
+                >
+                  <FormControl.Label>Email</FormControl.Label>
+                  <FormControl.Input
+                    type="email"
+                    placeholder="email"
+                    onChange={async (event) => {
+                      await setFieldValue('email', event.target.value);
+                    }}
+                    value={values.email}
+                    className="border px-3 py-2 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                  />
+                  <FormControl.Text className="text-red-500">
+                    {errors.email}
+                  </FormControl.Text>
+                </FormControl>
+                <FormControl
+                  validation={
+                    values.password.length === 0
+                      ? 'none'
+                      : errors.password
+                      ? 'invalid'
+                      : 'valid'
+                  }
+                >
+                  <FormControl.Label>Contraseña</FormControl.Label>
+                  <div className="relative">
+                    <FormControl.Input
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="Contraseña"
+                      onChange={async (event) => {
+                        await setFieldValue('password', event.target.value);
+                      }}
+                      value={values.password}
+                      className="border px-3 py-2 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                    />
+                    <div
+                      className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                      onClick={() => setShowPassword((prevState) => !prevState)}
+                    >
+                      {showPassword ? (
+                        <Eye size={24} color="#1d6bb4" />
+                      ) : (
+                        <EyeClosed size={24} color="#1d6bb4" />
+                      )}
+                    </div>
+                  </div>
+                  <FormControl.Text className="text-red-500">
+                    {errors.password}
+                  </FormControl.Text>
+                </FormControl>
+                <div className="mt-4 flex items-center justify-center">
+                  <Button
+                    color="blue"
+                    onClick={submitForm}
+                    disabled={errors.email || errors.password}
+                    className={`px-4 py-2 rounded-md ${
+                      errors.email || errors.password
+                        ? 'bg-blue-300 cursor-not-allowed'
+                        : 'bg-blue-500 hover:bg-blue-600'
+                    }`}
+                  >
+                    Ingresar
+                  </Button>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
+      );
+      
 
-
-    )
 }

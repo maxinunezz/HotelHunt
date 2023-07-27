@@ -78,7 +78,7 @@ export default function HotelsRow({
         }
     }
 
-    const handleChangeCheckbox = (e:any) => {
+    const handleChangeCheckbox = (e: any) => {
         e.stopPropagation();
         setIsChecked(e.target.checked);
         if (e.target.checked !== disabled) {
@@ -90,7 +90,7 @@ export default function HotelsRow({
 
 
     return (
-        <div className={`dashboard-row rounded-md p-4 mb-4 ${disabled ? 'bg-slate-400' : 'bg-white'}`}>
+        <div className={` rounded-md p-5 mb-5 ${disabled ? 'bg-slate-400' : 'bg-white'}`}>
             <div className="grid grid-cols-8 gap-4">
                 <div className="col-span-2">
                     <img src={photo[0]} alt={name} className="w-48 h-48 object-cover" />
@@ -128,39 +128,51 @@ export default function HotelsRow({
             </div>
 
             {showConfirmDialog && (
-                <div className="bg-slate-600">
-                    <div className="confirm-dialog-overlay" onClick={() => setShowConfirmDialog(false)} />
-                    <div className="confirm-dialog-content">
-                        <h3 className="confirm-dialog-title">Confirmar eliminación</h3>
-                        <p className="confirm-dialog-message">¿Estás seguro de que deseas eliminar este hotel?</p>
-                        <div className="confirm-dialog-buttons">
-                            <button className="border-slate-950 text-white bg-orange-600 w-[100px]" onClick={(e) => { e.stopPropagation(); confirmDelete(); }}>
+                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-opacity-50 bg-black z-10">
+                    <div className="bg-white p-6 rounded-md shadow-md">
+                        <h3 className="text-xl font-bold mb-4">Confirmar eliminación</h3>
+                        <p className="text-lg mb-6">¿Estás seguro de que deseas eliminar este hotel?</p>
+                        <div className="flex justify-end">
+                            <button
+                                className="bg-orange-600 text-white px-4 py-2 rounded-md mr-2"
+                                onClick={(e) => { e.stopPropagation(); confirmDelete(); }}
+                            >
                                 Sí
                             </button>
-                            <button className="border-slate-950 text-white bg-lime-500 w-[100px]" onClick={(e) => { setShowConfirmDialog(false); e.stopPropagation(); }}>
+                            <button
+                                className="bg-lime-500 text-white px-4 py-2 rounded-md"
+                                onClick={(e) => { setShowConfirmDialog(false); e.stopPropagation(); }}
+                            >
                                 No
                             </button>
                         </div>
                     </div>
                 </div>
             )}
+
             {showConfirmDisabled && (
-                <div className="bg-slate-600">
-                    <div className="confirm-dialog-overlay" onClick={() => setShowConfirmDialog(false)} />
-                    <div className="confirm-dialog-content">
-                        <h3 className="confirm-dialog-title">Confirmar activación/desactivación</h3>
-                        <p className="confirm-dialog-message">¿Estás seguro de que deseas activar/desactivar este hotel?</p>
-                        <div className="confirm-dialog-buttons">
-                            <button className="border-slate-950 text-white bg-orange-600 w-[100px]" onClick={(e) => { e.stopPropagation(); ConfirmDisabled(); }}>
+                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-opacity-50 bg-black z-10">
+                    <div className="bg-white p-6 rounded-md shadow-md">
+                        <h3 className="text-xl font-bold mb-4">Confirmar activación/desactivación</h3>
+                        <p className="text-lg mb-6">¿Estás seguro de que deseas activar/desactivar este hotel?</p>
+                        <div className="flex justify-end">
+                            <button
+                                className="bg-orange-600 text-white px-4 py-2 rounded-md mr-2"
+                                onClick={(e) => { e.stopPropagation(); ConfirmDisabled(); }}
+                            >
                                 Sí
                             </button>
-                            <button className="border-slate-950 text-white bg-lime-500 w-[100px]" onClick={(e) => { setConfirmDisabled(false); e.stopPropagation(); }}>
+                            <button
+                                className="bg-lime-500 text-white px-4 py-2 rounded-md"
+                                onClick={(e) => { setConfirmDisabled(false); e.stopPropagation(); }}
+                            >
                                 No
                             </button>
                         </div>
                     </div>
                 </div>
             )}
+
         </div>
     );
 }

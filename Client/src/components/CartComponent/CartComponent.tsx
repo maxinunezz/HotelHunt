@@ -129,73 +129,75 @@ const CartComponent = () => {
         trigger="hover"
         tone="light"
         withChevron={false}
+        className="relative"
       >
         <Dropdown.Trigger className="flex items-center">
-          <Button>
-            <ShoppingCart size={30} weight="duotone" className="mr-1.5" />
-            Carrito ({
-              userReserve.length
-            })
+          <Button
+            className="  font-medium hover:text-blue-500"
+          >
+            <ShoppingCart size={30} weight="duotone" className="mr-2" />
+            Carrito ({userReserve.length})
           </Button>
         </Dropdown.Trigger>
-        <Dropdown.Content className="rounded" >
-          <Dropdown.Divider />
-
+        <Dropdown.Content >
           <div>
             {userReserve.map((item: any) => (
-              <Dropdown.Item className="my-2 justify-center items-center text-center">
-                <Button
-                  onClick={() => handleDeleteItem(item.roomId)}
-                  className="w-[80px]"
-                  variant="danger"
-                >
-                  <Trash size={25} weight="duotone" className="mr-1.5" />
-                </Button>
-                <div className="flex">
-                  <div className="w-[100px] h-[100px] flex justify-center items-center text-center">
-                    <img src={roomPhoto(item)} alt="" />
-                  </div>
-                  <div className="flex flex-col ml-2">
-                    <div>{roomName(item)}</div>
-                    <p>Dias: {calculateDays(item)}</p>
-                    <p>Precio: ${item.price * calculateDays(item)}</p>
+              <Dropdown.Item
+                className="flex items-center justify-between py-4"
+                key={item.roomId}
+              >
+                <div className="flex items-center ">
+                  <img
+                    src={roomPhoto(item)}
+                    alt=""
+                    className="w-20 h-20 object-cover rounded-md mr-4"
+                  />
+                  <div className="flex flex-col">
+                   <div className="font-medium mb-1">{roomName(item)}</div>
+                    <p className="text-sm text-gray-600">Dias: {calculateDays(item)}</p>
+                    <p className="text-sm text-gray-600">Precio: ${item.price * calculateDays(item)}</p>
                   </div>
                 </div>
+                <Button
+                  onClick={() => handleDeleteItem(item.roomId)}
+                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"
+                  variant="danger"
+                >
+                  <Trash size={25} weight="duotone" />
+                </Button>
               </Dropdown.Item>
             ))}
           </div>
 
           <Dropdown.Divider color="slate" />
 
-          <Dropdown.Divider color="dark" />
-
-          <Dropdown.Label
-            className="flex justify-start items-center"
-            weight="bold"
-          >
-            <div className="text-black">Total:</div>
-            <span className="ml-20 flex justify-end items-center text-green-500">
+          <div className="flex items-center justify-center py-4">
+            <div className="font-bold text-black">Total:</div>
+            <span className="text-green-500 font-bold">
               <CurrencyDollar size={21} weight="duotone" />
             </span>
-            <div>
+            <div className="font-bold text-green-500">
               {calculateTotalPay()}
             </div>
-          </Dropdown.Label>
-          <Dropdown.Divider />
+          </div>
+
+
+          <Dropdown.Divider color="dark" />
+
           <Dropdown.Item
             onClick={handleCheckout}
             color="green"
-            className="flex justify-center items-center"
+            className="flex justify-center items-center py-4"
           >
-            <Money size={20} weight="duotone" className="mr-1.5" />
+            <Money size={20} weight="duotone" className="mr-2" />
             Verificar
           </Dropdown.Item>
-          <Dropdown.Divider />
 
-        
+          <Dropdown.Divider />
         </Dropdown.Content>
       </Dropdown>
     </div>
+
   );
 };
 
