@@ -8,13 +8,14 @@ import { userStore } from "../../Store/UserStore";
 const AdminMenu = () => {
   const navigate = useNavigate();
   const { reset } = userStore();
-  const isAdmin = tokenStore((state) => state.userState); //análogo a UserMenu
+  const isAdmin = tokenStore((state) => state.userState); 
   const [selectedOption] = useState<string | undefined>();
   const { resetToken } = tokenStore();
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     window.sessionStorage.removeItem('tokenUser');
     window.sessionStorage.removeItem('SALoginInfo');
+    window.sessionStorage.removeItem('token');
     document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     resetToken();
     farewellAdminToast("Gracias y éxito en sus ventas");
