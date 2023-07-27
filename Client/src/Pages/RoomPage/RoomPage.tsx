@@ -20,6 +20,7 @@ import {
   reserveSuccessToast1,
   reserveFullToast,
   mustLoginToast,
+  errorToast,
 } from "../../components/toast";
 
 export interface ReserveBooking {

@@ -14,6 +14,7 @@ const AdminMenu = () => {
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     window.sessionStorage.removeItem('tokenUser');
+    window.sessionStorage.removeItem('SALoginInfo');
     document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     resetToken();
     farewellAdminToast("Gracias y éxito en sus ventas");

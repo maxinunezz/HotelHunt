@@ -17,14 +17,26 @@ export default function HomePage() {
 	const { saveInfo } = tokenStore();
 	const token = tokenStore((state) => state.userState)
 	const { getFavorite } = userStore()
-	
-	
+
+
 	useEffect(() => {
+		const sessionSA: string | null = window.sessionStorage.getItem("SALoginInfo");
 		const session: string | null = window.sessionStorage.getItem("tokenUser");
-		if (session) {
+
+		if (sessionSA) {
+			// Si existe sessionSA, guarda sessionSA
+			const parsedSessionSA = JSON.parse(sessionSA);
+			console.log(parsedSessionSA);
+			saveInfo(parsedSessionSA);
+		} else if (session) {
+			// Si no existe sessionSA pero sí existe session, guarda session
 			const parsedSession = JSON.parse(session);
 		
 			saveInfo(parsedSession);
+		} else {
+			// Si no existe ninguna sesión, no hace nada
+			console.log("no hay usuario logeado");
+			
 		}
 	}, []);
 
