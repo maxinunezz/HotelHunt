@@ -33,6 +33,7 @@ const Card: React.FC<CardProps> = ({
   const { addFavorite } = userStore();
   const { setHotelFavorites } = favoriteStore();
   const token = tokenStore((state) => state.userState);
+  
 
   const renderStars = (rating: number) => {
     const filledStars = rating;
@@ -147,10 +148,10 @@ const Card: React.FC<CardProps> = ({
               {/* Render the Phosphor icon repeatedly */}
               {ratingValue !== null && (
                 <>
-                {renderIcon(ratingValue)}
-                <span className="ml-1">
-                  (<span className="text-sm">{ratingValue}</span>)
-                </span>
+                  {renderIcon(ratingValue)}
+                  <span className="ml-1">
+                    (<span className="text-sm">{ratingValue}</span>)
+                  </span>
                 </>
               )}
             </div>

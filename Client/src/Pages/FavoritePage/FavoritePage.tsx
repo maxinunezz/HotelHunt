@@ -11,23 +11,38 @@ const FavoritePage = () => {
 
   const { setCurrentPageFavorites, setHotelFavorites } = favoriteStore();
   const { favorites, currentPageFavorites } = favoriteStore((state) => state);
+  const { saveInfo } = tokenStore()
   const { getFavorite } = userStore();
   const token = tokenStore((state) => state.userState);
-  const hotelFavorite=userStore(state=>state.favoriteHotel)
-  const hotels= hotelStore(state=>state.hotels)
+  const hotelFavorite = userStore(state => state.favoriteHotel)
+  const hotels = hotelStore(state => state.hotels)
 
   useEffect(() => {
-    // fetchHotels();
-    getFavorite(token[1]);
-  }, [token]); // eslint-disable-line
+    const session: string | null = window.sessionStorage.getItem("tokenUser");
+    if (session) {
+      const parsedSession = JSON.parse(session);
+      console.log(parsedSession);
+      saveInfo(parsedSession);
+    }
+  }, []);
 
-  useEffect(()=>{
-    const hotelFavorites = hotels.filter(hotel=> hotelFavorite.includes(hotel.id))
+  useEffect(() => {
+    const fetchFavoriteData = async () => {
+      if (token[1]) {
+        await getFavorite(token[1]);
+      }
+    };
+  
+    fetchFavoriteData();
+  }, [token, getFavorite, hotelFavorite]);
+  
+  useEffect(() => {
+    const hotelFavorites = hotels.filter(hotel => hotelFavorite.includes(hotel.id))
     
-        setHotelFavorites(hotelFavorites)
-        
-    }, [hotelFavorite]) // eslint-disable-line
-      
+    setHotelFavorites(hotelFavorites)
+    
+  }, [hotelFavorite]) // eslint-disable-line
+  
 
   const totalHotels = favorites?.length;
   const firstIndex = (currentPageFavorites - 1) * hotelsPerPage;
@@ -40,13 +55,12 @@ const FavoritePage = () => {
   };
 
 
-  
+
 
   return (
     <div>
 
-      <div><NavbarDetail/></div>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 mt-[150px]">
         {totalHotels ? (
           currentHotels.map((hotel) => (
             <Card
@@ -67,13 +81,14 @@ const FavoritePage = () => {
         )}
       </div>
       <div>
-      <PaginadoGlobal
-        elementsPerPage={hotelsPerPage}
-        elementToShow={favorites}
-        pageSet={handlePaginado}
-        currentPage={currentPageFavorites}
-      />
+        <PaginadoGlobal
+          elementsPerPage={hotelsPerPage}
+          elementToShow={favorites}
+          pageSet={handlePaginado}
+          currentPage={currentPageFavorites}
+        />
       </div>
+      <div><NavbarDetail /></div>
     </div>
   );
 };

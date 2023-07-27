@@ -8,6 +8,7 @@ const client = new OAuth2Client(CLIENT_GOOGLE_ID, GOOGLE_SECRET);
 const googleVerify = async (req, res,next) => {
     try {
         const idToken = req.body.credential;
+        console.log('body credential', req.body.credential)
 
         const ticket = await client.verifyIdToken({
             idToken,
@@ -15,6 +16,9 @@ const googleVerify = async (req, res,next) => {
         });
 
         const payload = ticket.getPayload();
+
+        console.log('cookie token',req.cookies.g_csrf_token)
+        console.log('body token', req.body.g_csrf_token)
 
         if (req.cookies.g_csrf_token !== req.body.g_csrf_token) {
             return res.status(400).send('Invalid CSRF token');

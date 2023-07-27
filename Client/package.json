@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "serve dist",
     "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "@googleapis/docs": "^2.0.1",
@@ -31,6 +31,7 @@
     "react-modal": "^3.16.1",
     "react-multi-carousel": "^2.8.4",
     "react-router-dom": "^6.14.1",
+    "serve": "^14.2.0",
     "tailwind-scrollbar": "^3.0.4",
     "xlsx": "^0.18.5",
     "yup": "^1.2.0",

@@ -17,6 +17,7 @@ const UserMenu = () => {
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
+        window.sessionStorage.removeItem('tokenUser');
         document.cookie = "json=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         resetToken()
         farewellToast("Adiós y buena suerte!")
