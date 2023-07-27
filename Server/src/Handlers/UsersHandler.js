@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const { PASSMAIL, COMPANYMAIL, JWT_SECRET,BACK_URL, FRONT_URL } = process.env;
+const { PASSMAIL, COMPANYMAIL, JWT_SECRET, BACK_URL, FRONT_URL } = process.env;
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -67,7 +67,7 @@ const createUserForEmail = async (req, res) => {
       await transporter.sendMail({
         from: `"Hotel Hunt"  <${COMPANYMAIL}>`,
         to: email,
-        subject: "CONFIRM YOUR ACCOUNT",
+        subject: "CONFIRME SU CUENTA",
         html: `
         <!DOCTYPE html>
         <html lang="en">
@@ -212,7 +212,7 @@ const askForPass = async (req, res) => {
         JWT_SECRET,
         { expiresIn: "15m" }
       );
-      const verificationLink = `${BACK_URL}/user/validateAsk/${token}`; 
+      const verificationLink = `${BACK_URL}/user/validateAsk/${token}`;
 
       await transporter.sendMail({
         from: `"Hotel Hunt"  <${COMPANYMAIL}>`,
@@ -237,13 +237,13 @@ const askForPass = async (req, res) => {
 const validateToken = async (req, res) => {
   const { token } = req.params;
   try {
-    const decodedToken = jwt.verify(token, JWT_SECRET );
-    const emailToken = jwt.sign({id: decodedToken.id}, JWT_SECRET, { expiresIn: '30m' });
-    const Token = { token : emailToken}
-    if (decodedToken && !isTokenExpired(decodedToken)){
+    const decodedToken = jwt.verify(token, JWT_SECRET);
+    const emailToken = jwt.sign({ id: decodedToken.id }, JWT_SECRET, { expiresIn: '30m' });
+    const Token = { token: emailToken }
+    if (decodedToken && !isTokenExpired(decodedToken)) {
       res.cookie('token', Token)
       return res.status(200).redirect(`${FRONT_URL}/SetNewPass`)
-    }else{
+    } else {
       throw Error(message, '')
     }
   } catch (error) {
@@ -251,16 +251,16 @@ const validateToken = async (req, res) => {
   }
 };
 
-const recoveryPass = async (req,res) => {
-  
+const recoveryPass = async (req, res) => {
+
   const { id } = userData;
   const { password } = req.body;
-  
+
   try {
-    const auth = await Auth.findOne({where: { id: id}})
+    const auth = await Auth.findOne({ where: { id: id } })
     const hashedpass = await bcrypt.hash(password, 5);
-    await auth.update({password: hashedpass})
-    const userFound = await User.findOne({where: { id: auth.userId }})
+    await auth.update({ password: hashedpass })
+    const userFound = await User.findOne({ where: { id: auth.userId } })
 
     const token = jwt.sign(
       { id: userFound.id, admin: userFound.admin },
@@ -336,11 +336,11 @@ const getUserFavorites = async (req, res) => {
   }
 };
 
-const getAllUsers = async(req,res) =>  {
+const getAllUsers = async (req, res) => {
   let users_array = []
   try {
     const users = await User.findAll();
-    if(users.length === 0) {
+    if (users.length === 0) {
       return res.status(404).json({ message: "No hay usuarios" });
     }
 
@@ -359,7 +359,7 @@ const getAllUsers = async(req,res) =>  {
     return res.status(200).json(users_array)
   } catch (error) {
     return res.status(500).send("Error del servidor")
-  }
+  }
 };
 
 module.exports = {

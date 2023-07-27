@@ -13,14 +13,9 @@ async function createBooking(req, res) {
     const { id } = userData;
     const { roomsToReserve } = req.body;
 
-    if (
-      !roomsToReserve ||
-      !Array.isArray(roomsToReserve) ||
-      roomsToReserve.length === 0
-    ) {
-      return res
-        .status(400)
-        .send("No se proporcionan habitaciones para reservar");
+
+    if (!roomsToReserve || !Array.isArray(roomsToReserve) || roomsToReserve.length === 0) {
+      return res.status(400).send( "No se proporcionan habitaciones para reservar" );
     }
 
     const bookings = [];
@@ -81,7 +76,7 @@ async function createBooking(req, res) {
         quantity: 1,
       })),
       mode: "payment",
-      success_url: `${FRONT_URL}/paymenttransition`,
+      success_url: `${FRONT_URL}`,
       cancel_url: `${FRONT_URL}`,
     });
     const price = session.amount_total / 100;
