@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { hotelStore, roomsStore } from "../../Store";
+import { Room, hotelStore, roomsStore } from "../../Store";
 import { useEffect, useState } from "react";
 import { useFetchRooms } from "../../hooks";
-import axios from 'axios'
+import axios from 'axios';
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import NavbarDetail from "../../components/NavBarDetail/NavBarDetail";
@@ -12,6 +12,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { tokenStore } from "../../Store";
 import { userStore } from "../../Store/UserStore";
 import { parseISO, addDays, isWithinInterval, format } from 'date-fns';
+
 const url = import.meta.env.VITE_URL;
 
 import {
@@ -19,6 +20,7 @@ import {
   reserveSuccessToast1,
   reserveFullToast,
   mustLoginToast,
+  errorToast,
 } from "../../components/toast";
 
 export interface ReserveBooking {
@@ -31,91 +33,81 @@ export interface ReserveBooking {
 const RoomPage = () => {
   const { id } = useParams();
   const { setRoom } = roomsStore();
-  const {saveInfo} = tokenStore()
+  const { saveInfo } = tokenStore();
   const [roomRender, setRoomRender] = useState<Room | null>();
   const [arrivalDate, setArrivalDate] = useState<Date | null>(null);
   const [departureDate, setDepartureDate] = useState<Date | null>(null);
-  const [date, setDate] = useState({ in: "", out: "" });
-  const [reservesOnScreen, setReservesOnScreen] = useState([]);
+  const [date, setDate] = useState<{ in: string; out: string }>({ in: "", out: "" });
+  const [reservesOnScreen, setReservesOnScreen] = useState<ReserveBooking[]>([]);
   const token = tokenStore((state) => state.userState);
   const { reserveRoomPayment } = userStore();
 
   useEffect(() => {
-		const sessionSA: string | null = window.sessionStorage.getItem("SALoginInfo");
-		const session: string | null = window.sessionStorage.getItem("tokenUser");
+    const sessionSA: string | null = window.sessionStorage.getItem("SALoginInfo");
+    const session: string | null = window.sessionStorage.getItem("tokenUser");
 
-		if (sessionSA) {
-			// Si existe sessionSA, guarda sessionSA
-			const parsedSessionSA = JSON.parse(sessionSA);
-			console.log(parsedSessionSA);
-			saveInfo(parsedSessionSA);
-		} else if (session) {
-			// Si no existe sessionSA pero sí existe session, guarda session
-			const parsedSession = JSON.parse(session);
-			console.log(parsedSession);
-			saveInfo(parsedSession);
-		} else {
-			// Si no existe ninguna sesión, no hace nada
-			console.log("no hay usuario logeado");
-			
-		}
-	}, []);
+    if (sessionSA) {
+   
+      const parsedSessionSA = JSON.parse(sessionSA);
+      saveInfo(parsedSessionSA);
+    } else if (session) {
+ 
+      const parsedSession = JSON.parse(session);
+      saveInfo(parsedSession);
+    } else {
 
-  
-  
+    
+    }
+  }, []);
+
   const reservesInScreen = async () => {
     try {
       const response = await axios.get(`${url}/booking/all/${id}`);
       const rawData = response.data;
-  
-      // Formatear las fechas en los datos recibidos sin incluir la hora
-      const formattedData = rawData.map((item) => ({
+
+
+      const formattedData = rawData.map((item: any) => ({
         ...item,
         checkin: new Date(item.checkin).toISOString().slice(0, 10),
         checkout: new Date(item.checkout).toISOString().slice(0, 10),
       }));
-  
-      console.log(formattedData);
-      
+
       setReservesOnScreen(formattedData);
-  
+
       return formattedData;
     } catch (error) {
       console.error("Error fetching reserves:", error);
-      // Aquí puedes agregar lógica para manejar el error, como mostrar un mensaje de error al usuario
     }
   };
 
-useEffect(()=>{
-reservesInScreen()
-},[])
+  useEffect(() => {
+    reservesInScreen();
+  }, []);
 
+  const getNextReservationDate = (checkInDate: Date) => {
+    const auxArray = reservesOnScreen.sort((a, b) => new Date(a.checkin).getTime() - new Date(b.checkin).getTime());
 
+    const nextReservation = auxArray.find((reserve) => parseISO(reserve.checkin) > checkInDate);
 
-const getNextReservationDate = (checkInDate) => {
-  const nextReservation = reservesOnScreen.find(
-    (reserve) => parseISO(reserve.checkin) > checkInDate
-  );
+    return nextReservation ? parseISO(nextReservation.checkin) : null;
+  };
 
-  return nextReservation ? parseISO(nextReservation.checkin) : null;
-};
+  const getBlockedDates = () => {
+    const blockedDates: Date[] = [];
 
-const getBlockedDates = () => {
-  const blockedDates: Date[] = [];
+    reservesOnScreen.forEach((reserve) => {
+      const checkinDate = parseISO(reserve.checkin);
+      const checkoutDate = parseISO(reserve.checkout);
+      let currentDate = new Date(checkinDate);
 
-  reservesOnScreen.forEach((reserve) => {
-    const checkinDate = parseISO(reserve.checkin);
-    const checkoutDate = parseISO(reserve.checkout);
-    let currentDate = new Date(checkinDate);
+      while (!isWithinInterval(currentDate, { start: checkoutDate, end: addDays(checkoutDate, 1) })) {
+        blockedDates.push(new Date(currentDate));
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+    });
 
-    while (!isWithinInterval(currentDate, { start: checkoutDate, end: addDays(checkoutDate, 1) })) {
-      blockedDates.push(new Date(currentDate));
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-  });
-
-  return blockedDates;
-};
+    return blockedDates;
+  };
 
   const blockedDates = getBlockedDates();
 
@@ -156,14 +148,16 @@ const getBlockedDates = () => {
       setDate((state) => ({ ...state, in: formattedDate }));
   
       const nextReservationDate = getNextReservationDate(date);
-      if (nextReservationDate) {
-        setDepartureDate(nextReservationDate); // Establecer el max date del datepicker de "checkout" con la siguiente reserva disponible
+  
+     
+      if (nextReservationDate !== null) {
+        setDepartureDate(nextReservationDate);
       } else {
         setDepartureDate(null);
       }
     }
   };
-
+  
   const handleDepartureDateChange = (date: Date | null) => {
     if (date) {
       const year = date.getFullYear();
@@ -175,13 +169,17 @@ const getBlockedDates = () => {
       setDepartureDate(date);
       setDate((state) => ({ ...state, out: formattedDate }));
   
-      if (arrivalDate && getNextReservationDate(arrivalDate)) {
+      if (arrivalDate) {
         const nextReservationDate = getNextReservationDate(arrivalDate);
-        if (date > nextReservationDate) {
-          setDepartureDate(nextReservationDate); // Actualizar la fecha de checkout si es posterior a la siguiente reserva disponible
+
+        if (nextReservationDate !== null && date > nextReservationDate) {
+          setDepartureDate(nextReservationDate);
           setDate((state) => ({ ...state, out: format(nextReservationDate, 'yyyy-MM-dd') }));
         }
       }
+    } else {
+      setDepartureDate(null);
+      setDate((state) => ({ ...state, out: '' }));
     }
   };
 
@@ -226,7 +224,6 @@ const getBlockedDates = () => {
 
     for (let i = 0; i < userReserve.length; i++) {
       if (userReserve[i].roomId === newReserve.roomId) {
-        console.log("Esta habitación ya tiene una reserva activa");
         reserveErrorToast("Esta habitación ya tiene una reserva activa");
         return;
       }
@@ -243,15 +240,6 @@ const getBlockedDates = () => {
     return hotelBelong?.name;
   };
 
-  const isDateBlockedForCheckout = (dateToCheck) => {
-    if (!arrivalDate || !departureDate) return false;
-
-    return (
-      dateToCheck <= addDays(arrivalDate, 1) || // Bloquear las fechas anteriores o iguales a 1 día después del checkIn
-      (getNextReservationDate(arrivalDate) && dateToCheck >= getNextReservationDate(arrivalDate)) || // Bloquear las fechas posteriores o iguales al checkIn de la siguiente reserva
-      dateToCheck >= departureDate // Bloquear las fechas posteriores o iguales a la fecha de checkIn de la siguiente reserva
-    );
-  };
 
   return (
     <div>
@@ -280,19 +268,19 @@ const getBlockedDates = () => {
                           excludeDates={blockedDates}
                         />
 
-                        {arrivalDate && <DatePicker
-                          selected={departureDate}
-                          onChange={handleDepartureDateChange}
-                          placeholderText="Fecha de salida"
-                          className="border-2 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 border-blue-500"
-                          popperClassName="text-black"
-                          minDate={addDays(arrivalDate, 1)} // La fecha de checkOut debe ser al menos 1 día después del checkIn
-                          excludeDates={blockedDates}
-                          maxDate={getNextReservationDate(arrivalDate)}
-                          highlightDates={(date) =>
-                            isDateBlockedForCheckout(date) // Usamos la función isDateBlockedForCheckout para las fechas de checkOut
-                          }
-                        />}
+                        {arrivalDate && (
+                          <DatePicker
+                            selected={departureDate}
+                            onChange={handleDepartureDateChange}
+                            placeholderText="Fecha de salida"
+                            className="border-2 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 border-blue-500"
+                            popperClassName="text-black"
+                            minDate={addDays(arrivalDate, 1)} 
+                            excludeDates={blockedDates}
+                            maxDate={getNextReservationDate(arrivalDate)}
+                           
+                          />
+                        )}
                       </div>
                     </div>
                     <div className="flex justify-start mt-4">
