@@ -26,12 +26,12 @@ const RoomFilter = () => {
 		if (sessionSA) {
 			// Si existe sessionSA, guarda sessionSA
 			const parsedSessionSA = JSON.parse(sessionSA);
-			console.log(parsedSessionSA);
+			
 			saveInfo(parsedSessionSA);
 		} else if (session) {
 			// Si no existe sessionSA pero sí existe session, guarda session
 			const parsedSession = JSON.parse(session);
-			console.log(parsedSession);
+			
 			saveInfo(parsedSession);
 		} else {
 			// Si no existe ninguna sesión, no hace nada

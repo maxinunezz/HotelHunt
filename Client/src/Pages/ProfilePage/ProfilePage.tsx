@@ -1,14 +1,39 @@
 import { tokenStore } from "../../Store";
 import ProfileSideBar from "../../components/ProfileSideBar/ProfileSideBar";
+import { useEffect } from "react";
 
 const AdminProfilePage = () => {
   const userData = tokenStore((state) => state.userState)
+  const { saveInfo } = tokenStore();
+
+
+
+  useEffect(() => {
+		const sessionSA: string | null = window.sessionStorage.getItem("SALoginInfo");
+		const session: string | null = window.sessionStorage.getItem("tokenUser");
+
+		if (sessionSA) {
+			
+			const parsedSessionSA = JSON.parse(sessionSA);
+			console.log(parsedSessionSA);
+			saveInfo(parsedSessionSA);
+		} else if (session) {
+			
+			const parsedSession = JSON.parse(session);
+		
+			saveInfo(parsedSession);
+		} else {
+	
+			console.log("no hay usuario logeado");
+			
+		}
+	}, []);
 
   const user = {
-    name: `${userData[0].name}`,
-    lastName: `${userData[0].lastName}`,
-    dateOfBirth: `${userData[0].birthDate}`,
-    phoneNumber: `${userData[0].phoneNumber}`,
+    name: `${userData[0]?.name}`,
+    lastName: `${userData[0]?.lastName}`,
+    dateOfBirth: `${userData[0]?.birthDate}`,
+    phoneNumber: `${userData[0]?.phoneNumber}`,
   };
 
   const isAdmin = userData[2] === 'admin';

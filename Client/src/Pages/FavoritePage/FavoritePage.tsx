@@ -17,6 +17,15 @@ const FavoritePage = () => {
   const hotelFavorite = userStore(state => state.favoriteHotel)
   const hotels = hotelStore(state => state.hotels)
 
+
+
+
+
+
+
+
+  
+
   useEffect(() => {
     const session: string | null = window.sessionStorage.getItem("tokenUser");
     if (session) {
@@ -26,6 +35,7 @@ const FavoritePage = () => {
     }
   }, []);
 
+  
   useEffect(() => {
     const fetchFavoriteData = async () => {
       if (token[1]) {

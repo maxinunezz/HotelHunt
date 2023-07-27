@@ -3,34 +3,43 @@ import { Text } from "@rewind-ui/core";
 
 const NavSADB = () => {
 
-    return (
-        <div className="grid grid-cols-8 gap-4 bg-white">
-                <div className="col-span-1 flex items-center justify-center">
-                    <Text variant="h6" className="text-lg font-medium">
-                        Nombre
-                    </Text>
-                </div>
-                <div className="col-span-1 flex items-center justify-center">
-                    <Text variant="h6" className="text-lg font-medium">
-                        Pais
-                    </Text>
-                </div>
-                <div className="col-span-1 flex items-center justify-center">
-                    <Text variant="h6" className="text-lg font-medium">
-                        Ciudad
-                    </Text>
-                </div>
-                <div className="col-span-1 flex items-center justify-center">
-                    <Text variant="h6" className="text-lg font-medium">
-                        Eliminar
-                    </Text>
-                </div>
-                <div className="col-span-1 flex items-center justify-center">
-                    <Text variant="h6" className="text-lg font-medium">
-                        Desactivar
-                    </Text>
-                </div>               
-            </div>
-    );
+  return (
+    <div className="navbar-wrapper shadow bg-slate-900 border rounded-xl">
+      <div className="grid grid-cols-5 gap-4 p-4">
+        <div className="flex items-center ml-[420px]">
+          <Text variant="h6" className="text-lg font-medium text-white">
+            Nombre
+          </Text>
+        </div>
+        <div className="flex items-center ml-[360px]">
+          <Text variant="h6" className="text-lg font-medium text-white">
+            País
+          </Text>
+        </div>
+        <div className="flex items-center ml-[220px]">
+          <Text variant="h6" className="text-lg font-medium text-white">
+            Ciudad
+          </Text>
+        </div>
+        <div className="flex items-center ml-[100px]">
+          <Text variant="h6" className="text-lg font-medium text-red-600 cursor-pointer">
+            Eliminar
+          </Text>
+        </div>
+        <div className="flex items-center ml-[-40px]">
+          <Text variant="h6" className="text-lg font-medium text-yellow-600 cursor-pointer">
+            Desactivar
+          </Text>
+        </div>
+      </div>
+    </div>
+  );
+  
+
+
+
+
+
+
 };
 export default NavSADB

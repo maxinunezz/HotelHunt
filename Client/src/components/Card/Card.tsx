@@ -140,10 +140,7 @@ const Card: React.FC<CardProps> = ({
               {description}
             </p>
           </div>
-          {/* Ordered Services */}
-          {/*<div>
-            <p>Servicios: {orderedServices()}</p>
-          </div>*}
+         
           {/* Hotel Category and Popular Rating */}
           <div>
             <div className="flex text-[20px]">
@@ -170,9 +167,7 @@ const Card: React.FC<CardProps> = ({
 
             <Link to={`/hotelpage/${id}`} key={id}>
               <div>
-                <p className="text-gray-500 mt-1 text-sm">
-                  Ubicación: {city}, {country}
-                </p>
+
                 <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                   Ver habitaciones
                 </button>

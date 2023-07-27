@@ -48,7 +48,7 @@ const ShoppingCartPage = () => {
 
   };
 
-  const roomName = (item:any) => {
+  const roomName = (item: any) => {
     for (let i = 0; i < allRooms.length; i++) {
       if (allRooms[i].id === item.roomId) {
         return (
@@ -64,7 +64,7 @@ const ShoppingCartPage = () => {
     }
   };
 
-  const roomPhoto = (item:any) => {
+  const roomPhoto = (item: any) => {
     for (let i = 0; i < allRooms.length; i++) {
       if (allRooms[i].id === item.roomId) {
         return allRooms[i].photo[0]
@@ -77,59 +77,65 @@ const ShoppingCartPage = () => {
   }, 0);
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Shopping Cart</h1>
+    <div className="flex items-center justify-center h-screen bg-slate-600">
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <h1 className="text-3xl font-bold mb-4">Shopping Cart</h1>
 
-      {userReserve.length === 0 ? (
-        <p>No items in the cart.</p>
-      ) : (
-        <div>
-          {userReserve.map((item: any) => (
-            <div key={item.roomId} className="flex items-center border-b border-gray-200 py-2">
-              <div className="w-[100px] h-[100px] flex justify-center items-center text-center">
-                <img src={roomPhoto(item)} alt="" />
+        {userReserve.length === 0 ? (
+          <p className="text-xl text-gray-600">No items in the cart.</p>
+        ) : (
+          <div>
+            {userReserve.map((item: any) => (
+              <div key={item.roomId} className="flex items-center border-b border-gray-200 py-4">
+                <div className="w-20 h-20 flex-shrink-0 rounded-md overflow-hidden">
+                  <img src={roomPhoto(item)} alt="" className="w-full h-full object-cover" />
+                </div>
+                <div className="ml-4 flex-grow">
+                  <div className="text-xl font-medium">{roomName(item)}</div>
+                  <p className="text-sm text-gray-600">Dias: {calculateDays(item)}</p>
+                  <p className="text-sm text-gray-600">Precio por noche: ${item.price}</p>
+                  <p className="text-sm text-gray-600">Precio por días: ${item.price * calculateDays(item)}</p>
+                </div>
+                <button
+                  onClick={() => handleDeleteItem(item.roomId)}
+                  className="text-red-500 hover:text-red-700 transition-colors duration-200"
+                >
+                  <Trash size={20} />
+                </button>
               </div>
-              <div className="flex flex-col ml-2">
-                <div>{roomName(item)}</div>
-                <p>Dias: {calculateDays(item)}</p>
-                <p>Precio por noche: ${item.price}</p>
-                <p>Precio por días: ${item.price * calculateDays(item)}</p>
-              </div>
-              <button
-                onClick={() => handleDeleteItem(item.roomId)}
-                className="ml-auto text-red-500 hover:text-red-700"
-              >
-                <Trash size={20} />
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {cartItems.length > 0 && (
-        <div className="mt-4">
-          <div className="flex items-center justify-between border-t border-gray-200 py-2">
-            <h3 className="text-lg font-medium">Total:</h3>
-            <span className="text-2xl font-bold">
-              <CurrencyDollar size={24} className="inline-block align-middle" />
-              {totalValueCart}
-            </span>
+            ))}
           </div>
-          <Link to={urlPayment}>
-            <button
-              onClick={handleCheckout}
-              className="mt-4 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
-            >
-              Efectuar pago
-            </button>
-          </Link>
-        </div>
-      )}
+        )}
 
-      <button onClick={() => navigate(-1)} className="mt-4 inline-block underline">
-      Seguir Reservando
-      </button>
+        {cartItems.length > 0 && (
+          <div className="mt-6">
+            <div className="flex items-center justify-between border-t border-gray-200 py-4">
+              <h3 className="text-xl font-medium">Total:</h3>
+              <span className="text-2xl font-bold">
+                <CurrencyDollar size={24} className="inline-block align-middle" />
+                {totalValueCart}
+              </span>
+            </div>
+            <Link to={urlPayment}>
+              <button
+                onClick={handleCheckout}
+                className="mt-4 bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-full font-bold transition-colors duration-200"
+              >
+                Efectuar pago
+              </button>
+            </Link>
+          </div>
+        )}
+
+        <button onClick={() => navigate(-1)} className="mt-6 inline-block underline text-blue-500 hover:text-blue-700">
+          Seguir Reservando
+        </button>
+      </div>
     </div>
+
+
+
+
   );
 };
 

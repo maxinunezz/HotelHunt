@@ -37,7 +37,6 @@ const HotelPage = () => {
 		if (sessionSA) {
 			// Si existe sessionSA, guarda sessionSA
 			const parsedSessionSA = JSON.parse(sessionSA);
-			console.log(parsedSessionSA);
 			saveInfo(parsedSessionSA);
 		} else if (session) {
 			// Si no existe sessionSA pero sí existe session, guarda session
@@ -103,8 +102,8 @@ const HotelPage = () => {
 
 	return (
 		<div className="bg-slate-600 min-h-screen flex flex-col overflow-hidden">
-			<NavbarDetail />
-			<div className="flex-grow mt-10 overflow-y-auto">
+			
+			<div className="flex-grow mt-10 overflow-y-auto mt-[100px]" >
 				<div className="max-w-screen-lg mx-auto p-8">
 					<div className="mt-2 flex justify-between">
 						<button onClick={() => navigate('/')} className="bg-blue-500 font-bold w-[80px] border-neutral-950">Back</button>
@@ -118,8 +117,8 @@ const HotelPage = () => {
 							</div>
 						</div>
 
-						<div className="w-2/3">
-							<div className="bg-white p-6 rounded-lg shadow-lg">
+						<div className="w-2/3 ">
+							<div className="bg-white p-6 rounded-lg shadow-lg ">
 								<h2 className="text-3xl font-bold mb-4">🏨{hotelOnScreen?.name}</h2>
 								<div className="flex items-center">
 									<MapPinLine size={20} className="mr-2" />
@@ -203,7 +202,7 @@ const HotelPage = () => {
 
 
 			</div>
-			<div className="mt-auto">
+			<div className="mt-auto"><NavbarDetail />
 				<Footer />
 			</div>
 		</div>

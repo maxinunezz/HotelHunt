@@ -78,7 +78,7 @@ export default function FormPageHotelUpdate() {
   const handleSubmit = useCallback(
     async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
       try {
-        console.log(token[0]);
+       
         const nameToBack = values.name ? values.name : currentHotelData?.name;
         const descriptionToBack = values.description
           ? values.description

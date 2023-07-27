@@ -11,7 +11,7 @@ export default function SAUsers() {
     const token = tokenStore((state) => state.userState);
     const url = import.meta.env.VITE_URL;
     const [users, setUsers] = useState<any[]>([])
-    const update = SAStore((state)=> state.updated)
+    const update = SAStore((state) => state.updated)
 
     const getUsers = async () => {
         try {
@@ -28,7 +28,7 @@ export default function SAUsers() {
             if (response.data) {
                 setUsers(response.data);
             }
-        } catch (error:any) {
+        } catch (error: any) {
             errorToast(error.response.data);
 
         }
@@ -45,28 +45,33 @@ export default function SAUsers() {
 
 
     return (
-        <div className="flex flex-col h-full mt-2 bg-slate-300 rounded-xl">
-            <hr />            
+        <div className="flex flex-col h-full mt-4 bg-slate-600 rounded-xl p-4 shadow-md">
             <NavUserSA />
-            <div className="flex flex-col h-full overflow-y-auto">
+            <div className="flex flex-col h-full overflow-y-auto mt-4">
                 {users?.length > 0 ? (
-                    users?.map((element: { id: string, name: string, lastName: string,  phoneNumber: string, disabled: boolean }) => (
-                        (
-                            <div key={element.id}>
-                                <SAUserRow                                    
-                                    id={element.id}
-                                    name={element.name}
-                                    lastName={element.lastName}
-                                    phoneNumber={element.phoneNumber}
-                                    disabled={element.disabled}
-                                />
-                            </div>
-                        )
-                    ) )
+                    users?.map((element: { id: string, name: string, lastName: string, phoneNumber: string, disabled: boolean }) => (
+                        <div key={element.id} className="  transition-transform transform hover:scale-95">
+                            <SAUserRow
+                                id={element.id}
+                                name={element.name}
+                                lastName={element.lastName}
+                                phoneNumber={element.phoneNumber}
+                                disabled={element.disabled}
+                            />
+                        </div>
+                    ))
                 ) : (
-                    <p>No hay usuarios</p>
-                ) }
+                    <div className="flex flex-grow items-center justify-center p-4 bg-white rounded-lg shadow-md">
+                        <p className="text-red-600 font-medium">No hay usuarios</p>
+                    </div>
+                )}
             </div>
         </div>
+
     );
 }
+
+
+
+
+
