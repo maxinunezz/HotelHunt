@@ -94,7 +94,7 @@ const ShoppingCartPage = () => {
                   <div className="text-xl font-medium">{roomName(item)}</div>
                   <p className="text-sm text-gray-600">Dias: {calculateDays(item)}</p>
                   <p className="text-sm text-gray-600">Precio por noche: ${item.price}</p>
-                  <p className="text-sm text-gray-600">Precio por días: ${item.price * calculateDays(item)}</p>
+                  <p className="text-sm text-gray-600">Precio por dÃ­as: ${item.price * calculateDays(item)}</p>
                 </div>
                 <button
                   onClick={() => handleDeleteItem(item.roomId)}
