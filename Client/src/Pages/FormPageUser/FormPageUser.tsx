@@ -66,7 +66,7 @@ const FormPageUser = () => {
       helpers: FormikHelpers<UserCreateValues>
     ) => {
       try {
-        const data = await axios.post(`${url}/user/signup`, {
+        await axios.post(`${url}/user/signup`, {
           name: values.name,
           lastName: values.lastName,
           birthDate: values.birthDate,

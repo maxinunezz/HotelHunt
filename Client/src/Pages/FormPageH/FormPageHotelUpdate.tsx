@@ -97,7 +97,7 @@ export default function FormPageHotelUpdate() {
           ? values.services
           : currentHotelData?.services;
 
-        const data = await axios.put(
+       await axios.put(
           `${url}/dashboard/hotel/${id}`,
           {
             name: nameToBack,
@@ -115,6 +115,8 @@ export default function FormPageHotelUpdate() {
           }
         );
 
+        
+        
         helpers.resetForm();
         setIsCreated(true);
         successToast("Hotel actualizado correctamente");

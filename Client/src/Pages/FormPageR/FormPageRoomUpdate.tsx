@@ -82,7 +82,7 @@ export default function FormPageRoomUpdate() {
           ? values.photo
           : currentRoomData?.photo;
 
-        const data = await axios.put(
+       await axios.put(
           `${url}/dashboard/room/${id}`,
           {
             name: nameToBack,

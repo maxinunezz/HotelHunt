@@ -31,7 +31,7 @@ export default function AdminSetting() {
     };
     const handleDelete = async () => {
         try {
-            const data = await axios.delete(
+          await axios.delete(
                 `${url}/dashboard/user`,
                 {
                     headers: {

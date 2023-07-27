@@ -67,7 +67,7 @@ export default function FormPageH() {
 		async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
 			try {
 
-				const data = await axios.post(
+				 await axios.post(
 					`${url}/dashboard/hotel/`,
 					{
 						name: values.name,
@@ -84,7 +84,7 @@ export default function FormPageH() {
 						},
 					}
 				);
-
+                       
 				helpers.resetForm()
 				setIsCreated(true);
 				successToast('Hotel creado correctamente');

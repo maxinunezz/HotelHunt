@@ -53,7 +53,7 @@ export default function FormPageRoom() {
 			try {
 				console.log('Submitting form data:', values);
 
-				const data = await axios.post(
+				await axios.post(
 					`${url}/dashboard/room/${hotelsUser[0].id}`,
 					{
 						name: values.roomName,
@@ -70,6 +70,8 @@ export default function FormPageRoom() {
 						},
 					}
 				);
+				
+				
 
 
 				helpers.resetForm();

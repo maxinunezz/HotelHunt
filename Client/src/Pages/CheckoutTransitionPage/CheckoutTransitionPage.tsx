@@ -7,7 +7,6 @@ const CheckoutTransitionPage = () => {
     const sessionStorageInfo = sessionStorage.getItem("token");
     const parsedSessionStorageInfo = sessionStorageInfo ? JSON.parse(sessionStorageInfo) : null;
     const { saveInfo } = tokenStore()
-    const token = tokenStore((state) => state.userState)
     
   
     useEffect(() =>{
