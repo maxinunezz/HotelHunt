@@ -228,7 +228,7 @@ const stripehook = async (req, res) => {
   const sessionId = req.body.data.object.id;
   const status = req.body.data.object.payment_status;
 
-  console.log(req.body)
+
 
   
 
