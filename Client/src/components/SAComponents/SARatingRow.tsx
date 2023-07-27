@@ -39,7 +39,7 @@ export default function RatingRow({
                     },
                 }
             );
-            console.log(response.data)
+         
 
             if (response.data) {
                 userDeleteToast("Comentario eliminado");

@@ -26,7 +26,6 @@ export default function ReservasPage() {
                 }
             });
             const reserves: Reservation[] = response.data;
-            console.log(reserves);
             setReservations(reserves); 
 
         } catch (error) {
@@ -38,7 +37,6 @@ export default function ReservasPage() {
         getReserves();
     }, []);
 
-    console.log(reservations);
 
 
 

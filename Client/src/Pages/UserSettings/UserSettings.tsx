@@ -39,7 +39,6 @@ export default function AdminSetting() {
                     },
                 }
             );
-            console.log(data);
 
             userDeleteToast('Lamentamos verte partir')
             resetAll()
@@ -92,7 +91,6 @@ export default function AdminSetting() {
             ...input,
             [event.target.name]: event.target.value
         }))
-        console.log(input);
     };
 
     const handleUpdate = async () => {

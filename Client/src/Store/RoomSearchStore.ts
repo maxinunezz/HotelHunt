@@ -74,7 +74,6 @@ export const roomsSearchStore = create<States & Actions>((set) => ({
 
 
     sortByPrice: (elements, sortBy) => {
-        console.log(sortBy, elements);
         switch (sortBy) {
             case "price-asc":
                 elements.sort((a:any, b: any) => Number(a.price) - Number(b.price));

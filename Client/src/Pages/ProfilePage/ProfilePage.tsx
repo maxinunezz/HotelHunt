@@ -3,7 +3,6 @@ import ProfileSideBar from "../../components/ProfileSideBar/ProfileSideBar";
 
 const AdminProfilePage = () => {
   const userData = tokenStore((state) => state.userState)
-  console.log(userData);
 
   const user = {
     name: `${userData[0].name}`,

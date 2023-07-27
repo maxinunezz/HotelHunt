@@ -8,19 +8,14 @@ const ShoppingCartPage = () => {
   const navigate = useNavigate()
   const allRooms = roomsStore((state) => state.rooms);
   const urlPayment = userStore((state) => state.urlPayment)
-  const allSessionData = userStore((state) => state.allSessionData)
   const token = tokenStore((state) => state.userState)
-  console.log(allSessionData);
 
   const calculateDays = (item:any) => {
-    // Convertir las fechas a objetos Date
     const checkinDate = new Date(item.checkin);
     const checkoutDate = new Date(item.checkout);
 
-    // Calcular la diferencia en milisegundos entre las fechas
     const differenceInMs = checkoutDate.getTime() - checkinDate.getTime();
 
-    // Convertir la diferencia en dÃ­as
     const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
 
 
@@ -31,15 +26,13 @@ const ShoppingCartPage = () => {
   const userReserve = userStore((state) => state.reserves)
   const { reserveRoomPayment } = userStore()
 
-  const [cartItems, setCartItems] = useState(userReserve); // Aquí se almacenarán los elementos del carrito
+  const [cartItems, setCartItems] = useState(userReserve); 
 
 
   const handleDeleteItem = (roomId: string) => {
-    console.log(roomId);
 
     const newArray = cartItems.filter(element => element.roomId !== roomId)
 
-    console.log(userReserve);
 
     reserveRoomPayment(newArray)
     setCartItems(newArray)
@@ -48,7 +41,6 @@ const ShoppingCartPage = () => {
 
 
   const handleCheckout = () => {
-    // Lógica para procesar el pago y completar la compra
 
     window.sessionStorage.setItem('token', JSON.stringify(token));
 

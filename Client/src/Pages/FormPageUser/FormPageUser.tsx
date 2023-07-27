@@ -59,7 +59,6 @@ const FormPageUser = () => {
   const navigate = useNavigate();
   const url = import.meta.env.VITE_URL;
 
-  console.log(import.meta.env.VITE_URL);
 
   const handleSubmit = useCallback(
     async (
@@ -80,7 +79,6 @@ const FormPageUser = () => {
         successToast(
           "Correo de confirmación enviado. Revisa tu email para continuar."
         );
-        console.log("data", data);
         navigate(-1);
       } catch (error: any) {
         errorToast(error.response.data);

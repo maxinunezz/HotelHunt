@@ -34,7 +34,6 @@ const HotelPage = () => {
 		const session: string | null = window.sessionStorage.getItem("tokenUser");
 		if (session) {
 			const parsedSession = JSON.parse(session);
-			console.log(parsedSession);
 			saveInfo(parsedSession);
 		}
 	}, []);
@@ -60,7 +59,7 @@ const HotelPage = () => {
 			try {
 				const response = await axios.get(`${url}/rating/${id}`);
 				setHotelRatings(response.data);
-				console.log(response.data);
+				
 
 			} catch (error) {
 				console.error(error);

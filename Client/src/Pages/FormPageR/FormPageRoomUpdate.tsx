@@ -58,8 +58,7 @@ export default function FormPageRoomUpdate() {
   const handleSubmit = useCallback(
     async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
       try {
-        console.log("Submitting form data:", values);
-        console.log(token[0]);
+       
 
         const nameToBack = values.roomName
           ? values.roomName
@@ -102,7 +101,6 @@ export default function FormPageRoomUpdate() {
           }
         );
 
-        console.log("Response data:", data);
 
         helpers.resetForm();
         setIsCreated(true);

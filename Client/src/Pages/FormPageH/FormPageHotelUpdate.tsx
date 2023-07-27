@@ -54,8 +54,7 @@ export default function FormPageHotelUpdate() {
   const allHotels = hotelStore((state) => state.hotels);
   const currentHotelData = allHotels?.find((hotel) => hotel?.id === id);
 
-  console.log(currentHotelData);
-  console.log(allHotels);
+ 
 
   useEffect(() => {
     fetchHotels();
@@ -119,7 +118,7 @@ export default function FormPageHotelUpdate() {
         helpers.resetForm();
         setIsCreated(true);
         successToast("Hotel actualizado correctamente");
-        console.log("data", data);
+       
         navigate(-1);
       } catch (error) {
         errorToast("Hubo un error, intenta de nuevo");

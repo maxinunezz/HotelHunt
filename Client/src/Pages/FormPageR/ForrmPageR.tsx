@@ -47,7 +47,6 @@ export default function FormPageRoom() {
 	const hotelsUser = tokenStore((state) => state.hotelsUserById);
 	const [isCreated, setIsCreated] = useState(false);
 	const token = tokenStore((state) => state.userState);
-	console.log(hotelsUser);
 	
 	const handleSubmit = useCallback(
 		async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
@@ -72,7 +71,6 @@ export default function FormPageRoom() {
 					}
 				);
 
-				console.log('Response data:', data);
 
 				helpers.resetForm();
 				setIsCreated(true);

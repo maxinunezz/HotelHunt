@@ -39,7 +39,7 @@ const LogingPage = () => {
 	const handleSubmit = useCallback(
 		async (values: LoginValues, helpers: FormikHelpers<LoginValues>) => {
 			try {
-				console.log('values', values);
+			
 				const arrayAux: any = [];
 				return await axios.post(`${URL}/user/auth`, values).then((response) => {
 					if (response.data) {
@@ -53,7 +53,6 @@ const LogingPage = () => {
 						arrayAux.push(logeado)
 						saveInfo(arrayAux)
 					}
-					console.log("values", values);
 					window.sessionStorage.setItem("tokenUser", JSON.stringify(arrayAux))
 					successToast('Usuario logeado correctamente');
 					navigate(-1)

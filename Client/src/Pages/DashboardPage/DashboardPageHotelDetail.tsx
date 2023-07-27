@@ -11,7 +11,7 @@ const DashboardPageHotelDetail = () => {
     const { id } = useParams()
     const token = tokenStore((state) => state.userState)
     const hotelsUser = tokenStore((state) => state.hotelsUserById)
-    console.log(hotelsUser);
+ 
 
     const [roomByUser, setRoomByUser] = useState<Room[]>([])
 
@@ -23,7 +23,7 @@ const DashboardPageHotelDetail = () => {
             return hotel.id === id;
         }
     })
-    console.log(hotelonScreen);
+   
     const roomsInThisHotel = async () => {
         try {
             const response = await axios.get(

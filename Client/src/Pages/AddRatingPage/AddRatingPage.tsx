@@ -61,7 +61,7 @@ const CommentForm: React.FC = () => {
       );
     }
   };
-  console.log("prueba");
+ 
 
   return (
     <div className="w-80 mx-auto mt-8">

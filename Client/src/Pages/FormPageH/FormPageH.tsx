@@ -88,7 +88,7 @@ export default function FormPageH() {
 				helpers.resetForm()
 				setIsCreated(true);
 				successToast('Hotel creado correctamente');
-				console.log('data', data);
+			
 				navigate(-1)
 			} catch (error) {
 
