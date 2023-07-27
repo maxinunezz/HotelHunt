@@ -232,19 +232,15 @@ const confirmationEmail = async (id, urlpago, name) => {
                   En caso de no haber realizado el pago haga click en el siguiente link.
                 <br>
                 <div>
-                <button onclick="redirectToWebsite()">Link de pago</button>
-             </div
-             ><br>
-                ¡Gracias por elegir HotelHunt!</p>
-               
-             </div>
+                <a href="${urlpago}"> 
+                <button>Link de pago</button>
+                </a>
+            </div>
+             <br>
+              ¡Gracias por elegir HotelHunt!</p>
+            </div>
              
            </div>
-           <script>
-            function redirectToWebsite() {
-            window.location.href = '${urlpago}';
-             }
-          </script>
          </body>
        </html>`,
     });
