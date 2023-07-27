@@ -31,6 +31,7 @@ export interface ReserveBooking {
 const RoomPage = () => {
   const { id } = useParams();
   const { setRoom } = roomsStore();
+  const {saveInfo} = tokenStore()
   const [roomRender, setRoomRender] = useState<Room | null>();
   const [arrivalDate, setArrivalDate] = useState<Date | null>(null);
   const [departureDate, setDepartureDate] = useState<Date | null>(null);
@@ -38,6 +39,27 @@ const RoomPage = () => {
   const [reservesOnScreen, setReservesOnScreen] = useState([]);
   const token = tokenStore((state) => state.userState);
   const { reserveRoomPayment } = userStore();
+
+  useEffect(() => {
+		const sessionSA: string | null = window.sessionStorage.getItem("SALoginInfo");
+		const session: string | null = window.sessionStorage.getItem("tokenUser");
+
+		if (sessionSA) {
+			// Si existe sessionSA, guarda sessionSA
+			const parsedSessionSA = JSON.parse(sessionSA);
+			console.log(parsedSessionSA);
+			saveInfo(parsedSessionSA);
+		} else if (session) {
+			// Si no existe sessionSA pero sí existe session, guarda session
+			const parsedSession = JSON.parse(session);
+			console.log(parsedSession);
+			saveInfo(parsedSession);
+		} else {
+			// Si no existe ninguna sesión, no hace nada
+			console.log("no hay usuario logeado");
+			
+		}
+	}, []);
 
   
   

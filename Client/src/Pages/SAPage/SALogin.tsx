@@ -50,6 +50,7 @@ export default function SALogin() {
                         saveInfo(arrayAux)
                     }
                     successToast('Usuario logeado correctamente');
+                    window.sessionStorage.setItem("SALoginInfo", JSON.stringify(arrayAux))
                     navigate('/SAP')
 
                 }

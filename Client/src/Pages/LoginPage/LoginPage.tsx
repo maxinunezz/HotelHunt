@@ -54,6 +54,11 @@ const LogingPage = () => {
 						saveInfo(arrayAux)
 					}
 					console.log("values", values);
+					const saLogindataToDelete = window.sessionStorage.getItem('SALoginInfo')
+					if(saLogindataToDelete) {
+						window.sessionStorage.removeItem('SALoginInfo')
+					}
+					
 					window.sessionStorage.setItem("tokenUser", JSON.stringify(arrayAux))
 					successToast('Usuario logeado correctamente');
 					navigate(-1)
