@@ -5,11 +5,12 @@ import { farewellAdminToast, farewellToast } from '../toast';
 import { MouseEvent } from 'react';
 
 export default function ProfileSideBar() {
+    const userData = tokenStore((state) => state.userState)
     const navigate = useNavigate()
     const isAdmin = tokenStore((state) => state.userState)
     const { resetToken } = tokenStore()
 
-    const role = isAdmin[0].admin === 'admin'
+    const role = userData[2] === 'admin';
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
@@ -29,6 +30,11 @@ export default function ProfileSideBar() {
             <a>
                 <div>
                     <h1 className="text-white">
+                        <img
+                            className="h-[180px] w-[190px] mr-2 center"
+                            src="https://cdn.discordapp.com/attachments/1125503406371524661/1127923542743334912/image.png"
+                            alt="Logo"
+                        />
                         <span className="text-3xl font-bold tracking-wider">HOTEL</span>
                         <span className="text-blue-500 text-3xl font-extrabold tracking-wider">HUNT</span>
                     </h1>
@@ -40,7 +46,7 @@ export default function ProfileSideBar() {
                 <nav className="-mx-3 space-y-6">
 
                     <span className="ml-3 my-8 py-3">
-                        <button onClick={() => navigate(-1)} type="button" className="flex items-center text-slate-100 text-m hover:underline">
+                        <button onClick={() => navigate('/')} type="button" className="flex items-center text-slate-100 text-m hover:underline">
                             <span className="inline-flex leading-none rotate-180 transform">
                                 <svg width="24" height="24" className="pointer-events-none max-h-full max-w-full">
                                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2">
@@ -55,14 +61,14 @@ export default function ProfileSideBar() {
                         <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
                             cuenta
                         </label>
-                        <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
+                        <a  onClick={() => navigate(`/profile/${isAdmin[0].name}+${isAdmin[0].lastName}`)} className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             <div className="w-5 h-5">
                                 <User size={20} />
                             </div>
 
                             <span
                                 className="mx-2 text-sm font-medium"
-                                onClick={() => navigate(`/profile/${isAdmin[0].name}+${isAdmin[0].lastName}`)}
+                               
                             >
                                 Usuario
                             </span>
@@ -73,19 +79,19 @@ export default function ProfileSideBar() {
                         <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">
                             contenido
                         </label>
-                        <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
+                        <a onClick={() => navigate('/profile/reservas')} className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             {role ? (
-                            <><div className="w-5 h-5">
+                                <><div className="w-5 h-5">
                                     <ClipboardText size={20} color="#fffafa" />
-                                </div><span className="mx-2 text-sm font-medium" onClick={() => navigate('/profile/reservas')}>
+                                </div><span className="mx-2 text-sm font-medium" >
                                         Reservas
                                     </span></>
                             ) : (
                                 <><div className="w-5 h-5">
-                                        <CallBell size={20} color="#fffafa" />
-                                    </div><span className="mx-2 text-sm font-medium" onClick={() => navigate('/profile/reservas')}>
-                                            Mis Reservas
-                                        </span></>
+                                    <CallBell size={20} color="#fffafa" />
+                                </div><span className="mx-2 text-sm font-medium" onClick={() => navigate('/profile/reservas')}>
+                                        Mis Reservas
+                                    </span></>
                             )}
                         </a>
                     </div>
@@ -95,12 +101,12 @@ export default function ProfileSideBar() {
                             personalización
                         </label>
 
-                        <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
+                        <a onClick={() => navigate('/profile/configuracion')} className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 cursor-pointer">
                             <div className="w-5 h-5">
                                 <Gear size={20} color="#fffafa" />
                             </div>
 
-                            <span className="mx-2 text-sm font-medium" onClick={() => navigate('/profile/configuracion')}>
+                            <span className="mx-2 text-sm font-medium" >
                                 Configuración
                             </span>
                         </a>

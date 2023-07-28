@@ -1,92 +1,148 @@
 import { Star, User, Users, UsersFour, UsersThree } from "@phosphor-icons/react";
-import { roomsSearchStore, roomsStore } from "../../Store";
+import { useEffect, useRef, useState } from "react";
+import { Link } from 'react-router-dom';
+import { roomsSearchStore, roomsStore, tokenStore } from "../../Store";
 import NavbarDetail from "../../components/NavBarDetail/NavBarDetail";
 import RoomCard from "../../components/RoomCard/RoomCard";
-import { useFetchRooms } from "../../hooks";
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import { Button, Dropdown } from "@rewind-ui/core";
 import { filterResetToast } from "../../components/toast";
+import { useFetchRooms } from "../../hooks";
+import PaginadoGlobal from "../../components/Pagination/PaginadoGlobal";
 
 const RoomFilter = () => {
-  const navigate = useNavigate();
-  useFetchRooms();
+  useFetchRooms()
+  const { saveInfo } = tokenStore()
+  const roomsPerPage = 6;
   const allRooms = roomsStore((state) => state.rooms);
   const roomsFiltered = roomsSearchStore((state) => state.roomsFilter)
   const { fetchFilterRooms, sortByPrice, reset } = roomsSearchStore()
-  const [filters, setFilters] = useState({
-    minPrice: "",
-    maxPrice: ""
-  });
-  const [checkboxValuesCategory, setCheckboxValues] = useState({
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false,
-    checkbox4: false,
-    checkbox5: false
-  });
-  const [checkboxValuesCapacity, setCheckboxCapacity] = useState({
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false,
-    checkbox4: false,
-    checkbox5: false
-  });
 
-  const handleMinPriceChange = (e) => {
-    setFilters({ ...filters, minPrice: e.target.value });
+  const currentPage = roomsStore((state) => state.currentPage)
+
+
+  useEffect(() => {
+		const sessionSA: string | null = window.sessionStorage.getItem("SALoginInfo");
+		const session: string | null = window.sessionStorage.getItem("tokenUser");
+
+		if (sessionSA) {
+			// Si existe sessionSA, guarda sessionSA
+			const parsedSessionSA = JSON.parse(sessionSA);
+			
+			saveInfo(parsedSessionSA);
+		} else if (session) {
+			// Si no existe sessionSA pero sí existe session, guarda session
+			const parsedSession = JSON.parse(session);
+			
+			saveInfo(parsedSession);
+		} else {
+			// Si no existe ninguna sesión, no hace nada
+			console.log("no hay usuario logeado");
+			
+		}
+	}, []);
+
+  useEffect(() => {
+    reset(allRooms)
+  }, [allRooms]) // eslint-disable-line
+
+  const initialStates = {
+    filters: {
+      minPrice: "",
+      maxPrice: ""
+    },
+    category: {
+      checkbox1: false,
+      checkbox2: false,
+      checkbox3: false,
+      checkbox4: false,
+      checkbox5: false
+    },
+    capacity: {
+      checkbox1: false,
+      checkbox2: false,
+      checkbox3: false,
+      checkbox4: false,
+      checkbox5: false
+    }
+  }
+
+  const [filters, setFilters] = useState(initialStates.filters);
+  const [checkboxValuesCategory, setCheckboxValues] = useState(initialStates.category);
+  const [checkboxValuesCapacity, setCheckboxCapacity] = useState(initialStates.capacity);
+  const sortByRef = useRef<HTMLSelectElement | null>(null)
+
+
+
+  const handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters({ ...filters, minPrice: event.target.value });
   };
 
-  const handleMaxPriceChange = (e) => {
-    setFilters({ ...filters, maxPrice: e.target.value });
+  const handleMaxPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters({ ...filters, maxPrice: event.target.value });
   };
 
   useEffect(() => {
     applyFilters();
-  }, [filters]); // Ejecuta applyFilters cuando filters cambie
+  }, [filters]); // eslint-disable-line
 
   const applyFilters = () => {
     // Lógica para aplicar los filtros
-    if (Number(filters.maxPrice) < Number(filters.minPrice)) {
-      const maxAux = filters.minPrice;
-      const minAux = filters.maxPrice;
-      console.log("ctm ctm ctm");
+    const minPrice = Number(filters.minPrice);
+    const maxPrice = Number(filters.maxPrice);
+
+    if (minPrice > maxPrice) {
+      const maxAux = minPrice;
+      const minAux = maxPrice;
+
       setFilters({
-        minPrice: minAux,
-        maxPrice: maxAux
+        ...filters,
+        minPrice: minAux.toString(),
+        maxPrice: maxAux.toString()
       });
     }
 
     fetchFilterRooms(allRooms, filters, checkboxValuesCategory, checkboxValuesCapacity)
-
-
   };
 
 
-  const handleSortBy = async (event) => {
+  const handleSortBy = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     const sortByValue = event.target.value;
     roomsFiltered.length ? sortByPrice(roomsFiltered, sortByValue) : sortByPrice(allRooms, sortByValue)
-
-
-
   };
 
   const handleReset = () => {
     filterResetToast("Filtros reseteados")
-    reset()
+    setFilters(initialStates.filters)
+    setCheckboxValues(initialStates.category)
+    setCheckboxCapacity(initialStates.capacity)
+    if (sortByRef.current?.value) {
+      sortByRef.current.value = ''
+    }
+    reset(allRooms)
   }
-  
+
+
   const filteredRooms = filters.minPrice === "62" && filters.maxPrice === "62" ? [] : roomsFiltered;
+  const totalRooms = filteredRooms?.length;
+  const firstIndex = (currentPage - 1) * roomsPerPage;
+  const lastIndex = currentPage * roomsPerPage;
+  const currentRooms = filteredRooms?.slice(firstIndex, lastIndex);
+  const { changeCurrentPage } = roomsStore();
+
+  const handlePaginadoHome = (pageNumbers: any) => {
+    //tercer componente del paginado
+    changeCurrentPage(pageNumbers);
+
+  };
 
   return (
-    <div className="flex-col bg-slate-600">
-      {/* Navbar */}
-      <NavbarDetail />
+    <div className="flex-col bg-slate-600 ">
+
+
 
       {/* Espacio para los filtros y la lista de habitaciones */}
       <div className="flex">
         {/* Filtros */}
-        <div className="dark:bg-gray-900 dark:border-gray-700 w-[500px] h-[700px] p-10 text-white mt-[20px] ml-[20px] rounded h-screen ">
+        <div className="dark:bg-gray-900 dark:border-gray-700 w-[500px] p-10 text-white mt-[150px] ml-[20px] rounded h-screen ">
           <div className="flex">
             <div className="mx-2 text-black">
               <div className="text-blue-500 font-bold">
@@ -148,6 +204,7 @@ const RoomFilter = () => {
               id="sort-by"
               className="bg-blue-500 rounded"
               onChange={handleSortBy}
+              ref={sortByRef}
             >
               <option value="">Ordenar por</option>
               <option value="price-asc">Precio (ascendente)</option>
@@ -264,7 +321,7 @@ const RoomFilter = () => {
           </div>
 
           <div className="mt-6">
-            <h3 className="text-blue-500 font-bold">Capacity</h3>
+            <h3 className="text-blue-500 font-bold">Capacidad</h3>
             {/* Componente de checkboxes */}
             <div className="flex mt-2">
 
@@ -361,10 +418,10 @@ const RoomFilter = () => {
         </div>
 
         {/* Lista de habitaciones */}
-        <div className="flex-col ml-[100px] mt-[20px]">
-          {filteredRooms.length ? (
-            <div className="grid grid-cols-3 justify-center mb-4 gap-5">
-              {filteredRooms.map((room) => (
+        <div className="flex-col ml-[100px] mt-[150px]">
+          {totalRooms ? (
+            <div className="grid grid-cols-3 justify-center mb-4 gap-5 p-10" >
+              {currentRooms.map((room) => (
                 <Link to={`/roompage/${room.id}`} key={room.id}>
                   <RoomCard
                     id={room.id}
@@ -385,8 +442,16 @@ const RoomFilter = () => {
           ) : (
             <p className="text-white text-center mt-8">No se encontraron habitaciones con los filtros seleccionados.</p>
           )}
+
+          <PaginadoGlobal
+            elementsPerPage={roomsPerPage}
+            elementToShow={roomsFiltered}
+            pageSet={handlePaginadoHome}
+            currentPage={currentPage}
+          />
         </div>
       </div>
+      <NavbarDetail />
     </div>
   );
 

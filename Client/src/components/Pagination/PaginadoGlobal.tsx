@@ -1,10 +1,11 @@
 import React from 'react';
 import { Hotel } from '../../models';
+import { Room } from '../../Store';
 
 interface PaginadoGlobalProps {
   elementsPerPage: number;
-  elementToShow: Hotel[]; 
-  pageSet: (pageNumber: number) => void; 
+  elementToShow: Hotel[] | Room[];
+  pageSet: (pageNumber: number) => void;
   currentPage: number;
 }
 
@@ -14,7 +15,9 @@ const PaginadoGlobal: React.FC<PaginadoGlobalProps> = ({
   pageSet,
   currentPage,
 }) => {
-  const totalPages = Math.ceil(elementToShow?.length / elementsPerPage);
+  const totalPages = Math.ceil(elementToShow.length / elementsPerPage);
+
+
 
   //Obtener rango de paginas para mostrar en paginado
   const getPageRange = () => {
@@ -62,12 +65,10 @@ const PaginadoGlobal: React.FC<PaginadoGlobalProps> = ({
             );
           })}
           <button
-            className={`px-4 py-2 ${currentPage !== pageNumbers.length ? 'bg-blue-500 hover:bg-blue-600 text-white' : 'bg-gray-500 text-gray-300 cursor-not-allowed'} rounded`}
+            className={`px-4 py-2 ${currentPage === totalPages ? 'bg-gray-500 text-gray-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 text-white'} rounded`}
             onClick={() => pageSet(currentPage + 1)}
-            disabled={currentPage === pageNumbers.length}
-          >
-            Siguiente
-          </button>
+            disabled={currentPage === totalPages}
+          >Siguiente</button>
         </div>
       </div>
     </nav>

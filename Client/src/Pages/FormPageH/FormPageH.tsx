@@ -10,6 +10,7 @@ import { errorToast, successToast } from '../../components/toast';
 import Hotel from "./Hotel.png"
 import { tokenStore } from '../../Store';
 import { useNavigate } from 'react-router-dom';
+import { servicesHotel } from '../../utils/servicesArray';
 const url = import.meta.env.VITE_URL;
 
 
@@ -21,7 +22,7 @@ interface FormValues {
 	city: string;
 	photo: string;
 	category: string;
-	services: string;
+	services: string[];
 }
 
 const formValidationSchema = yup.object().shape({
@@ -66,7 +67,7 @@ export default function FormPageH() {
 		async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
 			try {
 
-				const data = await axios.post(
+				 await axios.post(
 					`${url}/dashboard/hotel/`,
 					{
 						name: values.name,
@@ -83,11 +84,11 @@ export default function FormPageH() {
 						},
 					}
 				);
-
+                       
 				helpers.resetForm()
 				setIsCreated(true);
 				successToast('Hotel creado correctamente');
-				console.log('data', data);
+			
 				navigate(-1)
 			} catch (error) {
 
@@ -100,10 +101,16 @@ export default function FormPageH() {
 
 	return (
 		<div className="flex h-screen">
-			<div className="w-full bg-blue-500 flex flex-col justify-center">
-				<img src={Hotel} alt="Imagen" className="mx-auto max-w-full" />
-				<h2 className="text-3xl text-white font-bold px-8 text-center">Título del área azul</h2>
+			<div className="w-full bg-blue-500 flex flex-col justify-center items-center py-8">
+			<img src={Hotel} alt="Imagen" className="mx-auto max-w-full" />
+				<h2 className="text-3xl text-white font-bold px-4 text-center">
+					Publica tu hotel con HOTELHUNT
+				</h2>
+				<p className="text-white text-lg mt-2 opacity-80">
+					Descubre los mejores hoteles con nosotros
+				</p>
 			</div>
+
 			<div className="w-full bg-gray-800 shadow-lg p-8 overflow-y-auto">
 				<div className="max-h-full">
 					<div className="flex justify-start">
@@ -124,12 +131,13 @@ export default function FormPageH() {
 							city: '',
 							photo: '',
 							category: '',
-							services: ""
+							services: []
 						}}
 						onSubmit={handleSubmit}
 						validationSchema={formValidationSchema}
 					>
 						{({ values, errors, setFieldValue, resetForm }) => {
+							const areServicesSelected = values.services.length > 0;
 							return (
 								<Form>
 									<FormControl
@@ -316,31 +324,57 @@ export default function FormPageH() {
 										/>
 										<FormControl.Text>{errors.category}</FormControl.Text>
 									</FormControl>
-
 									<FormControl
-										validation={
-											values.services.length === 0
-												? 'none'
-												: errors.services
-													? 'invalid'
-													: 'valid'
-										}
+										validation={errors.services && !areServicesSelected ? 'invalid' : 'valid'}
 										className="mb-4"
 									>
-										<FormControl.Label className="text-white">
-											Servicios
-										</FormControl.Label>
-										<FormControl.Input
-											type="text"
-											placeholder="services"
+										<FormControl.Label className="text-white">Servicios</FormControl.Label>
+										<FormControl.Select
+											placeholder="Seleccione un servicio"
 											onChange={async (event) => {
-												await setFieldValue('services', event.target.value);
+												const selectedService = event.target.value;
+												if (!values.services.includes(selectedService)) {
+													await setFieldValue('services', [...values.services, selectedService]);
+												}
 											}}
 											value={values.services}
-											required
-										/>
+
+										>
+											<option value="">Seleccione un servicio</option>
+											{servicesHotel.map((option) => (
+												<option key={option} value={option}>
+													{option}
+												</option>
+											))}
+										</FormControl.Select>
 										<FormControl.Text>{errors.services}</FormControl.Text>
 									</FormControl>
+
+									{values.services.length > 0 && (
+										<div className="mb-4">
+											<FormControl.Label className="text-white">Servicios seleccionados</FormControl.Label>
+											<ul className="list-disc pl-8 text-white">
+												{values.services.map((service, index) => (
+													<li key={index}>{service}</li>
+												))}
+											</ul>
+										</div>
+									)}
+
+									{values.services.length > 0 && (
+										<div className="mb-4">
+											<Button
+												className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md"
+												onClick={() => {
+													const newServices = [...values.services];
+													newServices.pop();
+													setFieldValue('services', newServices);
+												}}
+											>
+												Eliminar último servicio
+											</Button>
+										</div>
+									)}
 
 									<div className="flex items-center justify-center">
 										<Button

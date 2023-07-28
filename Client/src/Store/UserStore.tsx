@@ -1,31 +1,90 @@
 import axios from "axios";
 import { create } from "zustand";
 import { ReserveBooking } from "../Pages/RoomPage/RoomPage";
-import { array } from "yup";
 const url = import.meta.env.VITE_URL;
+
 
 type States = {
   reserves: ReserveBooking[];
-  urlPayment: string | null;
+  urlPayment: string ;
   sessionIdUser: string;
   allSessionData: object;
+  favoriteHotel: any[];
 };
 
+
 type Actions = {
-  reserveRoomPayment: (data: []) => Promise<void>;
-  roomPayment: (data: object, token:string) => Promise<void>;
-  reset: () => void;
+  reserveRoomPayment: (data: ReserveBooking[]) => Promise<void>;
+  roomPayment: (data: any, token:string ) => Promise<void>;
+  getFavorite:(userData: any) => Promise<void>
+  addFavorite:(hotelId:any ,userData: any) => Promise<void>
+  reset: (stateKey: keyof States) => void;
+  resetAll:()=>void;
 };
 
 const initialState: States = {
   reserves: [],
-  urlPayment: null,
+  urlPayment: '',
   sessionIdUser: "",
-  allSessionData:{}
+  allSessionData: {},
+  favoriteHotel: []
+
 };
 
 export const userStore = create<States & Actions>((set) => ({
   ...initialState,
+
+  addFavorite: async (hotelId, userData) => {
+
+    try {
+
+      const { data } = await axios.post(
+        `${url}/user/favorites`,
+        hotelId,
+        {
+          headers: {
+            authorization: `Bearer ${userData}`,
+          },
+        }
+      )
+
+
+
+      set((state) => ({
+        ...state,
+        favoriteHotel: data
+      }))
+    } catch (error) {
+      console.log(error);
+    }
+
+  },
+
+  getFavorite: async (userData) => {
+    try {
+
+
+      const { data } = await axios.get(
+        `${url}/user/favorites`,
+        {
+          headers: {
+            authorization: `Bearer ${userData}`,
+          },
+        })
+
+
+
+      set(() => ({
+        favoriteHotel: data
+      }))
+
+    } catch (error) {
+      console.log(error);
+    }
+
+
+  },
+
 
   reserveRoomPayment: async (data) => {
     try {
@@ -35,11 +94,18 @@ export const userStore = create<States & Actions>((set) => ({
     }
   },
 
-  reset: () => {
-    set(initialState);
+  reset: (stateKey) => {
+    set((state) => ({
+      ...state,
+      [stateKey]: initialState[stateKey],
+    }));
   },
 
-  roomPayment: async (info:object, token:string) => {
+  resetAll:()=>{
+    set(initialState)
+  },
+
+  roomPayment: async (info, token) => {
     try {
       const { data } = await axios.post(
         `${url}/booking/reserva`,
@@ -52,14 +118,14 @@ export const userStore = create<States & Actions>((set) => ({
       );
 
       const urlPago = data.urlpago; // Ajusta esto según la estructura de la respuesta del backend
-      
-       
+
+
       set((state) => ({
-		...state,
-    allSessionData: data,
-		urlPayment: urlPago,
-    sessionIdUser: data.sessionId
-	}));
+        ...state,
+        allSessionData: data,
+        urlPayment: urlPago,
+        sessionIdUser: data.sessionId
+      }));
     } catch (error) {
       console.log(error);
     }

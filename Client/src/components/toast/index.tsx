@@ -87,7 +87,7 @@ export const reserveFullToast = (text: string) => {
 
 export const farewellToast = (text: string) => {
 	return toast(text, {
-		duration: 4000,
+		duration: 1000,
 		position: 'top-center',
 		style: {
 			backgroundColor: '#0d47a1',

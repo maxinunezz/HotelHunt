@@ -1,11 +1,11 @@
 import { Button, FormControl } from '@rewind-ui/core';
 import { Form, Formik, FormikHelpers } from 'formik';
-import { useCallback, useState } from 'react';
+import { useCallback} from 'react';
 import axios from 'axios';
 import { errorToast, successToast } from '../../components/toast';
 import * as yup from 'yup';
-import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -25,7 +25,7 @@ const loginValidationSchema = yup.object().shape({
         .min(8, 'La contraseña debe tener al menos 8 caracteres'),
     confirmPassword: yup
         .string()
-        .oneOf([yup.ref('password'), null], 'Las contraseñas deben coincidir')
+        .oneOf([yup.ref('password')], 'Las contraseñas deben coincidir')
         .required('Debes confirmar tu contraseña')
 });
 
@@ -34,7 +34,8 @@ const FormPagePass = () => {
     const url = import.meta.env.VITE_URL;
     const [cookies] = useCookies(["token"]);
     const Token = cookies.token && cookies.token.token;
-    console.log(Token);
+
+
 
 
 
@@ -42,7 +43,7 @@ const FormPagePass = () => {
         async (values: passCreateValues, helpers: FormikHelpers<passCreateValues>) => {
             try {
 
-                const response = await axios.post(
+               const response =  await axios.post(
                     `${url}/user/updatePass`,
                     {
                         password: values.password,
@@ -54,8 +55,9 @@ const FormPagePass = () => {
                     }
                 );
                 successToast(response.data);
-                navigate(-1)
-            } catch (error) {
+                navigate('/')
+              
+            } catch (error:any) {
 
                 errorToast(error.response.data);
             }
@@ -70,7 +72,7 @@ const FormPagePass = () => {
             <div className="flex w-full justify-center">
                 <div className="bg-white w-[600px] rounded-md p-8">
                     <h1 className="text-5xl text-center text-gray-800 font-bold mt-10">
-                        Recupera tu contraseña de
+                        Recupera tu password de
                         <br />
                         <span className="text-5xl text-blue-500 font-extrabold tracking-wider">
                             HOTELHUNT
@@ -86,7 +88,7 @@ const FormPagePass = () => {
                         onSubmit={handleSubmit}
                         validationSchema={loginValidationSchema}
                     >
-                        {({ values, errors, submitForm, setFieldValue }) => (
+                        {({ values, errors,  setFieldValue }) => (
                             <Form className="space-y-4 h-[530px]">
                                 <div className="flex space-x-4">
                                     <div className="w-1/2">
@@ -131,20 +133,15 @@ const FormPagePass = () => {
                                         disabled={Object.keys(errors).length > 0}
                                         className="py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                                     >
-                                        Establecer nueva contraseña.
+                                        Establecer nueva password.
                                     </Button>
                                 </div>
                             </Form>
-                        )}
+                            )}
                     </Formik>
                 </div>
             </div>
         </div>
     );
-
-
-
-
 }
-
 export default FormPagePass;

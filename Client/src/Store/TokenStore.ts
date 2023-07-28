@@ -1,38 +1,52 @@
-import axios from 'axios';
 import { create } from 'zustand';
 
-interface User {
-    admin: 'admin' | 'normal'
-    phoneNumber: any;
-    lastName: any;
-    birthDate: any;
-    name: ReactNode;
+export interface User {
+    id: string
+    email: string;
+    phoneNumber: string;
+    lastName: string;
+    birthDate: string;
+    name: string;
     token: string;
     userState: string;
     loggedIn:boolean;
-    userData: {}
+    userData: {[key: string]: any}
 }
 
+type Token = string; 
+
+type IsAdmin = 'admin' | 'normal' | 'super'
+
+export interface UserState extends Array<any> {
+    0: User,
+    1: Token,
+    2: IsAdmin,
+    3: boolean
+} 
+
+
 type States = {
-    userState: User[];
+    price: number;
+    userState: UserState | any;
     hotelsUserById: any[];
 }
 
 type Actions = {
-    saveInfo: (arrayAux) => Promise<void>
-    getHotelByUser: (hotelsArray) => Promise<void>
+    saveInfo: (arrayAux:any) => Promise<void>
+    getHotelByUser: (hotelsArray: any[]) => Promise<void>
     resetToken: () => void
 }
 
 const initialState: States = {
-    userState: [],
-    hotelsUserById: []
+    userState: [] as any,
+    hotelsUserById: [],
+    price: 0
 }
 
-export const tokenStore = create<States & Actions>((set) => ({
+ export const tokenStore = create<States & Actions>((set) => ({
     ...initialState,
 
-    saveInfo: async(arrayAux) => {
+    saveInfo: async(arrayAux:any) => {
         set(() => ({
             userState: arrayAux
         }))

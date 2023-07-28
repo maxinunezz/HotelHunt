@@ -1,11 +1,11 @@
-import { Buildings } from '@phosphor-icons/react';
-import { Button } from '@rewind-ui/core';
-import axios from 'axios';
-import { tokenStore } from '../../Store';
-import { log } from 'console';
-import { useEffect, useState } from 'react';
+import { Buildings } from "@phosphor-icons/react";
+import axios from "axios";
+import { hotelStore, tokenStore } from "../../Store";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { userStore } from "../../Store/UserStore";
+import { favoriteStore } from "../../Store/FavoriteStore";
 const url = import.meta.env.VITE_URL;
-
 
 interface CardProps {
   id: string;
@@ -26,11 +26,15 @@ const Card: React.FC<CardProps> = ({
   country,
   city,
   photo,
-  services,
   hotelCategory,
-  score
 }) => {
+  const hotelFavorite = userStore((state) => state.favoriteHotel);
+  const hotels = hotelStore((state) => state.hotels);
+  const { addFavorite } = userStore();
+  const { setHotelFavorites } = favoriteStore();
+  const token = tokenStore((state) => state.userState);
   
+
   const renderStars = (rating: number) => {
     const filledStars = rating;
     const emptyStars = 5 - rating;
@@ -62,18 +66,44 @@ const Card: React.FC<CardProps> = ({
     const icons = [];
 
     for (let i = 0; i < score; i++) {
-      icons.push(<Buildings key={`building-${i}`} size={32} color='darkblue' />);
+      icons.push(
+        <Buildings key={`building-${i}`} size={32} color="darkblue" />
+      );
     }
 
     return icons;
   };
+
+  const isFav = hotelFavorite.some((favHotel: any) => favHotel == id);
+
+  const handleFavorite = async () => {
+
+    const info = {
+      hotelId: id
+    }
+
+    await addFavorite(info, token[1]);
+
+
+  };
+
+
+
+  useEffect(() => {
+    const hotelFavorites = hotels.filter(hotel => hotelFavorite.includes(hotel.id))
+
+    setHotelFavorites(hotelFavorites)
+
+  }, [hotelFavorite])
+
+
   const [ratingValue, setRatingValue] = useState<number | null>(null);
   useEffect(() => {
     const fetchRating = async () => {
       try {
         const response = await axios.get(`${url}/rating/${id}`);
-        const scores = response.data.map((element) => element.score);
-        const sum = scores.reduce((acc, score) => acc + score, 0);
+        const scores = response.data.map((element: any) => element.score);
+        const sum = scores.reduce((acc: any, score: any) => acc + score, 0);
         const average = Math.round(sum / scores.length);
         setRatingValue(average);
       } catch (error) {
@@ -83,57 +113,75 @@ const Card: React.FC<CardProps> = ({
     fetchRating();
   }, [id]);
 
-  const orderedServices = () => {
-    const stringRaw = services.join(', ');
-    return stringRaw    
-  }
-
   return (
-    <div className="bg-white h-[460px] max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
+    <div className="bg-white h-[480px] max-w-5xl rounded-md shadow-md flex mx-auto transform hover:scale-105 transition duration-300">
+      {/* Hotel Photo */}
       <img
-        src={photo}
+        src={Array.isArray(photo) ? photo[0] : photo}
         alt={name}
         onError={({ currentTarget }) => {
           currentTarget.onerror = null;
           currentTarget.src =
-            'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg';
+            "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
         }}
         className="w-1/3 h-full object-cover rounded-l-md"
       />
       <div className="w-2/3 p-4 flex flex-col justify-between">
         <div className="h-full flex flex-col justify-between">
+          {/* Hotel Name (made it larger) */}
           <div>
-            <h2 className="text-lg font-bold mb-1">{name}</h2>
-            <p className="text-gray-600 text-sm overflow-hidden overflow-ellipsis">
+            <h2 className="text-2xl font-bold mb-4">{name}</h2>
+            <div className="flex justify-start mt-auto">
+              <p className="text-gray-500 text-sm mb-4">
+                Ubicación: {city}, {country}
+              </p>
+            </div>
+            <p className="text-black text-sm  text-[18px] ">
               {description}
             </p>
           </div>
+         
+          {/* Hotel Category and Popular Rating */}
           <div>
-            Servicios: {orderedServices()}
-          </div>
-          <div>
-            <div className='flex'>
-            <p>Categoria: </p>
-              {renderStars(Number(hotelCategory))}
-            </div>
-            <div className='flex'>
+            <div className="flex text-[20px]">
               <p>Calificación popular:</p>
-              {/* Renderizar el icono de Phosphor repetidamente */}
-              {ratingValue !== null && renderIcon(ratingValue)}
+              {/* Render the Phosphor icon repeatedly */}
+              {ratingValue !== null && (
+                <>
+                  {renderIcon(ratingValue)}
+                  <span className="ml-1">
+                    (<span className="text-sm">{ratingValue}</span>)
+                  </span>
+                </>
+              )}
+            </div>
+
+            <div className='flex '>
+              <p className='text-[20px]'>Categoria:{renderStars(Number(hotelCategory))} </p>
             </div>
           </div>
+
+          {/* "Ver habitaciones" button */}
           <div className="flex justify-end">
-            <p className="text-gray-500 mt-1 text-sm">
-              Ubicación: {city}, {country}
-            </p>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-              Ver habitaciones
-            </button>
+            {token.length > 0 && <div><button className=" py-2 px-4" onClick={handleFavorite}>{isFav ? "💙" : "🤍"}</button></div>}
+
+            <Link to={`/hotelpage/${id}`} key={id}>
+              <div>
+
+                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                  Ver habitaciones
+                </button>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
+      {/* Hotel Location (moved it to the leftmost side) */}
+
     </div>
   );
+
+
 };
 
 export default Card;

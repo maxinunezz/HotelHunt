@@ -22,19 +22,35 @@ const getHotelBin = async (req, res) => {
 }
 
 const getRoomsBin = async (req, res) => {
-    const hotelId = req.params
+    const { id } = userData;
 
     try {
-        const roomsForDelete = await Room.findAll({
-            where: {
-                hotelId: hotelId,
-                paranoid: false,                
+        const hotels = await Hotel.findAll({ where: { userId: id } })
+        let arrayRoom = [];
+
+        for (const hotel of hotels) {
+            const roomsForDelete = await Room.findAll({
+                where: {
+                    hotelId: hotel.id,
+                },
+                paranoid: false,
+            })
+            for(const room of roomsForDelete){
+                const one_room = {
+                    id: room.id,
+                    name: room.name,
+                    photo: room.photo,
+                    pax: room.pax
+
+                }
+                arrayRoom.push(one_room);
             }
-        })
-        if(!roomsForDelete){
+            
+        }
+        if (!arrayRoom) {
             return res.status(404).json('No hay hoteles para restaurar')
-        }else{
-            return res.status(200).json(roomsForDelete)
+        } else {
+            return res.status(200).json(arrayRoom)
         }
     } catch (error) {
         return res.status(500).json(error);

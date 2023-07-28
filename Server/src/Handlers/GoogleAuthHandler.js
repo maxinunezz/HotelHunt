@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET, FRONT_URL } = process.env;
 
 function generateRandomPassword(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -41,7 +41,7 @@ const authGoogle = async (req, res) => {
             const userData = { id: findUserData.id, email: email, name: name, lastName: lastName, admin: findUserData.admin };
             const allInfo = {admin: admin, token: token, data: userData}
             res.cookie('json', allInfo);
-            return res.status(201).redirect('http://localhost:5173/');
+            return res.status(201).redirect(`${FRONT_URL}`);
           }
         } else {
 
@@ -65,7 +65,7 @@ const authGoogle = async (req, res) => {
             res.cookie('json', allInfo);
         }
       
-        return res.status(200).redirect('http://localhost:5173/');
+        return res.status(200).redirect(`${FRONT_URL}`);
       } catch (error) {
         return res.status(500).json(error);
       }
